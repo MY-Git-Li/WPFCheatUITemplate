@@ -33,10 +33,11 @@ namespace CheatUITemplt
         {
            foreach(int id in hotKeyFunDic.Keys.ToList())
            {
-                if (hotKeyFunDic.ContainsKey(id))
-                {
-                    UnRegisterHotKey(hWnd, id);
-                }
+                //不需要在进行判断，id 来源于hotKeyFunDic
+                //if (hotKeyFunDic.ContainsKey(id))
+                //{
+                UnRegisterHotKey(hWnd, id);
+                //}
             }
               
         }
