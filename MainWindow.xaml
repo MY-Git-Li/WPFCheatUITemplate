@@ -218,12 +218,12 @@
             <ControlTemplate.Triggers>
                 <Trigger Property="TickPlacement" Value="TopLeft">
                     <Setter Property="Visibility" TargetName="TopTick" Value="Visible"/>
-                    <Setter Property="Template" TargetName="Thumb" Value="{StaticResource SliderThumbHorizontalTop}"/>
+                    <!--<Setter Property="Template" TargetName="Thumb" Value="{StaticResource SliderThumbHorizontalTop}"/>-->
                     <Setter Property="Margin" TargetName="TrackBackground" Value="5,2,5,0"/>
                 </Trigger>
                 <Trigger Property="TickPlacement" Value="BottomRight">
                     <Setter Property="Visibility" TargetName="BottomTick" Value="Visible"/>
-                    <Setter Property="Template" TargetName="Thumb" Value="{StaticResource SliderThumbHorizontalBottom}"/>
+                    <!--<Setter Property="Template" TargetName="Thumb" Value="{StaticResource SliderThumbHorizontalBottom}"/>-->
                     <Setter Property="Margin" TargetName="TrackBackground" Value="5,0,5,2"/>
                 </Trigger>
                 <Trigger Property="TickPlacement" Value="Both">
@@ -249,11 +249,11 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Foreground" Value="{StaticResource SliderThumb.Static.Foreground}"/>
             <Setter Property="Template" Value="{StaticResource SliderHorizontal}"/>
-            <Style.Triggers>
+            <!--<Style.Triggers>
                 <Trigger Property="Orientation" Value="Vertical">
                     <Setter Property="Template" Value="{StaticResource SliderVertical}"/>
                 </Trigger>
-            </Style.Triggers>
+            </Style.Triggers>-->
         </Style>
         
         <Style x:Key="chkBullet" TargetType="CheckBox">

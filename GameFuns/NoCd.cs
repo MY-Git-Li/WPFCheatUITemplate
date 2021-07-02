@@ -38,16 +38,16 @@ namespace CheatUITemplt.MyGameFuns
             IsSignatureCode = false;
             IsIntPtr = false;
 
-            Vk = Keys.NumPad2;
+            Vk = Keys.NumPad6;
             FsModifiers = HotKey.KeyModifiers.None;
 
-            KeyDescription_SC = "数字键2";
+            KeyDescription_SC = "数字键6";
             FunDescribe_SC = "无冷却时间";
 
-            KeyDescription_TC = "數字鍵2";
+            KeyDescription_TC = "數字鍵6";
             FunDescribe_TC = "無冷卻時間";
 
-            KeyDescription_EN = "Number key 2";
+            KeyDescription_EN = "Number key 6";
             FunDescribe_EN = "No Cool Down Time";
 
             IsTrigger = false;

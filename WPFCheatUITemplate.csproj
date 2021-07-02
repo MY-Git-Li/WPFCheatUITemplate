@@ -56,11 +56,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameFuns\AdventureLevel.cs" />
     <Compile Include="GameFuns\AllowBackground.cs" />
     <Compile Include="GameFuns\ArbitrarilyPlant.cs" />
     <Compile Include="GameFuns\AutoGet.cs" />
+    <Compile Include="GameFuns\ChangeMode.cs" />
+    <Compile Include="GameFuns\Coin.cs" />
     <Compile Include="GameFuns\DefaultPlantLayout.cs" />
     <Compile Include="GameFuns\NoCd.cs" />
+    <Compile Include="GameFuns\Tree.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="GameFuns\Sun.cs" />
     <Page Include="MainWindow.xaml">
