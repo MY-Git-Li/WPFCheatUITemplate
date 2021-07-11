@@ -47,7 +47,7 @@ namespace CheatUITemplt.MyGameFuns
             KeyDescription_TC = "數字鍵6";
             FunDescribe_TC = "無冷卻時間";
 
-            KeyDescription_EN = "Number key 6";
+            KeyDescription_EN = "Number 6";
             FunDescribe_EN = "No Cool Down Time";
 
             IsTrigger = false;
