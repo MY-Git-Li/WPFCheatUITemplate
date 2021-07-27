@@ -44,6 +44,7 @@ namespace CheatUITemplt
                     GameFunManger.Instance.Pid = pid;
                     GameFunManger.Instance.SetViewPid();
                     GameFunManger.Instance.SetAllGameFun();
+                    GameFunManger.Instance.EnableControl();
                     GameFunManger.Instance.RegisterAllHotKey();
 
                    
@@ -58,6 +59,7 @@ namespace CheatUITemplt
                     isRegistered = false;
                     isUnRegistered = true;
 
+                    GameFunManger.Instance.DisableControl();
                     GameFunManger.Instance.MainWindow.EndHotsystem();
                     GameFunManger.Instance.Pid = 0;
                     GameFunManger.Instance.SetViewPid();

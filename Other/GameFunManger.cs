@@ -180,9 +180,7 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                SetControlEnable(item.myStackPanel.button);
-                SetControlEnable(item.myStackPanel.checkBox);
-
+                
                 if (item.gameFun.IsTrigger)
                 {
                     RegisterHotKey(item.gameFun.FsModifiers, item.gameFun.Vk, new MyButton(item.myStackPanel.button),
@@ -237,16 +235,31 @@ namespace CheatUITemplt
 
 
 
-        }
+            }
         }
 
-        
+        public void EnableControl()
+        {
+            foreach (var item in gameFunUIs)
+            {
+                SetControlEnable(item.myStackPanel.button, true);
+                SetControlEnable(item.myStackPanel.checkBox, true);
+            }
+        }
+        public void DisableControl()
+        {
+            foreach (var item in gameFunUIs)
+            {
+                SetControlEnable(item.myStackPanel.button, false);
+                SetControlEnable(item.myStackPanel.checkBox, false);
+            }
+        }
 
-        void SetControlEnable(System.Windows.Controls.Control control)
+        void SetControlEnable(System.Windows.Controls.Control control, bool enable)
         {
             if (control != null)
             {
-                control.IsEnabled = true;
+                control.IsEnabled = enable;
             }
            
         }
