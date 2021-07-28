@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using WPFCheatUITemplate;
+using WPFCheatUITemplate.Other;
 using static CheatUITemplt.HotKey;
 
 namespace CheatUITemplt
@@ -17,15 +18,19 @@ namespace CheatUITemplt
     {
        
         List<GameFunUI> gameFunUIs = new List<GameFunUI>();
+
         MainWindow mainWindow;
         public MainWindow MainWindow { get => mainWindow; set => mainWindow = value; }
       
-
         CreateLayout createLayout;
         public CreateLayout CreateLayout { get => createLayout; set => createLayout = value; }
 
         int pid;
         public int Pid{set => pid = value;}
+
+        SoundEffect soundEffect;
+        public SoundEffect SoundEffect { get => soundEffect; set => soundEffect = value; }
+
 
         //注册热键
         public HotSystem hotSystem;
@@ -49,7 +54,6 @@ namespace CheatUITemplt
                 return instance;
             }
         }
-
 
         #endregion
 
@@ -136,11 +140,13 @@ namespace CheatUITemplt
                         //"快捷键禁用";
                         hotSystem.BanOtherHotKeyFun(1);
 
+                        soundEffect.PlayTurnOnEffect();
                     }, () =>
                     {
                         //"快捷键启用";
                         hotSystem.RelieveHotKeyFun();
 
+                        soundEffect.PlayTurnOffEffect();
                     }));
             }
             #endregion
@@ -190,6 +196,9 @@ namespace CheatUITemplt
                         Slider slider = item.myStackPanel.ValueEntered;
 
                         item.gameFun.DoFirstTime(slider==null?0:slider.Value);
+
+                        soundEffect.PlayTurnOnEffect();
+
                         await Task.Delay(500);
                         
                     }));
@@ -213,7 +222,8 @@ namespace CheatUITemplt
                         {
                             slider.IsEnabled = !slider.IsEnabled;
                         }
-                       
+
+                        soundEffect.PlayTurnOnEffect();
 
                     }, () =>
                     {
@@ -229,6 +239,7 @@ namespace CheatUITemplt
                             slider.IsEnabled = !slider.IsEnabled;
                         }
 
+                        soundEffect.PlayTurnOffEffect();
 
                     }));
                 }

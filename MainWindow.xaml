@@ -396,9 +396,7 @@
                 <RowDefinition Height="66"/>
                 <RowDefinition Height="16*"/>
                 <RowDefinition Height="2*"/>
-
             </Grid.RowDefinitions>
-
 
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -442,7 +440,7 @@
 
                 <StackPanel Grid.Column="0" Margin="3 0 0 0">
                     <StackPanel>
-                        <Image Height="300" Stretch="Fill" Source="2.png"  VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Image Height="300" Stretch="Fill" Source="Picture/2.png"  VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <TextBlock Margin="0 10 0 0" Text="游戏进程名：" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
                         <TextBlock  x:FieldModifier="public"  x:Name="lbl_gemeProcess" Text="jiwudazhanjiangshi.exe" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
 

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using CheatUITemplt;
+using WPFCheatUITemplate.Other;
 
 namespace WPFCheatUITemplate
 {
@@ -13,6 +14,8 @@ namespace WPFCheatUITemplate
     {
         CreateLayout createLayout;
         InvestigateGame investigateGame;
+        SoundEffect soundEffect;
+
         string processName = "PlantsVsZombies";
 
         public IntPtr Hwnd;
@@ -20,17 +23,21 @@ namespace WPFCheatUITemplate
         {
             InitializeComponent();
 
-
             this.DataContext = new MainWindowsViewModel();
 
-           
-
             GameFunManger.Instance.MainWindow = this;
+
             createLayout = new CreateLayout(keyAndDescribelayout,Resources);
             GameFunManger.Instance.CreateLayout = createLayout;
+
+            soundEffect = new SoundEffect();
+            GameFunManger.Instance.SoundEffect = soundEffect;
+
             lbl_gemeProcess.Text = processName + ".exe";
             lbl_processID.Text = "0";
+
             investigateGame = new InvestigateGame(processName);
+
 
         }
 
