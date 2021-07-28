@@ -31,11 +31,14 @@ namespace CheatUITemplt
         SoundEffect soundEffect;
         public SoundEffect SoundEffect { get => soundEffect; set => soundEffect = value; }
 
+        UILangerManger uILangerManger;
+        public UILangerManger UILangerManger { get => uILangerManger; set => uILangerManger = value; }
 
         //注册热键
         public HotSystem hotSystem;
 
         MyButtonManger myButtonManger;
+
 
         #region 单例模式
         //单例模式
@@ -66,6 +69,7 @@ namespace CheatUITemplt
                 item.showDescription.funDescription.Text = item.traditionalChinese.funDescription.Text;
             }
 
+            uILangerManger.SetTraditionalChinese();
         }
         public void SetEnglish()
         {
@@ -75,8 +79,9 @@ namespace CheatUITemplt
                 item.showDescription.funDescription.Text = item.englishDescription.funDescription.Text;
                 item.showDescription.keyDescription.FontSize = 17;
                 item.showDescription.funDescription.FontSize = 17;
-
             }
+
+            uILangerManger.SetEnglish();
         }
         public void SetSimplifiedChinese()
         {
@@ -85,8 +90,9 @@ namespace CheatUITemplt
                 item.showDescription.keyDescription.Text = item.simplifiedChinese.keyDescription.Text;
                 item.showDescription.funDescription.Text = item.simplifiedChinese.funDescription.Text;
             }
-        }
 
+            uILangerManger.SetSimplifiedChinese();
+        }
 
 
         public void SetViewPid()

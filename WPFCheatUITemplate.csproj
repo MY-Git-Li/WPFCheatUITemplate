@@ -66,9 +66,11 @@
     <Compile Include="GameFuns\DefaultPlantLayout.cs" />
     <Compile Include="GameFuns\NoCd.cs" />
     <Compile Include="GameFuns\Tree.cs" />
-    <Compile Include="Other\SoundEffect.cs" />
+    <Compile Include="Other\UI\LanguageUI.cs" />
+    <Compile Include="Other\Voice\SoundEffect.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="GameFuns\Sun.cs" />
+    <Compile Include="Other\UI\UILangerManger.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,15 +87,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowsViewModel.cs" />
-    <Compile Include="Other\CreateLayout.cs" />
+    <Compile Include="Other\UI\CreateLayout.cs" />
     <Compile Include="Other\GameDataAddress.cs" />
     <Compile Include="Other\GameFun.cs" />
     <Compile Include="Other\GameFunManger.cs" />
     <Compile Include="Other\GameFunUI.cs" />
     <Compile Include="Other\InvestigateGame.cs" />
-    <Compile Include="Other\MyButton.cs" />
-    <Compile Include="Other\MyButtonManger.cs" />
-    <Compile Include="Other\MyTimer.cs" />
+    <Compile Include="Other\UI\MyButton.cs" />
+    <Compile Include="Other\UI\MyButtonManger.cs" />
+    <Compile Include="Other\UI\MyTimer.cs" />
     <Compile Include="Other\Tools\CheatTools.cs" />
     <Compile Include="Other\Tools\HotSystem.cs" />
     <Compile Include="Other\Tools\WinAPI.cs" />

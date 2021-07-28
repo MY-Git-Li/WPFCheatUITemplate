@@ -407,10 +407,10 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel>
-                    <TextBlock Text="《植物大战僵尸》" 
+                    <TextBlock Text="《植物大战僵尸》" Name="MainTitle"
                 Style="{StaticResource TitleText}"
                 Margin="0 8 0 3"/>
-                    <TextBlock Text="Early Access 二十七项修改器" 
+                    <TextBlock Text="Early Access 二十七项修改器" Name="subtitle"
                 Style="{StaticResource ShowText}"
                 Margin="0 0 0 3"/>
                 </StackPanel>
@@ -441,13 +441,13 @@
                 <StackPanel Grid.Column="0" Margin="3 0 0 0">
                     <StackPanel>
                         <Image Height="300" Stretch="Fill" Source="Picture/2.png"  VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                        <TextBlock Margin="0 10 0 0" Text="游戏进程名：" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
+                        <TextBlock Name="process" Margin="0 10 0 0" Text="游戏进程名：" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
                         <TextBlock  x:FieldModifier="public"  x:Name="lbl_gemeProcess" Text="jiwudazhanjiangshi.exe" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
 
-                        <TextBlock Margin="0 10 0 0" Text="进程ID：" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
+                        <TextBlock Name="pid" Margin="0 10 0 0" Text="进程ID：" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
                         <TextBlock   x:FieldModifier="public" x:Name="lbl_processID"  Text="86564" Style="{StaticResource OtherText}"/>
 
-                        <TextBlock Margin="0 10 0 0" Text="作者：Mr.Li" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
+                        <TextBlock Name="author" Margin="0 10 0 0" Text="作者：Mr.Li" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
 
                     </StackPanel>
                 </StackPanel>
@@ -455,8 +455,8 @@
                 <StackPanel Grid.Column="1">
 
                     <StackPanel Margin="8 5 0 0"  Orientation="Horizontal" VerticalAlignment="Top">
-                        <TextBlock Text="快捷键" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
-                        <TextBlock Text="功能列表" Margin="200 0 0 0" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
+                        <TextBlock Name="keyDes" Text="快捷键" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
+                        <TextBlock Name="funDes" Text="功能列表" Margin="200 0 0 0" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
                     </StackPanel>
                     <Path Data="M4 2 660 2" Stroke="#E0E0E0" StrokeThickness="1"/>
 
@@ -511,7 +511,7 @@
 
                     <StackPanel Grid.Column="1">
                         <Path Grid.Row="1" Data="M4 2 660 2" Stroke="#E0E0E0" StrokeThickness="1"  VerticalAlignment="Bottom"/>
-                        <TextBlock Text="其他说明：Ctrl+Shift+Home禁用/启用快捷键" Style="{StaticResource OtherText}"/>
+                        <TextBlock Name="otherDes" Text="其他说明：Ctrl+Shift+Home禁用/启用快捷键" Style="{StaticResource OtherText}"/>
                     </StackPanel>
 
                 </Grid>

@@ -8,7 +8,6 @@ namespace CheatUITemplt
 {
     class InvestigateGame
     {
-        //TODO: 找到游戏然后通知GameFunManger
         string processName;
         MyTimer timer;
         bool isRegistered;
