@@ -155,8 +155,8 @@ namespace WPFCheatUITemplate
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
             Hwnd = wndHelper.Handle;
 
-            investigateGame.FindingGame();
             Start.Init();
+            investigateGame.FindingGame();
         }
 
 

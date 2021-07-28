@@ -79,23 +79,23 @@ namespace CheatUITemplt.MyGameFuns
             for (int i = 0; i < 5; i++)
             {
                 Plant(i, 0, 40);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 1, 40);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 2, 43);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 3, 43);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 4, 44);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 5, 44);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 6, 22);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 7, 23);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
                 Plant(i, 8, 46);
-                Thread.Sleep(10);
+                Thread.Sleep(50);
             }
         }
 

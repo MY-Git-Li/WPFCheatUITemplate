@@ -95,7 +95,6 @@
     <Compile Include="Other\InvestigateGame.cs" />
     <Compile Include="Other\UI\MyButton.cs" />
     <Compile Include="Other\UI\MyButtonManger.cs" />
-    <Compile Include="Other\UI\MyTimer.cs" />
     <Compile Include="Other\Tools\CheatTools.cs" />
     <Compile Include="Other\Tools\HotSystem.cs" />
     <Compile Include="Other\Tools\WinAPI.cs" />
