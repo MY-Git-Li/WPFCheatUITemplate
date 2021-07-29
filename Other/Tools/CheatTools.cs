@@ -209,14 +209,41 @@ namespace CheatUITemplt
         //获得目标进程的模块地址
         public static uint GetProcessModuleHandle(uint pid, string moduleName)
         {
-            uint address = WinAPI.GetProcessModuleHandle(pid, moduleName);
-            int count = 0;
-            while (address<5 && count<1000)
+            uint address;
+            address = MyGetProcessModuleHandle(pid, moduleName);
+            //如果自己的方法读取不到，则使用MyAPI.dll的方法去读
+            if (address == 0)
             {
                 address = WinAPI.GetProcessModuleHandle(pid, moduleName);
-                count++;
+                int count = 0;
+                while (address < 5 && count < 1000)
+                {
+                    address = WinAPI.GetProcessModuleHandle(pid, moduleName);
+                    count++;
+                }
             }
+
             return address;
+        }
+
+        public static uint MyGetProcessModuleHandle(uint pid, string moduleName)
+        {
+            //获取该系统下所有进程
+            Process[] processes = Process.GetProcesses();
+            foreach (var process in processes)
+            {
+                if (process.Id == pid)
+                {
+                    foreach (ProcessModule item in process.Modules)
+                    {
+                        if (item.ModuleName == moduleName)
+                        {
+                            return (uint)item.BaseAddress;
+                        }
+                    }
+                }
+            }
+            return 0;
         }
 
         #endregion
