@@ -41,10 +41,10 @@ namespace CheatUITemplt.MyGameFuns
             Vk = Keys.NumPad8;
             FsModifiers = HotKey.KeyModifiers.Alt;
 
-            KeyDescription_SC = "ALT+数字键8";
+            KeyDescription_SC = "Alt+数字键8";
             FunDescribe_SC = "默认植物种植";
 
-            KeyDescription_TC = "ALT+數字鍵8";
+            KeyDescription_TC = "Alt+數字鍵8";
             FunDescribe_TC = "默認植物種植";
 
             KeyDescription_EN = "Alt+Number 8";
