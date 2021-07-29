@@ -43,10 +43,10 @@ namespace CheatUITemplt.MyGameFuns
             Vk = Keys.W;
             FsModifiers = HotKey.KeyModifiers.Shift;
 
-            KeyDescription_SC = "SHIFT+字母键W";
+            KeyDescription_SC = "Shift+字母键W";
             FunDescribe_SC = "自动获取";
 
-            KeyDescription_TC = "SHIFT+字母鍵W";
+            KeyDescription_TC = "Shift+字母鍵W";
             FunDescribe_TC = "自動獲取";
 
             KeyDescription_EN = "Shift+Number W";

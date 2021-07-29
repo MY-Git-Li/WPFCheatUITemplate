@@ -41,14 +41,14 @@ namespace CheatUITemplt.MyGameFuns
             Vk = Keys.NumPad6;
             FsModifiers = HotKey.KeyModifiers.Ctrl;
 
-            KeyDescription_SC = "CTRL+数字键6";
+            KeyDescription_SC = "Ctrl+数字键6";
             FunDescribe_SC = "允许后台运行";
 
-            KeyDescription_TC = "CTRL+數字鍵6";
+            KeyDescription_TC = "Ctrl+數字鍵6";
             FunDescribe_TC = "允許後臺運行";
 
-            KeyDescription_EN = "CTRL+number 6";
-            FunDescribe_EN = "running in background";
+            KeyDescription_EN = "Ctrl+Number 6";
+            FunDescribe_EN = "Running in background";
 
             IsTrigger = false;
 

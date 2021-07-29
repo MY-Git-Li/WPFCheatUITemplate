@@ -44,13 +44,13 @@ namespace CheatUITemplt.MyGameFuns
             Vk = Keys.NumPad1;
             FsModifiers = HotKey.KeyModifiers.Ctrl;
 
-            KeyDescription_SC = "CTRL+数字键1";
+            KeyDescription_SC = "Ctrl+数字键1";
             FunDescribe_SC = "随意种植";
 
-            KeyDescription_TC = "CTRL+數字鍵1";
+            KeyDescription_TC = "Ctrl+數字鍵1";
             FunDescribe_TC = "隨意種植";
 
-            KeyDescription_EN = "CTRL+number 1";
+            KeyDescription_EN = "Ctrl+Number 1";
             FunDescribe_EN = "Planting will";
 
             IsTrigger = false;
