@@ -73,6 +73,11 @@ namespace CheatUITemplt.MyGameFuns
             asm.RunAsm(pid);
         }
 
+        public override void Awake()
+        {
+
+        }
+
         public override void DoFirstTime(double value)
         {
             pid = CheatTools.GetPidByHandle(Handle);

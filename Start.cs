@@ -13,12 +13,12 @@ namespace CheatUITemplt
             new AdventureLevel();
             new ChangeMode();
             new Tree();
+            new ArtificialPointer();
             new NoCd();
             new AutoGet();
             new ArbitrarilyPlant();
             new AllowBackground();
             new DefaultPlantLayout();
-
        }
     }
 }

@@ -59,8 +59,11 @@ namespace CheatUITemplt.MyGameFuns
 
             GameFunManger.Instance.RegisterGameFun(this);
         }
+        public override void Awake()
+        {
 
-      
+        }
+
         public override void DoFirstTime(double value)
         {
             CheatTools.WriteMemoryByte(GameDataAddress.Address, Handle, new byte[] { 0xEB });

@@ -56,6 +56,10 @@ namespace CheatUITemplt.MyGameFuns
             GameFunManger.Instance.RegisterGameFun(this);
         }
 
+        public override void Awake()
+        {
+
+        }
 
         public override void DoFirstTime(double value)
         {

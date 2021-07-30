@@ -100,7 +100,15 @@ namespace CheatUITemplt
             mainWindow.lbl_processID.Text = pid.ToString();
         }
 
-        public void SetAllGameFun()
+        public void SetAllGameFunAwake()
+        {
+            foreach (var item in gameFunUIs)
+            {
+                item.gameFun.Awake();
+            }
+        }
+
+        public void SetAllGameFunData()
         {
 
             foreach (var item in gameFunUIs)

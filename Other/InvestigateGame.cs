@@ -65,7 +65,8 @@ namespace CheatUITemplt
             }
             
             GameFunManger.Instance.Pid = pid;
-            GameFunManger.Instance.SetAllGameFun();
+            GameFunManger.Instance.SetAllGameFunData();
+            GameFunManger.Instance.SetAllGameFunAwake();
         }
 
         private void startFindGame_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

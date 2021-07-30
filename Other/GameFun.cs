@@ -137,6 +137,12 @@ namespace CheatUITemplt
             }
 
         }
+
+        /// <summary>
+        /// 可以实现自定义数据获取，列如人造指针等，运行一次
+        /// </summary>
+        public abstract void Awake();
+        
         /// <summary>
         /// 初次点击函数
         /// </summary>

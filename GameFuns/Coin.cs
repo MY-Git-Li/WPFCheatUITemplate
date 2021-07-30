@@ -65,6 +65,11 @@ namespace WPFCheatUITemplate.GameFuns
             GameFunManger.Instance.RegisterGameFun(this);
         }
 
+        public override void Awake()
+        {
+
+        }
+
         public override void DoFirstTime(double value)
         {
             CheatTools.WriteMemoryInt(GameDataAddress.Address, Handle, (int)value);

@@ -62,6 +62,7 @@
     <Compile Include="GameFuns\AdventureLevel.cs" />
     <Compile Include="GameFuns\AllowBackground.cs" />
     <Compile Include="GameFuns\ArbitrarilyPlant.cs" />
+    <Compile Include="GameFuns\ArtificialPointer.cs" />
     <Compile Include="GameFuns\AutoGet.cs" />
     <Compile Include="GameFuns\ChangeMode.cs" />
     <Compile Include="GameFuns\Coin.cs" />
