@@ -33,7 +33,7 @@ namespace WPFCheatUITemplate.GameFuns
         public override double SliderMaxNum { get; set; }
         public override double SliderMinNum { get; set; }
 
-        int artificialPoint;
+        Dictionary<ASM.RegisterType, int> ret;
 
         public ArtificialPointer()
         {
@@ -64,23 +64,17 @@ namespace WPFCheatUITemplate.GameFuns
         public override void Awake()
         {
             int pid = CheatTools.GetPidByHandle(Handle);
-            int hwnd = ASM.OpenProcess(0x1F0FFF | 0x2 | 0x20, 0, pid);
-
-            artificialPoint = ASM.VirtualAllocEx(hwnd,0,64, 4096, 0x4);
            
             ASM asm = new ASM();
             asm.Mov_EAX_DWORD_Ptr_EDI_Add(0x5578);
-            asm.Pushad();
-            asm.Mov_EAX_EDI();
-            asm.Mov_DWORD_Ptr_EAX(artificialPoint);
-            asm.Popad();
-            asm.RunJmpHook(pid, (int)(this.ModuleAddress + 0x9f2e5), (int)(this.ModuleAddress + 0x9F2EB));
-
+         
+            ret = asm.HookAllRegister(pid, (int)(this.ModuleAddress + 0x9f2e5), (int)(this.ModuleAddress + 0x9F2EB));
+            
         }
 
         public override void DoFirstTime(double value)
         {
-            int address = CheatTools.ReadMemoryValue(artificialPoint, Handle);
+            int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], Handle);
 
 
             CheatTools.WriteMemoryInt(address+0x5578, Handle, (int)value);
