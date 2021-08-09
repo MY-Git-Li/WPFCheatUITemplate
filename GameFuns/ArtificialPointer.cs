@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WPFCheatUITemplate.GameFuns
@@ -34,7 +35,7 @@ namespace WPFCheatUITemplate.GameFuns
         public override double SliderMinNum { get; set; }
 
         Dictionary<ASM.RegisterType, int> ret;
-
+        Thread T;
         public ArtificialPointer()
         {
             ModuleName = "PlantsVsZombies.exe";
@@ -43,18 +44,18 @@ namespace WPFCheatUITemplate.GameFuns
             FsModifiers = HotKey.KeyModifiers.None;
 
             KeyDescription_SC = "数字键9";
-            FunDescribe_SC = "人造指针设置阳光";
+            FunDescribe_SC = "绘制菜单";
 
             KeyDescription_TC = "數字鍵9";
-            FunDescribe_TC = "人造指針設置陽光";
+            FunDescribe_TC = "繪製菜單";
 
             KeyDescription_EN = "Number 9";
-            FunDescribe_EN = "ArtificialPointer Sun number";
+            FunDescribe_EN = "Draw Menu";
 
-            IsTrigger = true;
+            IsTrigger = false;
 
 
-            IsAcceptValue = true;
+            IsAcceptValue = false;
             SliderMinNum = 1;
             SliderMaxNum = 9999;
 
@@ -74,15 +75,20 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], Handle);
+            //int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], Handle);
 
 
-            CheatTools.WriteMemoryInt(address+0x5578, Handle, (int)value);
+            //CheatTools.WriteMemoryInt(address+0x5578, Handle, (int)value);
+            T = new Thread(StartDraw);
+            T.Start();
         }
-
+        public void StartDraw()
+        {
+            ImGuiNET.Program.MainDraw();
+        }
         public override void DoRunAgain(double value)
         {
-           
+            T.Abort();
         }
     }
 }
