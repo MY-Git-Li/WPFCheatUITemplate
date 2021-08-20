@@ -3058,9 +3058,10 @@ namespace CheatUITemplt
                    this.RunJmpHook(pid, hookAddress, retnAddress);
                 }
             }
-            this.Asmcode = "";
+
             return keyValuePairs;
 
+            this.Asmcode = "";
         }
 
 
