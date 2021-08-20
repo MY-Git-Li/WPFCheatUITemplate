@@ -360,6 +360,7 @@
     </Content>
     <None Include="D3D\Shaders\HLSL\imgui-frag.hlsl" />
     <None Include="D3D\Shaders\HLSL\imgui-vertex.hlsl" />
+    <Resource Include="D3D\说明.txt" />
     <Content Include="SoundEffect\77lx3-1y6gm.wav" />
     <Content Include="SoundEffect\afpiz-if2hn.wav" />
     <Content Include="SoundEffect\ext09-vnxd7.wav" />
