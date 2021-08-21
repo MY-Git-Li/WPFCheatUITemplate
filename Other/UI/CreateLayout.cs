@@ -29,8 +29,8 @@ namespace CheatUITemplt
             Description sc = new Description();
 
 
-            sc.keyDescription = CreatKeyTextBlock(gameFun.KeyDescription_SC);
-            sc.funDescription = CreatFunTextBlock(gameFun.FunDescribe_SC);
+            sc.keyDescription = CreatKeyTextBlock(gameFun.gameFunDateStruct.KeyDescription_SC);
+            sc.funDescription = CreatFunTextBlock(gameFun.gameFunDateStruct.FunDescribe_SC);
 
             //SetPosition(sc.keyDescription, true);
             //grid.Children.Add(sc.keyDescription);
@@ -41,8 +41,8 @@ namespace CheatUITemplt
             Description sc = new Description();
 
 
-            sc.keyDescription = CreatKeyTextBlock(gameFun.KeyDescription_TC);
-            sc.funDescription = CreatFunTextBlock(gameFun.FunDescribe_TC);
+            sc.keyDescription = CreatKeyTextBlock(gameFun.gameFunDateStruct.KeyDescription_TC);
+            sc.funDescription = CreatFunTextBlock(gameFun.gameFunDateStruct.FunDescribe_TC);
 
             //SetPosition(sc.keyDescription, true);
 
@@ -53,8 +53,8 @@ namespace CheatUITemplt
             Description sc = new Description();
 
 
-            sc.keyDescription = CreatKeyTextBlock(gameFun.KeyDescription_EN);
-            sc.funDescription = CreatFunTextBlock(gameFun.FunDescribe_EN);
+            sc.keyDescription = CreatKeyTextBlock(gameFun.gameFunDateStruct.KeyDescription_EN);
+            sc.funDescription = CreatFunTextBlock(gameFun.gameFunDateStruct.FunDescribe_EN);
 
             //SetPosition(sc.keyDescription, true);
 
@@ -65,8 +65,8 @@ namespace CheatUITemplt
         {
             Description sc = new Description();
 
-            sc.keyDescription = CreatKeyTextBlock(gameFun.KeyDescription_SC);
-            sc.funDescription = CreatFunTextBlock(gameFun.FunDescribe_SC);
+            sc.keyDescription = CreatKeyTextBlock(gameFun.gameFunDateStruct.KeyDescription_SC);
+            sc.funDescription = CreatFunTextBlock(gameFun.gameFunDateStruct.FunDescribe_SC);
 
             SetPosition(sc.keyDescription, true);
             grid.Children.Add(sc.keyDescription);
@@ -83,7 +83,7 @@ namespace CheatUITemplt
             StackPanel stackPanel = CreatStackPanel();
             SetPosition(stackPanel,false);
 
-            if (gameFun.IsTrigger)
+            if (gameFun.gameFunDateStruct.IsTrigger)
             {
                 myStackPanel.button = CreatButton();
                 stackPanel.Children.Add(myStackPanel.button);
@@ -96,13 +96,13 @@ namespace CheatUITemplt
 
             stackPanel.Children.Add(gameFunUI.showDescription.funDescription);
 
-            if (gameFun.IsAcceptValue)
+            if (gameFun.gameFunDateStruct.IsAcceptValue)
             {
                 Slider slider = CreatSlider();
                 TextBox textBox = CreatTextBox();
 
-                slider.Maximum = gameFun.SliderMaxNum;
-                slider.Minimum = gameFun.SliderMinNum;
+                slider.Maximum = gameFun.gameFunDateStruct.SliderMaxNum;
+                slider.Minimum = gameFun.gameFunDateStruct.SliderMinNum;
 
                 myStackPanel.ValueEntered = slider;
                //实例化绑定对象

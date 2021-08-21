@@ -100,6 +100,14 @@ namespace CheatUITemplt
             mainWindow.lbl_processID.Text = pid.ToString();
         }
 
+        public void SetAllGameFunEnding()
+        {
+            foreach (var item in gameFunUIs)
+            {
+                item.gameFun.Ending();
+            }
+        }
+
         public void SetAllGameFunAwake()
         {
             foreach (var item in gameFunUIs)
@@ -113,8 +121,8 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                item.gameFun.Handle = CheatTools.GetProcessHandle(pid);
-                item.gameFun.ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, item.gameFun.ModuleName);
+                item.gameFun.gameFunDateStruct.Handle = CheatTools.GetProcessHandle(pid);
+                item.gameFun.gameFunDateStruct.ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, item.gameFun.gameFunDateStruct.ModuleName);
                 item.gameFun.GetGameData();
             }
 
@@ -201,9 +209,9 @@ namespace CheatUITemplt
             foreach (var item in gameFunUIs)
             {
                 
-                if (item.gameFun.IsTrigger)
+                if (item.gameFun.gameFunDateStruct.IsTrigger)
                 {
-                    RegisterHotKey(item.gameFun.FsModifiers, item.gameFun.Vk, new MyButton(item.myStackPanel.button),
+                    RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.button),
                     new HotSystemFun(async () =>
                     {
 
@@ -219,7 +227,7 @@ namespace CheatUITemplt
                 }
                 else
                 {
-                    RegisterHotKey(item.gameFun.FsModifiers, item.gameFun.Vk, new MyButton(item.myStackPanel.checkBox),
+                    RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.checkBox),
                     new HotSystemFun(() =>
                     {
                         

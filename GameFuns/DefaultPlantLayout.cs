@@ -10,47 +10,28 @@ namespace CheatUITemplt.MyGameFuns
 {
     class DefaultPlantLayout:GameFun
     {
-        public override string ModuleName { get; set; }
-        public override uint ModuleOffsetAddress { get; set; }
-        public override uint[] IntPtrOffset { get; set; }
-        public override Keys Vk { get; set; }
-
-        public override bool IsSignatureCode { get; set; }
-        public override string SignatureCode { get; set; }
-        public override uint SignatureCodeOffset { get; set; }
-        public override bool IsTrigger { get; set; }
-        internal override HotKey.KeyModifiers FsModifiers { get; set; }
-        internal override GameDataAddress GameDataAddress { get; set; }
-        public override IntPtr Handle { get; set; }
-        public override bool IsIntPtr { get; set; }
-        public override string KeyDescription_TC { get; set; }
-        public override string FunDescribe_TC { get; set; }
-        public override bool IsAcceptValue { get; set; }
-        public override string KeyDescription_SC { get; set; }
-        public override string FunDescribe_SC { get; set; }
-        public override string KeyDescription_EN { get; set; }
-        public override string FunDescribe_EN { get; set; }
-        public override double SliderMaxNum { get; set; }
-        public override double SliderMinNum { get; set; }
-
+        
         int pid;
         public DefaultPlantLayout()
         {
+
+            this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
+            {
+                Vk = Keys.NumPad8,
+                FsModifiers = HotKey.KeyModifiers.Alt,
+
+                KeyDescription_SC = "Alt+数字键8",
+                FunDescribe_SC = "默认植物种植",
+
+                KeyDescription_TC = "Alt+數字鍵8",
+                FunDescribe_TC = "默認植物種植",
+
+                KeyDescription_EN = "Alt+Number 8",
+                FunDescribe_EN = "Default planting",
+
+                IsTrigger = true,
+            };
            
-
-            Vk = Keys.NumPad8;
-            FsModifiers = HotKey.KeyModifiers.Alt;
-
-            KeyDescription_SC = "Alt+数字键8";
-            FunDescribe_SC = "默认植物种植";
-
-            KeyDescription_TC = "Alt+數字鍵8";
-            FunDescribe_TC = "默認植物種植";
-
-            KeyDescription_EN = "Alt+Number 8";
-            FunDescribe_EN = "Default planting";
-
-            IsTrigger = true;
            
             GameFunManger.Instance.RegisterGameFun(this);
         }
@@ -80,7 +61,7 @@ namespace CheatUITemplt.MyGameFuns
 
         public override void DoFirstTime(double value)
         {
-            pid = CheatTools.GetPidByHandle(Handle);
+            pid = CheatTools.GetPidByHandle(gameFunDateStruct.Handle);
             for (int i = 0; i < 5; i++)
             {
                 Plant(i, 0, 40);
@@ -107,6 +88,10 @@ namespace CheatUITemplt.MyGameFuns
         public override void DoRunAgain(double value)
         {
            
+        }
+        public override void Ending()
+        {
+
         }
     }
 }

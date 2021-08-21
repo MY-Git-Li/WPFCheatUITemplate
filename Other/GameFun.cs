@@ -9,132 +9,36 @@ namespace CheatUITemplt
 {
     /// <summary>
     /// 需要在类的构造函数中最后一行添加GameFunManger.Instance.RegisterGameFun(this);启用
-    /// 重写字段格式 列如 public override string ModuleName { get; set; }
+    /// 必须给初始化gameFunDateStruct类对象进行赋值。
     /// </summary>
     abstract class GameFun
     {
-        
         /// <summary>
-        /// 游戏的句柄----不用赋值，可直接使用
+        /// 必须设置属性后续才能起作用。
         /// </summary>
-        public abstract IntPtr Handle { get ; set ; }
-
-        /// <summary>
-        /// 模块名字-----必填
-        /// </summary>
-        public abstract string ModuleName { get ; set ; }
-
-        /// <summary>
-        /// 模块地址
-        /// </summary>
-        public uint ModuleAddress { get ; set; }
-
-        /// <summary>
-        /// 模块偏移----必填
-        /// </summary>
-        public abstract uint ModuleOffsetAddress { get ; set ; }
-
-        /// <summary>
-        /// 是否启用指针
-        /// </summary>
-        public abstract bool IsIntPtr { get ; set ; }
-
-        /// <summary>
-        /// 指针偏移----当启用指针时填写
-        /// </summary>
-        public abstract uint[] IntPtrOffset { get ; set; }
-
-        /// <summary>
-        /// 游戏数据----不用赋值，可直接定位到地址
-        /// </summary>
-        internal abstract GameDataAddress GameDataAddress { get ; set ; }
-
-        /// <summary>
-        /// 启用的主键----必填 比如一些特定的按键比如ALT等
-        /// </summary>
-        internal abstract HotKey.KeyModifiers FsModifiers { get; set ; }
-
-        /// <summary>
-        /// 启用的复键----必填 比如数字键1
-        /// </summary>
-        public abstract Keys Vk { get; set ; }
-
-        /// <summary>
-        /// 快捷键描述(繁体)----可选填用于界面展示
-        /// </summary>
-        public abstract string KeyDescription_TC { get ; set ; }
-
-        /// <summary>
-        /// 功能描述(繁体)----可选填用于界面展示
-        /// </summary>
-        public abstract string FunDescribe_TC { get ; set ; }
-
-        /// <summary>
-        /// 是否是特征码定位----可选，使用此则无需填写模块偏移等
-        /// </summary>
-        public abstract bool IsSignatureCode { get ; set ; }
-
-        /// <summary>
-        /// 特征码字符串----当特征码定位为真时启用，填写特征码字符串
-        /// </summary>
-        public abstract string SignatureCode { get ; set ; }
-
-        /// <summary>
-        /// 特征码偏移----当特征码定位为真时启用，填写特征码地址后续偏移
-        /// </summary>
-        public abstract uint SignatureCodeOffset { get ; set ; }
-
-        /// <summary>
-        /// 是否为触发器----是否使用DoRunAgain函数
-        /// </summary>
-        public abstract bool IsTrigger { get ; set ; }
-        /// <summary>
-        /// 是否接受外部的值，将决定是否创建slide
-        /// </summary>
-        public abstract bool IsAcceptValue { get; set; }
-
-        /// <summary>
-        /// 快捷键描述(简体)----可选填用于界面展示
-        /// </summary>
-        public abstract string KeyDescription_SC { get ; set ; }
-        /// <summary>
-        /// 功能描述(简体)----可选填用于界面展示
-        /// </summary>
-        public abstract string FunDescribe_SC { get ; set ; }
-        /// <summary>
-        /// 快捷键描述(英文)----可选填用于界面展示
-        /// </summary>
-        public abstract string KeyDescription_EN { get ; set ; }
-        /// <summary>
-        /// 功能描述(英文)----可选填用于界面展示
-        /// </summary>
-        public abstract string FunDescribe_EN { get ; set ; }
-        /// <summary>
-        /// 当IsAcceptValue真时起效，设置数据的最大值 默认100
-        /// </summary>
-        public abstract double SliderMaxNum { get ; set ; }
-        /// <summary>
-        /// 当IsAcceptValue真时起效，设置数据的最小值 默认1
-        /// </summary>
-        public abstract double SliderMinNum { get ; set ; }
-
+        public WPFCheatUITemplate.Other.GameFunDateStruct gameFunDateStruct;
         public void GetGameData()
         {
-            if (!IsSignatureCode)
-            {
-                if (IsIntPtr)
+            if (gameFunDateStruct!=null)
+                if (!gameFunDateStruct.IsSignatureCode)
                 {
-                    this.GameDataAddress = new GameDataAddress(Handle, ModuleAddress + ModuleOffsetAddress, IntPtrOffset);
+                    if (gameFunDateStruct.IsIntPtr)
+                    {
+                        if (gameFunDateStruct.GameDataAddress == null)
+                            this.gameFunDateStruct.GameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.ModuleAddress + gameFunDateStruct.ModuleOffsetAddress, gameFunDateStruct.IntPtrOffset);
+
+                    }
+                    else
+                    {
+                        if (gameFunDateStruct.GameDataAddress == null)
+                            this.gameFunDateStruct.GameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.ModuleAddress + gameFunDateStruct.ModuleOffsetAddress);
+                    }
                 }
                 else
                 {
-                    this.GameDataAddress = new GameDataAddress(Handle, ModuleAddress + ModuleOffsetAddress);
+                    if (gameFunDateStruct.GameDataAddress == null)
+                        this.gameFunDateStruct.GameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, CheatTools.FindData(gameFunDateStruct.Handle, gameFunDateStruct.ModuleAddress, gameFunDateStruct.ModuleAddress + 0x4000000, gameFunDateStruct.SignatureCode)[0] + gameFunDateStruct.SignatureCodeOffset);
                 }
-            }
-            else
-            {
-                this.GameDataAddress = new GameDataAddress(Handle, CheatTools.FindData(Handle, ModuleAddress, ModuleAddress + 0x4000000, SignatureCode)[0] + SignatureCodeOffset);
-            }
 
         }
 
@@ -154,7 +58,10 @@ namespace CheatUITemplt
         /// </summary>
         /// <param name="value">IsAcceptValue为真时 value为slider的值 否则为0</param>
         public abstract void DoRunAgain(double value);
+        /// <summary>
+        /// 与Awake 相对应的Ending方法，用来释放Awake方法中的一些资源等
+        /// </summary>
+        public abstract void Ending();
         
-
     }
 }

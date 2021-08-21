@@ -1,6 +1,5 @@
 ﻿using CheatUITemplt.MyGameFuns;
 using WPFCheatUITemplate.GameFuns;
-using WPFCheatUITemplate.Other;
 
 namespace CheatUITemplt
 {
@@ -19,6 +18,7 @@ namespace CheatUITemplt
             new ArbitrarilyPlant();
             new AllowBackground();
             new DefaultPlantLayout();
+           
        }
     }
 }

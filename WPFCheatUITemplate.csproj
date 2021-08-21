@@ -69,6 +69,7 @@
     <Compile Include="GameFuns\DefaultPlantLayout.cs" />
     <Compile Include="GameFuns\NoCd.cs" />
     <Compile Include="GameFuns\Tree.cs" />
+    <Compile Include="Other\GameFunDateStruct.cs" />
     <Compile Include="Other\UI\LanguageUI.cs" />
     <Compile Include="Other\Voice\SoundEffect.cs" />
     <Compile Include="Start.cs" />
