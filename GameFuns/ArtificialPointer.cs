@@ -64,7 +64,7 @@ namespace WPFCheatUITemplate.GameFuns
         }
         public override void Ending()
         {
-
+            CheatTools.WriteMemoryByte((int)this.gameFunDateStruct.ModuleAddress + 0x9f2e5, gameFunDateStruct.Handle, new byte[] { 0x8B, 0x87, 0x78, 0x55, 0x00, 0x00 });
         }
     }
 }

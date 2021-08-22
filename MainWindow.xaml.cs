@@ -176,6 +176,7 @@ namespace WPFCheatUITemplate
         {
             GameFunManger.Instance.hotSystem.UnRegisterHotKeyAll(Hwnd);
             GameFunManger.Instance.hotSystem.CloseHotKeyFunAll();
+            GameFunManger.Instance.SetAllGameFunEnding();
         }
 
        
