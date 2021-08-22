@@ -171,15 +171,15 @@ namespace WPFCheatUITemplate
         private void mainWindows_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             EndHotsystem();
+
+            if (GameFunManger.Instance.Pid != 0)
+                GameFunManger.Instance.SetAllGameFunEnding();
         }
         public void EndHotsystem()
         {
             GameFunManger.Instance.hotSystem.UnRegisterHotKeyAll(Hwnd);
             GameFunManger.Instance.hotSystem.CloseHotKeyFunAll();
 
-            if (GameFunManger.Instance.Pid != 0)
-                GameFunManger.Instance.SetAllGameFunEnding();
-            
         }
 
     }
