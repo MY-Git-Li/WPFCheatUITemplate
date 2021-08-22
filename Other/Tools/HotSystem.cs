@@ -71,7 +71,7 @@ namespace CheatUITemplt
 
         public void CloseHotKeyFunAll()
         {
-            for (int i = 0; i < hotKeyFunedList.Count; i++)
+            for (int i = hotKeyFunedList.Count - 1; i >= 0; i--)
             {
                 hotKeyFunedList[i].runed();
                 hotKeyFunedList.Remove(hotKeyFunedList[i]);
