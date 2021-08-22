@@ -74,6 +74,7 @@ namespace CheatUITemplt
             for (int i = 0; i < hotKeyFunedList.Count; i++)
             {
                 hotKeyFunedList[i].runed();
+                hotKeyFunedList.Remove(hotKeyFunedList[i]);
             }
         }
         
