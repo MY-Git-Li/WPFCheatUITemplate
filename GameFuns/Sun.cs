@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using CheatUITemplt;
+using System.Windows.Forms;
 
-namespace CheatUITemplt.MyGameFuns
+namespace WPFCheatUITemplate.GameFuns
 {
     class Sun : GameFun
     {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using CheatUITemplt;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CheatUITemplt.MyGameFuns
+namespace WPFCheatUITemplate.GameFuns
 {
     class DefaultPlantLayout:GameFun
     {

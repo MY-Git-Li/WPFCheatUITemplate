@@ -77,9 +77,9 @@ namespace WPFCheatUITemplate.Other
         public  string FunDescribe_TC { get; set; }
 
         /// <summary>
-        /// 是否为触发器----是否使用DoRunAgain函数
+        /// 是否为触发器----false启用DoRunAgain函数，
         /// </summary>
-        public  bool IsTrigger { get; set; }
+        public bool IsTrigger { get; set; }
         /// <summary>
         /// 是否接受外部的值，将决定是否创建slide
         /// </summary>

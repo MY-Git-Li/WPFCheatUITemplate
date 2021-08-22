@@ -1,7 +1,6 @@
 ﻿using CheatUITemplt;
-using System;
 using System.Windows.Forms;
-using WPFCheatUITemplate;
+
 
 namespace WPFCheatUITemplate.GameFuns
 {

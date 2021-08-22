@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CheatUITemplt
+﻿namespace CheatUITemplt
 {
     /// <summary>
     /// 需要在类的构造函数中最后一行添加GameFunManger.Instance.RegisterGameFun(this);启用
@@ -19,7 +12,7 @@ namespace CheatUITemplt
         public WPFCheatUITemplate.Other.GameFunDateStruct gameFunDateStruct;
         public void GetGameData()
         {
-            if (gameFunDateStruct!=null)
+            if (gameFunDateStruct != null)
                 if (!gameFunDateStruct.IsSignatureCode)
                 {
                     if (gameFunDateStruct.IsIntPtr)
@@ -46,7 +39,7 @@ namespace CheatUITemplt
         /// 可以实现自定义数据获取，列如人造指针等，运行一次
         /// </summary>
         public abstract void Awake();
-        
+
         /// <summary>
         /// 初次点击函数
         /// </summary>
@@ -62,6 +55,6 @@ namespace CheatUITemplt
         /// 与Awake 相对应的Ending方法，用来释放Awake方法中的一些资源等
         /// </summary>
         public abstract void Ending();
-        
+
     }
 }
