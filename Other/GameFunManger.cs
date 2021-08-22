@@ -26,7 +26,7 @@ namespace CheatUITemplt
         public CreateLayout CreateLayout { get => createLayout; set => createLayout = value; }
 
         int pid;
-        public int Pid{set => pid = value;}
+        public int Pid{ set => pid = value; get => pid; }
 
         SoundEffect soundEffect;
         public SoundEffect SoundEffect { get => soundEffect; set => soundEffect = value; }
