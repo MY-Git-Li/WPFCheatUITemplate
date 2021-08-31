@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ICO\黑洞%28blackhole%29-ico.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -140,6 +143,7 @@
     <Content Include="SoundEffect\77lx3-1y6gm.wav" />
     <Content Include="SoundEffect\afpiz-if2hn.wav" />
     <Content Include="SoundEffect\ext09-vnxd7.wav" />
+    <Resource Include="ICO\黑洞%28blackhole%29-ico.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
