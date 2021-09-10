@@ -33,12 +33,18 @@ namespace WPFCheatUITemplate
 
         public void SetBrushes(Action<Graphics> action)
         {
-            drawWindow.SetBrushes = action;
+            if (drawWindow !=null)
+            {
+                drawWindow.SetBrushes = action;
+            }
         }
 
         public void SetFonts(Action<Graphics> action)
         {
-            drawWindow.SetFonts = action;
+            if (drawWindow != null)
+            {
+                drawWindow.SetFonts = action;
+            }
         }
 
 
