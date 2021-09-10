@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Name="mainWindows"
         Title="《植物大战僵尸》 Early Access 二十七项修改器"
-        Height="810" Width="850"
+        Height="800" Width="950"
          ResizeMode="NoResize"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -458,7 +458,7 @@
                         <TextBlock Name="keyDes" Text="快捷键" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
                         <TextBlock Name="funDes" Text="功能列表" Margin="200 0 0 0" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
                     </StackPanel>
-                    <Path Data="M4 2 660 2" Stroke="#E0E0E0" StrokeThickness="1"/>
+                    <Path Data="M4 2 1080 2" Stroke="#E0E0E0" StrokeThickness="1"/>
 
                     <Grid Margin="8 0 0 0" Name="keyAndDescribelayout">
                         <Grid.ColumnDefinitions>
@@ -510,7 +510,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="1">
-                        <Path Grid.Row="1" Data="M4 2 660 2" Stroke="#E0E0E0" StrokeThickness="1"  VerticalAlignment="Bottom"/>
+                        <Path Grid.Row="1" Data="M4 2 1080 2" Stroke="#E0E0E0" StrokeThickness="1"  VerticalAlignment="Bottom"/>
                         <TextBlock Name="otherDes" Text="其他说明：Ctrl+Shift+Home禁用/启用快捷键" Style="{StaticResource OtherText}"/>
                     </StackPanel>
 

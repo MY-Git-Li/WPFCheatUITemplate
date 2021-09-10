@@ -87,7 +87,7 @@ namespace WPFCheatUITemplate
             uILangerManger.RegisterLanguageUI(new LanguageUI()
             {
                 textBlock = process,
-                Description_SC = "功能列表",
+                Description_SC = "游戏进程名",
                 Description_TC = "遊戲進程名",
                 Description_EN = "Game Process Name"
 
