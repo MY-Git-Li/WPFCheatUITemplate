@@ -27,8 +27,8 @@ namespace WPFCheatUITemplate
 
         public void DrawFun(Action<Graphics> action)
         {
-           
-           drawWindow.DrawCallBack = action;
+            if (drawWindow != null)
+                drawWindow.DrawCallBack = action;
         }
 
         public void SetBrushes(Action<Graphics> action)
