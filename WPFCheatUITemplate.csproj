@@ -40,9 +40,22 @@
     <ApplicationIcon>ICO\黑洞%28blackhole%29-ico.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GameOverlay, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\GameOverlay.Net.4.3.1\lib\net47\GameOverlay.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.Direct2D1.4.2.0\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,8 +85,12 @@
     <Compile Include="GameFuns\DefaultPlantLayout.cs" />
     <Compile Include="GameFuns\NoCd.cs" />
     <Compile Include="GameFuns\Tree.cs" />
-    <Compile Include="Other\FastGameFun.cs" />
-    <Compile Include="Other\GameFunDateStruct.cs" />
+    <Compile Include="Other\Draw\WinAPI.cs" />
+    <Compile Include="Other\Draw\DrawManager.cs" />
+    <Compile Include="Other\Draw\DrawWindow.cs" />
+    <Compile Include="Other\Draw\Memory.cs" />
+    <Compile Include="Other\GameFuns\FastGameFun.cs" />
+    <Compile Include="Other\GameFuns\GameFunDateStruct.cs" />
     <Compile Include="Other\UI\LanguageUI.cs" />
     <Compile Include="Other\Voice\SoundEffect.cs" />
     <Compile Include="Start.cs" />
@@ -96,11 +113,11 @@
   <ItemGroup>
     <Compile Include="MainWindowsViewModel.cs" />
     <Compile Include="Other\UI\CreateLayout.cs" />
-    <Compile Include="Other\GameDataAddress.cs" />
-    <Compile Include="Other\GameFun.cs" />
-    <Compile Include="Other\GameFunManger.cs" />
-    <Compile Include="Other\GameFunUI.cs" />
-    <Compile Include="Other\InvestigateGame.cs" />
+    <Compile Include="Other\GameFuns\GameDataAddress.cs" />
+    <Compile Include="Other\GameFuns\GameFun.cs" />
+    <Compile Include="Other\GameFuns\GameFunManger.cs" />
+    <Compile Include="Other\GameFuns\GameFunUI.cs" />
+    <Compile Include="Other\FindGame\InvestigateGame.cs" />
     <Compile Include="Other\UI\MyButton.cs" />
     <Compile Include="Other\UI\MyButtonManger.cs" />
     <Compile Include="Other\Tools\CheatTools.cs" />
@@ -123,6 +140,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

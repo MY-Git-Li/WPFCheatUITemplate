@@ -1,6 +1,6 @@
 ﻿using CheatUITemplt;
 using System.Collections.Generic;
-
+using System.Threading;
 
 namespace WPFCheatUITemplate.GameFuns
 {
@@ -19,18 +19,17 @@ namespace WPFCheatUITemplate.GameFuns
                 FsModifiers = HotKey.KeyModifiers.None,
 
                 KeyDescription_SC = "数字键9",
-                FunDescribe_SC = "人造指针设置阳光",
+                FunDescribe_SC = "外部绘制",
 
                 KeyDescription_TC = "數字鍵9",
-                FunDescribe_TC = "人造指針設置陽光",
+                FunDescribe_TC = "外部繪製",
 
                 KeyDescription_EN = "Number 9",
-                FunDescribe_EN = "ArtificialPointer Sun number",
+                FunDescribe_EN = "External draw",
 
-                IsTrigger = true,
+                IsTrigger = false,
 
-
-                IsAcceptValue = true,
+                IsAcceptValue = false,
                 SliderMinNum = 1,
                 SliderMaxNum = 9999,
             };
@@ -49,22 +48,48 @@ namespace WPFCheatUITemplate.GameFuns
             ret = asm.HookAllRegister(pid, (int)(this.gameFunDateStruct.ModuleAddress + 0x9f2e5), (int)(this.gameFunDateStruct.ModuleAddress + 0x9F2EB));
             
         }
-
+        Thread tt;
+        DrawManager drawManager;
         public override void DoFirstTime(double value)
         {
-            int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], gameFunDateStruct.Handle);
+            //int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], gameFunDateStruct.Handle);
 
 
-            CheatTools.WriteMemoryInt(address+0x5578, gameFunDateStruct.Handle, (int)value);
+            //CheatTools.WriteMemoryInt(address+0x5578, gameFunDateStruct.Handle, (int)value);
+
+            tt = new Thread(Draw);
+            tt.IsBackground = true;
+            tt.Start();
+          
+        }
+
+        void Draw()
+        {
+            drawManager = new DrawManager();
+            drawManager.Init("PlantsVsZombies");
+            drawManager.SetBrushes((g) => { drawManager._brushes["blue"] = g.CreateSolidBrush(30, 144, 255); });
+            drawManager.SetFonts((g) => { drawManager._fonts["Microsoft YaHei"] = g.CreateFont("Microsoft YaHei", 12); });
+            drawManager.DrawFun((g) =>
+            {
+
+                g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f, 
+                    drawManager._brushes["blue"], 
+                    10, drawManager._windowData.Height / 2,
+                    "这里是测试");
+
+            });
+            drawManager.Run();
         }
 
         public override void DoRunAgain(double value)
         {
-           
+            drawManager.Close();
+            tt.Abort();
         }
+
         public override void Ending()
         {
-            CheatTools.WriteMemoryByte((int)this.gameFunDateStruct.ModuleAddress + 0x9f2e5, gameFunDateStruct.Handle, new byte[] { 0x8B, 0x87, 0x78, 0x55, 0x00, 0x00 });
+            //CheatTools.WriteMemoryByte((int)this.gameFunDateStruct.ModuleAddress + 0x9f2e5, gameFunDateStruct.Handle, new byte[] { 0x8B, 0x87, 0x78, 0x55, 0x00, 0x00 });
         }
     }
 }
