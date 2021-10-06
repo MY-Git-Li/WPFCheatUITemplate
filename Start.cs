@@ -13,7 +13,7 @@ namespace WPFCheatUITemplate
             new AdventureLevel();
             new ChangeMode();
             new Tree();
-            new ArtificialPointer();
+            new DrawWindow();
             new NoCd();
             new AutoGet();
             new ArbitrarilyPlant();

@@ -4,12 +4,12 @@ using System.Threading;
 
 namespace WPFCheatUITemplate.GameFuns
 {
-    class ArtificialPointer : GameFun
+    class DrawWindow : GameFun
     {
 
         Dictionary<ASM.RegisterType, int> ret;
 
-        public ArtificialPointer()
+        public DrawWindow()
         {
             this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
             {
