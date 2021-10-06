@@ -10,9 +10,9 @@ namespace WPFCheatUITemplate.Other.Draw
 {
     class Memory
     {
-        public static Process m_Process;
-        public static IntPtr m_pWindowHandle;
-        public static IntPtr m_pProcessHandle;
+        private Process m_Process;
+        private IntPtr m_pWindowHandle;
+        private IntPtr m_pProcessHandle;
 
         public struct WindowData
         {
@@ -22,19 +22,25 @@ namespace WPFCheatUITemplate.Other.Draw
             public int Height;
         }
 
-        public static void Initialize(string ProcessName)
+        public void Initialize(string ProcessName)
         {
             m_Process = Process.GetProcessesByName(ProcessName)[0];
             m_pWindowHandle = m_Process.MainWindowHandle;
             m_pProcessHandle = WinAPI.OpenProcess(WinAPI.PROCESS_VM_READ | WinAPI.PROCESS_VM_WRITE | WinAPI.PROCESS_VM_OPERATION, false, m_Process.Id);
         }
 
-        public static void CloseHandle()
+        public void SetProcessHandle(IntPtr handle)
+        {
+            m_pProcessHandle = handle;
+        }
+
+
+        public  void CloseHandle()
         {
             WinAPI.CloseHandle(m_pProcessHandle);
         }
 
-        public static int GetModule(string moduleName)
+        public  int GetModule(string moduleName)
         {
             foreach (ProcessModule module in m_Process.Modules)
             {
@@ -47,12 +53,12 @@ namespace WPFCheatUITemplate.Other.Draw
             return 0;
         }
 
-        public static void SetForegroundWindow()
+        public  void SetForegroundWindow()
         {
             WinAPI.SetForegroundWindow(m_pWindowHandle);
         }
 
-        public static WindowData GetGameWindowData()
+        public  WindowData GetGameWindowData()
         {
             // 获取指定窗口句柄的窗口矩形数据和客户区矩形数据
             WinAPI.GetWindowRect(m_pWindowHandle, out RECT windowRect);
@@ -91,20 +97,20 @@ namespace WPFCheatUITemplate.Other.Draw
             };
         }
 
-        public static T ReadMemory<T>(int address) where T : struct
+        public  T ReadMemory<T>(int address) where T : struct
         {
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
             WinAPI.ReadProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
             return ByteArrayToStructure<T>(buffer);
         }
 
-        public static void WriteMemory<T>(int address, object Value) where T : struct
+        public  void WriteMemory<T>(int address, object Value) where T : struct
         {
             byte[] buffer = StructureToByteArray(Value);
             WinAPI.WriteProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
         }
 
-        public static float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
+        public  float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
         {
             int ByteSize = Marshal.SizeOf(typeof(T));
             byte[] buffer = new byte[ByteSize * MatrixSize];
@@ -112,7 +118,7 @@ namespace WPFCheatUITemplate.Other.Draw
             return ConvertToFloatArray(buffer);
         }
 
-        public static string ReadString(int address, int size)
+        public  string ReadString(int address, int size)
         {
             byte[] buffer = new byte[size];
             WinAPI.ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);

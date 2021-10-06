@@ -63,7 +63,7 @@ namespace WPFCheatUITemplate
             Vector2 _worldToScreenPos;
             Vector3 _camera;
 
-            float[] viewmatrix = Memory.ReadMatrix<float>(MatrixAddress, 16);
+            float[] viewmatrix = drawWindow.memory.ReadMatrix<float>(MatrixAddress, 16);
 
             _camera.Z = viewmatrix[8] * target.X + viewmatrix[9] * target.Y + viewmatrix[10] * target.Z + viewmatrix[11];
             if (_camera.Z < 0.001f)

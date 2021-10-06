@@ -26,12 +26,15 @@ namespace WPFCheatUITemplate.Other.Draw
         public Action<Graphics> SetBrushes;
         public Action<Graphics> SetFonts;
 
+        public Memory memory;
         public DrawWindow(string WinDowName)
         {
-            Memory.Initialize(WinDowName);
-            Memory.SetForegroundWindow();
+            memory = new Memory();
 
-            _WindowData = Memory.GetGameWindowData();
+            memory.Initialize(WinDowName);
+            memory.SetForegroundWindow();
+
+            _WindowData = memory.GetGameWindowData();
 
 
             _brushes = new Dictionary<string, SolidBrush>();
@@ -114,7 +117,7 @@ namespace WPFCheatUITemplate.Other.Draw
         private void ResizeWindow(Graphics gfx)
         {
             // 窗口移动跟随
-            _WindowData = GetGameWindowData();
+            _WindowData = memory.GetGameWindowData();
             _window.X = _WindowData.Left;
             _window.Y = _WindowData.Top;
             _window.Width = _WindowData.Width;

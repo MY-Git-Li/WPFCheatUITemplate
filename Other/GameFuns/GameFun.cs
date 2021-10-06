@@ -1,4 +1,5 @@
-﻿namespace CheatUITemplt
+﻿
+namespace CheatUITemplt
 {
     /// <summary>
     /// 需要在类的构造函数中最后一行添加GameFunManger.Instance.RegisterGameFun(this);启用
@@ -10,9 +11,26 @@
         /// 必须设置属性后续才能起作用。
         /// </summary>
         public WPFCheatUITemplate.Other.GameFunDateStruct gameFunDateStruct;
+
+        public WPFCheatUITemplate.Other.Draw.Memory memory;
+
+        //public Memory Memory
+        //{
+        //    get
+        //    {
+        //        return memory;
+        //    }
+
+        //    set
+        //    {
+        //        memory = value;
+        //    }
+        //}
+
         public void GetGameData()
         {
             if (gameFunDateStruct != null)
+            {
                 if (!gameFunDateStruct.IsSignatureCode)
                 {
                     if (gameFunDateStruct.IsIntPtr)
@@ -33,6 +51,9 @@
                         this.gameFunDateStruct.GameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, CheatTools.FindData(gameFunDateStruct.Handle, gameFunDateStruct.ModuleAddress, gameFunDateStruct.ModuleAddress + 0x4000000, gameFunDateStruct.SignatureCode)[0] + gameFunDateStruct.SignatureCodeOffset);
                 }
 
+                memory = new WPFCheatUITemplate.Other.Draw.Memory();
+                memory.SetProcessHandle(gameFunDateStruct.Handle);
+            }
         }
 
         /// <summary>
