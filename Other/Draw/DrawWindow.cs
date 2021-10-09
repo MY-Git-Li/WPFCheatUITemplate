@@ -60,6 +60,41 @@ namespace WPFCheatUITemplate.Other.Draw
             _window.DrawGraphics += _window_DrawGraphics;
             _window.DestroyGraphics += _window_DestroyGraphics;
         }
+
+        public DrawWindow(string WinDowName,int maxfps)
+        {
+            memory = new Memory();
+
+            memory.Initialize(WinDowName);
+            memory.SetForegroundWindow();
+
+            _WindowData = memory.GetGameWindowData();
+
+
+            _brushes = new Dictionary<string, SolidBrush>();
+            _fonts = new Dictionary<string, Font>();
+
+
+            var gfx = new Graphics()
+            {
+                VSync = false,
+                MeasureFPS = true,
+                PerPrimitiveAntiAliasing = true,
+                TextAntiAliasing = true
+            };
+
+            _window = new GraphicsWindow(_WindowData.Left, _WindowData.Top, _WindowData.Width, _WindowData.Height, gfx)
+            {
+                FPS = maxfps,
+                IsTopmost = true,
+                IsVisible = true
+            };
+
+            _window.SetupGraphics += _window_SetupGraphics;
+            _window.DrawGraphics += _window_DrawGraphics;
+            _window.DestroyGraphics += _window_DestroyGraphics;
+        }
+
         private void _window_SetupGraphics(object sender, SetupGraphicsEventArgs e)
         {
             var gfx = e.Graphics;

@@ -6,8 +6,13 @@ namespace WPFCheatUITemplate.GameFuns
 {
     class DrawWindow : GameFun
     {
+        //hook 所有的寄存器的值
+        //Dictionary<ASM.RegisterType, int> ret;
 
-        Dictionary<ASM.RegisterType, int> ret;
+        //启动绘图的线程
+        Thread tt;
+        //绘图的管理者，用于绘图
+        DrawManager drawManager;
 
         public DrawWindow()
         {
@@ -29,31 +34,31 @@ namespace WPFCheatUITemplate.GameFuns
 
                 IsTrigger = false,
 
-                IsAcceptValue = false,
-                SliderMinNum = 1,
-                SliderMaxNum = 9999,
             };
-            
+
+           
+
+            drawManager = new DrawManager();
 
             GameFunManger.Instance.RegisterGameFun(this);
         }
 
         public override void Awake()
         {
-            int pid = CheatTools.GetPidByHandle(gameFunDateStruct.Handle);
+            //人造指针的步骤
+            //int pid = CheatTools.GetPidByHandle(gameFunDateStruct.Handle);
            
-            ASM asm = new ASM();
-            asm.Mov_EAX_DWORD_Ptr_EDI_Add(0x5578);
+            //ASM asm = new ASM();
+            //asm.Mov_EAX_DWORD_Ptr_EDI_Add(0x5578);
          
-            ret = asm.HookAllRegister(pid, (int)(this.gameFunDateStruct.ModuleAddress + 0x9f2e5), (int)(this.gameFunDateStruct.ModuleAddress + 0x9F2EB));
+            //ret = asm.HookAllRegister(pid, (int)(this.gameFunDateStruct.ModuleAddress + 0x9f2e5), (int)(this.gameFunDateStruct.ModuleAddress + 0x9F2EB));
             
         }
-        Thread tt;
-        DrawManager drawManager;
+       
         public override void DoFirstTime(double value)
         {
+            //使用人造指针
             //int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], gameFunDateStruct.Handle);
-
 
             //CheatTools.WriteMemoryInt(address+0x5578, gameFunDateStruct.Handle, (int)value);
 
@@ -65,7 +70,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         void Draw()
         {
-            drawManager = new DrawManager();
+           
             drawManager.Init("PlantsVsZombies");
             drawManager.SetBrushes((g) => { drawManager._brushes["blue"] = g.CreateSolidBrush(30, 144, 255); });
             drawManager.SetFonts((g) => { drawManager._fonts["Microsoft YaHei"] = g.CreateFont("Microsoft YaHei", 12); });
@@ -73,9 +78,9 @@ namespace WPFCheatUITemplate.GameFuns
             {
 
                 g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f, 
-                    drawManager._brushes["blue"], 
+                    drawManager._brushes["blue"],
                     10, drawManager._windowData.Height / 2,
-                    "这里是测试");
+                    "测试文字");
 
             });
             drawManager.Run();
@@ -89,7 +94,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void Ending()
         {
-            //CheatTools.WriteMemoryByte((int)this.gameFunDateStruct.ModuleAddress + 0x9f2e5, gameFunDateStruct.Handle, new byte[] { 0x8B, 0x87, 0x78, 0x55, 0x00, 0x00 });
+            
         }
     }
 }
