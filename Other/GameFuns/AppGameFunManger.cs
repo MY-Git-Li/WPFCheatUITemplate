@@ -109,7 +109,6 @@ namespace CheatUITemplt
                 item.gameFun.Ending();
             }
 
-            StartFlashAnimation();
         }
 
         public void SetAllGameFunAwake()
@@ -119,7 +118,6 @@ namespace CheatUITemplt
                 item.gameFun.Awake();
             }
 
-            StopFlashAnimation();
         }
 
         public void SetAllGameFunData()
@@ -341,6 +339,15 @@ namespace CheatUITemplt
             mainWindow.EndHotsystem();
         }
 
+        public void StartFlashAnimation()
+        {
+            mainWindow.PlayFlashAinimation();
+        }
+
+        public void StopFlashAnimation()
+        {
+            mainWindow.StopFlashAinimation();
+        }
 
         private void SetControlEnable(System.Windows.Controls.Control control, bool enable)
         {
@@ -369,15 +376,7 @@ namespace CheatUITemplt
         }
 
 
-        private void StartFlashAnimation()
-        {
-            mainWindow.PlayFlashAinimation();
-        }
-
-        private void StopFlashAnimation()
-        {
-            mainWindow.StopFlashAinimation();
-        }
+      
     }
 
 

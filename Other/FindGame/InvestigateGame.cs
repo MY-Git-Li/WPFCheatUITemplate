@@ -55,6 +55,7 @@ namespace CheatUITemplt
             AppGameFunManger.Instance.EndHotsystem();
             AppGameFunManger.Instance.Pid = 0;
             AppGameFunManger.Instance.SetViewPid();
+            AppGameFunManger.Instance.StartFlashAnimation();
             AppGameFunManger.Instance.SetAllGameFunEnding();
 
             startFindGame.RunWorkerAsync();
@@ -87,6 +88,7 @@ namespace CheatUITemplt
         private void startFindGame_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             AppGameFunManger.Instance.SetViewPid();
+            AppGameFunManger.Instance.StopFlashAnimation();
             AppGameFunManger.Instance.EnableControl();
             AppGameFunManger.Instance.RegisterAllHotKey();
 
