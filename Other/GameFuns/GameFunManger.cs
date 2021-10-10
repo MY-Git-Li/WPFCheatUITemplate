@@ -97,7 +97,14 @@ namespace CheatUITemplt
 
         public void SetViewPid()
         {
-            mainWindow.lbl_processID.Text = pid.ToString();
+            if (pid == 0)
+            {
+                mainWindow.lbl_processID.Text ="";
+            }else
+            {
+                mainWindow.lbl_processID.Text = pid.ToString();
+            }
+           
         }
 
         public void SetAllGameFunEnding()
@@ -106,6 +113,8 @@ namespace CheatUITemplt
             {
                 item.gameFun.Ending();
             }
+
+            StartFlashAnimation();
         }
 
         public void SetAllGameFunAwake()
@@ -114,6 +123,8 @@ namespace CheatUITemplt
             {
                 item.gameFun.Awake();
             }
+
+            StopFlashAnimation();
         }
 
         public void SetAllGameFunData()
@@ -315,6 +326,16 @@ namespace CheatUITemplt
             hotSystem.RegisterHotKey(mainWindow.Hwnd, fsModifiers, vk, fun);
         }
 
+
+        void StartFlashAnimation()
+        {
+            mainWindow.PlayFlashAinimation();
+        }
+
+        void StopFlashAnimation()
+        {
+            mainWindow.StopFlashAinimation();
+        }
     }
 
 

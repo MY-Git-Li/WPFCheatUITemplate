@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Name="mainWindows"
         Title="《植物大战僵尸》 Early Access 二十七项修改器"
-        Height="800" Width="950"
+        Height="800" Width="880"
          ResizeMode="NoResize"
         WindowStyle="None"
         AllowsTransparency="True"

@@ -68,6 +68,6 @@ namespace WPFCheatUITemplate
                 },
 
             }.Start();
-       }
+        }
     }
 }
