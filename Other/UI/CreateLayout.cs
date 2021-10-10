@@ -73,7 +73,13 @@ namespace CheatUITemplt
             return sc;
         }
 
-
+        public void CreatSeparate()
+        {
+            Description sc = new Description();
+            sc.keyDescription = CreatKeyTextBlock("");
+            SetPosition(sc.keyDescription, true);
+            grid.Children.Add(sc.keyDescription);
+        }
 
         public MyStackPanel CreatMyStackPanel(GameFun gameFun,GameFunUI gameFunUI)
         {

@@ -163,6 +163,13 @@ namespace CheatUITemplt
         }
 
 
+        public void CreatSeparate()
+        {
+            CreateLayout.AddRowDefin();
+            CreateLayout.CreatSeparate();
+            CreateLayout.UpDateRow();
+        }
+
         public void RegisterAllHotKey()
         {
             #region//快捷键禁用/启用

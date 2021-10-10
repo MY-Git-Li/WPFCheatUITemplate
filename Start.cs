@@ -13,9 +13,9 @@ namespace WPFCheatUITemplate
             new AdventureLevel();
             new ChangeMode();
             new Tree();
-            new DrawWindow();
             new NoCd();
-            new AutoGet();
+            new DrawWindow();
+            GameFunManger.Instance.CreatSeparate();
             new ArbitrarilyPlant();
             new AllowBackground();
             new DefaultPlantLayout();
@@ -30,15 +30,15 @@ namespace WPFCheatUITemplate
                     IsIntPtr = false,
 
                     Vk = Keys.NumPad1,
-                    FsModifiers = HotKey.KeyModifiers.Shift,
+                    FsModifiers = HotKey.KeyModifiers.Alt,
 
-                    KeyDescription_SC = "Shift+数字键1",
+                    KeyDescription_SC = "Alt+数字键1",
                     FunDescribe_SC = "超级攻速",
 
-                    KeyDescription_TC = "Shift+數字鍵1",
+                    KeyDescription_TC = "Alt+數字鍵1",
                     FunDescribe_TC = "超級攻速",
 
-                    KeyDescription_EN = "Shift+Number 1",
+                    KeyDescription_EN = "Alt+Number 1",
                     FunDescribe_EN = "Super attack speed",
 
                     IsTrigger = false
@@ -68,6 +68,7 @@ namespace WPFCheatUITemplate
                 },
 
             }.Start();
+            new AutoGet();
         }
     }
 }
