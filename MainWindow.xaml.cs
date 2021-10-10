@@ -203,13 +203,13 @@ namespace WPFCheatUITemplate
         {
 
             ObjectAnimationUsingKeyFrames flashAnimation = new ObjectAnimationUsingKeyFrames();
-            flashAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.3));
+            flashAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.6));
             
 
             flashAnimation.RepeatBehavior = RepeatBehavior.Forever;
             flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.0))));
-            flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Hidden, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.15))));
-            flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.3))));
+            flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Hidden, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.3))));
+            flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.6))));
             
             
             Storyboard.SetTargetName(flashAnimation, lbl_gemeProcess.Name);

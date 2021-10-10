@@ -263,19 +263,30 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
-                        <Border x:Name="bordercolo" Width="40" Height="20" CornerRadius="4" Background="#15181E" >
+                        <Border x:Name="bordercolo" Width="40" Height="20" CornerRadius="4" Background="#14171D" >
+                            <Border.Effect>
+
+                                <DropShadowEffect BlurRadius="6" Color="#404142" Direction="225" Opacity="0.8"
+            RenderingBias="Quality" ShadowDepth="5" />
+
+                            </Border.Effect>
                             <Grid>
+                                <Path Data="M12 10 28 10" Stroke="#0C0F13" StrokeThickness="3"/>
+                                <Path Data="M12 11 28 11" Stroke="#373A3F" StrokeThickness="1.5"/>
                                 <Border x:Name="border" Width="18" Height="18" CornerRadius="4" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1 0" Background="#484E51">
                                     <Border.RenderTransform>
                                         <TranslateTransform  X="0"/>
                                     </Border.RenderTransform>
                                 </Border>
+                               
                                 <!--<TextBlock x:Name="txt" Text="{TemplateBinding Content}" Margin="9 0" VerticalAlignment="Center" Foreground="White" >
                                     <TextBlock.RenderTransform>
                                         <TranslateTransform   X="18"></TranslateTransform>
                                     </TextBlock.RenderTransform>
                                 </TextBlock>-->
                             </Grid>
+                            
+                            
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
@@ -320,6 +331,10 @@
 
                         <Border x:Name="bordercolo" Width="40" Height="20" CornerRadius="4" Background="#15181E" >
 
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="6" Color="#404142" Direction="225" Opacity="0.8"
+            RenderingBias="Quality" ShadowDepth="5" />
+                            </Border.Effect>
                             <Border x:Name="border" Margin="12 0 0 0" Width="18" Height="18" CornerRadius="4" VerticalAlignment="Center" HorizontalAlignment="Left"  Background="#484E51"/>
 
                         </Border>
