@@ -18,8 +18,8 @@ namespace WPFCheatUITemplate
         InvestigateGame investigateGame;
         SoundEffect soundEffect;
         UILangerManger uILangerManger;
-        ObjectAnimationUsingKeyFrames flashAnimation;
-
+      
+        Storyboard myStoryboard;
         string processName = "PlantsVsZombies";
 
         public IntPtr Hwnd;
@@ -191,18 +191,18 @@ namespace WPFCheatUITemplate
 
         public void PlayFlashAinimation()
         {
-            lbl_gemeProcess.BeginAnimation(TextBlock.VisibilityProperty, flashAnimation);
+            myStoryboard.Begin(this, true);
         }
 
         public void StopFlashAinimation()
         {
-            lbl_gemeProcess.BeginAnimation(TextBlock.VisibilityProperty, null);
+            myStoryboard.Stop(this);
         }
 
         void InitFlashAinimation()
         {
-            
-            flashAnimation = new ObjectAnimationUsingKeyFrames();
+
+            ObjectAnimationUsingKeyFrames flashAnimation = new ObjectAnimationUsingKeyFrames();
             flashAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.3));
             
 
@@ -210,7 +210,15 @@ namespace WPFCheatUITemplate
             flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.0))));
             flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Hidden, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.15))));
             flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.3))));
+            
+            
+            Storyboard.SetTargetName(flashAnimation, lbl_gemeProcess.Name);
+            Storyboard.SetTargetProperty(
+                flashAnimation, new PropertyPath(TextBlock.VisibilityProperty));
 
+            // Create a storyboard to apply the animation.
+            myStoryboard = new Storyboard();
+            myStoryboard.Children.Add(flashAnimation);
         }
     }
 }
