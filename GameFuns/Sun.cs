@@ -37,7 +37,7 @@ namespace WPFCheatUITemplate.GameFuns
                 SliderMaxNum = 9999
             };
 
-            GameFunManger.Instance.RegisterGameFun(this);
+            AppGameFunManger.Instance.RegisterGameFun(this);
         }
 
         public override void Awake()
@@ -47,7 +47,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            CheatTools.WriteMemoryInt(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, (int)value);
+            memory.WriteMemory<int>(gameFunDateStruct.GameDataAddress.Address, (int)value);
         }
 
         public override void DoRunAgain(double value)

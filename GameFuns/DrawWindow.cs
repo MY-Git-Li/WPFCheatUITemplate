@@ -40,7 +40,7 @@ namespace WPFCheatUITemplate.GameFuns
 
             drawManager = new DrawManager();
 
-            GameFunManger.Instance.RegisterGameFun(this);
+            AppGameFunManger.Instance.RegisterGameFun(this);
         }
 
         public override void Awake()

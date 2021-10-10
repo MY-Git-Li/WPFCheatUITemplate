@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using WPFCheatUITemplate;
@@ -13,26 +9,22 @@ using static CheatUITemplt.HotKey;
 
 namespace CheatUITemplt
 {
-    
-    class GameFunManger
+
+    class AppGameFunManger
     {
-       
+
         List<GameFunUI> gameFunUIs = new List<GameFunUI>();
 
         MainWindow mainWindow;
-        public MainWindow MainWindow { get => mainWindow; set => mainWindow = value; }
-      
+
         CreateLayout createLayout;
-        public CreateLayout CreateLayout { get => createLayout; set => createLayout = value; }
 
         int pid;
-        public int Pid{ set => pid = value; get => pid; }
+        public int Pid { set => pid = value; get => pid; }
 
         SoundEffect soundEffect;
-        public SoundEffect SoundEffect { get => soundEffect; set => soundEffect = value; }
 
         UILangerManger uILangerManger;
-        public UILangerManger UILangerManger { get => uILangerManger; set => uILangerManger = value; }
 
         //注册热键
         public HotSystem hotSystem;
@@ -42,15 +34,15 @@ namespace CheatUITemplt
 
         #region 单例模式
         //单例模式
-        private static GameFunManger instance;
-        private GameFunManger() { }
-        public static GameFunManger Instance
+        private static AppGameFunManger instance;
+        private AppGameFunManger() { }
+        public static AppGameFunManger Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new GameFunManger();
+                    instance = new AppGameFunManger();
                     instance.myButtonManger = new MyButtonManger();
                     instance.hotSystem = new HotSystem();
                 }
@@ -71,6 +63,7 @@ namespace CheatUITemplt
 
             uILangerManger.SetTraditionalChinese();
         }
+
         public void SetEnglish()
         {
             foreach (var item in gameFunUIs)
@@ -83,6 +76,7 @@ namespace CheatUITemplt
 
             uILangerManger.SetEnglish();
         }
+
         public void SetSimplifiedChinese()
         {
             foreach (var item in gameFunUIs)
@@ -99,12 +93,13 @@ namespace CheatUITemplt
         {
             if (pid == 0)
             {
-                mainWindow.lbl_processID.Text ="";
-            }else
+                mainWindow.lbl_processID.Text = "";
+            }
+            else
             {
                 mainWindow.lbl_processID.Text = pid.ToString();
             }
-           
+
         }
 
         public void SetAllGameFunEnding()
@@ -139,35 +134,70 @@ namespace CheatUITemplt
 
         }
 
+        public void RegisterWindow(Window window)
+        {
+            this.mainWindow = (MainWindow)window;
+        }
+
+        public void RegisterManger(CreateLayout createLayout)
+        {
+            this.createLayout = createLayout;
+        }
+        public void RegisterManger(UILangerManger uILangerManger)
+        {
+            this.uILangerManger = uILangerManger;
+        }
+        public void RegisterManger(SoundEffect soundEffect)
+        {
+            this.soundEffect = soundEffect;
+        }
 
         public void RegisterGameFun(GameFun a)
         {
-            
+
             GameFunUI gameFunUI = new GameFunUI();
             gameFunUI.gameFun = a;
 
-            CreateLayout.AddRowDefin();
+            createLayout.AddRowDefin();
 
-            gameFunUI.simplifiedChinese = CreateLayout.CreatDescription_SC(a);
-            gameFunUI.traditionalChinese = CreateLayout.CreatDescription_TC(a);
-            gameFunUI.englishDescription = CreateLayout.CreatDescription_EN(a);
+            gameFunUI.simplifiedChinese = createLayout.CreatDescription_SC(a);
+            gameFunUI.traditionalChinese = createLayout.CreatDescription_TC(a);
+            gameFunUI.englishDescription = createLayout.CreatDescription_EN(a);
 
-            gameFunUI.showDescription = CreateLayout.CreatShowDescription(a);
+            gameFunUI.showDescription = createLayout.CreatShowDescription(a);
 
-            gameFunUI.myStackPanel = CreateLayout.CreatMyStackPanel(a, gameFunUI);
+            gameFunUI.myStackPanel = createLayout.CreatMyStackPanel(a, gameFunUI);
 
-            CreateLayout.UpDateRow();
+            createLayout.UpDateRow();
 
             gameFunUIs.Add(gameFunUI);
-            
+
         }
 
 
         public void CreatSeparate()
         {
-            CreateLayout.AddRowDefin();
-            CreateLayout.CreatSeparate();
-            CreateLayout.UpDateRow();
+            createLayout.AddRowDefin();
+            createLayout.CreatSeparate();
+            createLayout.UpDateRow();
+        }
+
+        public void CreatSeparate(string Description_SC, string Description_TC = "", string Description_EN = "")
+        {
+
+            LanguageUI languageUI = new LanguageUI()
+            {
+                Description_EN = Description_EN,
+                Description_SC = Description_SC,
+                Description_TC = Description_TC
+            };
+
+
+            uILangerManger.RegisterLanguageUI(languageUI);
+
+            createLayout.AddRowDefin();
+            createLayout.CreatSeparate(languageUI);
+            createLayout.UpDateRow();
         }
 
         public void RegisterAllHotKey()
@@ -226,7 +256,7 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                
+
                 if (item.gameFun.gameFunDateStruct.IsTrigger)
                 {
                     RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.button),
@@ -235,12 +265,12 @@ namespace CheatUITemplt
 
                         Slider slider = item.myStackPanel.ValueEntered;
 
-                        item.gameFun.DoFirstTime(slider==null?0:slider.Value);
+                        item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
 
                         soundEffect.PlayTurnOnEffect();
 
                         await Task.Delay(500);
-                        
+
                     }));
                 }
                 else
@@ -248,7 +278,7 @@ namespace CheatUITemplt
                     RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.checkBox),
                     new HotSystemFun(() =>
                     {
-                        
+
 
                         Slider slider = item.myStackPanel.ValueEntered;
 
@@ -306,17 +336,22 @@ namespace CheatUITemplt
             }
         }
 
-        void SetControlEnable(System.Windows.Controls.Control control, bool enable)
+        public void EndHotsystem()
+        {
+            mainWindow.EndHotsystem();
+        }
+
+
+        private void SetControlEnable(System.Windows.Controls.Control control, bool enable)
         {
             if (control != null)
             {
                 control.IsEnabled = enable;
             }
-           
+
         }
 
-
-        void RegisterHotKey(KeyModifiers fsModifiers, Keys vk, MyButton buttonClick, HotSystemFun fun)
+        private void RegisterHotKey(KeyModifiers fsModifiers, Keys vk, MyButton buttonClick, HotSystemFun fun)
         {
             int id;
             id = hotSystem.RegisterHotKey(mainWindow.Hwnd, fsModifiers, vk, fun);
@@ -328,26 +363,26 @@ namespace CheatUITemplt
             //buttonClick.SetOnClick(index, (i) => { hotSystem.ClickHotKeyFun(ButtonFunId[i]); });
         }
 
-        void RegisterHotKey(KeyModifiers fsModifiers, Keys vk, HotSystemFun fun)
+        private void RegisterHotKey(KeyModifiers fsModifiers, Keys vk, HotSystemFun fun)
         {
             hotSystem.RegisterHotKey(mainWindow.Hwnd, fsModifiers, vk, fun);
         }
 
 
-        void StartFlashAnimation()
+        private void StartFlashAnimation()
         {
             mainWindow.PlayFlashAinimation();
         }
 
-        void StopFlashAnimation()
+        private void StopFlashAnimation()
         {
             mainWindow.StopFlashAinimation();
         }
     }
 
 
-    
 
 
-   
+
+
 }

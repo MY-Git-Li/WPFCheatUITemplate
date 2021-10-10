@@ -11,21 +11,10 @@ namespace CheatUITemplt
         /// 必须设置属性后续才能起作用。
         /// </summary>
         public WPFCheatUITemplate.Other.GameFunDateStruct gameFunDateStruct;
-
+        /// <summary>
+        /// 读写内存实例
+        /// </summary>
         public WPFCheatUITemplate.Other.Draw.Memory memory;
-
-        //public Memory Memory
-        //{
-        //    get
-        //    {
-        //        return memory;
-        //    }
-
-        //    set
-        //    {
-        //        memory = value;
-        //    }
-        //}
 
         public void GetGameData()
         {

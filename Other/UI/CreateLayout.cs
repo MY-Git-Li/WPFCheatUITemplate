@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using WPFCheatUITemplate.Properties;
 
 namespace CheatUITemplt
 {
-  
+
     class CreateLayout
     {
         Grid grid;
         ResourceDictionary resourceDictionary;
-        int row=0;
+        int row = 0;
 
         public CreateLayout(Grid grid, ResourceDictionary resourceDictionary)
         {
@@ -81,20 +75,32 @@ namespace CheatUITemplt
             grid.Children.Add(sc.keyDescription);
         }
 
-        public MyStackPanel CreatMyStackPanel(GameFun gameFun,GameFunUI gameFunUI)
+        public void CreatSeparate(WPFCheatUITemplate.LanguageUI languageUI)
+        {
+            languageUI.textBlock = CreatSeparateTextBlock(languageUI.Description_SC);
+
+            SetPosition(languageUI.textBlock, true);
+            grid.Children.Add(languageUI.textBlock);
+
+        }
+
+
+
+        public MyStackPanel CreatMyStackPanel(GameFun gameFun, GameFunUI gameFunUI)
         {
 
             MyStackPanel myStackPanel = new MyStackPanel();
 
             StackPanel stackPanel = CreatStackPanel();
-            SetPosition(stackPanel,false);
+            SetPosition(stackPanel, false);
 
             if (gameFun.gameFunDateStruct.IsTrigger)
             {
                 myStackPanel.button = CreatButton();
                 stackPanel.Children.Add(myStackPanel.button);
 
-            }else
+            }
+            else
             {
                 myStackPanel.checkBox = CreatCheckBox();
                 stackPanel.Children.Add(myStackPanel.checkBox);
@@ -111,8 +117,8 @@ namespace CheatUITemplt
                 slider.Minimum = gameFun.gameFunDateStruct.SliderMinNum;
 
                 myStackPanel.ValueEntered = slider;
-               //实例化绑定对象
-               Binding textBinding = new Binding();
+                //实例化绑定对象
+                Binding textBinding = new Binding();
                 //设置要绑定源控件
                 textBinding.Source = slider;
                 //设置要绑定属性
@@ -168,18 +174,19 @@ namespace CheatUITemplt
 
 
 
-        void SetPosition(UIElement control,bool isStart)
+        void SetPosition(UIElement control, bool isStart)
         {
             if (isStart)
             {
                 Grid.SetRow(control, row);
                 Grid.SetColumn(control, 0);
-            }else
+            }
+            else
             {
                 Grid.SetRow(control, row);
                 Grid.SetColumn(control, 1);
             }
-           
+
         }
 
         void AddRowDefinitions()
@@ -191,6 +198,17 @@ namespace CheatUITemplt
 
         }
 
+
+        TextBlock CreatSeparateTextBlock(string con)
+        {
+            TextBlock keydiscrb = new TextBlock();
+            keydiscrb.Style = resourceDictionary["SeparateDescribeText"] as Style;
+            keydiscrb.Text = con;
+            keydiscrb.Margin = new Thickness(0, 10, 0, 0);
+
+            return keydiscrb;
+        }
+
         TextBlock CreatKeyTextBlock(string con)
         {
             TextBlock keydiscrb = new TextBlock();
@@ -198,7 +216,7 @@ namespace CheatUITemplt
             keydiscrb.Text = con;
             keydiscrb.Margin = new Thickness(0, 10, 0, 0);
 
-            
+
 
             return keydiscrb;
         }
@@ -218,8 +236,8 @@ namespace CheatUITemplt
             stackPanel.Margin = new Thickness(-40, 10, 0, 0);
             stackPanel.Orientation = Orientation.Horizontal;
             stackPanel.HorizontalAlignment = HorizontalAlignment.Left;
-           
-           
+
+
             return stackPanel;
         }
         CheckBox CreatCheckBox()

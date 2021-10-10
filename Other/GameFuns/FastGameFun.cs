@@ -26,7 +26,7 @@ namespace WPFCheatUITemplate.Other
 
         public void Start()
         {
-            GameFunManger.Instance.RegisterGameFun(this);
+            AppGameFunManger.Instance.RegisterGameFun(this);
         }
 
         public override void Awake()

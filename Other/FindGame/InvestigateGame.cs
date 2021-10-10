@@ -51,11 +51,11 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void findGameing_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            GameFunManger.Instance.DisableControl();
-            GameFunManger.Instance.MainWindow.EndHotsystem();
-            GameFunManger.Instance.Pid = 0;
-            GameFunManger.Instance.SetViewPid();
-            GameFunManger.Instance.SetAllGameFunEnding();
+            AppGameFunManger.Instance.DisableControl();
+            AppGameFunManger.Instance.EndHotsystem();
+            AppGameFunManger.Instance.Pid = 0;
+            AppGameFunManger.Instance.SetViewPid();
+            AppGameFunManger.Instance.SetAllGameFunEnding();
 
             startFindGame.RunWorkerAsync();
         }
@@ -74,9 +74,9 @@ namespace CheatUITemplt
                 System.Threading.Thread.Sleep(100);
             }
             
-            GameFunManger.Instance.Pid = pid;
-            GameFunManger.Instance.SetAllGameFunData();
-            GameFunManger.Instance.SetAllGameFunAwake();
+            AppGameFunManger.Instance.Pid = pid;
+            AppGameFunManger.Instance.SetAllGameFunData();
+            AppGameFunManger.Instance.SetAllGameFunAwake();
         }
 
         /// <summary>
@@ -86,9 +86,9 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void startFindGame_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            GameFunManger.Instance.SetViewPid();
-            GameFunManger.Instance.EnableControl();
-            GameFunManger.Instance.RegisterAllHotKey();
+            AppGameFunManger.Instance.SetViewPid();
+            AppGameFunManger.Instance.EnableControl();
+            AppGameFunManger.Instance.RegisterAllHotKey();
 
             findGameing.RunWorkerAsync();
         }

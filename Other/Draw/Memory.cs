@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace WPFCheatUITemplate.Other.Draw
 {
@@ -35,12 +32,12 @@ namespace WPFCheatUITemplate.Other.Draw
         }
 
 
-        public  void CloseHandle()
+        public void CloseHandle()
         {
             WinAPI.CloseHandle(m_pProcessHandle);
         }
 
-        public  int GetModule(string moduleName)
+        public int GetModule(string moduleName)
         {
             foreach (ProcessModule module in m_Process.Modules)
             {
@@ -53,12 +50,12 @@ namespace WPFCheatUITemplate.Other.Draw
             return 0;
         }
 
-        public  void SetForegroundWindow()
+        public void SetForegroundWindow()
         {
             WinAPI.SetForegroundWindow(m_pWindowHandle);
         }
 
-        public  WindowData GetGameWindowData()
+        public WindowData GetGameWindowData()
         {
             // 获取指定窗口句柄的窗口矩形数据和客户区矩形数据
             WinAPI.GetWindowRect(m_pWindowHandle, out RECT windowRect);
@@ -97,20 +94,20 @@ namespace WPFCheatUITemplate.Other.Draw
             };
         }
 
-        public  T ReadMemory<T>(int address) where T : struct
+        public T ReadMemory<T>(int address) where T : struct
         {
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
             WinAPI.ReadProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
             return ByteArrayToStructure<T>(buffer);
         }
 
-        public  void WriteMemory<T>(int address, object Value) where T : struct
+        public void WriteMemory<T>(int address, object Value) where T : struct
         {
             byte[] buffer = StructureToByteArray(Value);
             WinAPI.WriteProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
         }
 
-        public  float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
+        public float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
         {
             int ByteSize = Marshal.SizeOf(typeof(T));
             byte[] buffer = new byte[ByteSize * MatrixSize];
@@ -118,7 +115,7 @@ namespace WPFCheatUITemplate.Other.Draw
             return ConvertToFloatArray(buffer);
         }
 
-        public  string ReadString(int address, int size)
+        public string ReadString(int address, int size)
         {
             byte[] buffer = new byte[size];
             WinAPI.ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);

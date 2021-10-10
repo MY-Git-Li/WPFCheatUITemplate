@@ -1,10 +1,10 @@
-﻿using System;
+﻿using CheatUITemplt;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using CheatUITemplt;
 using WPFCheatUITemplate.Other;
 
 namespace WPFCheatUITemplate
@@ -18,7 +18,7 @@ namespace WPFCheatUITemplate
         InvestigateGame investigateGame;
         SoundEffect soundEffect;
         UILangerManger uILangerManger;
-      
+
         Storyboard myStoryboard;
         string processName = "PlantsVsZombies";
 
@@ -29,13 +29,13 @@ namespace WPFCheatUITemplate
 
             this.DataContext = new MainWindowsViewModel();
 
-            GameFunManger.Instance.MainWindow = this;
+            AppGameFunManger.Instance.RegisterWindow(this);
 
-            createLayout = new CreateLayout(keyAndDescribelayout,Resources);
-            GameFunManger.Instance.CreateLayout = createLayout;
+            createLayout = new CreateLayout(keyAndDescribelayout, Resources);
+            AppGameFunManger.Instance.RegisterManger(createLayout);
 
             soundEffect = new SoundEffect();
-            GameFunManger.Instance.SoundEffect = soundEffect;
+            AppGameFunManger.Instance.RegisterManger(soundEffect);
 
             lbl_gemeProcess.Text = processName + ".exe";
             lbl_processID.Text = "";
@@ -49,7 +49,7 @@ namespace WPFCheatUITemplate
         private void InitUi()
         {
             uILangerManger = new UILangerManger();
-            GameFunManger.Instance.UILangerManger = uILangerManger;
+            AppGameFunManger.Instance.RegisterManger(uILangerManger);
 
 
             uILangerManger.RegisterLanguageUI(new LanguageUI()
@@ -136,13 +136,13 @@ namespace WPFCheatUITemplate
         {
             // Handle messages...
 
-            if (GameFunManger.Instance.hotSystem.enable)
+            if (AppGameFunManger.Instance.hotSystem.enable)
             {
                 const int WM_HOTKEY = 0x0312;
                 switch (msg)
                 {
                     case WM_HOTKEY:
-                        GameFunManger.Instance.hotSystem.RunHotKeyFun((int)wParam);
+                        AppGameFunManger.Instance.hotSystem.RunHotKeyFun((int)wParam);
                         handled = true;
                         break;
                 }
@@ -163,7 +163,7 @@ namespace WPFCheatUITemplate
             investigateGame.FindingGame();
 
             PlayFlashAinimation();
-            GameFunManger.Instance.SetSimplifiedChinese();
+            AppGameFunManger.Instance.SetSimplifiedChinese();
         }
 
 
@@ -179,13 +179,13 @@ namespace WPFCheatUITemplate
         {
             EndHotsystem();
 
-            if (GameFunManger.Instance.Pid != 0)
-                GameFunManger.Instance.SetAllGameFunEnding();
+            if (AppGameFunManger.Instance.Pid != 0)
+                AppGameFunManger.Instance.SetAllGameFunEnding();
         }
         public void EndHotsystem()
         {
-            GameFunManger.Instance.hotSystem.UnRegisterHotKeyAll(Hwnd);
-            GameFunManger.Instance.hotSystem.CloseHotKeyFunAll();
+            AppGameFunManger.Instance.hotSystem.UnRegisterHotKeyAll(Hwnd);
+            AppGameFunManger.Instance.hotSystem.CloseHotKeyFunAll();
 
         }
 
@@ -204,14 +204,14 @@ namespace WPFCheatUITemplate
 
             ObjectAnimationUsingKeyFrames flashAnimation = new ObjectAnimationUsingKeyFrames();
             flashAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.6));
-            
+
 
             flashAnimation.RepeatBehavior = RepeatBehavior.Forever;
             flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.0))));
             flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Hidden, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.3))));
             flashAnimation.KeyFrames.Add(new DiscreteObjectKeyFrame(Visibility.Visible, KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.6))));
-            
-            
+
+
             Storyboard.SetTargetName(flashAnimation, lbl_gemeProcess.Name);
             Storyboard.SetTargetProperty(
                 flashAnimation, new PropertyPath(TextBlock.VisibilityProperty));

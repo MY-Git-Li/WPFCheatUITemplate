@@ -115,7 +115,7 @@
     <Compile Include="Other\UI\CreateLayout.cs" />
     <Compile Include="Other\GameFuns\GameDataAddress.cs" />
     <Compile Include="Other\GameFuns\GameFun.cs" />
-    <Compile Include="Other\GameFuns\GameFunManger.cs" />
+    <Compile Include="Other\GameFuns\AppGameFunManger.cs" />
     <Compile Include="Other\GameFuns\GameFunUI.cs" />
     <Compile Include="Other\FindGame\InvestigateGame.cs" />
     <Compile Include="Other\UI\MyButton.cs" />

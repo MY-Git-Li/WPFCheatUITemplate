@@ -44,6 +44,13 @@
             <Setter Property="FontSize" Value="17"/>
         </Style>
 
+        <Style x:Key="SeparateDescribeText" TargetType="TextBlock" BasedOn="{StaticResource DescribeText}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="#FF8000"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+
         <ControlTemplate TargetType="Button" x:Key="CloseButtonTemplate">
             <Border Background="Transparent">
                 <Path Data="M2 2 18 18M2 18 18 2" Stroke="#FF8000" StrokeThickness="2.5"/>

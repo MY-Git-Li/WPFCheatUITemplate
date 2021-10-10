@@ -15,7 +15,7 @@ namespace WPFCheatUITemplate
             new Tree();
             new NoCd();
             new DrawWindow();
-            GameFunManger.Instance.CreatSeparate();
+            AppGameFunManger.Instance.CreatSeparate("基本属性");
             new ArbitrarilyPlant();
             new AllowBackground();
             new DefaultPlantLayout();
