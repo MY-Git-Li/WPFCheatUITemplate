@@ -17,44 +17,6 @@ namespace CheatUITemplt
             this.resourceDictionary = resourceDictionary;
         }
 
-
-        public Description CreatDescription_SC(GameFun gameFun)
-        {
-            Description sc = new Description();
-
-
-            sc.keyDescription = CreatKeyTextBlock(gameFun.gameFunDateStruct.KeyDescription_SC);
-            sc.funDescription = CreatFunTextBlock(gameFun.gameFunDateStruct.FunDescribe_SC);
-
-            //SetPosition(sc.keyDescription, true);
-            //grid.Children.Add(sc.keyDescription);
-            return sc;
-        }
-        public Description CreatDescription_TC(GameFun gameFun)
-        {
-            Description sc = new Description();
-
-
-            sc.keyDescription = CreatKeyTextBlock(gameFun.gameFunDateStruct.KeyDescription_TC);
-            sc.funDescription = CreatFunTextBlock(gameFun.gameFunDateStruct.FunDescribe_TC);
-
-            //SetPosition(sc.keyDescription, true);
-
-            return sc;
-        }
-        public Description CreatDescription_EN(GameFun gameFun)
-        {
-            Description sc = new Description();
-
-
-            sc.keyDescription = CreatKeyTextBlock(gameFun.gameFunDateStruct.KeyDescription_EN);
-            sc.funDescription = CreatFunTextBlock(gameFun.gameFunDateStruct.FunDescribe_EN);
-
-            //SetPosition(sc.keyDescription, true);
-
-            return sc;
-        }
-
         public Description CreatShowDescription(GameFun gameFun)
         {
             Description sc = new Description();

@@ -57,8 +57,11 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                item.showDescription.keyDescription.Text = item.traditionalChinese.keyDescription.Text;
-                item.showDescription.funDescription.Text = item.traditionalChinese.funDescription.Text;
+                if (item.gameFun != null)
+                {
+                    item.showDescription.keyDescription.Text = item.keylanguageUI.Description_TC;
+                    item.showDescription.funDescription.Text = item.funlanguageUI.Description_TC;
+                }
             }
 
             uILangerManger.SetTraditionalChinese();
@@ -68,10 +71,13 @@ namespace CheatUITemplt
         {
             foreach (var item in gameFunUIs)
             {
-                item.showDescription.keyDescription.Text = item.englishDescription.keyDescription.Text;
-                item.showDescription.funDescription.Text = item.englishDescription.funDescription.Text;
-                item.showDescription.keyDescription.FontSize = 17;
-                item.showDescription.funDescription.FontSize = 17;
+                if (item.gameFun != null)
+                {
+                    item.showDescription.keyDescription.Text = item.keylanguageUI.Description_EN;
+                    item.showDescription.funDescription.Text = item.funlanguageUI.Description_EN;
+                    item.showDescription.keyDescription.FontSize = 17;
+                    item.showDescription.funDescription.FontSize = 17;
+                }
             }
 
             uILangerManger.SetEnglish();
@@ -81,8 +87,12 @@ namespace CheatUITemplt
         {
             foreach (var item in gameFunUIs)
             {
-                item.showDescription.keyDescription.Text = item.simplifiedChinese.keyDescription.Text;
-                item.showDescription.funDescription.Text = item.simplifiedChinese.funDescription.Text;
+                if (item.gameFun != null)
+                {
+                    item.showDescription.keyDescription.Text = item.keylanguageUI.Description_SC;
+                    item.showDescription.funDescription.Text = item.funlanguageUI.Description_SC;
+                }
+                   
             }
 
             uILangerManger.SetSimplifiedChinese();
@@ -106,7 +116,10 @@ namespace CheatUITemplt
         {
             foreach (var item in gameFunUIs)
             {
-                item.gameFun.Ending();
+                if (item.gameFun != null)
+                {
+                    item.gameFun.Ending();
+                }
             }
 
         }
@@ -115,7 +128,10 @@ namespace CheatUITemplt
         {
             foreach (var item in gameFunUIs)
             {
-                item.gameFun.Awake();
+                if (item.gameFun != null)
+                {
+                    item.gameFun.Awake();
+                }
             }
 
         }
@@ -125,9 +141,13 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                item.gameFun.gameFunDateStruct.Handle = CheatTools.GetProcessHandle(pid);
-                item.gameFun.gameFunDateStruct.ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, item.gameFun.gameFunDateStruct.ModuleName);
-                item.gameFun.GetGameData();
+                if (item.gameFun != null)
+                {
+                    item.gameFun.gameFunDateStruct.Handle = CheatTools.GetProcessHandle(pid);
+                    item.gameFun.gameFunDateStruct.ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, item.gameFun.gameFunDateStruct.ModuleName);
+                    item.gameFun.GetGameData();
+                }
+                
             }
 
         }
@@ -150,52 +170,85 @@ namespace CheatUITemplt
             this.soundEffect = soundEffect;
         }
 
+        public void InitUI()
+        {
+            foreach (var item in gameFunUIs)
+            {
+                if (item.gameFun!=null)
+                {
+                    LanguageUI funlanguageUI = new LanguageUI()
+                    {
+                        Description_EN = item.gameFun.gameFunDateStruct.FunDescribe_EN,
+                        Description_SC = item.gameFun.gameFunDateStruct.FunDescribe_SC,
+                        Description_TC = item.gameFun.gameFunDateStruct.FunDescribe_TC
+                    };
+
+                    LanguageUI keylanguageUI = new LanguageUI()
+                    {
+                        Description_EN = item.gameFun.gameFunDateStruct.KeyDescription_EN,
+                        Description_SC = item.gameFun.gameFunDateStruct.KeyDescription_SC,
+                        Description_TC = item.gameFun.gameFunDateStruct.KeyDescription_TC
+                    };
+                    item.funlanguageUI = funlanguageUI;
+                    item.keylanguageUI = keylanguageUI;
+
+
+                    createLayout.AddRowDefin();
+
+                    item.showDescription = createLayout.CreatShowDescription(item.gameFun);
+
+                    item.myStackPanel = createLayout.CreatMyStackPanel(item.gameFun, item);
+
+                    createLayout.UpDateRow();
+                }
+                else if (item.keylanguageUI!=null)
+                {
+                    createLayout.AddRowDefin();
+                    createLayout.CreatSeparate(item.keylanguageUI);
+                    createLayout.UpDateRow();
+                }else
+                {
+                    createLayout.AddRowDefin();
+                    createLayout.CreatSeparate();
+                    createLayout.UpDateRow();
+                }
+                
+            }
+        }
+
         public void RegisterGameFun(GameFun a)
         {
 
             GameFunUI gameFunUI = new GameFunUI();
             gameFunUI.gameFun = a;
 
-            createLayout.AddRowDefin();
-
-            gameFunUI.simplifiedChinese = createLayout.CreatDescription_SC(a);
-            gameFunUI.traditionalChinese = createLayout.CreatDescription_TC(a);
-            gameFunUI.englishDescription = createLayout.CreatDescription_EN(a);
-
-            gameFunUI.showDescription = createLayout.CreatShowDescription(a);
-
-            gameFunUI.myStackPanel = createLayout.CreatMyStackPanel(a, gameFunUI);
-
-            createLayout.UpDateRow();
-
             gameFunUIs.Add(gameFunUI);
 
         }
 
-
         public void CreatSeparate()
         {
-            createLayout.AddRowDefin();
-            createLayout.CreatSeparate();
-            createLayout.UpDateRow();
+            GameFunUI gameFunUI = new GameFunUI();
+            gameFunUIs.Add(gameFunUI);
+
         }
 
         public void CreatSeparate(string Description_SC, string Description_TC = "", string Description_EN = "")
         {
-
+            GameFunUI gameFunUI = new GameFunUI();
+           
             LanguageUI languageUI = new LanguageUI()
             {
                 Description_EN = Description_EN,
                 Description_SC = Description_SC,
                 Description_TC = Description_TC
             };
+            gameFunUI.keylanguageUI = languageUI;
 
+            gameFunUIs.Add(gameFunUI);
 
             uILangerManger.RegisterLanguageUI(languageUI);
 
-            createLayout.AddRowDefin();
-            createLayout.CreatSeparate(languageUI);
-            createLayout.UpDateRow();
         }
 
         public void RegisterAllHotKey()
@@ -219,101 +272,68 @@ namespace CheatUITemplt
             }
             #endregion
 
-            //问题解决办法：用for是对数组操作，容易引发数组越界问题，故使用foreach 直接对指针进行操作。
-            //for (int i = 0; i < gameFunUIs.Count; i++)
-            //{
-            //    if (gameFunUIs[i].gameFun.IsTrigger)
-            //    {
-            //        RegisterHotKey(gameFunUIs[i].gameFun.FsModifiers, gameFunUIs[i].gameFun.Vk, new MyButton(gameFunUIs[i].myPanel.button),
-            //        new HotSystemFun(async () =>
-            //        {
-            //            gameFunUIs[i].gameFun.DoFirstTime();
-            //            ChangeLabelColor(gameFunUIs[i], runColor);
-
-            //            await Task.Delay(500);
-            //            ChangeLabelColor(gameFunUIs[i], defaultColor);
-            //        }));
-            //    }
-            //    else
-            //    {
-            //        RegisterHotKey(gameFunUIs[i].gameFun.FsModifiers, gameFunUIs[i].gameFun.Vk, new MyButton(gameFunUIs[i].myPanel.button),
-            //        new HotSystemFun(() =>
-            //        {
-            //            gameFunUIs[i].gameFun.DoFirstTime();
-            //            ChangeLabelColor(gameFunUIs[i], runColor);
-
-            //        }, () =>
-            //        {
-
-            //            gameFunUIs[i].gameFun.DoRunAgain();
-            //            ChangeLabelColor(gameFunUIs[i], defaultColor);
-
-            //        }));
-            //    }
-
-
             foreach (var item in gameFunUIs)
             {
-
-                if (item.gameFun.gameFunDateStruct.IsTrigger)
+                if (item.gameFun != null)
                 {
-                    RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.button),
-                    new HotSystemFun(async () =>
+                    if (item.gameFun.gameFunDateStruct.IsTrigger)
                     {
-
-                        Slider slider = item.myStackPanel.ValueEntered;
-
-                        item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
-
-                        soundEffect.PlayTurnOnEffect();
-
-                        await Task.Delay(500);
-
-                    }));
-                }
-                else
-                {
-                    RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.checkBox),
-                    new HotSystemFun(() =>
-                    {
-
-
-                        Slider slider = item.myStackPanel.ValueEntered;
-
-                        item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
-
-                        System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
-                        checkBox.IsChecked = true;
-
-
-                        if (slider != null)
+                        RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.button),
+                        new HotSystemFun(async () =>
                         {
-                            slider.IsEnabled = !slider.IsEnabled;
-                        }
 
-                        soundEffect.PlayTurnOnEffect();
+                            Slider slider = item.myStackPanel.ValueEntered;
 
-                    }, () =>
+                            item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
+
+                            soundEffect.PlayTurnOnEffect();
+
+                            await Task.Delay(500);
+
+                        }));
+                    }
+                    else
                     {
-                        Slider slider = item.myStackPanel.ValueEntered;
-
-                        System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
-                        checkBox.IsChecked = false;
-
-                        item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
-
-                        if (slider != null)
+                        RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.checkBox),
+                        new HotSystemFun(() =>
                         {
-                            slider.IsEnabled = !slider.IsEnabled;
-                        }
 
-                        soundEffect.PlayTurnOffEffect();
 
-                    }));
+                            Slider slider = item.myStackPanel.ValueEntered;
+
+                            item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
+
+                            System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
+                            checkBox.IsChecked = true;
+
+
+                            if (slider != null)
+                            {
+                                slider.IsEnabled = !slider.IsEnabled;
+                            }
+
+                            soundEffect.PlayTurnOnEffect();
+
+                        }, () =>
+                        {
+                            Slider slider = item.myStackPanel.ValueEntered;
+
+                            System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
+                            checkBox.IsChecked = false;
+
+                            item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
+
+                            if (slider != null)
+                            {
+                                slider.IsEnabled = !slider.IsEnabled;
+                            }
+
+                            soundEffect.PlayTurnOffEffect();
+
+                        }));
+                    }
                 }
-
-
-
+                
             }
         }
 

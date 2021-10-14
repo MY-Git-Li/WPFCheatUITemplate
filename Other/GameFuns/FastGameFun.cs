@@ -24,11 +24,6 @@ namespace WPFCheatUITemplate.Other
             gameDataAddresseList = new List<GameDataAddress>();
         }
 
-        public void Start()
-        {
-            AppGameFunManger.Instance.RegisterGameFun(this);
-        }
-
         public override void Awake()
         {
             awake?.Invoke(this);

@@ -147,6 +147,8 @@ namespace WPFCheatUITemplate
             Hwnd = wndHelper.Handle;
 
             Start.Init();
+            AppGameFunManger.Instance.InitUI();
+
             investigateGame.FindingGame();
 
             PlayFlashAinimation();

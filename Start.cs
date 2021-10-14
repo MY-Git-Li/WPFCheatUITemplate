@@ -45,29 +45,29 @@ namespace WPFCheatUITemplate
 
                 },
 
-                awake = (i) => 
+                awake = (i) =>
                 {
-                    i.gameDataAddresseList.Add(new GameDataAddress(i.gameFunDateStruct.Handle,i.gameFunDateStruct.ModuleAddress+ 0x72EE4));
+                    i.gameDataAddresseList.Add(new GameDataAddress(i.gameFunDateStruct.Handle, i.gameFunDateStruct.ModuleAddress + 0x72EE4));
                 },
 
-                doFirstTime = (i, v) => 
+                doFirstTime = (i, v) =>
                 {
                     CheatTools.WriteMemoryByte(i.gameFunDateStruct.GameDataAddress.Address, i.gameFunDateStruct.Handle, new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 });
-                    CheatTools.WriteMemoryByte(i.gameDataAddresseList[0].Address, i.gameFunDateStruct.Handle, new byte[] { 0x0F,0x84 });
+                    CheatTools.WriteMemoryByte(i.gameDataAddresseList[0].Address, i.gameFunDateStruct.Handle, new byte[] { 0x0F, 0x84 });
 
                 },
-                doRunAgain = (i,v) => 
+                doRunAgain = (i, v) =>
                 {
                     CheatTools.WriteMemoryByte(i.gameFunDateStruct.GameDataAddress.Address, i.gameFunDateStruct.Handle, new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
                     CheatTools.WriteMemoryByte(i.gameDataAddresseList[0].Address, i.gameFunDateStruct.Handle, new byte[] { 0x0F, 0x85 });
                 },
 
-                ending = (i)=>
+                ending = (i) =>
                 {
                     i.gameDataAddresseList.Clear();
                 },
 
-            }.Start();
+            };
             new AutoGet();
         }
     }

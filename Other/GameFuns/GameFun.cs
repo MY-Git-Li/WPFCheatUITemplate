@@ -2,8 +2,7 @@
 namespace CheatUITemplt
 {
     /// <summary>
-    /// 需要在类的构造函数中最后一行添加GameFunManger.Instance.RegisterGameFun(this);启用
-    /// 必须给初始化gameFunDateStruct类对象进行赋值。
+    /// 游戏功能基类
     /// </summary>
     abstract class GameFun
     {
@@ -15,6 +14,11 @@ namespace CheatUITemplt
         /// 读写内存实例
         /// </summary>
         public WPFCheatUITemplate.Other.Draw.Memory memory;
+
+        public GameFun()
+        {
+            AppGameFunManger.Instance.RegisterGameFun(this);
+        }
 
         public void GetGameData()
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using WPFCheatUITemplate;
 
 namespace CheatUITemplt
 {
@@ -28,10 +29,9 @@ namespace CheatUITemplt
     {
         public GameFun gameFun;
 
-       
-        public Description simplifiedChinese;
-        public Description traditionalChinese;
-        public Description englishDescription;
+        public LanguageUI keylanguageUI;
+        public LanguageUI funlanguageUI;
+
         public Description showDescription;
         public MyStackPanel myStackPanel;
 

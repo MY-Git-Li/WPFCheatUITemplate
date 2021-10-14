@@ -28,8 +28,6 @@ namespace WPFCheatUITemplate.GameFuns
                 IsTrigger = true,
             };
            
-           
-            AppGameFunManger.Instance.RegisterGameFun(this);
         }
 
         public void Plant(int x, int y, int id)

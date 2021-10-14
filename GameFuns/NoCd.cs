@@ -30,7 +30,7 @@ namespace WPFCheatUITemplate.GameFuns
                 IsTrigger = false
             };
            
-            AppGameFunManger.Instance.RegisterGameFun(this);
+           
         }
 
         public override void Awake()

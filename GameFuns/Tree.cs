@@ -39,8 +39,6 @@ namespace WPFCheatUITemplate.GameFuns
                 SliderMaxNum = 99999,
             };
            
-
-            AppGameFunManger.Instance.RegisterGameFun(this);
         }
 
         public override void Awake()
