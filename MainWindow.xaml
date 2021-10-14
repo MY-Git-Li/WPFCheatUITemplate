@@ -417,7 +417,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="66"/>
                 <RowDefinition Height="16*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="81"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -457,7 +457,7 @@
                     <!--<ColumnDefinition Width="3*" x:Name="colum"/>
                     <ColumnDefinition Width="8*"/>-->
                     <ColumnDefinition Width="231" />
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="645"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Margin="3 0 0 0">
@@ -480,43 +480,53 @@
                         <TextBlock Name="keyDes" Text="快捷键" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
                         <TextBlock Name="funDes" Text="功能列表" Margin="200 0 0 0" Style="{StaticResource ShowText}" HorizontalAlignment="Left"/>
                     </StackPanel>
-                    <Path Data="M4 2 1080 2" Stroke="#E0E0E0" StrokeThickness="1"/>
+                    <Path Data="M4 2 1920 2" Stroke="#E0E0E0" StrokeThickness="1"/>
 
-                    <Grid Margin="8 0 0 0" Name="keyAndDescribelayout">
+
+                    <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="260"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="645"/>
+                            <ColumnDefinition Width="645"/>
                         </Grid.ColumnDefinitions>
 
-                        <Grid.RowDefinitions>
-                            <!--<RowDefinition Height="30"/>-->
-                            <!--<RowDefinition Height="30"/>
+                        <Grid Margin="8 0 0 0" Name="keyAndDescribelayout" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="260"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <!--<RowDefinition Height="30"/>-->
+                                <!--<RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>-->
-                        </Grid.RowDefinitions>
+                            </Grid.RowDefinitions>
 
-                        <!--<TextBlock Grid.Row="0"  Margin="0 10 0 0"  Grid.Column="0" Text="Ctrl+数字键5" FontSize="18" Style="{StaticResource DescribeText}"/>
+                            <!--<TextBlock Grid.Row="0"  Margin="0 10 0 0"  Grid.Column="0" Text="Ctrl+数字键5" FontSize="18" Style="{StaticResource DescribeText}"/>
                         <StackPanel Margin="-40 10 0 0" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" >
                             <CheckBox IsEnabled="False"  Style="{StaticResource chkBullet}" IsChecked="False" />
                             <TextBlock Margin="10 0 0 0" Text="天下无伤" FontSize="18" Style="{StaticResource DescribeText}"/>
                         </StackPanel>-->
 
-                        <!--<TextBlock Grid.Row="1" Margin="0 10 0 0"  Grid.Column="0" Text="Ctrl+数字键5" FontSize="18" Style="{StaticResource DescribeText}"/>
+                            <!--<TextBlock Grid.Row="1" Margin="0 10 0 0"  Grid.Column="0" Text="Ctrl+数字键5" FontSize="18" Style="{StaticResource DescribeText}"/>
                         <StackPanel Margin="-40 10 0 0" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" >
                             <CheckBox  Style="{StaticResource chkBullet}" IsChecked="False" />
                             <TextBlock Margin="10 0 0 0" Text="无敌" FontSize="18" Style="{StaticResource DescribeText}"/>
                         </StackPanel>-->
 
-                        <!--<TextBlock Grid.Row="2" Margin="0 10 0 0"  Grid.Column="0" Text="Ctrl+数字键8" Style="{StaticResource DescribeText}"/>
+                            <!--<TextBlock Grid.Row="2" Margin="0 10 0 0"  Grid.Column="0" Text="Ctrl+数字键8" Style="{StaticResource DescribeText}"/>
                         <StackPanel Margin="-40 10 0 0" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" >
                             <Button  Style="{StaticResource Describebutton}" />
                             <TextBlock Margin="10 0 0 0" Text="默认布局" Style="{StaticResource DescribeText}"/>
                             <Slider x:Name="slider" IsEnabled="False" Height="18" Margin="2,5,0,0" IsSnapToTickEnabled="True" Value="{Binding Text, ElementName=text}" Minimum="0" Maximum="100" FontSize="15" Width="150" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource SliderStyle1}" />
                             <TextBox x:Name="text" IsEnabled="{Binding IsEnabled, ElementName=slider}" Margin="3 1 0 0" FontSize="15" Text="{Binding Value, ElementName=slider}" Style="{DynamicResource MyTextBoxStyle}" />
                         </StackPanel>-->
+                        </Grid>
                     </Grid>
+                    
+                    
 
                 </StackPanel>
 
@@ -527,12 +537,12 @@
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="231"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="1">
-                        <Path Grid.Row="1" Data="M4 2 1080 2" Stroke="#E0E0E0" StrokeThickness="1"  VerticalAlignment="Bottom"/>
+                        <Path Grid.Row="1" Data="M4 2 1920 2" Stroke="#E0E0E0" StrokeThickness="1"  VerticalAlignment="Bottom"/>
                         <TextBlock Name="otherDes" Text="其他说明：Ctrl+Shift+Home禁用/启用快捷键" Style="{StaticResource OtherText}"/>
                     </StackPanel>
 
