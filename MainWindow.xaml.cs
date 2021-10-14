@@ -135,20 +135,7 @@ namespace WPFCheatUITemplate
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             // Handle messages...
-
-            if (AppGameFunManger.Instance.hotSystem.enable)
-            {
-                const int WM_HOTKEY = 0x0312;
-                switch (msg)
-                {
-                    case WM_HOTKEY:
-                        AppGameFunManger.Instance.hotSystem.RunHotKeyFun((int)wParam);
-                        handled = true;
-                        break;
-                }
-            }
-
-
+            AppGameFunManger.Instance.hotSystem.WndProcWPF(hwnd, msg, wParam, lParam, ref handled);
 
             return IntPtr.Zero;
         }

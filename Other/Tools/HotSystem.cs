@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static CheatUITemplt.HotKey;
 
@@ -15,15 +13,15 @@ namespace CheatUITemplt
         List<HotSystemFun> hotKeyFunedList = new List<HotSystemFun>();
         public bool enable = true;
         int id = 0;
-        public int RegisterHotKey(IntPtr hWnd,KeyModifiers fsModifiers,Keys vk, HotSystemFun fun)
+        public int RegisterHotKey(IntPtr hWnd, KeyModifiers fsModifiers, Keys vk, HotSystemFun fun)
         {
             id += 1;
-            HotKey.RegisterHotKey(hWnd, id, fsModifiers|KeyModifiers.NOREPEAT, vk);
+            HotKey.RegisterHotKey(hWnd, id, fsModifiers | KeyModifiers.NOREPEAT, vk);
             hotKeyFunDic.Add(id, fun);
             return id;
         }
 
-        public void UnRegisterHotKey(IntPtr hWnd,int id)
+        public void UnRegisterHotKey(IntPtr hWnd, int id)
         {
             HotKey.UnregisterHotKey(hWnd, id);
             hotKeyFunDic.Remove(id);
@@ -31,15 +29,15 @@ namespace CheatUITemplt
 
         public void UnRegisterHotKeyAll(IntPtr hWnd)
         {
-           foreach(int id in hotKeyFunDic.Keys.ToList())
-           {
+            foreach (int id in hotKeyFunDic.Keys.ToList())
+            {
                 //不需要在进行判断，id 来源于hotKeyFunDic
                 //if (hotKeyFunDic.ContainsKey(id))
                 //{
                 UnRegisterHotKey(hWnd, id);
                 //}
             }
-              
+
         }
 
         public void RunHotKeyFun(int id)
@@ -55,7 +53,7 @@ namespace CheatUITemplt
                         if (!hotKeyFunDic[id].isSingle)
                             hotKeyFunedList.Add(hotKeyFunDic[id]);
                     }
-                    
+
                 }
                 else
                 {
@@ -64,7 +62,7 @@ namespace CheatUITemplt
                         hotKeyFunDic[id].runed();
                         hotKeyFunedList.Remove(hotKeyFunDic[id]);
                     }
-                   
+
                 }
             }
         }
@@ -77,7 +75,7 @@ namespace CheatUITemplt
                 hotKeyFunedList.Remove(hotKeyFunedList[i]);
             }
         }
-        
+
         public void BanOtherHotKeyFun(int id)
         {
             foreach (int banid in hotKeyFunDic.Keys.ToList())
@@ -92,12 +90,12 @@ namespace CheatUITemplt
         {
             foreach (int id in hotKeyFunDic.Keys.ToList())
             {
-                
+
                 hotKeyFunDic[id].locked = false;
-                
+
             }
         }
-       
+
         public void ClickHotKeyFun(int id)
         {
             if (hotKeyFunDic.ContainsKey(id))
@@ -105,11 +103,11 @@ namespace CheatUITemplt
                 if (!hotKeyFunDic[id].isRun)
                 {
 
-                    hotKeyFunDic[id].run(); 
+                    hotKeyFunDic[id].run();
 
                     if (!hotKeyFunDic[id].isSingle)
                         hotKeyFunedList.Add(hotKeyFunDic[id]);
-                    
+
                 }
                 else
                 {
@@ -118,6 +116,34 @@ namespace CheatUITemplt
                     hotKeyFunedList.Remove(hotKeyFunDic[id]);
 
                 }
+            }
+        }
+
+        public void WndProcWPF(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            const int WM_HOTKEY = 0x0312;
+            switch (msg)
+            {
+                case WM_HOTKEY:
+                    if (enable)
+                    {
+                        RunHotKeyFun((int)wParam);
+                        handled = true;
+                    }
+                    break;
+            }
+
+        }
+
+        public void WndProcWinForm(ref Message m)
+        {
+            const int WM_HOTKEY = 0x0312;
+            switch (m.Msg)
+            {
+                case WM_HOTKEY:
+                    if (enable)
+                        RunHotKeyFun(m.WParam.ToInt32());
+                    break;
             }
         }
     }
@@ -138,11 +164,11 @@ namespace CheatUITemplt
         /// <param name="runed">再次运行方法</param>
         public HotSystemFun(funcation run, funcation runed)
         {
-           
+
             this.run = run;
             this.run += () => { isRun = !isRun; };
 
-           
+
             this.runed += runed;
             this.runed += () => { isRun = !isRun; };
         }
@@ -152,7 +178,7 @@ namespace CheatUITemplt
         /// <param name="run">运行的方法</param>
         public HotSystemFun(funcation run)
         {
-           
+
             this.run = run;
             this.runed = run;
             isSingle = true;
