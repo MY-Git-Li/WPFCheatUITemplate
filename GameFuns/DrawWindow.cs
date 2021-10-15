@@ -20,16 +20,16 @@ namespace WPFCheatUITemplate.GameFuns
             {
                 ModuleName = "PlantsVsZombies.exe",
 
-                Vk = System.Windows.Forms.Keys.NumPad9,
+                Vk = System.Windows.Forms.Keys.NumPad8,
                 FsModifiers = HotKey.KeyModifiers.None,
 
-                KeyDescription_SC = "数字键9",
+                KeyDescription_SC = "数字键8",
                 FunDescribe_SC = "外部绘制",
 
-                KeyDescription_TC = "數字鍵9",
+                KeyDescription_TC = "數字鍵8",
                 FunDescribe_TC = "外部繪製",
 
-                KeyDescription_EN = "Number 9",
+                KeyDescription_EN = "Number 8",
                 FunDescribe_EN = "External draw",
 
                 IsTrigger = false,

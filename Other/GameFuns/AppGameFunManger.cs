@@ -31,6 +31,7 @@ namespace CheatUITemplt
 
         MyButtonManger myButtonManger;
 
+        CreateUIGrid createUIGrid;
 
         #region 单例模式
         //单例模式
@@ -112,7 +113,7 @@ namespace CheatUITemplt
 
         }
 
-        public void SetAllGameFunEnding()
+        public void RunAllGameFunEnding()
         {
             foreach (var item in gameFunUIs)
             {
@@ -124,7 +125,7 @@ namespace CheatUITemplt
 
         }
 
-        public void SetAllGameFunAwake()
+        public void RunAllGameFunAwake()
         {
             foreach (var item in gameFunUIs)
             {
@@ -136,7 +137,7 @@ namespace CheatUITemplt
 
         }
 
-        public void SetAllGameFunData()
+        public void GetAllGameFunData()
         {
 
             foreach (var item in gameFunUIs)
@@ -157,9 +158,11 @@ namespace CheatUITemplt
             this.mainWindow = (MainWindow)window;
         }
 
-        public void RegisterManger(CreateLayout createLayout)
+        public void RegisterManger(CreateLayout createLayout, Grid grid)
         {
             this.createLayout = createLayout;
+            //createLayout.SetGrid(grid);
+            createUIGrid = new CreateUIGrid(grid, this.createLayout);
         }
         public void RegisterManger(UILangerManger uILangerManger)
         {
@@ -170,7 +173,13 @@ namespace CheatUITemplt
             this.soundEffect = soundEffect;
         }
 
-        public void InitUI()
+        public void StartUI(System.Action action)
+        {
+            action?.Invoke();
+            DrawUI();
+        }
+
+        private void DrawUI()
         {
             foreach (var item in gameFunUIs)
             {
@@ -201,16 +210,17 @@ namespace CheatUITemplt
 
                     createLayout.UpDateRow();
                 }
+                else if (item.doNextPage)
+                {
+                    createUIGrid.NextPage(item.nextPageOffset);
+                }
                 else if (item.keylanguageUI!=null)
                 {
-                    createLayout.AddRowDefin();
-                    createLayout.CreatSeparate(item.keylanguageUI);
-                    createLayout.UpDateRow();
+                    createLayout.CreatSeparate(item.keylanguageUI,item.SeparateOffset);
+                   
                 }else
                 {
-                    createLayout.AddRowDefin();
-                    createLayout.CreatSeparate();
-                    createLayout.UpDateRow();
+                    createLayout.CreatSeparate(item.SeparateOffset);
                 }
                 
             }
@@ -226,14 +236,15 @@ namespace CheatUITemplt
 
         }
 
-        public void CreatSeparate()
+        public void CreatSeparate(int offset=15)
         {
             GameFunUI gameFunUI = new GameFunUI();
+            gameFunUI.SeparateOffset = offset < 0 ? 15 : offset;
             gameFunUIs.Add(gameFunUI);
 
         }
 
-        public void CreatSeparate(string Description_SC, string Description_TC = "", string Description_EN = "")
+        public void CreatSeparate(string Description_SC, string Description_TC = "", string Description_EN = "",int offset = 30)
         {
             GameFunUI gameFunUI = new GameFunUI();
            
@@ -245,10 +256,20 @@ namespace CheatUITemplt
             };
             gameFunUI.keylanguageUI = languageUI;
 
+            gameFunUI.SeparateOffset = offset < 30 ? 30 : offset;
+
             gameFunUIs.Add(gameFunUI);
 
             uILangerManger.RegisterLanguageUI(languageUI);
 
+        }
+
+        public void NextPage(int offset = 0)
+        {
+            GameFunUI gameFunUI = new GameFunUI();
+            gameFunUI.doNextPage = true;
+            gameFunUI.nextPageOffset = offset;
+            gameFunUIs.Add(gameFunUI);
         }
 
         public void RegisterAllHotKey()

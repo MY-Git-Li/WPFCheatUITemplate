@@ -15,16 +15,16 @@ namespace WPFCheatUITemplate.GameFuns
                 IsSignatureCode = false,
                 IsIntPtr = false,
 
-                Vk = Keys.NumPad6,
+                Vk = Keys.NumPad2,
                 FsModifiers = HotKey.KeyModifiers.Ctrl,
 
-                KeyDescription_SC = "Ctrl+数字键6",
+                KeyDescription_SC = "Ctrl+数字键2",
                 FunDescribe_SC = "允许后台运行",
 
-                KeyDescription_TC = "Ctrl+數字鍵6",
+                KeyDescription_TC = "Ctrl+數字鍵2",
                 FunDescribe_TC = "允許後臺運行",
 
-                KeyDescription_EN = "Ctrl+Number 6",
+                KeyDescription_EN = "Ctrl+Number 2",
                 FunDescribe_EN = "Running in background",
 
                 IsTrigger = false,

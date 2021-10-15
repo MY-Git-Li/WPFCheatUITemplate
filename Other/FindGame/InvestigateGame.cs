@@ -56,7 +56,7 @@ namespace CheatUITemplt
             AppGameFunManger.Instance.Pid = 0;
             AppGameFunManger.Instance.SetViewPid();
             AppGameFunManger.Instance.StartFlashAnimation();
-            AppGameFunManger.Instance.SetAllGameFunEnding();
+            AppGameFunManger.Instance.RunAllGameFunEnding();
 
             startFindGame.RunWorkerAsync();
         }
@@ -76,8 +76,8 @@ namespace CheatUITemplt
             }
             
             AppGameFunManger.Instance.Pid = pid;
-            AppGameFunManger.Instance.SetAllGameFunData();
-            AppGameFunManger.Instance.SetAllGameFunAwake();
+            AppGameFunManger.Instance.GetAllGameFunData();
+            AppGameFunManger.Instance.RunAllGameFunAwake();
         }
 
         /// <summary>

@@ -15,16 +15,16 @@ namespace WPFCheatUITemplate.GameFuns
                 IsSignatureCode = false,
                 IsIntPtr = false,
 
-                Vk = Keys.NumPad6,
+                Vk = Keys.NumPad7,
                 FsModifiers = HotKey.KeyModifiers.None,
 
-                KeyDescription_SC = "数字键6",
+                KeyDescription_SC = "数字键7",
                 FunDescribe_SC = "无冷却时间",
 
-                KeyDescription_TC = "數字鍵6",
+                KeyDescription_TC = "數字鍵7",
                 FunDescribe_TC = "無冷卻時間",
 
-                KeyDescription_EN = "Number 6",
+                KeyDescription_EN = "Number 7",
                 FunDescribe_EN = "No cool down time",
 
                 IsTrigger = false

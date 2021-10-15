@@ -91,6 +91,7 @@
     <Compile Include="Other\Draw\Memory.cs" />
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
     <Compile Include="Other\GameFuns\GameFunDateStruct.cs" />
+    <Compile Include="Other\UI\CreateUIGrid.cs" />
     <Compile Include="Other\UI\LanguageUI.cs" />
     <Compile Include="Other\Voice\SoundEffect.cs" />
     <Compile Include="Start.cs" />

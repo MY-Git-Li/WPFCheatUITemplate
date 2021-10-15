@@ -31,8 +31,8 @@ namespace WPFCheatUITemplate
 
             AppGameFunManger.Instance.RegisterWindow(this);
 
-            createLayout = new CreateLayout(keyAndDescribelayout, Resources);
-            AppGameFunManger.Instance.RegisterManger(createLayout);
+            createLayout = new CreateLayout(Resources);
+            AppGameFunManger.Instance.RegisterManger(createLayout, keyAndDescribelayouts);
 
             soundEffect = new SoundEffect();
             AppGameFunManger.Instance.RegisterManger(soundEffect);
@@ -43,6 +43,9 @@ namespace WPFCheatUITemplate
             investigateGame = new InvestigateGame(processName);
 
             InitUi();
+
+            AppGameFunManger.Instance.StartUI(Start.Init);
+
             InitFlashAinimation();
         }
 
@@ -146,15 +149,12 @@ namespace WPFCheatUITemplate
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
             Hwnd = wndHelper.Handle;
 
-            Start.Init();
-            AppGameFunManger.Instance.InitUI();
-
+          
             investigateGame.FindingGame();
 
             PlayFlashAinimation();
             AppGameFunManger.Instance.SetSimplifiedChinese();
         }
-
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -169,7 +169,7 @@ namespace WPFCheatUITemplate
             EndHotsystem();
 
             if (AppGameFunManger.Instance.Pid != 0)
-                AppGameFunManger.Instance.SetAllGameFunEnding();
+                AppGameFunManger.Instance.RunAllGameFunEnding();
         }
         public void EndHotsystem()
         {

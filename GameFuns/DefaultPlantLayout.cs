@@ -13,16 +13,16 @@ namespace WPFCheatUITemplate.GameFuns
 
             this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
             {
-                Vk = Keys.NumPad8,
-                FsModifiers = HotKey.KeyModifiers.Alt,
+                Vk = Keys.NumPad6,
+                FsModifiers = HotKey.KeyModifiers.None,
 
-                KeyDescription_SC = "Alt+数字键8",
+                KeyDescription_SC = "数字键6",
                 FunDescribe_SC = "默认植物种植",
 
-                KeyDescription_TC = "Alt+數字鍵8",
+                KeyDescription_TC = "數字鍵6",
                 FunDescribe_TC = "默認植物種植",
 
-                KeyDescription_EN = "Alt+Number 8",
+                KeyDescription_EN = "Number 6",
                 FunDescribe_EN = "Default planting",
 
                 IsTrigger = true,

@@ -32,6 +32,10 @@ namespace CheatUITemplt
         public LanguageUI keylanguageUI;
         public LanguageUI funlanguageUI;
 
+        public bool doNextPage;
+        public int  nextPageOffset;
+        public int SeparateOffset;
+
         public Description showDescription;
         public MyStackPanel myStackPanel;
 

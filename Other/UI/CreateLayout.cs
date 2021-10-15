@@ -11,10 +11,15 @@ namespace CheatUITemplt
         ResourceDictionary resourceDictionary;
         int row = 0;
 
-        public CreateLayout(Grid grid, ResourceDictionary resourceDictionary)
+        public CreateLayout(ResourceDictionary resourceDictionary)
+        {
+            this.resourceDictionary = resourceDictionary;
+        }
+
+        public void SetGrid(Grid grid)
         {
             this.grid = grid;
-            this.resourceDictionary = resourceDictionary;
+            row = 0;
         }
 
         public Description CreatShowDescription(GameFun gameFun)
@@ -29,24 +34,23 @@ namespace CheatUITemplt
             return sc;
         }
 
-        public void CreatSeparate()
+        public void CreatSeparate(int offset = 30)
         {
-            Description sc = new Description();
-            sc.keyDescription = CreatKeyTextBlock("");
-            SetPosition(sc.keyDescription, true);
-            grid.Children.Add(sc.keyDescription);
+            AddRowDefin(offset);
+            UpDateRow();
         }
 
-        public void CreatSeparate(WPFCheatUITemplate.LanguageUI languageUI)
+        public void CreatSeparate(WPFCheatUITemplate.LanguageUI languageUI,int offset = 30)
         {
+            AddRowDefin(offset);
+
             languageUI.textBlock = CreatSeparateTextBlock(languageUI.Description_SC);
 
             SetPosition(languageUI.textBlock, true);
             grid.Children.Add(languageUI.textBlock);
 
+            UpDateRow();
         }
-
-
 
         public MyStackPanel CreatMyStackPanel(GameFun gameFun, GameFunUI gameFunUI)
         {
@@ -122,18 +126,18 @@ namespace CheatUITemplt
 
         }
 
-
         public void UpDateRow()
         {
             row++;
         }
 
-        public void AddRowDefin()
+        public void AddRowDefin(int offset = 30)
         {
-            AddRowDefinitions();
+            grid.RowDefinitions.Add(new RowDefinition()
+            {
+                Height = new GridLength(offset)
+            });
         }
-
-
 
 
         void SetPosition(UIElement control, bool isStart)
@@ -151,16 +155,7 @@ namespace CheatUITemplt
 
         }
 
-        void AddRowDefinitions()
-        {
-            grid.RowDefinitions.Add(new RowDefinition()
-            {
-                Height = new GridLength(30)
-            });
-
-        }
-
-
+       
         TextBlock CreatSeparateTextBlock(string con)
         {
             TextBlock keydiscrb = new TextBlock();
