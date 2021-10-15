@@ -33,6 +33,7 @@ namespace CheatUITemplt
 
         CreateUIGrid createUIGrid;
 
+        LanguageUI messageBoxMessage;
         #region 单例模式
         //单例模式
         private static AppGameFunManger instance;
@@ -166,7 +167,16 @@ namespace CheatUITemplt
         }
         public void RegisterManger(UILangerManger uILangerManger)
         {
+            messageBoxMessage = new LanguageUI()
+            {
+                textBlock = new TextBlock(),
+                Description_SC = "未检测到游戏进程，请先运行游戏在激活修改功能@错误",
+                Description_TC = "未檢測到遊戲進程，請先運行遊戲在激活修改功能@錯誤",
+                Description_EN = "Game is not detected,please launch the game before activating cheats.@Error"
+            };
+
             this.uILangerManger = uILangerManger;
+            uILangerManger.RegisterLanguageUI(messageBoxMessage);
         }
         public void RegisterManger(SoundEffect soundEffect)
         {
@@ -360,19 +370,52 @@ namespace CheatUITemplt
 
         public void EnableControl()
         {
+            //foreach (var item in gameFunUIs)
+            //{
+            //    SetControlEnable(item.myStackPanel.button, true);
+            //    SetControlEnable(item.myStackPanel.checkBox, true);
+            //}
+
             foreach (var item in gameFunUIs)
             {
-                SetControlEnable(item.myStackPanel.button, true);
-                SetControlEnable(item.myStackPanel.checkBox, true);
+                if (item.myStackPanel.button != null)
+                {
+                    item.myStackPanel.button.IsEnabled = true;
+                    item.myStackPanel.button.Click -= ButtonHandlerNoGamePro;
+                }
+
+                if (item.myStackPanel.checkBox != null)
+                {
+                    item.myStackPanel.checkBox.IsEnabled = true;
+                    item.myStackPanel.checkBox.Click -= CheckBoxHandlerNoGamePro;
+                }
             }
+
         }
         public void DisableControl()
         {
+            //foreach (var item in gameFunUIs)
+            //{
+            //    SetControlEnable(item.myStackPanel.button, false);
+            //    SetControlEnable(item.myStackPanel.checkBox, false);
+            //}
+
             foreach (var item in gameFunUIs)
             {
-                SetControlEnable(item.myStackPanel.button, false);
-                SetControlEnable(item.myStackPanel.checkBox, false);
+                if (item.myStackPanel.button!=null)
+                {
+                    item.myStackPanel.button.IsEnabled = true;
+                    item.myStackPanel.button.Click += ButtonHandlerNoGamePro;
+                }
+
+                if (item.myStackPanel.checkBox!=null)
+                {
+                    item.myStackPanel.checkBox.IsEnabled = true;
+                    item.myStackPanel.checkBox.Click += CheckBoxHandlerNoGamePro;
+                }
             }
+
+
         }
 
         public void EndHotsystem()
@@ -417,7 +460,17 @@ namespace CheatUITemplt
         }
 
 
-      
+        void ButtonHandlerNoGamePro(object sender, RoutedEventArgs e)
+        {
+            System.Windows.MessageBox.Show(messageBoxMessage.textBlock.Text.Split('@')[0], messageBoxMessage.textBlock.Text.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        void CheckBoxHandlerNoGamePro(object sender, RoutedEventArgs e)
+        {
+            var check = sender as System.Windows.Controls.CheckBox;
+            System.Windows.MessageBox.Show(messageBoxMessage.textBlock.Text.Split('@')[0], messageBoxMessage.textBlock.Text.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+            check.IsChecked = false;
+        }
     }
 
 

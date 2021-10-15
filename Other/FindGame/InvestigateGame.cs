@@ -21,7 +21,8 @@ namespace CheatUITemplt
 
         public void FindingGame()
         {
-          
+            AppGameFunManger.Instance.DisableControl();
+
             startFindGame.RunWorkerCompleted += new RunWorkerCompletedEventHandler(startFindGame_RunWorkerCompleted);
             startFindGame.DoWork += new DoWorkEventHandler(startFindGame_DoWork);
             startFindGame.RunWorkerAsync();
@@ -51,8 +52,8 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void findGameing_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            AppGameFunManger.Instance.DisableControl();
             AppGameFunManger.Instance.EndHotsystem();
+            AppGameFunManger.Instance.DisableControl();
             AppGameFunManger.Instance.Pid = 0;
             AppGameFunManger.Instance.SetViewPid();
             AppGameFunManger.Instance.StartFlashAnimation();

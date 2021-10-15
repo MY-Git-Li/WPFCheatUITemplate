@@ -18,7 +18,11 @@ namespace WPFCheatUITemplate
         {
             foreach (var item in languageUIs)
             {
-                item.textBlock.Text = item.Description_SC;
+                if (item.textBlock != null)
+                {
+                    item.textBlock.Text = item.Description_SC;
+                }
+               
             }
         }
 
@@ -26,14 +30,20 @@ namespace WPFCheatUITemplate
         {
             foreach (var item in languageUIs)
             {
-                item.textBlock.Text = item.Description_EN;
+                if (item.textBlock != null)
+                {
+                    item.textBlock.Text = item.Description_EN;
+                }
             }
         }
         public void SetTraditionalChinese()
         {
             foreach (var item in languageUIs)
             {
-                item.textBlock.Text = item.Description_TC;
+                if (item.textBlock != null)
+                {
+                    item.textBlock.Text = item.Description_TC;
+                }
             }
         }
     }
