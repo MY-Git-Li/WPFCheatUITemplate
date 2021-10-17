@@ -8,6 +8,73 @@ using System.Threading.Tasks;
 namespace WPFCheatUITemplate.Other
 {
 
+    class GameFunDateStruct
+    {
+        /// <summary>
+        /// 游戏的句柄----不用赋值，可直接使用
+        /// </summary>
+        public IntPtr Handle { get; set; }
+
+        /// <summary>
+        /// 游戏的PID----不用赋值，可直接使用
+        /// </summary>
+        public int Pid { get; set; }
+
+        /// <summary>
+        /// 游戏实现功能相关,支持多版本
+        /// </summary>
+        Dictionary<GameVersion.Version, GameDate> gameDates = new Dictionary<GameVersion.Version, GameDate>();
+
+        /// <summary>
+        /// UI显示相关
+        /// </summary>
+        public UIData uIData;
+
+        /// <summary>
+        /// 设定快捷键相关
+        /// </summary>
+        public RefHotKey refHotKey;
+
+        /// <summary>
+        /// 目前的GameDate
+        /// </summary>
+        public GameDate currentGameDate;
+
+
+        public void AddGameDate(GameDate gameDate)
+        {
+            gameDates.Add(GameVersion.Version.Default, gameDate);
+        }
+
+        public void AddGameDate(GameVersion.Version version, GameDate gameDate)
+        {
+            gameDates.Add(version, gameDate);
+        }
+
+        public GameDate GetGameDate(GameVersion.Version version)
+        {
+            if (!gameDates.TryGetValue(version, out currentGameDate))
+            {
+                if(gameDates.TryGetValue(GameVersion.Version.Default, out currentGameDate))
+                {
+                    return currentGameDate;
+                }else
+                {
+                    return null;
+                }
+               
+            }else
+            {
+                return currentGameDate;
+            }
+        }
+
+
+    }
+
+    /// <summary>
+    /// 游戏数据描述类
+    /// </summary>
     class GameDate
     {
         /// <summary>
@@ -50,7 +117,9 @@ namespace WPFCheatUITemplate.Other
         /// </summary>
         public uint SignatureCodeOffset { get; set; }
     }
-
+    /// <summary>
+    /// UI显示描述类
+    /// </summary>
     class UIData
     {
         /// <summary>
@@ -101,7 +170,9 @@ namespace WPFCheatUITemplate.Other
         /// </summary>
         public bool IsHide { get; set; }
     }
-
+    /// <summary>
+    /// 快捷键设置类
+    /// </summary>
     class RefHotKey
     {
         /// <summary>
@@ -113,64 +184,5 @@ namespace WPFCheatUITemplate.Other
         /// 启用的复键----必填 比如数字键1
         /// </summary>
         public System.Windows.Forms.Keys Vk { get; set; }
-    }
-
-    class GameFunDateStruct
-    {
-        /// <summary>
-        /// 游戏的句柄----不用赋值，可直接使用
-        /// </summary>
-        public IntPtr Handle { get; set; }
-
-        /// <summary>
-        /// 游戏的PID----不用赋值，可直接使用
-        /// </summary>
-        public int Pid { get; set; }
-
-        /// <summary>
-        /// 游戏实现功能相关,支持多版本
-        /// </summary>
-        Dictionary<GameVersion.Version, GameDate> gameDates = new Dictionary<GameVersion.Version, GameDate>();
-
-        /// <summary>
-        /// UI显示相关
-        /// </summary>
-        public UIData uIData;
-
-        /// <summary>
-        /// 设定快捷键相关
-        /// </summary>
-        public RefHotKey refHotKey;
-
-        /// <summary>
-        /// 目前的GameDate
-        /// </summary>
-        public GameDate currentGameDate;
-
-
-        public void AddGameDate(GameVersion.Version version, GameDate gameDate)
-        {
-            gameDates.Add(version, gameDate);
-        }
-
-        public GameDate GetGameDate(GameVersion.Version version)
-        {
-            if (!gameDates.TryGetValue(version, out currentGameDate))
-            {
-                if(gameDates.TryGetValue(GameVersion.Version.Default, out currentGameDate))
-                {
-                    return currentGameDate;
-                }else
-                {
-                    return null;
-                }
-               
-            }else
-            {
-                return currentGameDate;
-            }
-        }
-
-
     }
 }
