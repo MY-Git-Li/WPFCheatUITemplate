@@ -150,7 +150,8 @@ namespace WPFCheatUITemplate.Other
         {
             if (!gameDates.TryGetValue(version, out currentGameDate))
             {
-                return null;
+                gameDates.TryGetValue(GameVersion.Version.Default, out currentGameDate);
+                return currentGameDate;
             }else
             {
                 return currentGameDate;

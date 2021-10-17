@@ -49,7 +49,7 @@ namespace WPFCheatUITemplate
 
                 setGameDate = (i) =>
                 {
-                    i.gameDates.Add(GameVersion.Version.Null, new GameDate()
+                    i.gameDates.Add(GameVersion.Version.Default, new GameDate()
                     {
                         ModuleName = "PlantsVsZombies.exe",
                         ModuleOffsetAddress = 0x6DC21,

@@ -28,7 +28,7 @@ namespace WPFCheatUITemplate.GameFuns
                 FsModifiers = HotKey.KeyModifiers.Shift,
 
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Null, new Other.GameDate()
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameDate()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x3CC72,

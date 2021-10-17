@@ -10,7 +10,7 @@ namespace WPFCheatUITemplate
     {
         public enum Version
         {
-            Null,
+            Default,
         }
 
         public static Version GetCurrentVersion(IntPtr handle)
@@ -21,7 +21,7 @@ namespace WPFCheatUITemplate
             //    default:
             //        return Version.Null;
             //}
-            return Version.Null;
+            return Version.Default;
         }
 
     }
