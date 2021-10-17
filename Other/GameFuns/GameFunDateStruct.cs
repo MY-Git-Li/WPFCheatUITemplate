@@ -96,6 +96,10 @@ namespace WPFCheatUITemplate.Other
         /// 当IsAcceptValue真时起效，设置数据的最小值 默认1
         /// </summary>
         public double SliderMinNum { get; set; }
+        /// <summary>
+        /// 是否隐藏，不在界面显示
+        /// </summary>
+        public bool IsHide { get; set; }
     }
 
     class RefHotKey
@@ -138,6 +142,9 @@ namespace WPFCheatUITemplate.Other
         /// </summary>
         public RefHotKey refHotKey;
 
+        /// <summary>
+        /// 目前的GameDate
+        /// </summary>
         public GameDate currentGameDate;
 
 

@@ -217,31 +217,33 @@ namespace CheatUITemplt
             {
                 if (item.gameFun!=null)
                 {
-                   
-                    LanguageUI funlanguageUI = new LanguageUI()
+                    if (!item.gameFun.gameFunDateStruct.uIData.IsHide)
                     {
-                        Description_EN = item.gameFun.gameFunDateStruct.uIData.FunDescribe_EN,
-                        Description_SC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_SC,
-                        Description_TC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_TC
-                    };
+                        LanguageUI funlanguageUI = new LanguageUI()
+                        {
+                            Description_EN = item.gameFun.gameFunDateStruct.uIData.FunDescribe_EN,
+                            Description_SC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_SC,
+                            Description_TC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_TC
+                        };
 
-                    LanguageUI keylanguageUI = new LanguageUI()
-                    {
-                        Description_EN = item.gameFun.gameFunDateStruct.uIData.KeyDescription_EN,
-                        Description_SC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_SC,
-                        Description_TC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_TC
-                    };
-                    item.funlanguageUI = funlanguageUI;
-                    item.keylanguageUI = keylanguageUI;
+                        LanguageUI keylanguageUI = new LanguageUI()
+                        {
+                            Description_EN = item.gameFun.gameFunDateStruct.uIData.KeyDescription_EN,
+                            Description_SC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_SC,
+                            Description_TC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_TC
+                        };
+                        item.funlanguageUI = funlanguageUI;
+                        item.keylanguageUI = keylanguageUI;
 
 
-                    createLayout.AddRowDefin();
+                        createLayout.AddRowDefin();
 
-                    item.showDescription = createLayout.CreatShowDescription(item.gameFun);
+                        item.showDescription = createLayout.CreatShowDescription(item.gameFun);
 
-                    item.myStackPanel = createLayout.CreatMyStackPanel(item.gameFun, item);
+                        item.myStackPanel = createLayout.CreatMyStackPanel(item.gameFun, item);
 
-                    createLayout.UpDateRow();
+                        createLayout.UpDateRow();
+                    }
                 }
                 else if (item.doNextPage)
                 {
