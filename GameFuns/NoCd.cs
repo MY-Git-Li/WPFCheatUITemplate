@@ -8,16 +8,9 @@ namespace WPFCheatUITemplate.GameFuns
        
         public NoCd()
         {
-            this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
+            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct.uIData = new Other.UIData()
             {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x9ce02,
-                IsSignatureCode = false,
-                IsIntPtr = false,
-
-                Vk = Keys.NumPad7,
-                FsModifiers = HotKey.KeyModifiers.None,
-
                 KeyDescription_SC = "数字键7",
                 FunDescribe_SC = "无冷却时间",
 
@@ -28,9 +21,21 @@ namespace WPFCheatUITemplate.GameFuns
                 FunDescribe_EN = "No cool down time",
 
                 IsTrigger = false
+
             };
-           
-           
+            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            {
+                Vk = Keys.NumPad7,
+                FsModifiers = HotKey.KeyModifiers.None,
+            };
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Null, new Other.GameDate()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x9ce02,
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
+
         }
 
         public override void Awake()
@@ -40,12 +45,12 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            CheatTools.WriteMemoryByte(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, new byte[] { 0x74 });
+            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0x74 });
         }
 
         public override void DoRunAgain(double value)
         {
-            CheatTools.WriteMemoryByte(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, new byte[] { 0x7e });
+            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0x7e });
         }
         public override void Ending()
         {

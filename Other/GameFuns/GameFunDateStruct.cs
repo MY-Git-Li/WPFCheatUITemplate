@@ -7,15 +7,9 @@ using System.Threading.Tasks;
 
 namespace WPFCheatUITemplate.Other
 {
-    class GameFunDateStruct
+
+    class GameDate
     {
-        #region 游戏数据块
-
-        /// <summary>
-        /// 游戏的句柄----不用赋值，可直接使用
-        /// </summary>
-        public IntPtr Handle { get; set; }
-
         /// <summary>
         /// 模块名字-----必填
         /// </summary>
@@ -55,26 +49,19 @@ namespace WPFCheatUITemplate.Other
         /// 特征码偏移----当特征码定位为真时启用，填写特征码地址后续偏移
         /// </summary>
         public uint SignatureCodeOffset { get; set; }
+    }
 
-
-        /// <summary>
-        /// 游戏数据----设置了前面的属性后不用赋值，可直接定位到地址，也可自定义数据
-        /// </summary>
-        public GameDataAddress GameDataAddress { get; set; }
-
-        #endregion
-
-        #region UI界面块
-       
+    class UIData
+    {
         /// <summary>
         /// 快捷键描述(繁体)----可选填用于界面展示
         /// </summary>
-        public  string KeyDescription_TC { get; set; }
+        public string KeyDescription_TC { get; set; }
 
         /// <summary>
         /// 功能描述(繁体)----可选填用于界面展示
         /// </summary>
-        public  string FunDescribe_TC { get; set; }
+        public string FunDescribe_TC { get; set; }
 
         /// <summary>
         /// 是否为触发器----false启用DoRunAgain函数，
@@ -109,11 +96,10 @@ namespace WPFCheatUITemplate.Other
         /// 当IsAcceptValue真时起效，设置数据的最小值 默认1
         /// </summary>
         public double SliderMinNum { get; set; }
+    }
 
-        #endregion
-
-        #region 快捷键块
-
+    class RefHotKey
+    {
         /// <summary>
         /// 启用的主键----必填 比如一些特定的按键比如ALT等
         /// </summary>
@@ -123,7 +109,54 @@ namespace WPFCheatUITemplate.Other
         /// 启用的复键----必填 比如数字键1
         /// </summary>
         public System.Windows.Forms.Keys Vk { get; set; }
+    }
 
-        #endregion
+    class GameFunDateStruct
+    {
+        /// <summary>
+        /// 游戏的句柄----不用赋值，可直接使用
+        /// </summary>
+        public IntPtr Handle { get; set; }
+
+        /// <summary>
+        /// 游戏的PID----不用赋值，可直接使用
+        /// </summary>
+        public int Pid { get; set; }
+
+        /// <summary>
+        /// 游戏实现功能相关,支持多版本
+        /// </summary>
+        Dictionary<GameVersion.Version, GameDate> gameDates = new Dictionary<GameVersion.Version, GameDate>();
+
+        /// <summary>
+        /// UI显示相关
+        /// </summary>
+        public UIData uIData;
+
+        /// <summary>
+        /// 设定快捷键相关
+        /// </summary>
+        public RefHotKey refHotKey;
+
+        public GameDate currentGameDate;
+
+
+        public void AddGameDate(GameVersion.Version version, GameDate gameDate)
+        {
+            gameDates.Add(version, gameDate);
+        }
+
+        public GameDate GetGameDate(GameVersion.Version version)
+        {
+            if (!gameDates.TryGetValue(version, out currentGameDate))
+            {
+                return null;
+            }else
+            {
+                return currentGameDate;
+            }
+        }
+
+
     }
 }

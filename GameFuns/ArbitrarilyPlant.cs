@@ -8,19 +8,9 @@ namespace WPFCheatUITemplate.GameFuns
        
         public ArbitrarilyPlant()
         {
-            this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
+            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct.uIData = new Other.UIData()
             {
-                ModuleName = "PlantsVsZombies.exe",
-
-                IsSignatureCode = true,
-                SignatureCodeOffset = 0xe,
-                SignatureCode = "8B 54 24 0C 53 52 57",
-
-                IsIntPtr = false,
-
-                Vk = Keys.NumPad1,
-                FsModifiers = HotKey.KeyModifiers.Ctrl,
-
                 KeyDescription_SC = "Ctrl+数字键1",
                 FunDescribe_SC = "随意种植",
 
@@ -31,8 +21,24 @@ namespace WPFCheatUITemplate.GameFuns
                 FunDescribe_EN = "Planting will",
 
                 IsTrigger = false,
+
             };
-           
+            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            {
+                Vk = Keys.NumPad1,
+                FsModifiers = HotKey.KeyModifiers.Ctrl,
+            };
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Null, new Other.GameDate()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+
+                IsSignatureCode = true,
+                SignatureCodeOffset = 0xe,
+                SignatureCode = "8B 54 24 0C 53 52 57",
+
+                IsIntPtr = false,
+            });
+
         }
         public override void Awake()
         {
@@ -41,13 +47,13 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            CheatTools.WriteMemoryByte(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, new byte[] { 0xE9, 0x47, 0x09, 0x00, 0x00, 0x90 });
+            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0xE9, 0x47, 0x09, 0x00, 0x00, 0x90 });
 
         }
 
         public override void DoRunAgain(double value)
         {
-            CheatTools.WriteMemoryByte(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, new byte[] { 0x0f, 0x84, 0x46, 0x09, 0x00, 0x00 });
+            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0x0f, 0x84, 0x46, 0x09, 0x00, 0x00 });
 
         }
         public override void Ending()

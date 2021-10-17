@@ -12,20 +12,9 @@ namespace WPFCheatUITemplate.GameFuns
     {
         public Coin()
         {
-
-            this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
+            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct.uIData = new Other.UIData()
             {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x355E0C,
-
-                IsSignatureCode = false,
-
-                IntPtrOffset = new uint[] { 0x950, 0x50 },
-                IsIntPtr = true,
-
-                Vk = Keys.NumPad2,
-                FsModifiers = HotKey.KeyModifiers.None,
-
                 KeyDescription_SC = "数字键2",
                 FunDescribe_SC = "设置硬币",
 
@@ -41,8 +30,24 @@ namespace WPFCheatUITemplate.GameFuns
                 IsAcceptValue = true,
                 SliderMinNum = 1,
                 SliderMaxNum = 9999,
+
             };
-        
+            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            {
+                Vk = Keys.NumPad2,
+                FsModifiers = HotKey.KeyModifiers.None,
+            };
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Null, new Other.GameDate()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x950, 0x50 },
+                IsIntPtr = true,
+            });
+         
         }
 
         public override void Awake()
@@ -52,7 +57,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            CheatTools.WriteMemoryInt(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, (int)value);
+            memory.WriteMemory<int>(gameDataAddress.Address, (int)value);
         }
 
         public override void DoRunAgain(double value)

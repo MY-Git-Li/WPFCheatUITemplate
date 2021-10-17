@@ -8,16 +8,9 @@ namespace WPFCheatUITemplate.GameFuns
        
         public AllowBackground()
         {
-            this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
+            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct.uIData = new Other.UIData()
             {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x5D040,
-                IsSignatureCode = false,
-                IsIntPtr = false,
-
-                Vk = Keys.NumPad2,
-                FsModifiers = HotKey.KeyModifiers.Ctrl,
-
                 KeyDescription_SC = "Ctrl+数字键2",
                 FunDescribe_SC = "允许后台运行",
 
@@ -30,7 +23,18 @@ namespace WPFCheatUITemplate.GameFuns
                 IsTrigger = false,
 
             };
-
+            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            {
+                Vk = Keys.NumPad2,
+                FsModifiers = HotKey.KeyModifiers.Ctrl,
+            };
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Null, new Other.GameDate()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x5D040,
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
       
         }
 
@@ -41,13 +45,13 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            CheatTools.WriteMemoryByte(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, new byte[] { 0xC2, 0x04, 0x00 });
+            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0xC2, 0x04, 0x00 });
+      
         }
 
         public override void DoRunAgain(double value)
         {
-            CheatTools.WriteMemoryByte(gameFunDateStruct.GameDataAddress.Address, gameFunDateStruct.Handle, new byte[] { 0x55, 0x8B, 0xEC });
-           
+            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0x55, 0x8B, 0xEC });
         }
         public override void Ending()
         {

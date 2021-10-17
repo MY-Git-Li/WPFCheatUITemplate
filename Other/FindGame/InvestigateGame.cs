@@ -77,8 +77,8 @@ namespace CheatUITemplt
             }
             
             AppGameFunManger.Instance.Pid = pid;
-            AppGameFunManger.Instance.GetAllGameFunData();
             AppGameFunManger.Instance.RunAllGameFunAwake();
+            AppGameFunManger.Instance.GetAllGameFunData();
         }
 
         /// <summary>

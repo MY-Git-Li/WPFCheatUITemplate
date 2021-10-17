@@ -106,6 +106,13 @@ namespace WPFCheatUITemplate.Other.Draw
             byte[] buffer = StructureToByteArray(Value);
             WinAPI.WriteProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
         }
+        public void WriteMemory<T>(int address, byte[] Value) where T : struct
+        {
+            //byte[] buffer = StructureToByteArray(Value);
+            WinAPI.WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
+        }
+
+
 
         public float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
         {

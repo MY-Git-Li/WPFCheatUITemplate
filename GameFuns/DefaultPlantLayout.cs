@@ -10,12 +10,9 @@ namespace WPFCheatUITemplate.GameFuns
         int pid;
         public DefaultPlantLayout()
         {
-
-            this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
+            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct.uIData = new Other.UIData()
             {
-                Vk = Keys.NumPad6,
-                FsModifiers = HotKey.KeyModifiers.None,
-
                 KeyDescription_SC = "数字键6",
                 FunDescribe_SC = "默认植物种植",
 
@@ -26,8 +23,18 @@ namespace WPFCheatUITemplate.GameFuns
                 FunDescribe_EN = "Default planting",
 
                 IsTrigger = true,
+
             };
-           
+            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            {
+                Vk = Keys.NumPad6,
+                FsModifiers = HotKey.KeyModifiers.None,
+            };
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Null, new Other.GameDate()
+            {
+               
+            });
+            
         }
 
         public void Plant(int x, int y, int id)

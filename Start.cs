@@ -1,4 +1,5 @@
 ﻿using CheatUITemplt;
+using System;
 using System.Windows.Forms;
 using WPFCheatUITemplate.GameFuns;
 using WPFCheatUITemplate.Other;
@@ -22,45 +23,56 @@ namespace WPFCheatUITemplate
             new AllowBackground();
             new FastGameFun()
             {
+
                 gameFunDateStruct = new GameFunDateStruct()
                 {
-                    ModuleName = "PlantsVsZombies.exe",
-                    ModuleOffsetAddress = 0x6DC21,
+                    uIData = new UIData()
+                    {
+                        KeyDescription_SC = "Alt+数字键1",
+                        FunDescribe_SC = "超级攻速",
 
-                    IsSignatureCode = false,
-                    IsIntPtr = false,
+                        KeyDescription_TC = "Alt+數字鍵1",
+                        FunDescribe_TC = "超級攻速",
 
-                    Vk = Keys.NumPad1,
-                    FsModifiers = HotKey.KeyModifiers.Alt,
+                        KeyDescription_EN = "Alt+Number 1",
+                        FunDescribe_EN = "Super attack speed",
 
-                    KeyDescription_SC = "Alt+数字键1",
-                    FunDescribe_SC = "超级攻速",
+                        IsTrigger = false
+                    },
+                    refHotKey = new RefHotKey()
+                    {
+                        Vk = Keys.NumPad1,
+                        FsModifiers = HotKey.KeyModifiers.Alt,
+                    },
 
-                    KeyDescription_TC = "Alt+數字鍵1",
-                    FunDescribe_TC = "超級攻速",
+                },
 
-                    KeyDescription_EN = "Alt+Number 1",
-                    FunDescribe_EN = "Super attack speed",
+                setGameDate = (i) =>
+                {
+                    i.gameDates.Add(GameVersion.Version.Null, new GameDate()
+                    {
+                        ModuleName = "PlantsVsZombies.exe",
+                        ModuleOffsetAddress = 0x6DC21,
 
-                    IsTrigger = false
-
+                        IsSignatureCode = false,
+                        IsIntPtr = false,
+                    });
                 },
 
                 awake = (i) =>
                 {
-                    i.gameDataAddresseList.Add(new GameDataAddress(i.gameFunDateStruct.Handle, i.gameFunDateStruct.ModuleAddress + 0x72EE4));
+                    i.gameDataAddresseList.Add(new GameDataAddress((IntPtr)i.gameFunDateStruct.Pid, CheatTools.GetProcessModuleHandle((uint)i.gameFunDateStruct.Pid, "PlantsVsZombies.exe") + 0x72EE4));
                 },
 
                 doFirstTime = (i, v) =>
                 {
-                    CheatTools.WriteMemoryByte(i.gameFunDateStruct.GameDataAddress.Address, i.gameFunDateStruct.Handle, new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 });
-                    CheatTools.WriteMemoryByte(i.gameDataAddresseList[0].Address, i.gameFunDateStruct.Handle, new byte[] { 0x0F, 0x84 });
-
+                    i.memory.WriteMemory<byte>(i.gameDataAddress.Address, new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 });
+                    i.memory.WriteMemory<byte>(i.gameDataAddresseList[0].Address, new byte[] { 0x0F, 0x84 });
                 },
                 doRunAgain = (i, v) =>
                 {
-                    CheatTools.WriteMemoryByte(i.gameFunDateStruct.GameDataAddress.Address, i.gameFunDateStruct.Handle, new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
-                    CheatTools.WriteMemoryByte(i.gameDataAddresseList[0].Address, i.gameFunDateStruct.Handle, new byte[] { 0x0F, 0x85 });
+                    i.memory.WriteMemory<byte>(i.gameDataAddress.Address, new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
+                    i.memory.WriteMemory<byte>(i.gameDataAddresseList[0].Address, new byte[] { 0x0F, 0x85 });
                 },
 
                 ending = (i) =>
@@ -68,8 +80,8 @@ namespace WPFCheatUITemplate
                     i.gameDataAddresseList.Clear();
                 },
 
-            };
-           
+            }.Go();
+
         }
     }
 }

@@ -19,9 +19,29 @@ namespace WPFCheatUITemplate.Other
         /// </summary>
         public List<GameDataAddress> gameDataAddresseList;
 
+        public Dictionary<GameVersion.Version,GameDate> gameDates;
+
+        public Action<FastGameFun> setGameDate;
+
         public FastGameFun()
         {
             gameDataAddresseList = new List<GameDataAddress>();
+            gameDates = new Dictionary<GameVersion.Version, GameDate>();
+
+        }
+
+        public void Go()
+        {
+            SetGameData();
+        }
+
+        private void SetGameData()
+        {
+            setGameDate?.Invoke(this);
+            foreach (var item in gameDates)
+            {
+                gameFunDateStruct.AddGameDate(item.Key, item.Value);
+            }
         }
 
         public override void Awake()
@@ -42,6 +62,8 @@ namespace WPFCheatUITemplate.Other
         public override void Ending()
         {
             ending?.Invoke(this);
+            gameDataAddresseList.Clear();
+            gameDates.Clear();
         }
     }
 }

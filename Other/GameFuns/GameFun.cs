@@ -1,4 +1,8 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using WPFCheatUITemplate.Other;
+
 namespace CheatUITemplt
 {
     /// <summary>
@@ -15,6 +19,11 @@ namespace CheatUITemplt
         /// </summary>
         public WPFCheatUITemplate.Other.Draw.Memory memory;
 
+        /// <summary>
+        /// 游戏数据----设置了前面的属性后不用赋值，可直接定位到地址，也可自定义数据
+        /// </summary>
+        public GameDataAddress gameDataAddress;
+
         public GameFun()
         {
             AppGameFunManger.Instance.RegisterGameFun(this);
@@ -24,26 +33,26 @@ namespace CheatUITemplt
         {
             if (gameFunDateStruct != null)
             {
-                if (!gameFunDateStruct.IsSignatureCode)
+                if (!gameFunDateStruct.currentGameDate.IsSignatureCode)
                 {
-                    if (gameFunDateStruct.IsIntPtr)
+                    if (gameFunDateStruct.currentGameDate.IsIntPtr)
                     {
-                        if (gameFunDateStruct.GameDataAddress == null)
-                            this.gameFunDateStruct.GameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.ModuleAddress + gameFunDateStruct.ModuleOffsetAddress, gameFunDateStruct.IntPtrOffset);
+                        if (gameFunDateStruct.currentGameDate != null)
+                            gameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.currentGameDate.ModuleAddress + gameFunDateStruct.currentGameDate.ModuleOffsetAddress, gameFunDateStruct.currentGameDate.IntPtrOffset);
 
                     }
                     else
                     {
-                        if (gameFunDateStruct.GameDataAddress == null)
-                            this.gameFunDateStruct.GameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.ModuleAddress + gameFunDateStruct.ModuleOffsetAddress);
+                        if (gameFunDateStruct.currentGameDate != null)
+                            gameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.currentGameDate.ModuleAddress + gameFunDateStruct.currentGameDate.ModuleOffsetAddress);
                     }
                 }
                 else
                 {
-                    if (gameFunDateStruct.GameDataAddress == null)
-                        this.gameFunDateStruct.GameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, CheatTools.FindData(gameFunDateStruct.Handle, gameFunDateStruct.ModuleAddress, gameFunDateStruct.ModuleAddress + 0x4000000, gameFunDateStruct.SignatureCode)[0] + gameFunDateStruct.SignatureCodeOffset);
+                    if (gameFunDateStruct.currentGameDate != null)
+                        gameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, CheatTools.FindData(gameFunDateStruct.Handle, gameFunDateStruct.currentGameDate.ModuleAddress, gameFunDateStruct.currentGameDate.ModuleAddress + 0x4000000, gameFunDateStruct.currentGameDate.SignatureCode)[0] + gameFunDateStruct.currentGameDate.SignatureCodeOffset);
                 }
-
+               
                 memory = new WPFCheatUITemplate.Other.Draw.Memory();
                 memory.SetProcessHandle(gameFunDateStruct.Handle);
             }

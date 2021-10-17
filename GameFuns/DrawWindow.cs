@@ -16,13 +16,9 @@ namespace WPFCheatUITemplate.GameFuns
 
         public DrawWindow()
         {
-            this.gameFunDateStruct = new WPFCheatUITemplate.Other.GameFunDateStruct()
+            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct.uIData = new Other.UIData()
             {
-                ModuleName = "PlantsVsZombies.exe",
-
-                Vk = System.Windows.Forms.Keys.NumPad8,
-                FsModifiers = HotKey.KeyModifiers.None,
-
                 KeyDescription_SC = "数字键8",
                 FunDescribe_SC = "外部绘制",
 
@@ -35,6 +31,15 @@ namespace WPFCheatUITemplate.GameFuns
                 IsTrigger = false,
 
             };
+            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            {
+                Vk = System.Windows.Forms.Keys.NumPad8,
+                FsModifiers = HotKey.KeyModifiers.None,
+            };
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Null, new Other.GameDate()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+            });
 
             drawManager = new DrawManager();
 

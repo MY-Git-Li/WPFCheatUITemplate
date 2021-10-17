@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,6 +19,8 @@ namespace CheatUITemplt
         MainWindow mainWindow;
 
         CreateLayout createLayout;
+
+        IntPtr handle;
 
         int pid;
         public int Pid { set => pid = value; get => pid; }
@@ -132,6 +135,20 @@ namespace CheatUITemplt
             {
                 if (item.gameFun != null)
                 {
+                  
+                    handle = CheatTools.GetProcessHandle(pid);
+
+                    item.gameFun.gameFunDateStruct.Handle = handle;
+
+                    item.gameFun.gameFunDateStruct.Pid = pid;
+
+                    GameDate gameDate = item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
+
+                    if (gameDate != null)
+                    {
+                        gameDate.ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, gameDate.ModuleName);
+                    }
+
                     item.gameFun.Awake();
                 }
             }
@@ -145,9 +162,14 @@ namespace CheatUITemplt
             {
                 if (item.gameFun != null)
                 {
-                    item.gameFun.gameFunDateStruct.Handle = CheatTools.GetProcessHandle(pid);
-                    item.gameFun.gameFunDateStruct.ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, item.gameFun.gameFunDateStruct.ModuleName);
-                    item.gameFun.GetGameData();
+                    GameDate gameDate = item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
+                   
+                    if (gameDate!=null)
+                    {
+                        item.gameFun.GetGameData();
+                    }
+
+                   
                 }
                 
             }
@@ -195,18 +217,19 @@ namespace CheatUITemplt
             {
                 if (item.gameFun!=null)
                 {
+                   
                     LanguageUI funlanguageUI = new LanguageUI()
                     {
-                        Description_EN = item.gameFun.gameFunDateStruct.FunDescribe_EN,
-                        Description_SC = item.gameFun.gameFunDateStruct.FunDescribe_SC,
-                        Description_TC = item.gameFun.gameFunDateStruct.FunDescribe_TC
+                        Description_EN = item.gameFun.gameFunDateStruct.uIData.FunDescribe_EN,
+                        Description_SC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_SC,
+                        Description_TC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_TC
                     };
 
                     LanguageUI keylanguageUI = new LanguageUI()
                     {
-                        Description_EN = item.gameFun.gameFunDateStruct.KeyDescription_EN,
-                        Description_SC = item.gameFun.gameFunDateStruct.KeyDescription_SC,
-                        Description_TC = item.gameFun.gameFunDateStruct.KeyDescription_TC
+                        Description_EN = item.gameFun.gameFunDateStruct.uIData.KeyDescription_EN,
+                        Description_SC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_SC,
+                        Description_TC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_TC
                     };
                     item.funlanguageUI = funlanguageUI;
                     item.keylanguageUI = keylanguageUI;
@@ -305,65 +328,70 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                if (item.gameFun != null)
+                if (item.gameFun!=null)
                 {
-                    if (item.gameFun.gameFunDateStruct.IsTrigger)
+                    if (item.gameFun.gameFunDateStruct != null)
                     {
-                        RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.button),
-                        new HotSystemFun(async () =>
+                        RefHotKey refHotKey = item.gameFun.gameFunDateStruct.refHotKey;
+                        if (item.gameFun.gameFunDateStruct.uIData.IsTrigger)
                         {
-
-                            Slider slider = item.myStackPanel.ValueEntered;
-
-                            item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
-
-                            soundEffect.PlayTurnOnEffect();
-
-                            await Task.Delay(500);
-
-                        }));
-                    }
-                    else
-                    {
-                        RegisterHotKey(item.gameFun.gameFunDateStruct.FsModifiers, item.gameFun.gameFunDateStruct.Vk, new MyButton(item.myStackPanel.checkBox),
-                        new HotSystemFun(() =>
-                        {
-
-
-                            Slider slider = item.myStackPanel.ValueEntered;
-
-                            item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
-
-                            System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
-                            checkBox.IsChecked = true;
-
-
-                            if (slider != null)
+                            RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
+                            new HotSystemFun(async () =>
                             {
-                                slider.IsEnabled = !slider.IsEnabled;
-                            }
 
-                            soundEffect.PlayTurnOnEffect();
+                                Slider slider = item.myStackPanel.ValueEntered;
 
-                        }, () =>
+                                item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
+
+                                soundEffect.PlayTurnOnEffect();
+
+                                await Task.Delay(500);
+
+                            }));
+                        }
+                        else
                         {
-                            Slider slider = item.myStackPanel.ValueEntered;
-
-                            System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
-                            checkBox.IsChecked = false;
-
-                            item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
-
-                            if (slider != null)
+                            RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.checkBox),
+                            new HotSystemFun(() =>
                             {
-                                slider.IsEnabled = !slider.IsEnabled;
-                            }
 
-                            soundEffect.PlayTurnOffEffect();
 
-                        }));
+                                Slider slider = item.myStackPanel.ValueEntered;
+
+                                item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
+
+                                System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
+                                checkBox.IsChecked = true;
+
+
+                                if (slider != null)
+                                {
+                                    slider.IsEnabled = !slider.IsEnabled;
+                                }
+
+                                soundEffect.PlayTurnOnEffect();
+
+                            }, () =>
+                            {
+                                Slider slider = item.myStackPanel.ValueEntered;
+
+                                System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
+                                checkBox.IsChecked = false;
+
+                                item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
+
+                                if (slider != null)
+                                {
+                                    slider.IsEnabled = !slider.IsEnabled;
+                                }
+
+                                soundEffect.PlayTurnOffEffect();
+
+                            }));
+                        }
                     }
                 }
+              
                 
             }
         }
