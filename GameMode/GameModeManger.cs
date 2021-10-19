@@ -13,18 +13,18 @@ namespace WPFCheatUITemplate.GameMode
         {
             List<Zombie> zombies = new List<Zombie>();
             int maxnum = CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new
-                int[] { 0x6A9EC0, 0x768, 0x94 });
+                int[] { 0x755e0c, 0x868, 0xac });
 
 
-            for (int i = 0; i < maxnum; i++)
+            for (int i = -maxnum; i < maxnum; i++)
             {
-                int address = CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { 0x6A9EC0, 0x768, 0x90, 0xEC + 0x15C * i });
+                int address = CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { 0x755e0c, 0x868, 0xA8, 0xEC + 0x168 * i });
 
                 if (address == 0)
                 {
                     Zombie zombie = new Zombie();
 
-                    zombie.BaseAddress = CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { 0x6A9EC0, 0x768, 0x90 }) + 0x15C * i;
+                    zombie.BaseAddress = CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { 0x755e0c, 0x868, 0xA8 }) + 0x168 * i;
 
                     zombies.Add(zombie);
                 }

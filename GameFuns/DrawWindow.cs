@@ -69,7 +69,7 @@ namespace WPFCheatUITemplate.GameFuns
             tt.Start();
           
         }
-
+        List<GameMode.Zombie> zombies;
         void Draw()
         {
            
@@ -85,18 +85,31 @@ namespace WPFCheatUITemplate.GameFuns
                     "测试文字");
 
 
-                //zombies = Zombies.GetZombies();
+                zombies = GameMode.GameModeManger.GetZombies();
 
-                //foreach (var item in zombies)
-                //{
-                //    //g.DrawRectangle(drawManager._brushes["blue"],
-                //    //item.X+20,item.Y,item.X+100,item.Y+115,1f);
+                foreach (var item in zombies)
+                {
+                    //g.DrawRectangle(drawManager._brushes["blue"],
+                    //item.X+20,item.Y,item.X+100,item.Y+115,1f);
 
-                //    //g.DrawBox2D(drawManager._brushes["blue"], drawManager._brushes["red"], item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
-                    
-                //    g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"], Rectangle.Create(item.X+28, item.Y-10,55, 6), 1f, 56f);
-                //}
-                
+                    //g.DrawBox2D(drawManager._brushes["blue"], drawManager._brushes["red"], item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
+                    if (!item.IsDath)
+                    {
+                        if (item.X != 0 && item.Y!=0)
+                        {
+                            float HpMax = (float)(item.HatMaxHp + item.AnnexMaxHp + item.HpMax);
+                            float curentHp = (float)(item.HatHp + item.AnnexHp + item.Hp);
+                            float percenttage = curentHp / HpMax;
+                            percenttage = percenttage * 100;
+                            g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"],
+                                Rectangle.Create(item.X + 20, item.Y - 10, 80, 6), 1f, percenttage);
+                            g.DrawRectangle(drawManager._brushes["blue"],
+                            item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
+                        }
+
+                    }
+                }
+
 
 
 
