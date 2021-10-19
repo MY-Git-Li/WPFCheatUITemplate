@@ -1,4 +1,5 @@
 ﻿using CheatUITemplt;
+using GameOverlay.Drawing;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -42,9 +43,9 @@ namespace WPFCheatUITemplate.GameFuns
             });
 
             drawManager = new DrawManager();
-
+           
         }
-
+      
         public override void Awake()
         {
             //人造指针的步骤
@@ -63,7 +64,6 @@ namespace WPFCheatUITemplate.GameFuns
             //int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], gameFunDateStruct.Handle);
 
             //CheatTools.WriteMemoryInt(address+0x5578, gameFunDateStruct.Handle, (int)value);
-
             tt = new Thread(Draw);
             tt.IsBackground = true;
             tt.Start();
@@ -84,6 +84,23 @@ namespace WPFCheatUITemplate.GameFuns
                     10, drawManager._windowData.Height / 2,
                     "测试文字");
 
+
+                //zombies = Zombies.GetZombies();
+
+                //foreach (var item in zombies)
+                //{
+                //    //g.DrawRectangle(drawManager._brushes["blue"],
+                //    //item.X+20,item.Y,item.X+100,item.Y+115,1f);
+
+                //    //g.DrawBox2D(drawManager._brushes["blue"], drawManager._brushes["red"], item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
+                    
+                //    g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"], Rectangle.Create(item.X+28, item.Y-10,55, 6), 1f, 56f);
+                //}
+                
+
+
+
+
             });
             drawManager.Run();
         }
@@ -99,4 +116,5 @@ namespace WPFCheatUITemplate.GameFuns
             
         }
     }
+   
 }

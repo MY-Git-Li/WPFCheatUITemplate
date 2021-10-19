@@ -21,6 +21,7 @@ namespace CheatUITemplt
         CreateLayout createLayout;
 
         IntPtr handle;
+        public IntPtr Handle { get { return handle; } set{ handle = value; }}
 
         int pid;
         public int Pid { set => pid = value; get => pid; }
@@ -54,6 +55,7 @@ namespace CheatUITemplt
                 return instance;
             }
         }
+
 
         #endregion
 
