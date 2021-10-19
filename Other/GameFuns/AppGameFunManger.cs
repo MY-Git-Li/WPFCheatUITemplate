@@ -116,8 +116,6 @@ namespace CheatUITemplt
             {
                 mainWindow.lbl_processID.Text = pid.ToString();
 
-                handle = CheatTools.GetProcessHandle(pid);
-
             }
 
         }
@@ -140,6 +138,7 @@ namespace CheatUITemplt
             {
                 if (item.gameFun != null)
                 {
+                    handle = CheatTools.GetProcessHandle(pid);
 
                     item.gameFun.gameFunDateStruct.Handle = handle;
 
