@@ -35,7 +35,7 @@ namespace CheatUITemplt
             {
                 if (gameFunDateStruct.currentGameDate!=null)
                 {
-                    gameDataAddress = gameFunDateStruct.currentGameDate.GetDataAddress(gameFunDateStruct.Handle);
+                    gameDataAddress = gameFunDateStruct.currentGameDate.GetDataAddress(gameFunDateStruct.Pid);
                 }
                
                 memory = new WPFCheatUITemplate.Other.Draw.Memory();

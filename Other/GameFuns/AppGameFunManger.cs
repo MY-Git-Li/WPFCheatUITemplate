@@ -144,12 +144,7 @@ namespace CheatUITemplt
 
                     item.gameFun.gameFunDateStruct.Pid = pid;
 
-                    GameDate gameDate = item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
-
-                    if (gameDate != null)
-                    {
-                        gameDate.ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, gameDate.ModuleName);
-                    }
+                    item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
 
                     item.gameFun.Awake();
                 }
