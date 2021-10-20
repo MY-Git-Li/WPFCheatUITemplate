@@ -116,6 +116,32 @@ namespace WPFCheatUITemplate.Other
         /// 特征码偏移----当特征码定位为真时启用，填写特征码地址后续偏移
         /// </summary>
         public uint SignatureCodeOffset { get; set; }
+
+
+        public GameDataAddress GetDataAddress(IntPtr Handle)
+        {
+            if (!IsSignatureCode)
+            {
+                if (IsIntPtr)
+                {
+                   
+                        return new GameDataAddress(Handle, ModuleAddress + ModuleOffsetAddress, IntPtrOffset);
+
+                }
+                else
+                {
+                   
+                      return  new GameDataAddress(Handle,ModuleAddress + ModuleOffsetAddress);
+                }
+            }
+            else
+            {
+                   return new GameDataAddress(Handle, CheatTools.FindData(Handle, ModuleAddress, ModuleAddress + 0x4000000,SignatureCode)[0] + SignatureCodeOffset);
+            }
+
+
+        }
+
     }
     /// <summary>
     /// UI显示描述类

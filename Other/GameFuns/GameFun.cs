@@ -33,24 +33,9 @@ namespace CheatUITemplt
         {
             if (gameFunDateStruct != null)
             {
-                if (!gameFunDateStruct.currentGameDate.IsSignatureCode)
+                if (gameFunDateStruct.currentGameDate!=null)
                 {
-                    if (gameFunDateStruct.currentGameDate.IsIntPtr)
-                    {
-                        if (gameFunDateStruct.currentGameDate != null)
-                            gameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.currentGameDate.ModuleAddress + gameFunDateStruct.currentGameDate.ModuleOffsetAddress, gameFunDateStruct.currentGameDate.IntPtrOffset);
-
-                    }
-                    else
-                    {
-                        if (gameFunDateStruct.currentGameDate != null)
-                            gameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, gameFunDateStruct.currentGameDate.ModuleAddress + gameFunDateStruct.currentGameDate.ModuleOffsetAddress);
-                    }
-                }
-                else
-                {
-                    if (gameFunDateStruct.currentGameDate != null)
-                        gameDataAddress = new GameDataAddress(gameFunDateStruct.Handle, CheatTools.FindData(gameFunDateStruct.Handle, gameFunDateStruct.currentGameDate.ModuleAddress, gameFunDateStruct.currentGameDate.ModuleAddress + 0x4000000, gameFunDateStruct.currentGameDate.SignatureCode)[0] + gameFunDateStruct.currentGameDate.SignatureCodeOffset);
+                    gameDataAddress = gameFunDateStruct.currentGameDate.GetDataAddress(gameFunDateStruct.Handle);
                 }
                
                 memory = new WPFCheatUITemplate.Other.Draw.Memory();
