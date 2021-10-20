@@ -105,6 +105,10 @@ namespace WPFCheatUITemplate.GameFuns
                                 Rectangle.Create(item.X.Value + 20, item.Y.Value - 10, 80, 6), 1f, percenttage);
                             g.DrawRectangle(drawManager._brushes["blue"],
                             item.X.Value + 20, item.Y.Value, item.X.Value + 100, item.Y.Value + 115, 1f);
+                            g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
+                                drawManager._brushes["blue"],
+                                item.X.Value + 20, item.Y.Value-26,
+                                curentHp.ToString()+"/"+ HpMax.ToString());
                         }
 
                     }
