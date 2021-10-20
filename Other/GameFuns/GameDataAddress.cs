@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace CheatUITemplt
 {
-    class GameDataAddress
-    {
+   public class GameDataAddress
+   {
         int startAddress;
         //开始地址，偏移地址
 

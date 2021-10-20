@@ -20,7 +20,7 @@ namespace WPFCheatUITemplate
         UILangerManger uILangerManger;
 
         Storyboard myStoryboard;
-        string processName = "PlantsVsZombies";
+        string processName = GameMode.GameInformation.ProcessName;
 
         public IntPtr Hwnd;
         public MainWindow()

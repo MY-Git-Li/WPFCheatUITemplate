@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using WPFCheatUITemplate;
+using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
 using static CheatUITemplt.HotKey;
 
@@ -134,12 +135,14 @@ namespace CheatUITemplt
 
         public void RunAllGameFunAwake()
         {
+            handle = CheatTools.GetProcessHandle(pid);
+
+            GameInformation.InitInformation(handle, pid);
+
             foreach (var item in gameFunUIs)
             {
                 if (item.gameFun != null)
                 {
-                    handle = CheatTools.GetProcessHandle(pid);
-
                     item.gameFun.gameFunDateStruct.Handle = handle;
 
                     item.gameFun.gameFunDateStruct.Pid = pid;

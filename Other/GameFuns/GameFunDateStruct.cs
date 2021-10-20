@@ -75,7 +75,7 @@ namespace WPFCheatUITemplate.Other
     /// <summary>
     /// 游戏数据描述类
     /// </summary>
-    class GameDate
+    public class GameDate
     {
         /// <summary>
         /// 模块名字-----必填

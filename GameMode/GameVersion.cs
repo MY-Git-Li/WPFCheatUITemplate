@@ -11,17 +11,23 @@ namespace WPFCheatUITemplate
         public enum Version
         {
             Default,
+            V1_0_0_1051,
         }
 
         public static Version GetCurrentVersion(IntPtr handle)
         {
-            //var ret = CheatUITemplt.CheatTools.ReadMemoryValue(0x555000,handle);
-            //switch (ret)
-            //{
-            //    default:
-            //        return Version.Null;
-            //}
-            return Version.Default;
+            GameVersion.Version ret = Version.Default;
+            var ver = CheatUITemplt.CheatTools.ReadMemoryValue(0x552013, handle);
+            switch ((uint)ver)
+            {
+                case 0xC35EDB74:
+                    ret = Version.V1_0_0_1051;
+                    break;
+                default:
+                    ret = Version.Default;
+                    break;
+            }
+            return ret;
         }
 
     }

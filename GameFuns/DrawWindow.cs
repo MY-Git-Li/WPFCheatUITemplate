@@ -93,18 +93,18 @@ namespace WPFCheatUITemplate.GameFuns
                     //item.X+20,item.Y,item.X+100,item.Y+115,1f);
 
                     //g.DrawBox2D(drawManager._brushes["blue"], drawManager._brushes["red"], item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
-                    if (!item.IsDath)
+                    if (!item.IsLive.Value)
                     {
-                        if (item.X != 0 && item.Y!=0)
+                        if (item.X.Value != 0 && item.Y.Value!=0)
                         {
-                            float HpMax = (float)(item.HatMaxHp + item.AnnexMaxHp + item.HpMax);
-                            float curentHp = (float)(item.HatHp + item.AnnexHp + item.Hp);
+                            float HpMax = (float)(item.HatMaxHp.Value + item.AnnexMaxHp.Value + item.HpMax.Value);
+                            float curentHp = (float)(item.HatHp.Value + item.AnnexHp.Value + item.Hp.Value);
                             float percenttage = curentHp / HpMax;
                             percenttage = percenttage * 100;
                             g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"],
-                                Rectangle.Create(item.X + 20, item.Y - 10, 80, 6), 1f, percenttage);
+                                Rectangle.Create(item.X.Value + 20, item.Y.Value - 10, 80, 6), 1f, percenttage);
                             g.DrawRectangle(drawManager._brushes["blue"],
-                            item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
+                            item.X.Value + 20, item.Y.Value, item.X.Value + 100, item.Y.Value + 115, 1f);
                         }
 
                     }

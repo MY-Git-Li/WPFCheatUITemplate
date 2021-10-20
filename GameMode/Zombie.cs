@@ -1,114 +1,123 @@
 ﻿using CheatUITemplt;
+using System.Collections.Generic;
 
 namespace WPFCheatUITemplate.GameMode
 {
+
+    public struct AttributeOffset<T> where T : struct
+    {
+        public int baseaddress;
+        public int offset;
+
+        public AttributeOffset(int basess,int offset=0)
+        {
+            baseaddress = basess;
+            this.offset = offset;
+        }
+
+        public T Value
+        {
+            get
+            {
+                return CheatTools.ReadMemoryPoninter<T>(GameInformation.Handle, new int[] { baseaddress + offset });
+            }
+
+            set
+            {
+                CheatTools.WriteMemoryPoninter<T>(GameInformation.Handle, new int[] { baseaddress + offset },Value);
+            }
+        }
+    }
+
     class Zombie
     {
+        public AttributeOffset<float> X;
 
-        public int BaseAddress;
-        float x;
-        float y;
-        int row;
-        bool isDath;
+        public AttributeOffset<float> Y;
 
-        int hatHp;
-        int hatMaxHp;
+        public AttributeOffset<int> Row;
 
-        int annexHp;
-        int annexMaxHp;
+        public AttributeOffset<bool> IsLive;
 
-        int hp;
-        int hpMax;
+        public AttributeOffset<int>  HatHp;
 
-        public int Row
+        public AttributeOffset<int> HatMaxHp;
+
+        public AttributeOffset<int> AnnexHp;
+
+        public AttributeOffset<int> AnnexMaxHp;
+
+        public AttributeOffset<int> Hp;
+
+        public AttributeOffset<int> HpMax;
+
+        public Zombie(int BaseAddress, GameVersion.Version Version)
         {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0x1c });
-            }
+            X = new AttributeOffset<float>(BaseAddress);
 
+            Y = new AttributeOffset<float>(BaseAddress);
 
-        }
-        public float Y
-        {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<float>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0x30 });
-            }
+            Row = new AttributeOffset<int>(BaseAddress);
 
-        }
+            IsLive = new AttributeOffset<bool>(BaseAddress);
 
-        public float X
-        {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<float>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0x2C });
-            }
+            HatHp = new AttributeOffset<int>(BaseAddress);
 
-        }
+            HatMaxHp = new AttributeOffset<int>(BaseAddress);
 
-        public bool IsDath
-        {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<float>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0xeC }) != 0 ? true : false;
-            }
+            AnnexMaxHp = new AttributeOffset<int>(BaseAddress);
 
+            AnnexHp = new AttributeOffset<int>(BaseAddress);
 
+            Hp = new AttributeOffset<int>(BaseAddress);
+
+            HpMax = new AttributeOffset<int>(BaseAddress);
+
+            SetZombieOffset(Version);
         }
 
-        public int HatHp
-        {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0xD0 });
-            }
 
-        }
-
-        public int HatMaxHp
+        public void SetZombieOffset(GameVersion.Version Version)
         {
-            get
+            //根据版本来更新数据
+            switch (Version)
             {
-                return CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0xD4 });
+                case GameVersion.Version.Default:
+                    DefaultVersion();
+                    break;
+                case GameVersion.Version.V1_0_0_1051:
+                    DefaultVersion();
+                    break;
+                default:
+                    break;
             }
 
         }
 
-        public int AnnexHp
+
+        void DefaultVersion()
         {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0xDC });
-            }
+            X.offset = 0x2C;
+
+            Y.offset = 0x30;
+
+            Row.offset = 0x1c;
+
+            IsLive.offset = 0xeC;
+
+            HatHp.offset = 0xD0;
+
+            HatMaxHp.offset = 0xD4;
+
+            AnnexHp.offset = 0xDC;
+
+            AnnexMaxHp.offset = 0xE0;
+
+            Hp.offset = 0xC8;
+
+            HpMax.offset = 0xCC;
 
         }
 
-        public int AnnexMaxHp
-        {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0xE0 });
-            }
-
-        }
-
-        public int Hp
-        {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0xC8 });
-            }
-
-        }
-
-        public int HpMax
-        {
-            get
-            {
-                return CheatTools.ReadMemoryPoninter<int>(AppGameFunManger.Instance.Handle, new int[] { BaseAddress + 0xCC });
-            }
-
-        }
     }
 }
