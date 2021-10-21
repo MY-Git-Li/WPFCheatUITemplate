@@ -19,12 +19,12 @@ namespace WPFCheatUITemplate.GameMode
         {
             get
             {
-                return CheatTools.ReadMemoryPoninter<T>(GameInformation.Handle, new int[] { baseaddress + offset });
+                return CheatTools.ReadMemory<T>(GameInformation.Handle, new int[] { baseaddress + offset });
             }
 
             set
             {
-                CheatTools.WriteMemoryPoninter<T>(GameInformation.Handle, new int[] { baseaddress + offset },Value);
+                CheatTools.WriteMemory<T>(GameInformation.Handle, new int[] { baseaddress + offset },Value);
             }
         }
     }

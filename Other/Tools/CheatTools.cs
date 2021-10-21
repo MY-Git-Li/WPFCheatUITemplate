@@ -71,7 +71,7 @@ namespace CheatUITemplt
             return array;
         }
 
-        public static T ReadMemoryPoninter<T>(IntPtr m_pProcessHandle, int[] address) where T : struct
+        public static T ReadMemory<T>(IntPtr m_pProcessHandle, int[] address) where T : struct
         {
 
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
@@ -99,7 +99,7 @@ namespace CheatUITemplt
             return ByteArrayToStructure<T>(buffer);
         }
 
-        public static void WriteMemoryPoninter<T>(IntPtr m_pProcessHandle, int[] address, T vaule) where T : struct
+        public static void WriteMemory<T>(IntPtr m_pProcessHandle, int[] address, T vaule) where T : struct
         {
 
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
