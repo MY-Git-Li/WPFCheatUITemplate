@@ -23,31 +23,11 @@ namespace WPFCheatUITemplate
             new AutoGet();
             new ArbitrarilyPlant();
             new AllowBackground();
+
+            GameFunDateStructManger.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             new FastGameFun()
             {
-
-                gameFunDateStruct = new GameFunDateStruct()
-                {
-                    uIData = new UIData()
-                    {
-                        KeyDescription_SC = "Alt+数字键1",
-                        FunDescribe_SC = "超级攻速",
-
-                        KeyDescription_TC = "Alt+數字鍵1",
-                        FunDescribe_TC = "超級攻速",
-
-                        KeyDescription_EN = "Alt+Number 1",
-                        FunDescribe_EN = "Super attack speed",
-
-                        IsTrigger = false
-                    },
-                    refHotKey = new RefHotKey()
-                    {
-                        Vk = Keys.NumPad1,
-                        FsModifiers = HotKey.KeyModifiers.Alt,
-                    },
-
-                },
+                gameFunDateStruct =GameFunDateStructManger.CheckButtonDateStruct("超级攻速", "Super attack speed",false),
 
                 setGameDate = (i) =>
                 {
@@ -81,18 +61,6 @@ namespace WPFCheatUITemplate
                 {
                     i.gameDataAddresseList.Clear();
                 },
-
-            }.Go();
-
-            GameFunDateStructManger.SetCurentKeyModifiers(Keys.NumPad9);
-            new FastGameFun()
-            {
-                gameFunDateStruct = GameFunDateStructManger.CheckButtonDateStruct("测试1", "Test 1"),
-
-            }.Go();
-            new FastGameFun()
-            {
-                gameFunDateStruct = GameFunDateStructManger.CheckButtonDateStruct("测试2", "Test 2",true),
 
             }.Go();
         }

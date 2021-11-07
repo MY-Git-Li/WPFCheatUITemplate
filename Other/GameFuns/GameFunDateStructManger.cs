@@ -11,23 +11,55 @@ namespace WPFCheatUITemplate.Other.GameFuns
         static System.Windows.Forms.Keys curentKey = System.Windows.Forms.Keys.NumPad0;
         static CheatUITemplt.HotKey.KeyModifiers curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.None;
 
-        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        static System.Windows.Forms.Keys formerKey = curentKey;
+        static CheatUITemplt.HotKey.KeyModifiers formerKeyModifiers = curentKeyModifiers;
+
+
+        static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys,bool iskeys, CheatUITemplt.HotKey.KeyModifiers keyModifiers, bool iskeyModifiers)
         {
-            curentKeyModifiers = keyModifiers;
+            SaveCurentKey();
+
+            if (iskeys)
+            {
+                curentKey = keys;
+            }
+            if (iskeyModifiers)
+            {
+                curentKeyModifiers = keyModifiers;
+            }
         }
 
-        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys,CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        public static void SetCurentKeyModifiersByReverseFormer()
         {
-            curentKey = keys;
-            curentKeyModifiers = keyModifiers;
+            curentKey = formerKey;
+            curentKeyModifiers = formerKeyModifiers;
+        }
+
+        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        {
+            SetCurentKeyModifiers(System.Windows.Forms.Keys.G,false, keyModifiers,true);
         }
 
         public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys)
         {
-            curentKey = keys;
+            SetCurentKeyModifiers(keys, true, CheatUITemplt.HotKey.KeyModifiers.None, false);
         }
 
+        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys, CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        {
+            SetCurentKeyModifiers(keys, true, keyModifiers, true);
+        }
 
+        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers, System.Windows.Forms.Keys keys)
+        {
+            SetCurentKeyModifiers(keys, true, keyModifiers, true);
+        }
+
+        static void SaveCurentKey()
+        {
+            formerKey = curentKey;
+            formerKeyModifiers = curentKeyModifiers;
+        }
 
         public static GameFunDateStruct BaseDateStruct(string KeyDescription_SC, string FunDescribe_SC,
         string KeyDescription_TC ,string FunDescribe_TC,string KeyDescription_EN, string FunDescribe_EN, 
