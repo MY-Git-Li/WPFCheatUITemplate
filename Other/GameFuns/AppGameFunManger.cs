@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using WPFCheatUITemplate;
 using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.Tools.Extensions;
 using static CheatUITemplt.HotKey;
 
 namespace CheatUITemplt
@@ -279,7 +280,7 @@ namespace CheatUITemplt
 
         }
 
-        public void CreatSeparate(string Description_SC, string Description_TC = "", string Description_EN = "",int offset = 30)
+        public void CreatSeparateEx(string Description_SC, string Description_TC = "", string Description_EN = "",int offset = 30)
         {
             GameFunUI gameFunUI = new GameFunUI();
            
@@ -297,6 +298,11 @@ namespace CheatUITemplt
 
             uILangerManger.RegisterLanguageUI(languageUI);
 
+        }
+
+        public void CreatSeparate(string Description_SC, string Description_EN = "", int offset = 30)
+        {
+            CreatSeparateEx(Description_SC, Description_SC.ToTraditional(), Description_EN, offset);
         }
 
         public void NextPage(int offset = 0)
