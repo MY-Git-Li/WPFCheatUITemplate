@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WPFCheatUITemplate.Other.Tools.Extensions;
 namespace WPFCheatUITemplate.Other.GameFuns
 {
     static class GameFunDateStructManger
@@ -11,27 +11,45 @@ namespace WPFCheatUITemplate.Other.GameFuns
         static System.Windows.Forms.Keys curentKey = System.Windows.Forms.Keys.NumPad0;
         static CheatUITemplt.HotKey.KeyModifiers curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.None;
 
+        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        {
+            curentKeyModifiers = keyModifiers;
+        }
 
-        public static GameFunDateStruct ButtonDateStruct(string FunDescribe_SC,
-            string FunDescribe_TC, string FunDescribe_EN, int SliderMinNum = 1, int SliderMaxNum = 9999)
+        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys,CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        {
+            curentKey = keys;
+            curentKeyModifiers = keyModifiers;
+        }
+
+        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys)
+        {
+            curentKey = keys;
+        }
+
+
+
+        public static GameFunDateStruct BaseDateStruct(string KeyDescription_SC, string FunDescribe_SC,
+        string KeyDescription_TC ,string FunDescribe_TC,string KeyDescription_EN, string FunDescribe_EN, 
+        bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999, bool IsButton= true)
         {
             var gameFunDateStruct = new Other.GameFunDateStruct();
 
             gameFunDateStruct.uIData = new Other.UIData()
             {
-                KeyDescription_SC = GetKeyDescription_EN(),
+                KeyDescription_SC = KeyDescription_SC,
                 FunDescribe_SC = FunDescribe_SC,
 
-                KeyDescription_TC = GetKeyDescription_TC(),
+                KeyDescription_TC = KeyDescription_TC,
                 FunDescribe_TC = FunDescribe_TC,
 
-                KeyDescription_EN = GetKeyDescription_EN(),
+                KeyDescription_EN = KeyDescription_EN,
                 FunDescribe_EN = FunDescribe_EN,
 
-                IsTrigger = true,
+                IsTrigger = IsButton,
 
 
-                IsAcceptValue = true,
+                IsAcceptValue = IsAcceptValue,
                 SliderMinNum = SliderMinNum,
                 SliderMaxNum = SliderMaxNum
 
@@ -43,41 +61,93 @@ namespace WPFCheatUITemplate.Other.GameFuns
             };
 
 
+            Update();
+            return gameFunDateStruct;
+        }
+
+        public static GameFunDateStruct BaseDateStruct(string FunDescribe_SC,string FunDescribe_TC, string FunDescribe_EN, 
+            bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999,
+            bool IsButton = true
+            )
+        {
+            var gameFunDateStruct = BaseDateStruct(
+                GetKeyDescription_SC(), FunDescribe_SC,
+                GetKeyDescription_TC(), FunDescribe_TC,
+                GetKeyDescription_EN(), FunDescribe_EN,
+                IsAcceptValue, SliderMinNum, SliderMaxNum, IsButton);
 
             return gameFunDateStruct;
         }
 
 
+        public static GameFunDateStruct ButtonDateStruct(string FunDescribe_SC,
+           string FunDescribe_EN, bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999)
+        {
+
+            var gameFunDateStruct = BaseDateStruct(FunDescribe_SC, FunDescribe_SC.ToTraditional(),FunDescribe_EN, IsAcceptValue, SliderMinNum, SliderMaxNum,true);
+
+            return gameFunDateStruct;
+        }
 
         public static GameFunDateStruct CheckButtonDateStruct(string FunDescribe_SC,
-           string FunDescribe_TC, string FunDescribe_EN)
+           string FunDescribe_EN, bool IsAcceptValue = false, int SliderMinNum = 1, int SliderMaxNum = 9999)
         {
-            var gameFunDateStruct = new Other.GameFunDateStruct();
-
-            gameFunDateStruct.uIData = new Other.UIData()
-            {
-                KeyDescription_SC = GetKeyDescription_EN(),
-                FunDescribe_SC = FunDescribe_SC,
-
-                KeyDescription_TC = GetKeyDescription_TC(),
-                FunDescribe_TC = FunDescribe_TC,
-
-                KeyDescription_EN = GetKeyDescription_EN(),
-                FunDescribe_EN = FunDescribe_EN,
-
-                IsTrigger = false,
-
-            };
-            gameFunDateStruct.refHotKey = new Other.RefHotKey()
-            {
-                Vk = curentKey,
-                FsModifiers = curentKeyModifiers,
-            };
-
+            var gameFunDateStruct = BaseDateStruct(FunDescribe_SC, FunDescribe_SC.ToTraditional(), FunDescribe_EN, IsAcceptValue, SliderMinNum, SliderMaxNum,false);
 
             return gameFunDateStruct;
         }
 
+
+        static void Update()
+        {
+            if ((int)curentKey == 105)
+            {
+                curentKey = (System.Windows.Forms.Keys)65;
+                UpdateCurentKeyModifiers();
+
+            }else if ((int)curentKey == 90)
+            {
+                curentKey = (System.Windows.Forms.Keys)96;
+            }else
+            {
+                UpdateCurentKey();
+            }
+
+           
+        }
+        static void UpdateCurentKey()
+        {
+            if ((int)curentKey <= 90 && (int)curentKey >= 65)
+            {
+                curentKey++;
+            }
+
+            if ((int)curentKey <= 105 && (int)curentKey >= 96)
+            {
+                curentKey++;
+            }
+
+        }
+        static void UpdateCurentKeyModifiers()
+        {
+            switch (curentKeyModifiers)
+            {
+                case CheatUITemplt.HotKey.KeyModifiers.None:
+                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Alt;
+                    break;
+                case CheatUITemplt.HotKey.KeyModifiers.Alt:
+                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Ctrl;
+                    break;
+                case CheatUITemplt.HotKey.KeyModifiers.Ctrl:
+                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Shift;
+                    break;
+                case CheatUITemplt.HotKey.KeyModifiers.Shift:
+                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Shift| CheatUITemplt.HotKey.KeyModifiers.Ctrl;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         static string GetKeyModifierd()
         {
@@ -104,9 +174,11 @@ namespace WPFCheatUITemplate.Other.GameFuns
         static string GetKeyDescription_EN()
         {
             string heaKeyModifierd = GetKeyModifierd();
-            
-
-            string key = heaKeyModifierd + "+";
+            string key = "";
+            if (heaKeyModifierd != "")
+            {
+                key = heaKeyModifierd + "+";
+            }
             switch (curentKey)
             {
                 case System.Windows.Forms.Keys.A:
@@ -226,7 +298,11 @@ namespace WPFCheatUITemplate.Other.GameFuns
         {
             string heaKeyModifierd = GetKeyModifierd();
 
-            string key = heaKeyModifierd + "+";
+            string key = "";
+            if (heaKeyModifierd != "")
+            {
+                key = heaKeyModifierd + "+";
+            }
             switch (curentKey)
             {
                 case System.Windows.Forms.Keys.A:
@@ -346,7 +422,11 @@ namespace WPFCheatUITemplate.Other.GameFuns
         {
             string heaKeyModifierd = GetKeyModifierd();
 
-            string key = heaKeyModifierd + "+";
+            string key = "";
+            if (heaKeyModifierd != "")
+            {
+                key = heaKeyModifierd + "+";
+            }
             switch (curentKey)
             {
                 case System.Windows.Forms.Keys.A:

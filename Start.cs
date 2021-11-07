@@ -3,6 +3,8 @@ using System;
 using System.Windows.Forms;
 using WPFCheatUITemplate.GameFuns;
 using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.GameFuns;
+
 namespace WPFCheatUITemplate
 {
     class Start
@@ -82,6 +84,17 @@ namespace WPFCheatUITemplate
 
             }.Go();
 
+            GameFunDateStructManger.SetCurentKeyModifiers(Keys.NumPad9);
+            new FastGameFun()
+            {
+                gameFunDateStruct = GameFunDateStructManger.CheckButtonDateStruct("测试1", "Test 1"),
+
+            }.Go();
+            new FastGameFun()
+            {
+                gameFunDateStruct = GameFunDateStructManger.CheckButtonDateStruct("测试2", "Test 2",true),
+
+            }.Go();
         }
     }
 }
