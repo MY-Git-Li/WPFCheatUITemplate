@@ -2830,42 +2830,16 @@ namespace CheatUITemplt
 
         }
 
-        public void RunJmpHook(int pid, int hookAddress, int retnAddress)
+        public void JmpHook(int pid, int hookAddress, int retnAddress)
         {
-            int hwnd, addre;
-            byte[] Asm = this.AsmChangebytes(this.Asmcode);
-
+          
             int oldAsmLeng = retnAddress - hookAddress;
 
             GetOldData(out jmpHook, pid, hookAddress, oldAsmLeng);
 
-            if (pid != 0)
-            {
 
-                hwnd = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_CREATE_THREAD | PROCESS_VM_WRITE, 0, pid);
+            RunJmpHook(pid, hookAddress, retnAddress, jmpHook.oldAsm);
 
-                if (hwnd != 0)
-                {
-
-                    addre = VirtualAllocEx(hwnd, 0, Asm.Length, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
-                    //RET
-                    string ofsetaddress = intTohex(retnAddress - (addre + Asm.Length + 5), 8);
-                    this.Asmcode += "e9";
-                    this.Asmcode += ofsetaddress;
-                    Asm = this.AsmChangebytes(this.Asmcode);
-                    WriteProcessMemory(hwnd, addre, Asm, Asm.Length, 0);
-
-                    //JMP
-                    ofsetaddress = intTohex(addre - (hookAddress + 5), 8);
-                    byte[] code = AsmChangebytes("e9" + ofsetaddress);
-                    WriteProcessMemory(hwnd, hookAddress, code, code.Length, 0);
-
-
-                    CloseHandle(hwnd);
-
-                }
-
-            }
             this.Asmcode = "";
         }
 
@@ -2874,9 +2848,11 @@ namespace CheatUITemplt
             int hwnd, addre;
             byte[] Asm = this.AsmChangebytes(this.Asmcode);
 
-            int oldAsmLeng = retnAddress - hookAddress;
-
-            GetOldData(out jmpHook, pid, hookAddress, oldAsmLeng);
+            int otherlen = 0;
+            if (others != null)
+            {
+                otherlen = others.Length;
+            }
 
             if (pid != 0)
             {
@@ -2888,14 +2864,17 @@ namespace CheatUITemplt
 
                     addre = VirtualAllocEx(hwnd, 0, Asm.Length, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 
-                    WriteProcessMemory(hwnd, addre, others, others.Length, 0);
-
+                    if (others != null)
+                    {
+                        WriteProcessMemory(hwnd, addre, others, otherlen, 0);
+                    }
+                   
                     //RET
-                    string ofsetaddress = intTohex(retnAddress - (addre + Asm.Length + 5 + others.Length), 8);
+                    string ofsetaddress = intTohex(retnAddress - (addre + Asm.Length + 5 + otherlen), 8);
                     this.Asmcode += "e9";
                     this.Asmcode += ofsetaddress;
                     Asm = this.AsmChangebytes(this.Asmcode);
-                    WriteProcessMemory(hwnd, addre + others.Length, Asm, Asm.Length, 0);
+                    WriteProcessMemory(hwnd, addre + otherlen, Asm, Asm.Length, 0);
 
                     //JMP
                     ofsetaddress = intTohex(addre - (hookAddress + 5), 8);
