@@ -84,6 +84,7 @@
     <Compile Include="GameFuns\Coin.cs" />
     <Compile Include="GameFuns\DefaultPlantLayout.cs" />
     <Compile Include="GameFuns\NoCd.cs" />
+    <Compile Include="GameFuns\Test.cs" />
     <Compile Include="GameFuns\Tree.cs" />
     <Compile Include="GameMode\GameInformation.cs" />
     <Compile Include="GameMode\GameModeManger.cs" />

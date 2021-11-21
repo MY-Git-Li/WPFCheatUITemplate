@@ -2735,6 +2735,15 @@ namespace CheatUITemplt
 
         #endregion
 
+        #region Hook相关
+        struct Hook
+        {
+           public int address;
+           public byte[] oldAsm;
+        }
+
+        Hook jmpHook;
+        Hook registerHook;
 
         public enum RegisterType
         {
@@ -2756,6 +2765,7 @@ namespace CheatUITemplt
             int oldAsmLeng = retnAddress - hookAddress;
             byte[] oldAsm = new byte[oldAsmLeng];
 
+            GetOldData(out registerHook, pid, hookAddress, oldAsmLeng);
 
             Dictionary<RegisterType, int> keyValuePairs = new Dictionary<RegisterType, int>();
 
@@ -2769,6 +2779,7 @@ namespace CheatUITemplt
                     artificialPoint = VirtualAllocEx(hwnd, 0, 128, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 
                     ReadProcessMemory(hwnd, hookAddress, oldAsm, oldAsmLeng, 0);
+
 
                     for (int i = 0; i < 8; i++)
                     {
@@ -2824,6 +2835,10 @@ namespace CheatUITemplt
             int hwnd, addre;
             byte[] Asm = this.AsmChangebytes(this.Asmcode);
 
+            int oldAsmLeng = retnAddress - hookAddress;
+
+            GetOldData(out jmpHook, pid, hookAddress, oldAsmLeng);
+
             if (pid != 0)
             {
 
@@ -2859,6 +2874,10 @@ namespace CheatUITemplt
             int hwnd, addre;
             byte[] Asm = this.AsmChangebytes(this.Asmcode);
 
+            int oldAsmLeng = retnAddress - hookAddress;
+
+            GetOldData(out jmpHook, pid, hookAddress, oldAsmLeng);
+
             if (pid != 0)
             {
 
@@ -2892,8 +2911,44 @@ namespace CheatUITemplt
             this.Asmcode = "";
         }
 
+        public void RecoveryJmpHook(int pid)
+        {
+           var hwnd = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_CREATE_THREAD | PROCESS_VM_WRITE, 0, pid);
 
-        public void RunAsm(int pid,bool save = false)
+            if (hwnd != 0)
+            {
+                WriteProcessMemory(hwnd, jmpHook.address, jmpHook.oldAsm, jmpHook.oldAsm.Length, 0);
+            }
+        }
+
+        public void RecoveryRegisterHook(int pid)
+        {
+            var hwnd = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_CREATE_THREAD | PROCESS_VM_WRITE, 0, pid);
+
+            if (hwnd != 0)
+            {
+                WriteProcessMemory(hwnd, registerHook.address, registerHook.oldAsm, registerHook.oldAsm.Length, 0);
+            }
+        }
+
+        void GetOldData(out Hook hookOld, int pid,int address,int len)
+        {
+            byte[] oldAsm = new byte[len];
+            var hwnd = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_CREATE_THREAD | PROCESS_VM_WRITE, 0, pid);
+            if (hwnd!=0)
+            {
+                ReadProcessMemory(hwnd, address, oldAsm, len, 0);
+
+            }
+
+
+            hookOld.address = address;
+            hookOld.oldAsm = oldAsm;
+        }
+
+        #endregion
+
+        public void RunAsm(int pid, bool save = false)
         {
 
             int hwnd, addre, threadhwnd;
@@ -2927,10 +2982,8 @@ namespace CheatUITemplt
             {
                 this.Asmcode = "";
             }
-           
+
         }
-
-
         private byte[] AsmChangebytes(string asmPram)
 
         {
