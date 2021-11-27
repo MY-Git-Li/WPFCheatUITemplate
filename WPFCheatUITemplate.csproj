@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MyDatas.cs" />
     <Compile Include="GameFuns\AdventureLevel.cs" />
     <Compile Include="GameFuns\AllowBackground.cs" />
     <Compile Include="GameFuns\ArbitrarilyPlant.cs" />
@@ -94,7 +95,7 @@
     <Compile Include="Other\Draw\DrawManager.cs" />
     <Compile Include="Other\Draw\DrawWindow.cs" />
     <Compile Include="Other\Draw\Memory.cs" />
-    <Compile Include="Other\GameFuns\Data.cs" />
+    <Compile Include="Other\GameFuns\Datas.cs" />
     <Compile Include="Other\GameFuns\DataManager.cs" />
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
     <Compile Include="Other\GameFuns\GameFunDataStruct.cs" />

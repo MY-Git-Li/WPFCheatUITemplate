@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -40,6 +41,7 @@ namespace CheatUITemplt
         CreateUIGrid createUIGrid;
 
         LanguageUI messageBoxMessage;
+
         #region 单例模式
         //单例模式
         private static AppGameFunManager instance;
@@ -61,6 +63,7 @@ namespace CheatUITemplt
 
         #endregion
 
+        #region 语言设置
         public void SetTraditionalChinese()
         {
 
@@ -107,6 +110,7 @@ namespace CheatUITemplt
             uILangerManger.SetSimplifiedChinese();
         }
 
+        #endregion
 
         public void SetViewPid()
         {
@@ -138,7 +142,7 @@ namespace CheatUITemplt
         {
             handle = CheatTools.GetProcessHandle(pid);
 
-            GameInformation.InitInformation(handle, pid);
+            GameInformationInit();
 
             foreach (var item in gameFunUIs)
             {
@@ -154,6 +158,12 @@ namespace CheatUITemplt
                 }
             }
 
+        }
+
+        private void GameInformationInit()
+        {
+            GameInformation.InitInformation(handle, pid);
+            DataManagerInit();
         }
 
         public void GetAllGameFunData()
@@ -188,6 +198,7 @@ namespace CheatUITemplt
             //createLayout.SetGrid(grid);
             createUIGrid = new CreateUIGrid(grid, this.createLayout);
         }
+
         public void RegisterManger(UILangerManger uILangerManger)
         {
             messageBoxMessage = new LanguageUI()
@@ -201,6 +212,7 @@ namespace CheatUITemplt
             this.uILangerManger = uILangerManger;
             uILangerManger.RegisterLanguageUI(messageBoxMessage);
         }
+
         public void RegisterManger(SoundEffect soundEffect)
         {
             this.soundEffect = soundEffect;
@@ -210,6 +222,28 @@ namespace CheatUITemplt
         {
             action?.Invoke();
             DrawUI();
+        }
+
+        void DataManagerInit()
+        {
+            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach (var type in types)
+            {
+                if (type.Name == "DataManager")
+                {
+                    MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
+                    if (init.IsStatic)
+                    {
+                        init.Invoke(null, null);
+                    }
+                    MethodInfo getVersion = type.GetMethod("GetVersion", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
+                    if (getVersion.IsStatic)
+                    {
+                        var pra = new object[] { GameInformation.CurentVersion };
+                        getVersion.Invoke(null, pra);
+                    }
+                }
+            }
         }
 
         private void DrawUI()
@@ -272,6 +306,7 @@ namespace CheatUITemplt
 
         }
 
+        #region 布局相关
         public void CreatSeparate(int offset=15)
         {
             GameFunUI gameFunUI = new GameFunUI();
@@ -312,6 +347,8 @@ namespace CheatUITemplt
             gameFunUI.nextPageOffset = offset;
             gameFunUIs.Add(gameFunUI);
         }
+
+        #endregion
 
         public void RegisterAllHotKey()
         {
