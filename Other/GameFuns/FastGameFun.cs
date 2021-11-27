@@ -19,14 +19,14 @@ namespace WPFCheatUITemplate.Other
         /// </summary>
         public List<GameDataAddress> gameDataAddresseList;
 
-        public Dictionary<GameVersion.Version,GameDate> gameDates;
+        public Dictionary<GameVersion.Version,GameData> gameDates;
 
         public Action<FastGameFun> setGameDate;
 
         public FastGameFun()
         {
             gameDataAddresseList = new List<GameDataAddress>();
-            gameDates = new Dictionary<GameVersion.Version, GameDate>();
+            gameDates = new Dictionary<GameVersion.Version, GameData>();
 
         }
 

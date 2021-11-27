@@ -94,9 +94,10 @@
     <Compile Include="Other\Draw\DrawManager.cs" />
     <Compile Include="Other\Draw\DrawWindow.cs" />
     <Compile Include="Other\Draw\Memory.cs" />
+    <Compile Include="Other\GameFuns\Data.cs" />
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
-    <Compile Include="Other\GameFuns\GameFunDateStruct.cs" />
-    <Compile Include="Other\GameFuns\GameFunDateStructManger.cs" />
+    <Compile Include="Other\GameFuns\GameFunDataStruct.cs" />
+    <Compile Include="Other\GameFuns\GameFunDataStructManger.cs" />
     <Compile Include="Other\Tools\ASM.cs" />
     <Compile Include="Other\Tools\Extensions\IStringExtensions.cs" />
     <Compile Include="Other\UI\CreateUIGrid.cs" />

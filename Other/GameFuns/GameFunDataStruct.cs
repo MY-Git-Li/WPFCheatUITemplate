@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WPFCheatUITemplate.Other
 {
 
-    class GameFunDateStruct
+    class GameFunDataStruct
     {
         /// <summary>
         /// 游戏的句柄----不用赋值，可直接使用
@@ -23,7 +23,7 @@ namespace WPFCheatUITemplate.Other
         /// <summary>
         /// 游戏实现功能相关,支持多版本
         /// </summary>
-        Dictionary<GameVersion.Version, GameDate> gameDates = new Dictionary<GameVersion.Version, GameDate>();
+        Dictionary<GameVersion.Version, GameData> gameDates = new Dictionary<GameVersion.Version, GameData>();
 
         /// <summary>
         /// UI显示相关
@@ -38,20 +38,20 @@ namespace WPFCheatUITemplate.Other
         /// <summary>
         /// 目前的GameDate
         /// </summary>
-        public GameDate currentGameDate;
+        public GameData currentGameDate;
 
 
-        public void AddGameDate(GameDate gameDate)
+        public void AddGameDate(GameData gameDate)
         {
             gameDates.Add(GameVersion.Version.Default, gameDate);
         }
 
-        public void AddGameDate(GameVersion.Version version, GameDate gameDate)
+        public void AddGameDate(GameVersion.Version version, GameData gameDate)
         {
             gameDates.Add(version, gameDate);
         }
 
-        public GameDate GetGameDate(GameVersion.Version version)
+        public GameData GetGameDate(GameVersion.Version version)
         {
             if (!gameDates.TryGetValue(version, out currentGameDate))
             {
@@ -75,7 +75,7 @@ namespace WPFCheatUITemplate.Other
     /// <summary>
     /// 游戏数据描述类
     /// </summary>
-    public class GameDate
+    public class GameData
     {
         /// <summary>
         /// 模块名字-----必填

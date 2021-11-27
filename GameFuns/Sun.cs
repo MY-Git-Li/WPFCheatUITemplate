@@ -7,7 +7,7 @@ namespace WPFCheatUITemplate.GameFuns
     {
         public Sun()
         {
-            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct = new Other.GameFunDataStruct();
             gameFunDateStruct.uIData = new Other.UIData()
             {
                 KeyDescription_SC = "数字键1",
@@ -32,7 +32,7 @@ namespace WPFCheatUITemplate.GameFuns
                 Vk = Keys.NumPad1,
                 FsModifiers = HotKey.KeyModifiers.None,
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameDate()
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,

@@ -13,7 +13,7 @@ namespace CheatUITemplt
         /// <summary>
         /// 必须设置属性后续才能起作用。
         /// </summary>
-        public WPFCheatUITemplate.Other.GameFunDateStruct gameFunDateStruct;
+        public WPFCheatUITemplate.Other.GameFunDataStruct gameFunDateStruct;
         /// <summary>
         /// 读写内存实例
         /// </summary>

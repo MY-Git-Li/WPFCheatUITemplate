@@ -8,7 +8,7 @@ namespace WPFCheatUITemplate.GameFuns
        
         public ArbitrarilyPlant()
         {
-            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct = new Other.GameFunDataStruct();
             gameFunDateStruct.uIData = new Other.UIData()
             {
                 KeyDescription_SC = "Ctrl+数字键1",
@@ -28,7 +28,7 @@ namespace WPFCheatUITemplate.GameFuns
                 Vk = Keys.NumPad1,
                 FsModifiers = HotKey.KeyModifiers.Ctrl,
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameDate()
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
 

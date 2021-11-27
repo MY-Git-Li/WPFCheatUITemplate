@@ -163,7 +163,7 @@ namespace CheatUITemplt
             {
                 if (item.gameFun != null)
                 {
-                    GameDate gameDate = item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
+                    GameData gameDate = item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
                    
                     if (gameDate!=null)
                     {

@@ -7,7 +7,7 @@ namespace WPFCheatUITemplate.GameFuns
     {
         public AutoGet()
         {
-            gameFunDateStruct = new Other.GameFunDateStruct();
+            gameFunDateStruct = new Other.GameFunDataStruct();
             gameFunDateStruct.uIData = new Other.UIData()
             {
                 KeyDescription_SC = "Shift+字母键W",
@@ -28,7 +28,7 @@ namespace WPFCheatUITemplate.GameFuns
                 FsModifiers = HotKey.KeyModifiers.Shift,
 
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameDate()
+            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x3CC72,

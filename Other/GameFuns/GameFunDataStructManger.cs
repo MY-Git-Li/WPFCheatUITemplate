@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WPFCheatUITemplate.Other.Tools.Extensions;
 namespace WPFCheatUITemplate.Other.GameFuns
 {
-    static class GameFunDateStructManger
+    static class GameFunDataStructManger
     {
         static System.Windows.Forms.Keys curentKey = System.Windows.Forms.Keys.NumPad0;
         static CheatUITemplt.HotKey.KeyModifiers curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.None;
@@ -61,11 +61,11 @@ namespace WPFCheatUITemplate.Other.GameFuns
             formerKeyModifiers = curentKeyModifiers;
         }
 
-        public static GameFunDateStruct BaseDateStruct(string KeyDescription_SC, string FunDescribe_SC,
+        public static GameFunDataStruct BaseDateStruct(string KeyDescription_SC, string FunDescribe_SC,
         string KeyDescription_TC ,string FunDescribe_TC,string KeyDescription_EN, string FunDescribe_EN, 
         bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999, bool IsButton= true)
         {
-            var gameFunDateStruct = new Other.GameFunDateStruct();
+            var gameFunDateStruct = new Other.GameFunDataStruct();
 
             gameFunDateStruct.uIData = new Other.UIData()
             {
@@ -97,7 +97,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return gameFunDateStruct;
         }
 
-        public static GameFunDateStruct BaseDateStruct(string FunDescribe_SC,string FunDescribe_TC, string FunDescribe_EN, 
+        public static GameFunDataStruct BaseDateStruct(string FunDescribe_SC,string FunDescribe_TC, string FunDescribe_EN, 
             bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999,
             bool IsButton = true
             )
@@ -112,7 +112,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
         }
 
 
-        public static GameFunDateStruct ButtonDateStruct(string FunDescribe_SC,
+        public static GameFunDataStruct ButtonDateStruct(string FunDescribe_SC,
            string FunDescribe_EN, bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999)
         {
 
@@ -121,7 +121,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return gameFunDateStruct;
         }
 
-        public static GameFunDateStruct CheckButtonDateStruct(string FunDescribe_SC,
+        public static GameFunDataStruct CheckButtonDateStruct(string FunDescribe_SC,
            string FunDescribe_EN, bool IsAcceptValue = false, int SliderMinNum = 1, int SliderMaxNum = 9999)
         {
             var gameFunDateStruct = BaseDateStruct(FunDescribe_SC, FunDescribe_SC.ToTraditional(), FunDescribe_EN, IsAcceptValue, SliderMinNum, SliderMaxNum,false);

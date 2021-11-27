@@ -24,14 +24,14 @@ namespace WPFCheatUITemplate
             new ArbitrarilyPlant();
             new AllowBackground();
 
-            GameFunDateStructManger.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
+            GameFunDataStructManger.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             new FastGameFun()
             {
-                gameFunDateStruct =GameFunDateStructManger.CheckButtonDateStruct("超级攻速", "Super attack speed",false),
+                gameFunDateStruct =GameFunDataStructManger.CheckButtonDateStruct("超级攻速", "Super attack speed",false),
 
                 setGameDate = (i) =>
                 {
-                    i.gameDates.Add(GameVersion.Version.Default, new GameDate()
+                    i.gameDates.Add(GameVersion.Version.Default, new GameData()
                     {
                         ModuleName = "PlantsVsZombies.exe",
                         ModuleOffsetAddress = 0x6DC21,
