@@ -13,7 +13,7 @@ namespace WPFCheatUITemplate.GameFuns
         ASM asm;
         public Test()
         {
-            gameFunDateStruct = GameFunDataStructManger.CheckButtonDateStruct("测试", "Test", false);
+            gameFunDateStruct = GameFunDataStructManager.CheckButtonDateStruct("测试", "Test", false);
             asm = new ASM();
         }
 

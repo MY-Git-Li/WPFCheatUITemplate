@@ -21,7 +21,7 @@ namespace CheatUITemplt
 
         public void FindingGame()
         {
-            AppGameFunManger.Instance.DisableControl();
+            AppGameFunManager.Instance.DisableControl();
 
             startFindGame.RunWorkerCompleted += new RunWorkerCompletedEventHandler(startFindGame_RunWorkerCompleted);
             startFindGame.DoWork += new DoWorkEventHandler(startFindGame_DoWork);
@@ -52,12 +52,12 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void findGameing_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            AppGameFunManger.Instance.EndHotsystem();
-            AppGameFunManger.Instance.DisableControl();
-            AppGameFunManger.Instance.Pid = 0;
-            AppGameFunManger.Instance.SetViewPid();
-            AppGameFunManger.Instance.StartFlashAnimation();
-            AppGameFunManger.Instance.RunAllGameFunEnding();
+            AppGameFunManager.Instance.EndHotsystem();
+            AppGameFunManager.Instance.DisableControl();
+            AppGameFunManager.Instance.Pid = 0;
+            AppGameFunManager.Instance.SetViewPid();
+            AppGameFunManager.Instance.StartFlashAnimation();
+            AppGameFunManager.Instance.RunAllGameFunEnding();
 
             startFindGame.RunWorkerAsync();
         }
@@ -76,9 +76,9 @@ namespace CheatUITemplt
                 System.Threading.Thread.Sleep(100);
             }
             
-            AppGameFunManger.Instance.Pid = pid;
-            AppGameFunManger.Instance.RunAllGameFunAwake();
-            AppGameFunManger.Instance.GetAllGameFunData();
+            AppGameFunManager.Instance.Pid = pid;
+            AppGameFunManager.Instance.RunAllGameFunAwake();
+            AppGameFunManager.Instance.GetAllGameFunData();
         }
 
         /// <summary>
@@ -88,10 +88,10 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void startFindGame_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            AppGameFunManger.Instance.SetViewPid();
-            AppGameFunManger.Instance.StopFlashAnimation();
-            AppGameFunManger.Instance.EnableControl();
-            AppGameFunManger.Instance.RegisterAllHotKey();
+            AppGameFunManager.Instance.SetViewPid();
+            AppGameFunManager.Instance.StopFlashAnimation();
+            AppGameFunManager.Instance.EnableControl();
+            AppGameFunManager.Instance.RegisterAllHotKey();
 
             findGameing.RunWorkerAsync();
         }

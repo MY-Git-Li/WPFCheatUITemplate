@@ -95,9 +95,10 @@
     <Compile Include="Other\Draw\DrawWindow.cs" />
     <Compile Include="Other\Draw\Memory.cs" />
     <Compile Include="Other\GameFuns\Data.cs" />
+    <Compile Include="Other\GameFuns\DataManager.cs" />
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
     <Compile Include="Other\GameFuns\GameFunDataStruct.cs" />
-    <Compile Include="Other\GameFuns\GameFunDataStructManger.cs" />
+    <Compile Include="Other\GameFuns\GameFunDataStructManager.cs" />
     <Compile Include="Other\Tools\ASM.cs" />
     <Compile Include="Other\Tools\Extensions\IStringExtensions.cs" />
     <Compile Include="Other\UI\CreateUIGrid.cs" />
@@ -125,7 +126,7 @@
     <Compile Include="Other\UI\CreateLayout.cs" />
     <Compile Include="Other\GameFuns\GameDataAddress.cs" />
     <Compile Include="Other\GameFuns\GameFun.cs" />
-    <Compile Include="Other\GameFuns\AppGameFunManger.cs" />
+    <Compile Include="Other\GameFuns\AppGameFunManager.cs" />
     <Compile Include="Other\UI\GameFunUI.cs" />
     <Compile Include="Other\FindGame\InvestigateGame.cs" />
     <Compile Include="Other\UI\MyButton.cs" />

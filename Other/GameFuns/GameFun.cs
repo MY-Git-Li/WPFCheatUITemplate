@@ -26,7 +26,7 @@ namespace CheatUITemplt
 
         public GameFun()
         {
-            AppGameFunManger.Instance.RegisterGameFun(this);
+            AppGameFunManager.Instance.RegisterGameFun(this);
         }
 
         public void GetGameData()

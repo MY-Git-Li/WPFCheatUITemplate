@@ -13,7 +13,7 @@ using static CheatUITemplt.HotKey;
 namespace CheatUITemplt
 {
 
-    class AppGameFunManger
+    class AppGameFunManager
     {
 
         List<GameFunUI> gameFunUIs = new List<GameFunUI>();
@@ -42,15 +42,15 @@ namespace CheatUITemplt
         LanguageUI messageBoxMessage;
         #region 单例模式
         //单例模式
-        private static AppGameFunManger instance;
-        private AppGameFunManger() { }
-        public static AppGameFunManger Instance
+        private static AppGameFunManager instance;
+        private AppGameFunManager() { }
+        public static AppGameFunManager Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new AppGameFunManger();
+                    instance = new AppGameFunManager();
                     instance.myButtonManger = new MyButtonManger();
                     instance.hotSystem = new HotSystem();
                 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WPFCheatUITemplate.Other.Tools.Extensions;
 namespace WPFCheatUITemplate.Other.GameFuns
 {
-    static class GameFunDataStructManger
+    static class GameFunDataStructManager
     {
         static System.Windows.Forms.Keys curentKey = System.Windows.Forms.Keys.NumPad0;
         static CheatUITemplt.HotKey.KeyModifiers curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.None;

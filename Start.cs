@@ -19,15 +19,15 @@ namespace WPFCheatUITemplate
             new DefaultPlantLayout();
             new NoCd();
             new DrawWindow();
-            AppGameFunManger.Instance.CreatSeparate("基本属性", "Basic properties");
+            AppGameFunManager.Instance.CreatSeparate("基本属性", "Basic properties");
             new AutoGet();
             new ArbitrarilyPlant();
             new AllowBackground();
 
-            GameFunDataStructManger.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
+            GameFunDataStructManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             new FastGameFun()
             {
-                gameFunDateStruct =GameFunDataStructManger.CheckButtonDateStruct("超级攻速", "Super attack speed",false),
+                gameFunDateStruct =GameFunDataStructManager.CheckButtonDateStruct("超级攻速", "Super attack speed",false),
 
                 setGameDate = (i) =>
                 {

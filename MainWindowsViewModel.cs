@@ -41,7 +41,7 @@ namespace WPFCheatUITemplate
             SimplifiedChineseLanguage = new CommandBase();
             SimplifiedChineseLanguage.DoExecute = new Action<object>((o) =>
             {
-                AppGameFunManger.Instance.SetSimplifiedChinese();
+                AppGameFunManager.Instance.SetSimplifiedChinese();
             });
             SimplifiedChineseLanguage.DoCanExecute = new Func<object, bool>((o) => { return true; });
 
@@ -49,14 +49,14 @@ namespace WPFCheatUITemplate
             TraditionalChineseLanguage = new CommandBase();
             TraditionalChineseLanguage.DoExecute = new Action<object>((o) =>
             {
-                AppGameFunManger.Instance.SetTraditionalChinese();
+                AppGameFunManager.Instance.SetTraditionalChinese();
             });
             TraditionalChineseLanguage.DoCanExecute = new Func<object, bool>((o) => { return true; });
 
             EnglishDescriptionLanguage = new CommandBase();
             EnglishDescriptionLanguage.DoExecute = new Action<object>((o) =>
             {
-                AppGameFunManger.Instance.SetEnglish();
+                AppGameFunManager.Instance.SetEnglish();
             });
             EnglishDescriptionLanguage.DoCanExecute = new Func<object, bool>((o) => { return true; });
 

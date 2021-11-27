@@ -29,13 +29,13 @@ namespace WPFCheatUITemplate
 
             this.DataContext = new MainWindowsViewModel();
 
-            AppGameFunManger.Instance.RegisterWindow(this);
+            AppGameFunManager.Instance.RegisterWindow(this);
 
             createLayout = new CreateLayout(Resources);
-            AppGameFunManger.Instance.RegisterManger(createLayout, keyAndDescribelayouts);
+            AppGameFunManager.Instance.RegisterManger(createLayout, keyAndDescribelayouts);
 
             soundEffect = new SoundEffect();
-            AppGameFunManger.Instance.RegisterManger(soundEffect);
+            AppGameFunManager.Instance.RegisterManger(soundEffect);
 
             lbl_gemeProcess.Text = processName + ".exe";
             lbl_processID.Text = "";
@@ -44,7 +44,7 @@ namespace WPFCheatUITemplate
 
             InitUi();
 
-            AppGameFunManger.Instance.StartUI(Start.Init);
+            AppGameFunManager.Instance.StartUI(Start.Init);
 
             InitFlashAinimation();
         }
@@ -52,7 +52,7 @@ namespace WPFCheatUITemplate
         private void InitUi()
         {
             uILangerManger = new UILangerManger();
-            AppGameFunManger.Instance.RegisterManger(uILangerManger);
+            AppGameFunManager.Instance.RegisterManger(uILangerManger);
 
 
             uILangerManger.RegisterLanguageUI(new LanguageUI()
@@ -138,7 +138,7 @@ namespace WPFCheatUITemplate
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             // Handle messages...
-            AppGameFunManger.Instance.hotSystem.WndProcWPF(hwnd, msg, wParam, lParam, ref handled);
+            AppGameFunManager.Instance.hotSystem.WndProcWPF(hwnd, msg, wParam, lParam, ref handled);
 
             return IntPtr.Zero;
         }
@@ -152,7 +152,7 @@ namespace WPFCheatUITemplate
             investigateGame.FindingGame();
 
             PlayFlashAinimation();
-            AppGameFunManger.Instance.SetSimplifiedChinese();
+            AppGameFunManager.Instance.SetSimplifiedChinese();
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -167,13 +167,13 @@ namespace WPFCheatUITemplate
         {
             EndHotsystem();
 
-            if (AppGameFunManger.Instance.Pid != 0)
-                AppGameFunManger.Instance.RunAllGameFunEnding();
+            if (AppGameFunManager.Instance.Pid != 0)
+                AppGameFunManager.Instance.RunAllGameFunEnding();
         }
         public void EndHotsystem()
         {
-            AppGameFunManger.Instance.hotSystem.UnRegisterHotKeyAll(Hwnd);
-            AppGameFunManger.Instance.hotSystem.CloseHotKeyFunAll();
+            AppGameFunManager.Instance.hotSystem.UnRegisterHotKeyAll(Hwnd);
+            AppGameFunManager.Instance.hotSystem.CloseHotKeyFunAll();
 
         }
 
