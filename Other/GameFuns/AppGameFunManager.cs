@@ -276,21 +276,21 @@ namespace CheatUITemplt
 
         void DataManagerInit()
         {
-            //WPFCheatUITemplate.Other.GameFuns.DataManager.Init();
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (var type in types)
-            {
-                if (type.Name == "AddressDataManager")
-                {
-                    MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
+            WPFCheatUITemplate.Other.GameFuns.AddressDataManager.Init();
+            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            //foreach (var type in types)
+            //{
+            //    if (type.Name == "AddressDataManager")
+            //    {
+            //        MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
 
-                    if (init != null && init.IsStatic)
-                    {
-                        init.Invoke(null, null);
-                    }
-                }
+            //        if (init != null && init.IsStatic)
+            //        {
+            //            init.Invoke(null, null);
+            //        }
+            //    }
 
-            }
+            //}
 
         }
 

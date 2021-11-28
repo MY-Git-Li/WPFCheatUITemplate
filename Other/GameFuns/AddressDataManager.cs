@@ -15,7 +15,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         static Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
-        static void Init()
+        public static void Init()
         {
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var type in types)
