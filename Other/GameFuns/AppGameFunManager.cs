@@ -144,6 +144,8 @@ namespace CheatUITemplt
 
             GameInformationInit();
 
+            DataManagerInit();
+
             foreach (var item in gameFunUIs)
             {
                 if (item.gameFun != null)
@@ -163,7 +165,6 @@ namespace CheatUITemplt
         private void GameInformationInit()
         {
             GameInformation.InitInformation(handle, pid);
-            DataManagerInit();
         }
 
         public void GetAllGameFunData()
@@ -226,24 +227,22 @@ namespace CheatUITemplt
 
         void DataManagerInit()
         {
+            //WPFCheatUITemplate.Other.GameFuns.DataManager.Init();
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var type in types)
             {
                 if (type.Name == "DataManager")
                 {
                     MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
-                    if (init.IsStatic)
+
+                    if (init != null && init.IsStatic)
                     {
                         init.Invoke(null, null);
                     }
-                    MethodInfo getVersion = type.GetMethod("GetVersion", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
-                    if (getVersion.IsStatic)
-                    {
-                        var pra = new object[] { GameInformation.CurentVersion };
-                        getVersion.Invoke(null, pra);
-                    }
                 }
+
             }
+
         }
 
         private void DrawUI()

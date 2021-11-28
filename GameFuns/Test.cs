@@ -19,12 +19,14 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void Awake()
         {
-            
+           
         }
 
         public override void DoFirstTime(double value)
         {
-            asm.HookAllRegister(gameFunDateStruct.Pid, 0x0061EBFC, 0x0061EC01);
+            var dd = DataManager.GetAddress("sun");
+
+            //asm.HookAllRegister(gameFunDateStruct.Pid, 0x0061EBFC, 0x0061EC01);
         }
 
         public override void DoRunAgain(double value)

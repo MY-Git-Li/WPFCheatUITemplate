@@ -11,9 +11,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
     static class DataManager
     {
 
-        static GameVersion.Version version;
+        static GameVersion.Version version= GameInformation.CurentVersion;
 
-        static Dictionary<GameVersion.Version, Dictionary<string ,GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
+        static Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
         static void Init()
         {
@@ -22,9 +22,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
             {
                 if (typeof(Datas).IsAssignableFrom(type))
                 {
-                    MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance|BindingFlags.Public|BindingFlags.Static);
+                    MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
 
-                    if (init !=null)
+                    if (init != null)
                     {
                         if (!type.IsAbstract)
                         {
@@ -32,26 +32,44 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
                             init.Invoke(obj, null);
                         }
-                       
+
                     }
                 }
 
             }
         }
 
-        public static void GetVersion(GameVersion.Version v)
-        {
-            version = v;
-        }
-
         public static void AddData(GameVersion.Version v, string id, GameData gameData)
         {
-            data_Dic[v][id] = gameData;
+
+            if (!data_Dic.ContainsKey(v))
+            {
+                var dic = new Dictionary<string, GameData>();
+                dic[id] = gameData;
+                data_Dic[v] = dic;
+            }else
+            {
+                data_Dic[v][id] = gameData;
+            }
+
+
         }
 
         public static int GetAddress(string id)
         {
-            return data_Dic[version][id].GetDataAddress(GameInformation.Pid).Address;
+            int ret = 0;
+
+            if (data_Dic.ContainsKey(version))
+            {
+                var dic = data_Dic[version];
+                if (dic.ContainsKey(id))
+                {
+                    ret = dic[id].GetDataAddress(GameInformation.Pid).Address;
+                }
+               
+            }
+
+            return ret;
         }
 
 

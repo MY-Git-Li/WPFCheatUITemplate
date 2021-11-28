@@ -20,7 +20,7 @@ namespace WPFCheatUITemplate.GameMode
             Handle = handle;
             Pid = pid;
 
-            GameModeManger.SetData(CurentVersion);
+            //GameModeManger.SetData(CurentVersion);
         }
 
 
@@ -63,7 +63,7 @@ namespace WPFCheatUITemplate.GameMode
             }
         }
 
-        internal static GameVersion.Version CurentVersion
+        public static GameVersion.Version CurentVersion
         {
             get
             {

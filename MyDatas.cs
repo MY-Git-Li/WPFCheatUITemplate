@@ -11,7 +11,12 @@ namespace WPFCheatUITemplate
     {
         public override void Init()
         {
-            
+            DataManager.AddData(GameVersion.Version.Default, "sun",new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+            });
         }
     }
 }
