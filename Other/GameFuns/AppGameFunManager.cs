@@ -280,7 +280,7 @@ namespace CheatUITemplt
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var type in types)
             {
-                if (type.Name == "DataManager")
+                if (type.Name == "AddressDataManager")
                 {
                     MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
 
