@@ -7,11 +7,11 @@ using WPFCheatUITemplate.Other.GameFuns;
 
 namespace WPFCheatUITemplate
 {
-    class MyDatas : Datas
+    class MyAddressDatas : AddressDatas
     {
         public override void Init()
         {
-            DataManager.AddData(GameVersion.Version.Default, "sun",new Other.GameData()
+            AddressDataManager.AddData(GameVersion.Version.Default, "sun",new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,

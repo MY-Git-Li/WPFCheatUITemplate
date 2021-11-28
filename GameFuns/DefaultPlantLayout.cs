@@ -10,8 +10,8 @@ namespace WPFCheatUITemplate.GameFuns
         int pid;
         public DefaultPlantLayout()
         {
-            gameFunDateStruct = new Other.GameFunDataStruct();
-            gameFunDateStruct.uIData = new Other.UIData()
+            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
+            gameFunDataAndUIStruct.uIData = new Other.UIData()
             {
                 KeyDescription_SC = "数字键6",
                 FunDescribe_SC = "默认植物种植",
@@ -25,12 +25,12 @@ namespace WPFCheatUITemplate.GameFuns
                 IsTrigger = true,
 
             };
-            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
             {
                 Vk = Keys.NumPad6,
                 FsModifiers = HotKey.KeyModifiers.None,
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameData()
+            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
             {
                
             });
@@ -62,7 +62,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            pid = CheatTools.GetPidByHandle(gameFunDateStruct.Handle);
+            pid = CheatTools.GetPidByHandle(gameFunDataAndUIStruct.Handle);
             for (int i = 0; i < 5; i++)
             {
                 Plant(i, 0, 40);

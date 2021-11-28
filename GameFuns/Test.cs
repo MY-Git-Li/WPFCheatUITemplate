@@ -13,7 +13,7 @@ namespace WPFCheatUITemplate.GameFuns
         ASM asm;
         public Test()
         {
-            gameFunDateStruct = GameFunDataStructManager.CheckButtonDateStruct("测试", "Test", false);
+            gameFunDataAndUIStruct = UIManager.GetCheckButtonDateStruct("测试", "Test", false);
             asm = new ASM();
         }
 
@@ -24,14 +24,14 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            var dd = DataManager.GetAddress("sun");
+            var dd = AddressDataManager.GetAddress("sun");
 
             //asm.HookAllRegister(gameFunDateStruct.Pid, 0x0061EBFC, 0x0061EC01);
         }
 
         public override void DoRunAgain(double value)
         {
-            asm.RecoveryRegisterHook(gameFunDateStruct.Pid);
+            asm.RecoveryRegisterHook(gameFunDataAndUIStruct.Pid);
         }
 
         public override void Ending()

@@ -52,13 +52,8 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void findGameing_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            AppGameFunManager.Instance.EndHotsystem();
-            AppGameFunManager.Instance.DisableControl();
-            AppGameFunManager.Instance.Pid = 0;
-            AppGameFunManager.Instance.SetViewPid();
-            AppGameFunManager.Instance.StartFlashAnimation();
-            AppGameFunManager.Instance.RunAllGameFunEnding();
-
+            AppGameFunManager.Instance.findGameing_RunWorkerCompleted();
+          
             startFindGame.RunWorkerAsync();
         }
 
@@ -75,10 +70,8 @@ namespace CheatUITemplt
                 pid = CheatTools.GetPidByProcessName(processName);
                 System.Threading.Thread.Sleep(100);
             }
-            
-            AppGameFunManager.Instance.Pid = pid;
-            AppGameFunManager.Instance.RunAllGameFunAwake();
-            AppGameFunManager.Instance.GetAllGameFunData();
+
+            AppGameFunManager.Instance.startFindGame_DoWork(pid);
         }
 
         /// <summary>
@@ -88,10 +81,7 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void startFindGame_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            AppGameFunManager.Instance.SetViewPid();
-            AppGameFunManager.Instance.StopFlashAnimation();
-            AppGameFunManager.Instance.EnableControl();
-            AppGameFunManager.Instance.RegisterAllHotKey();
+            AppGameFunManager.Instance.startFindGame_RunWorkerCompleted();
 
             findGameing.RunWorkerAsync();
         }

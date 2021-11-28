@@ -7,8 +7,8 @@ namespace WPFCheatUITemplate.GameFuns
     {
         public AutoGet()
         {
-            gameFunDateStruct = new Other.GameFunDataStruct();
-            gameFunDateStruct.uIData = new Other.UIData()
+            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
+            gameFunDataAndUIStruct.uIData = new Other.UIData()
             {
                 KeyDescription_SC = "Shift+字母键W",
                 FunDescribe_SC = "自动获取",
@@ -22,13 +22,13 @@ namespace WPFCheatUITemplate.GameFuns
                 IsTrigger = false,
 
             };
-            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
             {
                 Vk = Keys.W,
                 FsModifiers = HotKey.KeyModifiers.Shift,
 
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameData()
+            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x3CC72,

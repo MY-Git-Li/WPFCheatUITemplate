@@ -11,9 +11,9 @@ namespace CheatUITemplt
     abstract class GameFun
     {
         /// <summary>
-        /// 必须设置属性后续才能起作用。
+        /// 设置UI后续才能起作用-显示ui，设置data后gameDataAddress才有内容
         /// </summary>
-        public WPFCheatUITemplate.Other.GameFunDataStruct gameFunDateStruct;
+        public WPFCheatUITemplate.Other.GameFunDataAndUIStruct gameFunDataAndUIStruct;
         /// <summary>
         /// 读写内存实例
         /// </summary>
@@ -31,15 +31,15 @@ namespace CheatUITemplt
 
         public void GetGameData()
         {
-            if (gameFunDateStruct != null)
+            if (gameFunDataAndUIStruct != null)
             {
-                if (gameFunDateStruct.currentGameDate!=null)
+                if (gameFunDataAndUIStruct.currentGameDate!=null)
                 {
-                    gameDataAddress = gameFunDateStruct.currentGameDate.GetDataAddress(gameFunDateStruct.Pid);
+                    gameDataAddress = gameFunDataAndUIStruct.currentGameDate.GetDataAddress(gameFunDataAndUIStruct.Pid);
                 }
                
                 memory = new WPFCheatUITemplate.Other.Draw.Memory();
-                memory.SetProcessHandle(gameFunDateStruct.Handle);
+                memory.SetProcessHandle(gameFunDataAndUIStruct.Handle);
             }
         }
 

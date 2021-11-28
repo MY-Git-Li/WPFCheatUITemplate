@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheatUITemplt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,15 @@ using System.Threading.Tasks;
 using WPFCheatUITemplate.Other.Tools.Extensions;
 namespace WPFCheatUITemplate.Other.GameFuns
 {
-    static class GameFunDataStructManager
+    static class UIManager
     {
+        #region 配置
+
         static System.Windows.Forms.Keys curentKey = System.Windows.Forms.Keys.NumPad0;
         static CheatUITemplt.HotKey.KeyModifiers curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.None;
 
         static System.Windows.Forms.Keys formerKey = curentKey;
         static CheatUITemplt.HotKey.KeyModifiers formerKeyModifiers = curentKeyModifiers;
-
 
         static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys,bool iskeys, CheatUITemplt.HotKey.KeyModifiers keyModifiers, bool iskeyModifiers)
         {
@@ -61,11 +63,14 @@ namespace WPFCheatUITemplate.Other.GameFuns
             formerKeyModifiers = curentKeyModifiers;
         }
 
-        public static GameFunDataStruct BaseDateStruct(string KeyDescription_SC, string FunDescribe_SC,
+        #endregion
+
+        #region 控件
+        public static GameFunDataAndUIStruct GetBaseDateStruct(string KeyDescription_SC, string FunDescribe_SC,
         string KeyDescription_TC ,string FunDescribe_TC,string KeyDescription_EN, string FunDescribe_EN, 
         bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999, bool IsButton= true)
         {
-            var gameFunDateStruct = new Other.GameFunDataStruct();
+            var gameFunDateStruct = new Other.GameFunDataAndUIStruct();
 
             gameFunDateStruct.uIData = new Other.UIData()
             {
@@ -97,12 +102,12 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return gameFunDateStruct;
         }
 
-        public static GameFunDataStruct BaseDateStruct(string FunDescribe_SC,string FunDescribe_TC, string FunDescribe_EN, 
+        public static GameFunDataAndUIStruct GetBaseDateStruct(string FunDescribe_SC,string FunDescribe_TC, string FunDescribe_EN, 
             bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999,
             bool IsButton = true
             )
         {
-            var gameFunDateStruct = BaseDateStruct(
+            var gameFunDateStruct = GetBaseDateStruct(
                 GetKeyDescription_SC(), FunDescribe_SC,
                 GetKeyDescription_TC(), FunDescribe_TC,
                 GetKeyDescription_EN(), FunDescribe_EN,
@@ -112,23 +117,69 @@ namespace WPFCheatUITemplate.Other.GameFuns
         }
 
 
-        public static GameFunDataStruct ButtonDateStruct(string FunDescribe_SC,
+        public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
            string FunDescribe_EN, bool IsAcceptValue = true, int SliderMinNum = 1, int SliderMaxNum = 9999)
         {
 
-            var gameFunDateStruct = BaseDateStruct(FunDescribe_SC, FunDescribe_SC.ToTraditional(),FunDescribe_EN, IsAcceptValue, SliderMinNum, SliderMaxNum,true);
+            var gameFunDateStruct = GetBaseDateStruct(FunDescribe_SC, FunDescribe_SC.ToTraditional(),FunDescribe_EN, IsAcceptValue, SliderMinNum, SliderMaxNum,true);
 
             return gameFunDateStruct;
         }
 
-        public static GameFunDataStruct CheckButtonDateStruct(string FunDescribe_SC,
+        public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
            string FunDescribe_EN, bool IsAcceptValue = false, int SliderMinNum = 1, int SliderMaxNum = 9999)
         {
-            var gameFunDateStruct = BaseDateStruct(FunDescribe_SC, FunDescribe_SC.ToTraditional(), FunDescribe_EN, IsAcceptValue, SliderMinNum, SliderMaxNum,false);
+            var gameFunDateStruct = GetBaseDateStruct(FunDescribe_SC, FunDescribe_SC.ToTraditional(), FunDescribe_EN, IsAcceptValue, SliderMinNum, SliderMaxNum,false);
 
             return gameFunDateStruct;
         }
 
+        #endregion
+
+        #region 布局
+        public static void CreatSeparate(int offset = 15)
+        {
+            GameFunUI gameFunUI = new GameFunUI();
+            gameFunUI.SeparateOffset = offset < 0 ? 15 : offset;
+            AppGameFunManager.Instance.AddGameFunUIs(gameFunUI);
+        }
+
+        public static void CreatSeparateEx(string Description_SC, string Description_TC = "", string Description_EN = "", int offset = 30)
+        {
+            GameFunUI gameFunUI = new GameFunUI();
+
+            LanguageUI languageUI = new LanguageUI()
+            {
+                Description_EN = Description_EN,
+                Description_SC = Description_SC,
+                Description_TC = Description_TC
+            };
+            gameFunUI.keylanguageUI = languageUI;
+
+            gameFunUI.SeparateOffset = offset < 30 ? 30 : offset;
+
+            AppGameFunManager.Instance.AddGameFunUIs(gameFunUI);
+
+            AppGameFunManager.Instance.AddLanguageUI(languageUI);
+
+        }
+
+        public static void CreatSeparate(string Description_SC, string Description_EN = "", int offset = 30)
+        {
+            CreatSeparateEx(Description_SC, Description_SC.ToTraditional(), Description_EN, offset);
+        }
+
+        public static void NextPage(int offset = 0)
+        {
+            GameFunUI gameFunUI = new GameFunUI();
+            gameFunUI.doNextPage = true;
+            gameFunUI.nextPageOffset = offset;
+            AppGameFunManager.Instance.AddGameFunUIs(gameFunUI);
+        }
+
+        #endregion
+
+        #region 描述及更新
 
         static void Update()
         {
@@ -574,5 +625,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             }
             return key;
         }
+
+        #endregion
     }
 }

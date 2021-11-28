@@ -9,8 +9,8 @@ namespace WPFCheatUITemplate.GameFuns
        
         public AdventureLevel()
         {
-            gameFunDateStruct = new Other.GameFunDataStruct();
-            gameFunDateStruct.uIData = new Other.UIData()
+            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
+            gameFunDataAndUIStruct.uIData = new Other.UIData()
             {
                 KeyDescription_SC = "数字键3",
                 FunDescribe_SC = "设置冒险关卡",
@@ -29,12 +29,12 @@ namespace WPFCheatUITemplate.GameFuns
                 SliderMaxNum = 50,
 
             };
-            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
             {
                 Vk = Keys.NumPad3,
                 FsModifiers = HotKey.KeyModifiers.None,
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameData()
+            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,

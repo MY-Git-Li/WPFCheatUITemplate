@@ -19,15 +19,15 @@ namespace WPFCheatUITemplate
             new DefaultPlantLayout();
             new NoCd();
             new DrawWindow();
-            AppGameFunManager.Instance.CreatSeparate("基本属性", "Basic properties");
+            UIManager.CreatSeparate("基本属性", "Basic properties");
             new AutoGet();
             new ArbitrarilyPlant();
             new AllowBackground();
 
-            GameFunDataStructManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
+            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             new FastGameFun()
             {
-                gameFunDateStruct =GameFunDataStructManager.CheckButtonDateStruct("超级攻速", "Super attack speed",false),
+                gameFunDataAndUIStruct =UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed",false),
 
                 setGameDate = (i) =>
                 {
@@ -43,7 +43,7 @@ namespace WPFCheatUITemplate
 
                 awake = (i) =>
                 {
-                    i.gameDataAddresseList.Add(new GameDataAddress((IntPtr)i.gameFunDateStruct.Pid, CheatTools.GetProcessModuleHandle((uint)i.gameFunDateStruct.Pid, "PlantsVsZombies.exe") + 0x72EE4));
+                    i.gameDataAddresseList.Add(new GameDataAddress((IntPtr)i.gameFunDataAndUIStruct.Pid, CheatTools.GetProcessModuleHandle((uint)i.gameFunDataAndUIStruct.Pid, "PlantsVsZombies.exe") + 0x72EE4));
                 },
 
                 doFirstTime = (i, v) =>

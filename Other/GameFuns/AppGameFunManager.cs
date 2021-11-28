@@ -112,6 +112,55 @@ namespace CheatUITemplt
 
         #endregion
 
+        #region 寻找游戏执行的函数
+
+        /// <summary>
+        /// 找到游戏后，后台运行的函数
+        /// </summary>
+        /// <param name="pid"></param>
+        public void startFindGame_DoWork(int pid)
+        {
+           this.pid = pid;
+           RunAllGameFunAwake();
+           GetAllGameFunData();
+        }
+        /// <summary>
+        /// 找到游戏后，主线程执行的函数，解决跨线程处理ui的问题
+        /// </summary>
+        public void startFindGame_RunWorkerCompleted()
+        {
+           SetViewPid();
+           StopFlashAnimation();
+           EnableControl();
+           RegisterAllHotKey();
+
+        }
+
+        /// <summary>
+        /// 找到游戏后，游戏退出后，主线程处理ui问题
+        /// </summary>
+        public void findGameing_RunWorkerCompleted()
+        {
+            EndHotsystem();
+            DisableControl();
+            this.pid = 0;
+            SetViewPid();
+            StartFlashAnimation();
+            RunAllGameFunEnding();
+        }
+
+
+         #endregion
+
+        /// <summary>
+        /// 程序在游戏前退出清理资源
+        /// </summary>
+        public void ClearRes()
+        {
+            if (pid!= 0)
+               RunAllGameFunEnding();
+        }
+
         public void SetViewPid()
         {
             if (pid == 0)
@@ -150,11 +199,11 @@ namespace CheatUITemplt
             {
                 if (item.gameFun != null)
                 {
-                    item.gameFun.gameFunDateStruct.Handle = handle;
+                    item.gameFun.gameFunDataAndUIStruct.Handle = handle;
 
-                    item.gameFun.gameFunDateStruct.Pid = pid;
+                    item.gameFun.gameFunDataAndUIStruct.Pid = pid;
 
-                    item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
+                    item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
 
                     item.gameFun.Awake();
                 }
@@ -174,7 +223,7 @@ namespace CheatUITemplt
             {
                 if (item.gameFun != null)
                 {
-                    GameData gameDate = item.gameFun.gameFunDateStruct.GetGameDate(GameVersion.GetCurrentVersion(handle));
+                    GameData gameDate = item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
                    
                     if (gameDate!=null)
                     {
@@ -251,20 +300,20 @@ namespace CheatUITemplt
             {
                 if (item.gameFun!=null)
                 {
-                    if (!item.gameFun.gameFunDateStruct.uIData.IsHide)
+                    if (!item.gameFun.gameFunDataAndUIStruct.uIData.IsHide)
                     {
                         LanguageUI funlanguageUI = new LanguageUI()
                         {
-                            Description_EN = item.gameFun.gameFunDateStruct.uIData.FunDescribe_EN,
-                            Description_SC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_SC,
-                            Description_TC = item.gameFun.gameFunDateStruct.uIData.FunDescribe_TC
+                            Description_EN = item.gameFun.gameFunDataAndUIStruct.uIData.FunDescribe_EN,
+                            Description_SC = item.gameFun.gameFunDataAndUIStruct.uIData.FunDescribe_SC,
+                            Description_TC = item.gameFun.gameFunDataAndUIStruct.uIData.FunDescribe_TC
                         };
 
                         LanguageUI keylanguageUI = new LanguageUI()
                         {
-                            Description_EN = item.gameFun.gameFunDateStruct.uIData.KeyDescription_EN,
-                            Description_SC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_SC,
-                            Description_TC = item.gameFun.gameFunDateStruct.uIData.KeyDescription_TC
+                            Description_EN = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_EN,
+                            Description_SC = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_SC,
+                            Description_TC = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_TC
                         };
                         item.funlanguageUI = funlanguageUI;
                         item.keylanguageUI = keylanguageUI;
@@ -306,46 +355,17 @@ namespace CheatUITemplt
         }
 
         #region 布局相关
-        public void CreatSeparate(int offset=15)
-        {
-            GameFunUI gameFunUI = new GameFunUI();
-            gameFunUI.SeparateOffset = offset < 0 ? 15 : offset;
-            gameFunUIs.Add(gameFunUI);
 
+        public void AddGameFunUIs(GameFunUI gameFunUI)
+        {
+            gameFunUIs.Add(gameFunUI);
         }
 
-        public void CreatSeparateEx(string Description_SC, string Description_TC = "", string Description_EN = "",int offset = 30)
+        public void AddLanguageUI(LanguageUI languageUI)
         {
-            GameFunUI gameFunUI = new GameFunUI();
-           
-            LanguageUI languageUI = new LanguageUI()
-            {
-                Description_EN = Description_EN,
-                Description_SC = Description_SC,
-                Description_TC = Description_TC
-            };
-            gameFunUI.keylanguageUI = languageUI;
-
-            gameFunUI.SeparateOffset = offset < 30 ? 30 : offset;
-
-            gameFunUIs.Add(gameFunUI);
-
             uILangerManger.RegisterLanguageUI(languageUI);
-
         }
 
-        public void CreatSeparate(string Description_SC, string Description_EN = "", int offset = 30)
-        {
-            CreatSeparateEx(Description_SC, Description_SC.ToTraditional(), Description_EN, offset);
-        }
-
-        public void NextPage(int offset = 0)
-        {
-            GameFunUI gameFunUI = new GameFunUI();
-            gameFunUI.doNextPage = true;
-            gameFunUI.nextPageOffset = offset;
-            gameFunUIs.Add(gameFunUI);
-        }
 
         #endregion
 
@@ -374,10 +394,10 @@ namespace CheatUITemplt
             {
                 if (item.gameFun!=null)
                 {
-                    if (item.gameFun.gameFunDateStruct != null)
+                    if (item.gameFun.gameFunDataAndUIStruct != null)
                     {
-                        RefHotKey refHotKey = item.gameFun.gameFunDateStruct.refHotKey;
-                        if (item.gameFun.gameFunDateStruct.uIData.IsTrigger)
+                        RefHotKey refHotKey = item.gameFun.gameFunDataAndUIStruct.refHotKey;
+                        if (item.gameFun.gameFunDataAndUIStruct.uIData.IsTrigger)
                         {
                             RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
                             new HotSystemFun(async () =>

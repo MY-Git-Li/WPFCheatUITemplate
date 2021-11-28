@@ -9,8 +9,8 @@ namespace WPFCheatUITemplate.GameFuns
       
         public ChangeMode()
         {
-            gameFunDateStruct = new Other.GameFunDataStruct();
-            gameFunDateStruct.uIData = new Other.UIData()
+            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
+            gameFunDataAndUIStruct.uIData = new Other.UIData()
             {
                 KeyDescription_SC = "数字键4",
                 FunDescribe_SC = "改变模式",
@@ -29,12 +29,12 @@ namespace WPFCheatUITemplate.GameFuns
                 SliderMaxNum = 70,
 
             };
-            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
             {
                 Vk = Keys.NumPad4,
                 FsModifiers = HotKey.KeyModifiers.None,
             };
-            gameFunDateStruct.AddGameDate(GameVersion.Version.Default, new Other.GameData()
+            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,

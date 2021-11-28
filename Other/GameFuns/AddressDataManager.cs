@@ -8,7 +8,7 @@ using WPFCheatUITemplate.GameMode;
 
 namespace WPFCheatUITemplate.Other.GameFuns
 {
-    static class DataManager
+    static class AddressDataManager
     {
 
         static GameVersion.Version version= GameInformation.CurentVersion;
@@ -20,7 +20,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var type in types)
             {
-                if (typeof(Datas).IsAssignableFrom(type))
+                if (typeof(AddressDatas).IsAssignableFrom(type))
                 {
                     MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
 
@@ -28,7 +28,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                     {
                         if (!type.IsAbstract)
                         {
-                            var obj = Activator.CreateInstance(type) as Datas;
+                            var obj = Activator.CreateInstance(type) as AddressDatas;
 
                             init.Invoke(obj, null);
                         }

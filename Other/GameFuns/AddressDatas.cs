@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPFCheatUITemplate.Other.GameFuns
 {
-    abstract class Datas
+    abstract class AddressDatas
     {
         public abstract void Init();
     }

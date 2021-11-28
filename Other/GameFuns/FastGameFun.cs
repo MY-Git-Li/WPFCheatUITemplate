@@ -40,7 +40,7 @@ namespace WPFCheatUITemplate.Other
             setGameDate?.Invoke(this);
             foreach (var item in gameDates)
             {
-                gameFunDateStruct.AddGameDate(item.Key, item.Value);
+                gameFunDataAndUIStruct.AddData(item.Key, item.Value);
             }
         }
 

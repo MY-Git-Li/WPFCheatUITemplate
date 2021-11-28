@@ -167,8 +167,7 @@ namespace WPFCheatUITemplate
         {
             EndHotsystem();
 
-            if (AppGameFunManager.Instance.Pid != 0)
-                AppGameFunManager.Instance.RunAllGameFunEnding();
+            AppGameFunManager.Instance.ClearRes();
         }
         public void EndHotsystem()
         {
