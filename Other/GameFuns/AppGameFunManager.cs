@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using WPFCheatUITemplate;
 using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.Interface;
 using WPFCheatUITemplate.Other.Tools.Extensions;
 using static CheatUITemplt.HotKey;
 
@@ -18,6 +19,8 @@ namespace CheatUITemplt
     {
 
         List<GameFunUI> gameFunUIs = new List<GameFunUI>();
+
+        List<IExtend> extends = new List<IExtend>();
 
         MainWindow mainWindow;
 
@@ -124,6 +127,7 @@ namespace CheatUITemplt
            this.pid = pid;
            RunAllGameFunAwake();
            GetAllGameFunData();
+           StartExtends();
         }
         /// <summary>
         /// 找到游戏后，主线程执行的函数，解决跨线程处理ui的问题
@@ -148,10 +152,14 @@ namespace CheatUITemplt
             SetViewPid();
             StartFlashAnimation();
             RunAllGameFunEnding();
+
+            EndExtends();
         }
 
+        #endregion
 
-         #endregion
+
+
 
         /// <summary>
         /// 程序在游戏前退出清理资源
@@ -162,7 +170,23 @@ namespace CheatUITemplt
                RunAllGameFunEnding();
         }
 
-        public void SetViewPid()
+        void StartExtends()
+        {
+            foreach (var item in extends)
+            {
+                item.Start();
+            }
+        }
+
+        void EndExtends()
+        {
+            foreach (var item in extends)
+            {
+                item.End();
+            }
+        }
+
+        void SetViewPid()
         {
             if (pid == 0)
             {
@@ -217,6 +241,26 @@ namespace CheatUITemplt
             GameInformation.InitInformation(handle, pid);
         }
 
+        void DataManagerInit()
+        {
+            WPFCheatUITemplate.Other.GameFuns.AddressDataManager.Init();
+            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            //foreach (var type in types)
+            //{
+            //    if (type.Name == "AddressDataManager")
+            //    {
+            //        MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
+
+            //        if (init != null && init.IsStatic)
+            //        {
+            //            init.Invoke(null, null);
+            //        }
+            //    }
+
+            //}
+
+        }
+
         public void GetAllGameFunData()
         {
 
@@ -266,30 +310,32 @@ namespace CheatUITemplt
             this.soundEffect = soundEffect;
         }
 
+        void GetAllExtend()
+        {
+            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach (var type in types)
+            {
+                if (type.IsInterface)
+                    continue;
+                Type[] ins = type.GetInterfaces();
+                foreach (Type ty in ins)
+                {
+
+                    if (ty == typeof(IExtend))
+                    {
+                        IExtend extend = Activator.CreateInstance(type) as IExtend;
+                        extends.Add(extend);
+                    }
+
+                }
+            }
+        }
+
         public void StartUI(System.Action action)
         {
             action?.Invoke();
             DrawUI();
-        }
-
-        void DataManagerInit()
-        {
-            WPFCheatUITemplate.Other.GameFuns.AddressDataManager.Init();
-            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            //foreach (var type in types)
-            //{
-            //    if (type.Name == "AddressDataManager")
-            //    {
-            //        MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
-
-            //        if (init != null && init.IsStatic)
-            //        {
-            //            init.Invoke(null, null);
-            //        }
-            //    }
-
-            //}
-
+            GetAllExtend();
         }
 
         private void DrawUI()

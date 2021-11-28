@@ -100,6 +100,7 @@
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
     <Compile Include="Other\GameFuns\GameFunDataAndUIStruct.cs" />
     <Compile Include="Other\GameFuns\UIManager.cs" />
+    <Compile Include="Other\Interface\IExtend.cs" />
     <Compile Include="Other\Tools\ASM.cs" />
     <Compile Include="Other\Tools\Extensions\IStringExtensions.cs" />
     <Compile Include="Other\UI\CreateUIGrid.cs" />
