@@ -29,37 +29,15 @@ namespace WPFCheatUITemplate
             {
                 gameFunDataAndUIStruct =UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed",false),
 
-                setGameDate = (i) =>
-                {
-                    i.gameDates.Add(GameVersion.Version.Default, new GameData()
-                    {
-                        ModuleName = "PlantsVsZombies.exe",
-                        ModuleOffsetAddress = 0x6DC21,
-
-                        IsSignatureCode = false,
-                        IsIntPtr = false,
-                    });
-                },
-
-                awake = (i) =>
-                {
-                    i.gameDataAddresseList.Add(new GameDataAddress((IntPtr)i.gameFunDataAndUIStruct.Pid, CheatTools.GetProcessModuleHandle((uint)i.gameFunDataAndUIStruct.Pid, "PlantsVsZombies.exe") + 0x72EE4));
-                },
-
                 doFirstTime = (i, v) =>
                 {
-                    i.memory.WriteMemory<byte>(i.gameDataAddress.Address, new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 });
-                    i.memory.WriteMemory<byte>(i.gameDataAddresseList[0].Address, new byte[] { 0x0F, 0x84 });
+                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot"), new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 });
+                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot2"), new byte[] { 0x0F, 0x84 });
                 },
                 doRunAgain = (i, v) =>
                 {
-                    i.memory.WriteMemory<byte>(i.gameDataAddress.Address, new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
-                    i.memory.WriteMemory<byte>(i.gameDataAddresseList[0].Address, new byte[] { 0x0F, 0x85 });
-                },
-
-                ending = (i) =>
-                {
-                    i.gameDataAddresseList.Clear();
+                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot"), new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
+                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot2"), new byte[] { 0x0F, 0x85 });
                 },
 
             }.Go();

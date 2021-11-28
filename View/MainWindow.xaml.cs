@@ -15,8 +15,9 @@ namespace WPFCheatUITemplate
     public partial class MainWindow : Window
     {
         CreateLayout createLayout;
+
         InvestigateGame investigateGame;
-        SoundEffect soundEffect;
+
         UILangerManger uILangerManger;
 
         Storyboard myStoryboard;
@@ -34,13 +35,14 @@ namespace WPFCheatUITemplate
             createLayout = new CreateLayout(Resources);
             AppGameFunManager.Instance.RegisterManger(createLayout, keyAndDescribelayouts);
 
-            soundEffect = new SoundEffect();
-            AppGameFunManager.Instance.RegisterManger(soundEffect);
 
             lbl_gemeProcess.Text = processName + ".exe";
             lbl_processID.Text = "";
 
             investigateGame = new InvestigateGame(processName);
+
+            uILangerManger = new UILangerManger();
+            AppGameFunManager.Instance.RegisterManger(uILangerManger);
 
             InitUi();
 
@@ -51,10 +53,6 @@ namespace WPFCheatUITemplate
 
         private void InitUi()
         {
-            uILangerManger = new UILangerManger();
-            AppGameFunManager.Instance.RegisterManger(uILangerManger);
-
-
             uILangerManger.RegisterLanguageUI(new LanguageUI()
             {
                 textBlock = MainTitle,

@@ -27,7 +27,9 @@ namespace WPFCheatUITemplate.Other
         {
             gameDataAddresseList = new List<GameDataAddress>();
             gameDates = new Dictionary<GameVersion.Version, GameData>();
-
+            awake = null;
+            ending = null;
+            setGameDate = null;
         }
 
         public void Go()

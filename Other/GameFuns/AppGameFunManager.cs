@@ -55,6 +55,7 @@ namespace CheatUITemplt
                     instance = new AppGameFunManager();
                     instance.myButtonManger = new MyButtonManger();
                     instance.hotSystem = new HotSystem();
+                    instance.soundEffect = new SoundEffect();
                 }
                 return instance;
             }
@@ -223,14 +224,11 @@ namespace CheatUITemplt
             {
                 if (item.gameFun != null)
                 {
-                    GameData gameDate = item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
-                   
-                    if (gameDate!=null)
-                    {
-                        item.gameFun.GetGameData();
-                    }
 
+                   item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
                    
+                   item.gameFun.GetGameData();
+                    
                 }
                 
             }

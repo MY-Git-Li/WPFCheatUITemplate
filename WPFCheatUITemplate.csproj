@@ -108,7 +108,7 @@
     <Compile Include="Start.cs" />
     <Compile Include="GameFuns\Sun.cs" />
     <Compile Include="Other\UI\UILangerManger.cs" />
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -116,14 +116,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CommandBase.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="MVVM\CommandBase.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowsViewModel.cs" />
+    <Compile Include="ViewMode\MainWindowsViewModel.cs" />
     <Compile Include="Other\UI\CreateLayout.cs" />
     <Compile Include="Other\GameFuns\GameDataAddress.cs" />
     <Compile Include="Other\GameFuns\GameFun.cs" />

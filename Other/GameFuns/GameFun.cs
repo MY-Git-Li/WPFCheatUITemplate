@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using WPFCheatUITemplate.Other;
 
@@ -37,10 +36,9 @@ namespace CheatUITemplt
                 {
                     gameDataAddress = gameFunDataAndUIStruct.currentGameDate.GetDataAddress(gameFunDataAndUIStruct.Pid);
                 }
-               
-                memory = new WPFCheatUITemplate.Other.Draw.Memory();
-                memory.SetProcessHandle(gameFunDataAndUIStruct.Handle);
             }
+            memory = new WPFCheatUITemplate.Other.Draw.Memory();
+            memory.SetProcessHandle(gameFunDataAndUIStruct.Handle);
         }
 
         /// <summary>

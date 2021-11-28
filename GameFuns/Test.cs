@@ -24,14 +24,14 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            var dd = AddressDataManager.GetAddress("sun");
+            //var dd = AddressDataManager.GetAddress("sun");
 
             //asm.HookAllRegister(gameFunDateStruct.Pid, 0x0061EBFC, 0x0061EC01);
         }
 
         public override void DoRunAgain(double value)
         {
-            asm.RecoveryRegisterHook(gameFunDataAndUIStruct.Pid);
+            //asm.RecoveryRegisterHook(gameFunDataAndUIStruct.Pid);
         }
 
         public override void Ending()
