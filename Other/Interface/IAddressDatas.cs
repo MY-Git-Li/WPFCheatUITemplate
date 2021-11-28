@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFCheatUITemplate.Other.GameFuns
+namespace WPFCheatUITemplate.Other.Interface
 {
-    abstract class AddressDatas
+    public interface IAddressDatas
     {
-        public abstract void Init();
+        void Init();
     }
 }

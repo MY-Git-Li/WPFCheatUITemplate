@@ -20,19 +20,15 @@ namespace WPFCheatUITemplate.Other.GameFuns
             Type[] types = Assembly.GetExecutingAssembly().GetTypes();
             foreach (var type in types)
             {
-                if (typeof(AddressDatas).IsAssignableFrom(type))
+                if (type.IsInterface)
+                    continue;
+                if (typeof(Interface.IAddressDatas).IsAssignableFrom(type))
                 {
-                    MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
+                   if (!type.IsAbstract)
+                   {
+                        var obj = Activator.CreateInstance(type) as Interface.IAddressDatas;
 
-                    if (init != null)
-                    {
-                        if (!type.IsAbstract)
-                        {
-                            var obj = Activator.CreateInstance(type) as AddressDatas;
-
-                            init.Invoke(obj, null);
-                        }
-
+                        obj.Init();
                     }
                 }
 

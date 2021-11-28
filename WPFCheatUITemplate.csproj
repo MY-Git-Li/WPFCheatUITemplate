@@ -95,7 +95,7 @@
     <Compile Include="Other\Draw\DrawManager.cs" />
     <Compile Include="Other\Draw\DrawWindow.cs" />
     <Compile Include="Other\Draw\Memory.cs" />
-    <Compile Include="Other\GameFuns\AddressDatas.cs" />
+    <Compile Include="Other\Interface\IAddressDatas.cs" />
     <Compile Include="Other\GameFuns\AddressDataManager.cs" />
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
     <Compile Include="Other\GameFuns\GameFunDataAndUIStruct.cs" />

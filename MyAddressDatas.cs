@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WPFCheatUITemplate.Other;
+﻿using WPFCheatUITemplate.Other;
 using WPFCheatUITemplate.Other.GameFuns;
+using WPFCheatUITemplate.Other.Interface;
 
 namespace WPFCheatUITemplate
 {
-    class MyAddressDatas : AddressDatas
+    class MyAddressDatas : IAddressDatas
     {
-        public override void Init()
+        public void Init()
         {
             AddressDataManager.AddData(GameVersion.Version.Default,"supershoot" ,new GameData()
             {
@@ -31,4 +27,5 @@ namespace WPFCheatUITemplate
             });
         }
     }
+
 }

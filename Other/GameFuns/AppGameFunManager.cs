@@ -320,11 +320,14 @@ namespace CheatUITemplt
                 Type[] ins = type.GetInterfaces();
                 foreach (Type ty in ins)
                 {
-
                     if (ty == typeof(IExtend))
                     {
-                        IExtend extend = Activator.CreateInstance(type) as IExtend;
-                        extends.Add(extend);
+                        if (!type.IsAbstract)
+                        {
+                            IExtend extend = Activator.CreateInstance(type) as IExtend;
+                            extends.Add(extend);
+                        }
+                           
                     }
 
                 }
