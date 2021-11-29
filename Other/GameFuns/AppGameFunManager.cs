@@ -174,7 +174,7 @@ namespace CheatUITemplt
         {
             foreach (var item in extends)
             {
-                item.Start();
+                Task.Factory.StartNew(() => item.Start()); 
             }
         }
 
@@ -182,7 +182,7 @@ namespace CheatUITemplt
         {
             foreach (var item in extends)
             {
-                item.End();
+                Task.Factory.StartNew(() => item.End());
             }
         }
 
