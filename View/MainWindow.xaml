@@ -12,7 +12,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="{x:Null}"
-        WindowStartupLocation="CenterScreen" Closing="mainWindows_Closing" Loaded="mainWindows_Loaded"
+        WindowStartupLocation="CenterScreen"
         >
     <Window.Resources>
         

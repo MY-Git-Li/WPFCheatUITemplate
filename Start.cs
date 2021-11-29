@@ -11,9 +11,7 @@ namespace WPFCheatUITemplate
     {
        public static void Init()
         {
-            /* 1.将mainview内load，close方法放入appgamgeFunManager中
-             * 2.将Iextend 接口的star方法放在mainview.load中
-             */
+            
             new Sun();
             new Coin();
             new AdventureLevel();

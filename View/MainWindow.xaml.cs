@@ -16,8 +16,6 @@ namespace WPFCheatUITemplate
     {
         CreateLayout createLayout;
 
-        InvestigateGame investigateGame;
-
         UILangerManger uILangerManger;
 
         Storyboard myStoryboard;
@@ -38,8 +36,6 @@ namespace WPFCheatUITemplate
 
             lbl_gemeProcess.Text = processName + ".exe";
             lbl_processID.Text = "";
-
-            investigateGame = new InvestigateGame(processName);
 
             uILangerManger = new UILangerManger();
             AppGameFunManager.Instance.RegisterManger(uILangerManger);
@@ -141,18 +137,6 @@ namespace WPFCheatUITemplate
             return IntPtr.Zero;
         }
 
-        private void mainWindows_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
-            Hwnd = wndHelper.Handle;
-
-            investigateGame.FindingGame();
-
-            PlayFlashAinimation();
-            AppGameFunManager.Instance.SetSimplifiedChinese();
-        }
-
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -161,18 +145,6 @@ namespace WPFCheatUITemplate
             }
         }
 
-        private void mainWindows_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            EndHotsystem();
-
-            AppGameFunManager.Instance.ClearRes();
-        }
-        public void EndHotsystem()
-        {
-            AppGameFunManager.Instance.hotSystem.UnRegisterHotKeyAll(Hwnd);
-            AppGameFunManager.Instance.hotSystem.CloseHotKeyFunAll();
-
-        }
 
         public void PlayFlashAinimation()
         {

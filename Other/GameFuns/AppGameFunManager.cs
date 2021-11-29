@@ -9,7 +9,6 @@ using WPFCheatUITemplate;
 using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
 using WPFCheatUITemplate.Other.Interface;
-using WPFCheatUITemplate.Other.Tools.Extensions;
 using static CheatUITemplt.HotKey;
 
 namespace CheatUITemplt
@@ -24,10 +23,12 @@ namespace CheatUITemplt
 
         MainWindow mainWindow;
 
+        IntPtr Hwnd;
+
         CreateLayout createLayout;
 
         IntPtr handle;
-        public IntPtr Handle { get { return handle; } set{ handle = value; }}
+        public IntPtr Handle { get { return handle; } set { handle = value; } }
 
         int pid;
         public int Pid { set => pid = value; get => pid; }
@@ -45,6 +46,8 @@ namespace CheatUITemplt
 
         LanguageUI messageBoxMessage;
 
+        InvestigateGame investigateGame;
+
         #region 单例模式
         //单例模式
         private static AppGameFunManager instance;
@@ -59,6 +62,7 @@ namespace CheatUITemplt
                     instance.myButtonManger = new MyButtonManger();
                     instance.hotSystem = new HotSystem();
                     instance.soundEffect = new SoundEffect();
+                    instance.investigateGame = new InvestigateGame(GameInformation.ProcessName);
                 }
                 return instance;
             }
@@ -108,7 +112,7 @@ namespace CheatUITemplt
                     item.showDescription.keyDescription.Text = item.keylanguageUI.Description_SC;
                     item.showDescription.funDescription.Text = item.funlanguageUI.Description_SC;
                 }
-                   
+
             }
 
             uILangerManger.SetSimplifiedChinese();
@@ -124,22 +128,22 @@ namespace CheatUITemplt
         /// <param name="pid"></param>
         public void startFindGame_DoWork(int pid)
         {
-           this.pid = pid;
-           GameInformationInit();
-           DataManagerInit();
-           RunAllGameFunAwake();
-           GetAllGameFunData();
-           StartExtends();
+            this.pid = pid;
+            GameInformationInit();
+            DataManagerInit();
+            RunAllGameFunAwake();
+            GetAllGameFunData();
+            
         }
         /// <summary>
         /// 找到游戏后，主线程执行的函数，解决跨线程处理ui的问题
         /// </summary>
         public void startFindGame_RunWorkerCompleted()
         {
-           SetViewPid();
-           StopFlashAnimation();
-           EnableControl();
-           RegisterAllHotKey();
+            SetViewPid();
+            StopFlashAnimation();
+            EnableControl();
+            RegisterAllHotKey();
 
         }
 
@@ -155,28 +159,50 @@ namespace CheatUITemplt
             StartFlashAnimation();
             RunAllGameFunEnding();
 
-            EndExtends();
         }
 
         #endregion
 
 
+        private void GameInformationInit()
+        {
+            GameInformation.InitInformation(handle, pid);
+        }
 
+        void DataManagerInit()
+        {
+            WPFCheatUITemplate.Other.GameFuns.AddressDataManager.Init();
+            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            //foreach (var type in types)
+            //{
+            //    if (type.Name == "AddressDataManager")
+            //    {
+            //        MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
+
+            //        if (init != null && init.IsStatic)
+            //        {
+            //            init.Invoke(null, null);
+            //        }
+            //    }
+
+            //}
+
+        }
 
         /// <summary>
         /// 程序在游戏前退出清理资源
         /// </summary>
-        public void ClearRes()
+        void ClearRes()
         {
-            if (pid!= 0)
-               RunAllGameFunEnding();
+            if (pid != 0)
+                RunAllGameFunEnding();
         }
 
         void StartExtends()
         {
             foreach (var item in extends)
             {
-                Task.Factory.StartNew(() => item.Start()); 
+                Task.Factory.StartNew(() => item.Start());
             }
         }
 
@@ -234,31 +260,6 @@ namespace CheatUITemplt
 
         }
 
-        private void GameInformationInit()
-        {
-            GameInformation.InitInformation(handle, pid);
-        }
-
-        void DataManagerInit()
-        {
-            WPFCheatUITemplate.Other.GameFuns.AddressDataManager.Init();
-            //Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            //foreach (var type in types)
-            //{
-            //    if (type.Name == "AddressDataManager")
-            //    {
-            //        MethodInfo init = type.GetMethod("Init", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.Static);
-
-            //        if (init != null && init.IsStatic)
-            //        {
-            //            init.Invoke(null, null);
-            //        }
-            //    }
-
-            //}
-
-        }
-
         public void GetAllGameFunData()
         {
 
@@ -267,20 +268,47 @@ namespace CheatUITemplt
                 if (item.gameFun != null)
                 {
 
-                   item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
-                   
-                   item.gameFun.GetGameData();
-                    
+                    item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
+
+                    item.gameFun.GetGameData();
+
                 }
-                
+
             }
 
         }
 
+        #region 窗口相关
+
         public void RegisterWindow(Window window)
         {
             this.mainWindow = (MainWindow)window;
+            mainWindow.Loaded += mainWindows_Loaded;
+            mainWindow.Closing += mainWindows_Closing;
         }
+
+        private void mainWindows_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            EndHotsystem();
+            ClearRes();
+
+            EndExtends();
+        }
+
+        private void mainWindows_Loaded(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Interop.WindowInteropHelper wndHelper = new System.Windows.Interop.WindowInteropHelper(mainWindow);
+            Hwnd = wndHelper.Handle;
+
+            investigateGame.FindingGame();
+
+            StartFlashAnimation();
+            SetSimplifiedChinese();
+
+            StartExtends();
+        }
+
+        #endregion
 
         public void RegisterManger(CreateLayout createLayout, Grid grid)
         {
@@ -325,7 +353,7 @@ namespace CheatUITemplt
                             IExtend extend = Activator.CreateInstance(type) as IExtend;
                             extends.Add(extend);
                         }
-                           
+
                     }
 
                 }
@@ -343,7 +371,7 @@ namespace CheatUITemplt
         {
             foreach (var item in gameFunUIs)
             {
-                if (item.gameFun!=null)
+                if (item.gameFun != null)
                 {
                     if (!item.gameFun.gameFunDataAndUIStruct.uIData.IsHide)
                     {
@@ -377,26 +405,17 @@ namespace CheatUITemplt
                 {
                     createUIGrid.NextPage(item.nextPageOffset);
                 }
-                else if (item.keylanguageUI!=null)
+                else if (item.keylanguageUI != null)
                 {
-                    createLayout.CreatSeparate(item.keylanguageUI,item.SeparateOffset);
-                   
-                }else
+                    createLayout.CreatSeparate(item.keylanguageUI, item.SeparateOffset);
+
+                }
+                else
                 {
                     createLayout.CreatSeparate(item.SeparateOffset);
                 }
-                
+
             }
-        }
-
-        public void RegisterGameFun(GameFun a)
-        {
-
-            GameFunUI gameFunUI = new GameFunUI();
-            gameFunUI.gameFun = a;
-
-            gameFunUIs.Add(gameFunUI);
-
         }
 
         #region 布局相关
@@ -413,6 +432,16 @@ namespace CheatUITemplt
 
 
         #endregion
+
+        public void RegisterGameFun(GameFun a)
+        {
+
+            GameFunUI gameFunUI = new GameFunUI();
+            gameFunUI.gameFun = a;
+
+            gameFunUIs.Add(gameFunUI);
+
+        }
 
         public void RegisterAllHotKey()
         {
@@ -437,7 +466,7 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                if (item.gameFun!=null)
+                if (item.gameFun != null)
                 {
                     if (item.gameFun.gameFunDataAndUIStruct != null)
                     {
@@ -500,8 +529,8 @@ namespace CheatUITemplt
                         }
                     }
                 }
-              
-                
+
+
             }
         }
 
@@ -539,13 +568,13 @@ namespace CheatUITemplt
 
             foreach (var item in gameFunUIs)
             {
-                if (item.myStackPanel.button!=null)
+                if (item.myStackPanel.button != null)
                 {
                     item.myStackPanel.button.IsEnabled = true;
                     item.myStackPanel.button.Click += ButtonHandlerNoGamePro;
                 }
 
-                if (item.myStackPanel.checkBox!=null)
+                if (item.myStackPanel.checkBox != null)
                 {
                     item.myStackPanel.checkBox.IsEnabled = true;
                     item.myStackPanel.checkBox.Click += CheckBoxHandlerNoGamePro;
@@ -557,7 +586,8 @@ namespace CheatUITemplt
 
         public void EndHotsystem()
         {
-            mainWindow.EndHotsystem();
+            hotSystem.UnRegisterHotKeyAll(Hwnd);
+            hotSystem.CloseHotKeyFunAll();
         }
 
         public void StartFlashAnimation()
