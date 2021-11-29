@@ -613,7 +613,7 @@ namespace CheatUITemplt
         private void RegisterHotKey(KeyModifiers fsModifiers, Keys vk, MyButton buttonClick, HotSystemFun fun)
         {
             int id;
-            id = hotSystem.RegisterHotKey(mainWindow.Hwnd, fsModifiers, vk, fun);
+            id = hotSystem.RegisterHotKey(Hwnd, fsModifiers, vk, fun);
 
             myButtonManger.SetButtonFun(buttonClick, id, hotSystem);
 
@@ -624,7 +624,7 @@ namespace CheatUITemplt
 
         private void RegisterHotKey(KeyModifiers fsModifiers, Keys vk, HotSystemFun fun)
         {
-            hotSystem.RegisterHotKey(mainWindow.Hwnd, fsModifiers, vk, fun);
+            hotSystem.RegisterHotKey(Hwnd, fsModifiers, vk, fun);
         }
 
 
