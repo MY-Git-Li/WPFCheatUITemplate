@@ -125,6 +125,8 @@ namespace CheatUITemplt
         public void startFindGame_DoWork(int pid)
         {
            this.pid = pid;
+           GameInformationInit();
+           DataManagerInit();
            RunAllGameFunAwake();
            GetAllGameFunData();
            StartExtends();
@@ -215,10 +217,6 @@ namespace CheatUITemplt
         public void RunAllGameFunAwake()
         {
             handle = CheatTools.GetProcessHandle(pid);
-
-            GameInformationInit();
-
-            DataManagerInit();
 
             foreach (var item in gameFunUIs)
             {
