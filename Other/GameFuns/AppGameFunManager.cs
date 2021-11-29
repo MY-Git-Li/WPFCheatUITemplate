@@ -300,12 +300,13 @@ namespace CheatUITemplt
             System.Windows.Interop.WindowInteropHelper wndHelper = new System.Windows.Interop.WindowInteropHelper(mainWindow);
             Hwnd = wndHelper.Handle;
 
+            StartExtends();
+
             investigateGame.FindingGame();
 
             StartFlashAnimation();
             SetSimplifiedChinese();
 
-            StartExtends();
         }
 
         #endregion
