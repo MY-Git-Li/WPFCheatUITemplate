@@ -56,9 +56,19 @@ namespace CheatUITemplt
                     instance.hotSystem = new HotSystem();
                     instance.soundEffect = new SoundEffect();
                     instance.investigateGame = new InvestigateGame(GameInformation.ProcessName);
+                    instance.uILangerManger = new UILangerManger();
                 }
                 return instance;
             }
+        }
+
+        internal UILangerManger UILangerManger
+        {
+            get
+            {
+                return uILangerManger;
+            }
+
         }
 
 
@@ -127,7 +137,7 @@ namespace CheatUITemplt
 
         public void SetTraditionalChinese()
         {
-            uILangerManger.SetTraditionalChinese();
+            UILangerManger.SetTraditionalChinese();
 
             Changelanguage();
 
@@ -136,7 +146,7 @@ namespace CheatUITemplt
 
         public void SetEnglish()
         {
-            uILangerManger.SetEnglish();
+            UILangerManger.SetEnglish();
 
             Changelanguage();
 
@@ -145,7 +155,7 @@ namespace CheatUITemplt
 
         public void SetSimplifiedChinese()
         {
-            uILangerManger.SetSimplifiedChinese();
+            UILangerManger.SetSimplifiedChinese();
 
             Changelanguage();
 
@@ -335,11 +345,17 @@ namespace CheatUITemplt
 
         #region 窗口相关
 
-        public void RegisterWindow(Window window)
+        public void RegisterWindow(Window window, ResourceDictionary Resdictionary,Grid grid)
         {
             this.mainWindow = (MainWindow)window;
             mainWindow.Loaded += mainWindows_Loaded;
             mainWindow.Closing += mainWindows_Closing;
+
+            if (Resdictionary !=  null)
+            {
+                RegisterManger(new CreateLayout(Resdictionary), grid);
+            }
+
         }
 
         private void mainWindows_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -355,6 +371,8 @@ namespace CheatUITemplt
             System.Windows.Interop.WindowInteropHelper wndHelper = new System.Windows.Interop.WindowInteropHelper(mainWindow);
             Hwnd = wndHelper.Handle;
 
+            RegisteMessageBoxMessage();
+
             StartExtends();
 
             investigateGame.FindingGame();
@@ -367,12 +385,19 @@ namespace CheatUITemplt
 
         public void RegisterManger(CreateLayout createLayout, Grid grid)
         {
-            this.createLayout = createLayout;
-            //createLayout.SetGrid(grid);
-            createUIGrid = new CreateUIGrid(grid, this.createLayout);
+            if (createLayout != null)
+            {
+                this.createLayout = createLayout;
+            }
+
+            if (grid != null)
+            {
+                createUIGrid = new CreateUIGrid(grid, this.createLayout);
+            }
+            
         }
 
-        public void RegisterManger(UILangerManger uILangerManger)
+        void RegisteMessageBoxMessage()
         {
             messageBoxMessage = new LanguageUI()
             {
@@ -380,14 +405,19 @@ namespace CheatUITemplt
                 Description_TC = "未檢測到遊戲進程，請先運行遊戲在激活修改功能@錯誤",
                 Description_EN = "Game is not detected,please launch the game before activating cheats.@Error"
             };
-
-            this.uILangerManger = uILangerManger;
             uILangerManger.RegisterLanguageUI(messageBoxMessage);
+        }
+
+        public void RegisterManger(UILangerManger uILangerManger)
+        {
+            if(uILangerManger!=null)
+                this.uILangerManger = uILangerManger;
         }
 
         public void RegisterManger(SoundEffect soundEffect)
         {
-            this.soundEffect = soundEffect;
+            if (soundEffect != null)
+                this.soundEffect = soundEffect;
         }
 
         void GetAllExtend()
@@ -445,8 +475,8 @@ namespace CheatUITemplt
                         item.funlanguageUI = funlanguageUI;
                         item.keylanguageUI = keylanguageUI;
 
-                        uILangerManger.RegisterLanguageUI(funlanguageUI);
-                        uILangerManger.RegisterLanguageUI(keylanguageUI);
+                        UILangerManger.RegisterLanguageUI(funlanguageUI);
+                        UILangerManger.RegisterLanguageUI(keylanguageUI);
 
                         createLayout.AddRowDefin();
 
@@ -483,7 +513,7 @@ namespace CheatUITemplt
 
         public void AddLanguageUI(LanguageUI languageUI)
         {
-            uILangerManger.RegisterLanguageUI(languageUI);
+            UILangerManger.RegisterLanguageUI(languageUI);
         }
 
 
