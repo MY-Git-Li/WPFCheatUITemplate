@@ -10,6 +10,7 @@ namespace WPFCheatUITemplate
     class LanguageUI
     {
         public TextBlock textBlock;
+        public string ShowText;
         public string Description_SC;
         public string Description_TC;
         public string Description_EN;

@@ -382,7 +382,6 @@ namespace CheatUITemplt
         {
             messageBoxMessage = new LanguageUI()
             {
-                textBlock = new TextBlock(),
                 Description_SC = "未检测到游戏进程，请先运行游戏在激活修改功能@错误",
                 Description_TC = "未檢測到遊戲進程，請先運行遊戲在激活修改功能@錯誤",
                 Description_EN = "Game is not detected,please launch the game before activating cheats.@Error"
@@ -690,13 +689,13 @@ namespace CheatUITemplt
 
         void ButtonHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show(messageBoxMessage.textBlock.Text.Split('@')[0], messageBoxMessage.textBlock.Text.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show(messageBoxMessage.ShowText.Split('@')[0], messageBoxMessage.ShowText.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void CheckBoxHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
             var check = sender as System.Windows.Controls.CheckBox;
-            System.Windows.MessageBox.Show(messageBoxMessage.textBlock.Text.Split('@')[0], messageBoxMessage.textBlock.Text.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show(messageBoxMessage.ShowText.Split('@')[0], messageBoxMessage.ShowText.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
             check.IsChecked = false;
         }
 

@@ -11,6 +11,10 @@ namespace WPFCheatUITemplate
         List<LanguageUI> languageUIs = new List<LanguageUI>();
         public void RegisterLanguageUI(LanguageUI languageUI)
         {
+            if (languageUI.ShowText == "")
+            {
+                languageUI.ShowText = languageUI.Description_SC;
+            }
             languageUIs.Add(languageUI);
         }
 
@@ -18,6 +22,7 @@ namespace WPFCheatUITemplate
         {
             foreach (var item in languageUIs)
             {
+                item.ShowText= item.Description_SC;
                 if (item.textBlock != null)
                 {
                     item.textBlock.Text = item.Description_SC;
@@ -30,6 +35,7 @@ namespace WPFCheatUITemplate
         {
             foreach (var item in languageUIs)
             {
+                item.ShowText = item.Description_EN;
                 if (item.textBlock != null)
                 {
                     item.textBlock.Text = item.Description_EN;
@@ -40,6 +46,7 @@ namespace WPFCheatUITemplate
         {
             foreach (var item in languageUIs)
             {
+                item.ShowText = item.Description_TC;
                 if (item.textBlock != null)
                 {
                     item.textBlock.Text = item.Description_TC;
