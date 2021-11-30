@@ -131,7 +131,7 @@ namespace WPFCheatUITemplate
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             // Handle messages...
-            AppGameFunManager.Instance.hotSystem.WndProcWPF(hwnd, msg, wParam, lParam, ref handled);
+            AppGameFunManager.Instance.WndProcWPF(hwnd, msg, wParam, lParam, ref handled);
 
             return IntPtr.Zero;
         }

@@ -27,18 +27,11 @@ namespace CheatUITemplt
 
         CreateLayout createLayout;
 
-        IntPtr handle;
-        public IntPtr Handle { get { return handle; } set { handle = value; } }
-
-        int pid;
-        public int Pid { set => pid = value; get => pid; }
-
         SoundEffect soundEffect;
 
         UILangerManger uILangerManger;
 
-        //注册热键
-        public HotSystem hotSystem;
+        HotSystem hotSystem;
 
         MyButtonManger myButtonManger;
 
@@ -128,8 +121,7 @@ namespace CheatUITemplt
         /// <param name="pid"></param>
         public void startFindGame_DoWork(int pid)
         {
-            this.pid = pid;
-            GameInformationInit();
+            SetGameInformation(pid);
             DataManagerInit();
             RunAllGameFunAwake();
             GetAllGameFunData();
@@ -140,7 +132,7 @@ namespace CheatUITemplt
         /// </summary>
         public void startFindGame_RunWorkerCompleted()
         {
-            SetViewPid();
+            SetViewPid(GameInformation.Pid);
             StopFlashAnimation();
             EnableControl();
             RegisterAllHotKey();
@@ -154,8 +146,8 @@ namespace CheatUITemplt
         {
             EndHotsystem();
             DisableControl();
-            this.pid = 0;
-            SetViewPid();
+            SetGameInformation(0);
+            SetViewPid(GameInformation.Pid);
             StartFlashAnimation();
             RunAllGameFunEnding();
 
@@ -164,9 +156,16 @@ namespace CheatUITemplt
         #endregion
 
 
-        private void GameInformationInit()
+        private void SetGameInformation(int pid)
         {
-            GameInformation.InitInformation(handle, pid);
+            GameInformation.Pid = pid;
+            if (pid!=0)
+            {
+                GameInformation.Handle = CheatTools.GetProcessHandle(pid);
+            }else
+            {
+                GameInformation.Handle = IntPtr.Zero;
+            }
         }
 
         void DataManagerInit()
@@ -194,7 +193,7 @@ namespace CheatUITemplt
         /// </summary>
         void ClearRes()
         {
-            if (pid != 0)
+            if (GameInformation.Pid != 0)
                 RunAllGameFunEnding();
         }
 
@@ -214,7 +213,7 @@ namespace CheatUITemplt
             }
         }
 
-        void SetViewPid()
+        void SetViewPid(int pid)
         {
             if (pid == 0)
             {
@@ -242,17 +241,16 @@ namespace CheatUITemplt
 
         public void RunAllGameFunAwake()
         {
-            handle = CheatTools.GetProcessHandle(pid);
-
+           
             foreach (var item in gameFunUIs)
             {
                 if (item.gameFun != null)
                 {
-                    item.gameFun.gameFunDataAndUIStruct.Handle = handle;
+                    item.gameFun.gameFunDataAndUIStruct.Handle = GameInformation.Handle;
 
-                    item.gameFun.gameFunDataAndUIStruct.Pid = pid;
+                    item.gameFun.gameFunDataAndUIStruct.Pid = GameInformation.Pid;
 
-                    item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
+                    item.gameFun.gameFunDataAndUIStruct.GetData(GameInformation.CurentVersion);
 
                     item.gameFun.Awake();
                 }
@@ -268,7 +266,7 @@ namespace CheatUITemplt
                 if (item.gameFun != null)
                 {
 
-                    item.gameFun.gameFunDataAndUIStruct.GetData(GameVersion.GetCurrentVersion(handle));
+                    item.gameFun.gameFunDataAndUIStruct.GetData(GameInformation.CurentVersion);
 
                     item.gameFun.GetGameData();
 
@@ -638,6 +636,17 @@ namespace CheatUITemplt
             var check = sender as System.Windows.Controls.CheckBox;
             System.Windows.MessageBox.Show(messageBoxMessage.textBlock.Text.Split('@')[0], messageBoxMessage.textBlock.Text.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
             check.IsChecked = false;
+        }
+
+
+        public void WndProcWPF(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            hotSystem.WndProcWPF(hwnd, msg, wParam, lParam, ref handled);
+        }
+
+        public void WndProcWinForm(ref Message m)
+        {
+            hotSystem.WndProcWinForm(ref m);
         }
     }
 
