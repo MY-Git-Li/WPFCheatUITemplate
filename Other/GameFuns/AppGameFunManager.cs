@@ -127,52 +127,46 @@ namespace CheatUITemplt
 
         public void SetTraditionalChinese()
         {
-
-            foreach (var item in gameFunUIs)
-            {
-                if (item.gameFun != null)
-                {
-                    item.showDescription.keyDescription.Text = item.keylanguageUI.Description_TC;
-                    item.showDescription.funDescription.Text = item.funlanguageUI.Description_TC;
-                }
-            }
-
             uILangerManger.SetTraditionalChinese();
+
+            Changelanguage();
+
             SaveLanguage("TC");
         }
 
         public void SetEnglish()
         {
-            foreach (var item in gameFunUIs)
-            {
-                if (item.gameFun != null)
-                {
-                    item.showDescription.keyDescription.Text = item.keylanguageUI.Description_EN;
-                    item.showDescription.funDescription.Text = item.funlanguageUI.Description_EN;
-                    item.showDescription.keyDescription.FontSize = 17;
-                    item.showDescription.funDescription.FontSize = 17;
-                }
-            }
-
             uILangerManger.SetEnglish();
+
+            Changelanguage();
+
             SaveLanguage("EN");
         }
 
         public void SetSimplifiedChinese()
         {
+            uILangerManger.SetSimplifiedChinese();
+
+            Changelanguage();
+
+            SaveLanguage("SC");
+        }
+
+        void Changelanguage(int size = 17)
+        {
             foreach (var item in gameFunUIs)
             {
                 if (item.gameFun != null)
                 {
-                    item.showDescription.keyDescription.Text = item.keylanguageUI.Description_SC;
-                    item.showDescription.funDescription.Text = item.funlanguageUI.Description_SC;
+                    item.showDescription.keyDescription.Text = item.keylanguageUI.ShowText;
+                    item.showDescription.funDescription.Text = item.funlanguageUI.ShowText;
+                    item.showDescription.keyDescription.FontSize = size;
+                    item.showDescription.funDescription.FontSize = size;
                 }
 
             }
-
-            uILangerManger.SetSimplifiedChinese();
-            SaveLanguage("SC");
         }
+
 
         #endregion
 
@@ -451,6 +445,8 @@ namespace CheatUITemplt
                         item.funlanguageUI = funlanguageUI;
                         item.keylanguageUI = keylanguageUI;
 
+                        uILangerManger.RegisterLanguageUI(funlanguageUI);
+                        uILangerManger.RegisterLanguageUI(keylanguageUI);
 
                         createLayout.AddRowDefin();
 
