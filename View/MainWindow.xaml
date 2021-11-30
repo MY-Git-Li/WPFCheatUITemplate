@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFCheatUITemplate"
+        xmlns:Properties="clr-namespace:WPFCheatUITemplate.Properties"
         mc:Ignorable="d"
         Name="mainWindows"
         Title="《植物大战僵尸》 Early Access 二十七项修改器"
@@ -441,9 +442,9 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal" Margin="-15 20 0 0">
-                        <RadioButton Command="{Binding SimplifiedChineseLanguage}" IsChecked="True" Content="简体" Margin="0 0 15 0" GroupName="language" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource MyRadioButtonStyle}"/>
-                        <RadioButton Command="{Binding TraditionalChineseLanguage}"  Content="繁体" Margin="0 0 15 0" GroupName="language" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource MyRadioButtonStyle}"/>
-                        <RadioButton Command="{Binding EnglishDescriptionLanguage}" Content="English" Margin="0 0 15 0" GroupName="language" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource MyRadioButtonStyle}"/>
+                        <RadioButton Command="{Binding SimplifiedChineseLanguage}" IsChecked="{Binding Path=RadioButton_SC,Source={x:Static Properties:Settings.Default}}" Content="简体" Margin="0 0 15 0" GroupName="language" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource MyRadioButtonStyle}"/>
+                        <RadioButton Command="{Binding TraditionalChineseLanguage}" IsChecked="{Binding Path=RadioButton_TC,Source={x:Static Properties:Settings.Default}}" Content="繁体" Margin="0 0 15 0" GroupName="language" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource MyRadioButtonStyle}"/>
+                        <RadioButton Command="{Binding EnglishDescriptionLanguage}" IsChecked="{Binding Path=RadioButton_EN,Source={x:Static Properties:Settings.Default}}" Content="English" Margin="0 0 15 0" GroupName="language" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource MyRadioButtonStyle}"/>
                         <Border BorderThickness="2" BorderBrush="#FF8000" Margin="0 5 10 3" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Button  Command="{Binding MinimumButtonCommand}" CommandParameter="{Binding ElementName=mainWindows}" Style="{StaticResource WindDowsButton}" Template="{StaticResource MinimumButtonTemplate}"/>
                         </Border>

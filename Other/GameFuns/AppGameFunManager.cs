@@ -65,6 +65,66 @@ namespace CheatUITemplt
         #endregion
 
         #region 语言设置
+
+
+        void SetDefaultLanguage()
+        {
+            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
+            if (mode == "SC")
+            {
+                SetSimplifiedChinese();
+            }
+            if (mode == "TC")
+            {
+                SetTraditionalChinese();
+            }
+            if (mode == "EN")
+            {
+                SetEnglish();
+            }
+
+        }
+
+        void ChangRadioButton(string mode)
+        {
+            var en = WPFCheatUITemplate.Properties.Settings.Default.RadioButton_EN;
+            var sc = WPFCheatUITemplate.Properties.Settings.Default.RadioButton_SC;
+            var tc = WPFCheatUITemplate.Properties.Settings.Default.RadioButton_TC;
+
+            if (mode == "SC")
+            {
+                sc = true;
+                en = false;
+                tc = false;
+            }
+            if (mode == "TC")
+            {
+                sc = false;
+                en = false;
+                tc = true;
+            }
+            if (mode == "EN")
+            {
+                sc = false;
+                en = true;
+                tc = false;
+            }
+
+            WPFCheatUITemplate.Properties.Settings.Default.RadioButton_EN = en;
+            WPFCheatUITemplate.Properties.Settings.Default.RadioButton_SC = sc;
+            WPFCheatUITemplate.Properties.Settings.Default.RadioButton_TC = tc;
+
+        }
+
+        void SaveLanguage(string langer)
+        {
+            ChangRadioButton(langer);
+
+            WPFCheatUITemplate.Properties.Settings.Default.langer = langer;
+
+            WPFCheatUITemplate.Properties.Settings.Default.Save();
+        }
+
         public void SetTraditionalChinese()
         {
 
@@ -78,6 +138,7 @@ namespace CheatUITemplt
             }
 
             uILangerManger.SetTraditionalChinese();
+            SaveLanguage("TC");
         }
 
         public void SetEnglish()
@@ -94,6 +155,7 @@ namespace CheatUITemplt
             }
 
             uILangerManger.SetEnglish();
+            SaveLanguage("EN");
         }
 
         public void SetSimplifiedChinese()
@@ -109,6 +171,7 @@ namespace CheatUITemplt
             }
 
             uILangerManger.SetSimplifiedChinese();
+            SaveLanguage("SC");
         }
 
         #endregion
@@ -302,9 +365,8 @@ namespace CheatUITemplt
 
             investigateGame.FindingGame();
 
+            SetDefaultLanguage();
             StartFlashAnimation();
-            SetSimplifiedChinese();
-
         }
 
         #endregion
