@@ -118,11 +118,11 @@ namespace WPFCheatUITemplate.Other
         public uint SignatureCodeOffset { get; set; }
 
 
-        public GameDataAddress GetDataAddress(int pid)
+        public GameDataAddress GetDataAddress()
         {
 
-            IntPtr handle = CheatTools.GetProcessHandle(pid);
-            ModuleAddress = CheatTools.GetProcessModuleHandle((uint)pid, ModuleName);
+            IntPtr handle = CheatTools.GetProcessHandle(GameMode.GameInformation.Pid);
+            ModuleAddress = CheatTools.GetProcessModuleHandle((uint)GameMode.GameInformation.Pid, ModuleName);
 
             if (!IsSignatureCode)
             {

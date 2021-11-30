@@ -35,7 +35,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             }
         }
 
-        public static void AddData(GameVersion.Version v, string id, GameData gameData)
+        public static void AddData(string id, GameVersion.Version v, GameData gameData)
         {
 
             if (!data_Dic.ContainsKey(v))
@@ -60,7 +60,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 var dic = data_Dic[version];
                 if (dic.ContainsKey(id))
                 {
-                    ret = dic[id].GetDataAddress(GameInformation.Pid).Address;
+                    ret = dic[id].GetDataAddress().Address;
                 }
                
             }

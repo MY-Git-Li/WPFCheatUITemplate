@@ -65,17 +65,17 @@ namespace WPFCheatUITemplate.GameMode
         public static List<Zombie> GetZombies()
         {
             List<Zombie> zombies = new List<Zombie>();
-            int maxnum = CheatTools.ReadMemory<int>(AppGameFunManager.Instance.Handle, zombieMaxNumOffset.pointer);
+            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle, zombieMaxNumOffset.pointer);
 
 
             for (int i = -maxnum; i < maxnum; i++)
             {
-                int address = CheatTools.ReadMemory<int>(AppGameFunManager.Instance.Handle, 
+                int address = CheatTools.ReadMemory<int>(GameInformation.Handle, 
                     new int[] { zombieIslive.pointer[0], zombieIslive.pointer[1], zombieIslive.pointer[2], zombieIslive.sizeOrOffset + zombieOffset.sizeOrOffset * i });
 
                 if (address == 0)
                 {
-                    int BaseAddress = CheatTools.ReadMemory<int>(AppGameFunManager.Instance.Handle, zombieOffset.pointer) + zombieOffset.sizeOrOffset * i;
+                    int BaseAddress = CheatTools.ReadMemory<int>(GameInformation.Handle, zombieOffset.pointer) + zombieOffset.sizeOrOffset * i;
                     
 
                     Zombie zombie = new Zombie(BaseAddress, GameInformation.CurentVersion);

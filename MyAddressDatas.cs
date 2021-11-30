@@ -8,7 +8,7 @@ namespace WPFCheatUITemplate
     {
         public void Init()
         {
-            AddressDataManager.AddData(GameVersion.Version.Default,"supershoot" ,new GameData()
+            AddressDataManager.AddData("supershoot", GameVersion.Version.Default,new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x6DC21,
@@ -17,7 +17,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = false,
             });
 
-            AddressDataManager.AddData(GameVersion.Version.Default, "supershoot2", new GameData()
+            AddressDataManager.AddData("supershoot2", GameVersion.Version.Default, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x72EE4,
