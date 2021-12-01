@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using WPFCheatUITemplate;
 using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.Exceptions;
 using WPFCheatUITemplate.Other.Interface;
 using static CheatUITemplt.HotKey;
 
@@ -534,7 +535,7 @@ namespace CheatUITemplt
                     }));
             }
             #endregion
-
+            
             foreach (var item in gameFunUIs)
             {
                 if (item.gameFun != null)
@@ -550,11 +551,18 @@ namespace CheatUITemplt
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
-                                item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
+                                try
+                                {
+                                    item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
 
-                                soundEffect.PlayTurnOnEffect();
+                                    soundEffect.PlayTurnOnEffect();
 
-
+                                }
+                                catch (ZeroAddressException e)
+                                {
+                                    HandleZeroAddressExceptionOnRunGameFun(e);
+                                }
+                                
                             }));
                         }
                         else
@@ -565,35 +573,52 @@ namespace CheatUITemplt
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
-                                item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
-
                                 System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
+
                                 checkBox.IsChecked = true;
 
-
-                                if (slider != null)
+                                try
                                 {
-                                    slider.IsEnabled = !slider.IsEnabled;
-                                }
+                                    item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
 
-                                soundEffect.PlayTurnOnEffect();
+                                    if (slider != null)
+                                    {
+                                        slider.IsEnabled = !slider.IsEnabled;
+                                    }
+
+                                    soundEffect.PlayTurnOnEffect();
+
+                                }catch(ZeroAddressException e)
+                                {
+                                    HandleZeroAddressExceptionOnRunGameFun(e);
+                                }
+                                
 
                             }, () =>
                             {
+
                                 Slider slider = item.myStackPanel.ValueEntered;
 
                                 System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
+
                                 checkBox.IsChecked = false;
 
-                                item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
-
-                                if (slider != null)
+                                try
                                 {
-                                    slider.IsEnabled = !slider.IsEnabled;
+                                    item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
+
+                                    if (slider != null)
+                                    {
+                                        slider.IsEnabled = !slider.IsEnabled;
+                                    }
+
+                                    soundEffect.PlayTurnOffEffect();
+
+                                }catch (ZeroAddressException e)
+                                {
+                                    HandleZeroAddressExceptionOnRunGameFun(e);
                                 }
-
-                                soundEffect.PlayTurnOffEffect();
-
+                                
                             }));
                         }
                     }
@@ -708,6 +733,64 @@ namespace CheatUITemplt
             check.IsChecked = false;
         }
 
+        void HandleZeroAddressExceptionOnRunGameFun(ZeroAddressException e)
+        {
+            var g = e.gameData;
+
+            string text = "";
+
+            text += GameInformation.CurentVersion.ToString();
+
+            #region 详细错误信息
+
+            if (g.IsIntPtr)
+            {
+                if (g.IntPtrOffset != null)
+                {
+                    string offset = "";
+
+                    foreach (var item in g.IntPtrOffset)
+                    {
+                        offset += "0x";
+                        offset += item.ToString("X");
+                        offset += " ";
+                    }
+
+                    text = e.Message + "\n" +
+                    "详细信息:\n" +
+                    "模块名称:" + g.ModuleName + "\n" +
+                    "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
+                    "指针偏移:" + offset + "\n";
+
+                }else
+                {
+                    text = e.Message + "\n" +
+                    "详细信息:\n" +
+                    "模块名称:" + g.ModuleName + "\n" +
+                    "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X");
+                }
+               
+            }else if (g.IsSignatureCode)
+            {
+                text = e.Message + "\n" +
+               "详细信息:\n" +
+               "模块名称:" + g.ModuleName + "\n" +
+               "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
+               "特征码:" + g.SignatureCode + "\n" +
+               "特征码偏移:" + "0x" + g.SignatureCodeOffset.ToString("X") + "\n";
+            }else
+            {
+                text = e.Message + "\n" +
+              "详细信息:\n" +
+              "模块名称:" + g.ModuleName + "\n" +
+              "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n";
+            }
+
+            #endregion
+
+            System.Windows.MessageBox.Show(text, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+
+        }
 
         public void WndProcWPF(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {

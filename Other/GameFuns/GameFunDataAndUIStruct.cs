@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFCheatUITemplate.Other.Exceptions;
 
 namespace WPFCheatUITemplate.Other
 {
@@ -135,12 +136,22 @@ namespace WPFCheatUITemplate.Other
                 else
                 {
                    
-                      return  new GameDataAddress(handle, ModuleAddress + ModuleOffsetAddress);
+                      return new GameDataAddress(handle, ModuleAddress + ModuleOffsetAddress);
                 }
             }
             else
             {
-                   return new GameDataAddress(handle, CheatTools.FindData(handle, ModuleAddress, ModuleAddress + 0x4000000,SignatureCode)[0] + SignatureCodeOffset);
+                var offset = CheatTools.FindData(handle, ModuleAddress, ModuleAddress + 0x4000000, SignatureCode);
+
+                if (offset.Count == 0)
+                {
+                    return null;
+                }
+
+                var obj = new GameDataAddress(handle, offset[0] + SignatureCodeOffset);
+
+                return obj;
+                
             }
 
 

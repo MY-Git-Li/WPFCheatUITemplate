@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WPFCheatUITemplate.GameMode;
+using WPFCheatUITemplate.Other.Exceptions;
 
 namespace WPFCheatUITemplate.Other.GameFuns
 {
@@ -78,38 +79,53 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             if (data_Dic.ContainsKey(version))
             {
-                var dic = data_Dic[version];
-                if (dic.ContainsKey(id))
-                {
-                    if (!curentGameDataAddress.ContainsKey(id))
-                    {
-                        var dataAddress = dic[id].GetDataAddress();
-                        curentGameDataAddress.Add(id, dataAddress);
-                        return dataAddress.Address;
-                    }
-                    ret = curentGameDataAddress[id].Address;
-                    //ret = dic[id].GetDataAddress().Address;
-                }
-               
+                Dictionary<string, GameData> dic = data_Dic[version];
+
+                ret = HandleGetAddress(version, dic,id);
+
             }
             else if (data_Dic.ContainsKey(GameVersion.Version.Default))
             {
                 var dic = data_Dic[GameVersion.Version.Default];
-                if (dic.ContainsKey(id))
-                {
-                    if (!curentGameDataAddress.ContainsKey(id))
-                    {
-                        var dataAddress = dic[id].GetDataAddress();
-                        curentGameDataAddress.Add(id, dataAddress);
-                        return dataAddress.Address;
-                    }
-                    ret = curentGameDataAddress[id].Address;
-                }
+
+                ret = HandleGetAddress(GameVersion.Version.Default, dic, id);
 
             }
+                  
             return ret;
         }
 
 
+        static int HandleGetAddress(GameVersion.Version v, Dictionary<string, GameData> dic,string id)
+        {
+            int ret = 0;
+            if (dic.ContainsKey(id))
+            {
+                if (!curentGameDataAddress.ContainsKey(id))
+                {
+                    var dataAddress = dic[id].GetDataAddress();
+
+                    if (dataAddress == null)
+                    {
+                        throw new ZeroAddressException("地址错误！", data_Dic[v][id]);
+                    }
+
+                    curentGameDataAddress.Add(id, dataAddress);
+                    ret = dataAddress.Address;
+                }
+                else
+                {
+                    if (curentGameDataAddress[id] == null)
+                    {
+                        throw new ZeroAddressException("地址错误！", data_Dic[v][id]);
+                    }
+
+                    ret = curentGameDataAddress[id].Address;
+                }
+            }
+
+            return ret;
+        }
+        
     }
 }
