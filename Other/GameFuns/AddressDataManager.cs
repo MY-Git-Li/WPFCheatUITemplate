@@ -44,7 +44,12 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static void GetAllGameDataAddress()
         {
-            
+            foreach (var item in data_Dic[GameVersion.Version.Default])
+            {
+                curentGameDataAddress.Add(item.Key, item.Value.GetDataAddress());
+            }
+
+
             foreach (var item in data_Dic[version])
             {
                 curentGameDataAddress.Add(item.Key,item.Value.GetDataAddress());
@@ -87,7 +92,21 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 }
                
             }
+            else if (data_Dic.ContainsKey(GameVersion.Version.Default))
+            {
+                var dic = data_Dic[GameVersion.Version.Default];
+                if (dic.ContainsKey(id))
+                {
+                    if (!curentGameDataAddress.ContainsKey(id))
+                    {
+                        var dataAddress = dic[id].GetDataAddress();
+                        curentGameDataAddress.Add(id, dataAddress);
+                        return dataAddress.Address;
+                    }
+                    ret = curentGameDataAddress[id].Address;
+                }
 
+            }
             return ret;
         }
 
