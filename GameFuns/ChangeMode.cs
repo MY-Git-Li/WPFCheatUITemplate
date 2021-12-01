@@ -9,42 +9,8 @@ namespace WPFCheatUITemplate.GameFuns
       
         public ChangeMode()
         {
-            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
-            gameFunDataAndUIStruct.uIData = new Other.UIData()
-            {
-                KeyDescription_SC = "数字键4",
-                FunDescribe_SC = "改变模式",
-
-                KeyDescription_TC = "數字鍵4",
-                FunDescribe_TC = "改變模式",
-
-                KeyDescription_EN = "Number 4",
-                FunDescribe_EN = "Change mode",
-
-                IsTrigger = true,
-
-
-                IsAcceptValue = true,
-                SliderMinNum = 1,
-                SliderMaxNum = 70,
-
-            };
-            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
-            {
-                Vk = Keys.NumPad4,
-                FsModifiers = HotKey.KeyModifiers.None,
-            };
-            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
-            {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x355E0C,
-
-                IsSignatureCode = false,
-
-                IntPtrOffset = new uint[] { 0x91c },
-                IsIntPtr = true,
-            });
-
+            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetButtonDateStruct("改变模式", "Change mode", true, 1, 70);
+           
         }
 
         public override void Awake()
@@ -53,7 +19,7 @@ namespace WPFCheatUITemplate.GameFuns
         }
         public override void DoFirstTime(double value)
         {
-            memory.WriteMemory<int>(gameDataAddress.Address, (int)value);
+            memory.WriteMemory<int>(Other.GameFuns.AddressDataManager.GetAddress("changeMode"), (int)value);
         }
 
         public override void DoRunAgain(double value)

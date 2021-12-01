@@ -2,6 +2,7 @@
 using GameOverlay.Drawing;
 using System.Collections.Generic;
 using System.Threading;
+using WPFCheatUITemplate.GameMode;
 
 namespace WPFCheatUITemplate.GameFuns
 {
@@ -17,30 +18,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public DrawWindow()
         {
-            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
-            gameFunDataAndUIStruct.uIData = new Other.UIData()
-            {
-                KeyDescription_SC = "数字键8",
-                FunDescribe_SC = "外部绘制",
-
-                KeyDescription_TC = "數字鍵8",
-                FunDescribe_TC = "外部繪製",
-
-                KeyDescription_EN = "Number 8",
-                FunDescribe_EN = "External draw",
-
-                IsTrigger = false,
-
-            };
-            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
-            {
-                Vk = System.Windows.Forms.Keys.NumPad8,
-                FsModifiers = HotKey.KeyModifiers.None,
-            };
-            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
-            {
-                ModuleName = "PlantsVsZombies.exe",
-            });
+            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetCheckButtonDateStruct("外部绘制", "External draw", false);
 
             drawManager = new DrawManager();
            
@@ -73,7 +51,7 @@ namespace WPFCheatUITemplate.GameFuns
         void Draw()
         {
            
-            drawManager.Init("PlantsVsZombies");
+            drawManager.Init(GameInformation.ProcessName);
             drawManager.SetBrushes((g) => { drawManager._brushes["blue"] = g.CreateSolidBrush(30, 144, 255); });
             drawManager.SetFonts((g) => { drawManager._fonts["Microsoft YaHei"] = g.CreateFont("Microsoft YaHei", 12); });
             drawManager.DrawFun((g) =>
@@ -85,34 +63,34 @@ namespace WPFCheatUITemplate.GameFuns
                     "测试文字");
 
 
-                zombies = GameMode.GameModeManger.GetZombies();
+                //zombies = GameMode.GameModeManger.GetZombies();
 
-                foreach (var item in zombies)
-                {
-                    //g.DrawRectangle(drawManager._brushes["blue"],
-                    //item.X+20,item.Y,item.X+100,item.Y+115,1f);
+                //foreach (var item in zombies)
+                //{
+                //    //g.DrawRectangle(drawManager._brushes["blue"],
+                //    //item.X+20,item.Y,item.X+100,item.Y+115,1f);
 
-                    //g.DrawBox2D(drawManager._brushes["blue"], drawManager._brushes["red"], item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
-                    if (!item.IsLive.Value)
-                    {
-                        if (item.X.Value != 0 && item.Y.Value!=0)
-                        {
-                            float HpMax = (float)(item.HatMaxHp.Value + item.AnnexMaxHp.Value + item.HpMax.Value);
-                            float curentHp = (float)(item.HatHp.Value + item.AnnexHp.Value + item.Hp.Value);
-                            float percenttage = curentHp / HpMax;
-                            percenttage = percenttage * 100;
-                            g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"],
-                                Rectangle.Create(item.X.Value + 20, item.Y.Value - 10, 80, 6), 1f, percenttage);
-                            g.DrawRectangle(drawManager._brushes["blue"],
-                            item.X.Value + 20, item.Y.Value, item.X.Value + 100, item.Y.Value + 115, 1f);
-                            g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
-                                drawManager._brushes["blue"],
-                                item.X.Value + 20, item.Y.Value-26,
-                                curentHp.ToString()+"/"+ HpMax.ToString());
-                        }
+                //    //g.DrawBox2D(drawManager._brushes["blue"], drawManager._brushes["red"], item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
+                //    if (!item.IsLive.Value)
+                //    {
+                //        if (item.X.Value != 0 && item.Y.Value!=0)
+                //        {
+                //            float HpMax = (float)(item.HatMaxHp.Value + item.AnnexMaxHp.Value + item.HpMax.Value);
+                //            float curentHp = (float)(item.HatHp.Value + item.AnnexHp.Value + item.Hp.Value);
+                //            float percenttage = curentHp / HpMax;
+                //            percenttage = percenttage * 100;
+                //            g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"],
+                //                Rectangle.Create(item.X.Value + 20, item.Y.Value - 10, 80, 6), 1f, percenttage);
+                //            g.DrawRectangle(drawManager._brushes["blue"],
+                //            item.X.Value + 20, item.Y.Value, item.X.Value + 100, item.Y.Value + 115, 1f);
+                //            g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
+                //                drawManager._brushes["blue"],
+                //                item.X.Value + 20, item.Y.Value-26,
+                //                curentHp.ToString()+"/"+ HpMax.ToString());
+                //        }
 
-                    }
-                }
+                //    }
+                //}
 
 
 

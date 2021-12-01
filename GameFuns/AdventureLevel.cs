@@ -9,42 +9,7 @@ namespace WPFCheatUITemplate.GameFuns
        
         public AdventureLevel()
         {
-            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
-            gameFunDataAndUIStruct.uIData = new Other.UIData()
-            {
-                KeyDescription_SC = "数字键3",
-                FunDescribe_SC = "设置冒险关卡",
-
-                KeyDescription_TC = "數字鍵3",
-                FunDescribe_TC = "設置冒險關卡",
-
-                KeyDescription_EN = "Number 3",
-                FunDescribe_EN = "Adventure level",
-
-                IsTrigger = true,
-
-
-                IsAcceptValue = true,
-                SliderMinNum = 1,
-                SliderMaxNum = 50,
-
-            };
-            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
-            {
-                Vk = Keys.NumPad3,
-                FsModifiers = HotKey.KeyModifiers.None,
-            };
-            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
-            {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x355E0C,
-
-                IsSignatureCode = false,
-
-                IntPtrOffset = new uint[] { 0x950, 0x4c },
-                IsIntPtr = true,
-            });
-          
+            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetButtonDateStruct("设置冒险关卡", "Adventure level", true, 1, 50); 
         }
 
         public override void Awake()
@@ -54,7 +19,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            memory.WriteMemory<int>(gameDataAddress.Address, (int)value);
+            memory.WriteMemory<int>(Other.GameFuns.AddressDataManager.GetAddress("adventureLevel"), (int)value);
         }
 
         public override void DoRunAgain(double value)

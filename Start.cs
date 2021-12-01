@@ -11,7 +11,7 @@ namespace WPFCheatUITemplate
     {
        public static void Init()
         {
-            
+            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.None, Keys.NumPad1);
             new Sun();
             new Coin();
             new AdventureLevel();
@@ -20,15 +20,19 @@ namespace WPFCheatUITemplate
             new DefaultPlantLayout();
             new NoCd();
             new DrawWindow();
+
             UIManager.CreatSeparate("基本属性", "Basic properties");
+            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Shift, Keys.W);
             new AutoGet();
+
+            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Ctrl, Keys.NumPad1);
             new ArbitrarilyPlant();
             new AllowBackground();
 
             UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             new FastGameFun()
             {
-                gameFunDataAndUIStruct =UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed",false),
+                gameFunDataAndUIStruct = UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed",false),
 
                 doFirstTime = (i, v) =>
                 {

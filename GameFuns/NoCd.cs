@@ -8,34 +8,7 @@ namespace WPFCheatUITemplate.GameFuns
        
         public NoCd()
         {
-            gameFunDataAndUIStruct = new Other.GameFunDataAndUIStruct();
-            gameFunDataAndUIStruct.uIData = new Other.UIData()
-            {
-                KeyDescription_SC = "数字键7",
-                FunDescribe_SC = "无冷却时间",
-
-                KeyDescription_TC = "數字鍵7",
-                FunDescribe_TC = "無冷卻時間",
-
-                KeyDescription_EN = "Number 7",
-                FunDescribe_EN = "No cool down time",
-
-                IsTrigger = false
-
-            };
-            gameFunDataAndUIStruct.refHotKey = new Other.RefHotKey()
-            {
-                Vk = Keys.NumPad7,
-                FsModifiers = HotKey.KeyModifiers.None,
-            };
-            gameFunDataAndUIStruct.AddData(GameVersion.Version.Default, new Other.GameData()
-            {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x9ce02,
-                IsSignatureCode = false,
-                IsIntPtr = false,
-            });
-
+            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetCheckButtonDateStruct("无冷却时间", "No cool down time", false);
         }
 
         public override void Awake()
@@ -45,12 +18,12 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0x74 });
+            memory.WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("noCd"), new byte[] { 0x74 });
         }
 
         public override void DoRunAgain(double value)
         {
-            memory.WriteMemory<byte>(gameDataAddress.Address, new byte[] { 0x7e });
+            memory.WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("noCd"), new byte[] { 0x7e });
         }
         public override void Ending()
         {

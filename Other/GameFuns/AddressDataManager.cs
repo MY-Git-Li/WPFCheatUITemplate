@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheatUITemplt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,23 +16,38 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         static Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
+        static Dictionary<string, GameDataAddress> curentGameDataAddress = new Dictionary<string, GameDataAddress>();
+
         public static void Init()
         {
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (var type in types)
+            Task.Factory.StartNew(() => 
             {
-                if (type.IsInterface)
-                    continue;
-                if (typeof(Interface.IAddressDatas).IsAssignableFrom(type))
+                Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+                foreach (var type in types)
                 {
-                   if (!type.IsAbstract)
-                   {
-                        var obj = Activator.CreateInstance(type) as Interface.IAddressDatas;
+                    if (type.IsInterface)
+                        continue;
+                    if (typeof(Interface.IAddressDatas).IsAssignableFrom(type))
+                    {
+                        if (!type.IsAbstract)
+                        {
+                            var obj = Activator.CreateInstance(type) as Interface.IAddressDatas;
 
-                        obj.Init();
+                            obj.Init();
+                        }
                     }
-                }
 
+                }
+                GetAllGameDataAddress();
+            });
+        }
+
+        public static void GetAllGameDataAddress()
+        {
+            
+            foreach (var item in data_Dic[version])
+            {
+                curentGameDataAddress.Add(item.Key,item.Value.GetDataAddress());
             }
         }
 
@@ -60,7 +76,14 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 var dic = data_Dic[version];
                 if (dic.ContainsKey(id))
                 {
-                    ret = dic[id].GetDataAddress().Address;
+                    if (!curentGameDataAddress.ContainsKey(id))
+                    {
+                        var dataAddress = dic[id].GetDataAddress();
+                        curentGameDataAddress.Add(id, dataAddress);
+                        return dataAddress.Address;
+                    }
+                    ret = curentGameDataAddress[id].Address;
+                    //ret = dic[id].GetDataAddress().Address;
                 }
                
             }
