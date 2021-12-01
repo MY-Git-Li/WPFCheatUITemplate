@@ -790,6 +790,11 @@ namespace CheatUITemplt
 
             System.Windows.MessageBox.Show(text, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
 
+            System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);//重启软件
+
+            Environment.Exit(0);//关闭程序
+
+            
         }
 
         public void WndProcWPF(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

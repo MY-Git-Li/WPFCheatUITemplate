@@ -18,9 +18,10 @@ namespace WPFCheatUITemplate
             MessageBox.Show("我们很抱歉，当前应用程序遇到一些问题，该操作已经终止，请进行重试，如果问题继续存在，请联系管理员.", "意外的操作", MessageBoxButton.OK,MessageBoxImage.Error);
             e.Handled = true;
 
-            Application.Current.Shutdown();//关闭程序
+            System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);//重启软件
 
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);//重启软件
+            Environment.Exit(0);//关闭程序
+
         }
     }
 }
