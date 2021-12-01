@@ -545,7 +545,7 @@ namespace CheatUITemplt
                         if (item.gameFun.gameFunDataAndUIStruct.uIData.IsTrigger)
                         {
                             RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
-                            new HotSystemFun(async () =>
+                            new HotSystemFun(() =>
                             {
 
                                 Slider slider = item.myStackPanel.ValueEntered;
@@ -554,7 +554,6 @@ namespace CheatUITemplt
 
                                 soundEffect.PlayTurnOnEffect();
 
-                                await Task.Delay(500);
 
                             }));
                         }
@@ -563,7 +562,6 @@ namespace CheatUITemplt
                             RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.checkBox),
                             new HotSystemFun(() =>
                             {
-
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
