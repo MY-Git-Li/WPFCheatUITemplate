@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-
+using WPFCheatUITemplate.Other.Tools.Extensions;
 namespace WPFCheatUITemplate
 {
     /// <summary>
@@ -15,7 +15,23 @@ namespace WPFCheatUITemplate
     {
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show("我们很抱歉，当前应用程序遇到一些问题，该操作已经终止，请进行重试，如果问题继续存在，请联系管理员.", "意外的操作", MessageBoxButton.OK,MessageBoxImage.Error);
+
+            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
+            string error = "";
+            if (mode == "SC")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.error_sc;
+            }
+            if (mode == "TC")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.error_sc.ToTraditional();
+            }
+            if (mode == "EN")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.error_en;
+            }
+
+            MessageBox.Show(error.Split('@')[0], error.Split('@')[1], MessageBoxButton.OK,MessageBoxImage.Error);
             e.Handled = true;
 
             System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);//重启软件

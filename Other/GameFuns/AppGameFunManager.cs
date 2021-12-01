@@ -10,6 +10,7 @@ using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
 using WPFCheatUITemplate.Other.Exceptions;
 using WPFCheatUITemplate.Other.Interface;
+using WPFCheatUITemplate.Other.Tools.Extensions;
 using static CheatUITemplt.HotKey;
 
 namespace CheatUITemplt
@@ -37,8 +38,6 @@ namespace CheatUITemplt
         MyButtonManger myButtonManger;
 
         CreateUIGrid createUIGrid;
-
-        LanguageUI messageBoxMessage;
 
         InvestigateGame investigateGame;
 
@@ -357,8 +356,6 @@ namespace CheatUITemplt
             System.Windows.Interop.WindowInteropHelper wndHelper = new System.Windows.Interop.WindowInteropHelper(mainWindow);
             Hwnd = wndHelper.Handle;
 
-            RegisteMessageBoxMessage();
-
             StartExtends();
 
             investigateGame.FindingGame();
@@ -383,16 +380,6 @@ namespace CheatUITemplt
             
         }
 
-        void RegisteMessageBoxMessage()
-        {
-            messageBoxMessage = new LanguageUI()
-            {
-                Description_SC = "未检测到游戏进程，请先运行游戏在激活修改功能@错误",
-                Description_TC = "未檢測到遊戲進程，請先運行遊戲在激活修改功能@錯誤",
-                Description_EN = "Game is not detected,please launch the game before activating cheats.@Error"
-            };
-            uILangerManger.RegisterLanguageUI(messageBoxMessage);
-        }
 
         public void RegisterManger(UILangerManger uILangerManger)
         {
@@ -723,13 +710,48 @@ namespace CheatUITemplt
 
         void ButtonHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show(messageBoxMessage.ShowText.Split('@')[0], messageBoxMessage.ShowText.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+
+            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
+            string error = "";
+            if (mode == "SC")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.messbox_sc;
+            }
+            if (mode == "TC")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.messbox_sc.ToTraditional();
+            }
+            if (mode == "EN")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.messbox;
+            }
+
+
+
+            System.Windows.MessageBox.Show(error.Split('@')[0], error.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         void CheckBoxHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
+
+            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
+            string error = "";
+            if (mode == "SC")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.messbox_sc;
+            }
+            if (mode == "TC")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.messbox_sc.ToTraditional();
+            }
+            if (mode == "EN")
+            {
+                error = WPFCheatUITemplate.Properties.Resources.messbox;
+            }
+
+
             var check = sender as System.Windows.Controls.CheckBox;
-            System.Windows.MessageBox.Show(messageBoxMessage.ShowText.Split('@')[0], messageBoxMessage.ShowText.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show(error.Split('@')[0], error.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
             check.IsChecked = false;
         }
 
@@ -737,11 +759,60 @@ namespace CheatUITemplt
         {
             var g = e.gameData;
 
+            #region 详细错误信息
+
+            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
+            string Details = "";
+            string Modulename = "";
+            string mouduleOffset = "";
+            string PointerOffset = "";
+            string Signature = "";
+            string Signatureoffset = "";
+            string Wrongaddress = "";
+            string Exception = "";
+
+
+
+            if (mode == "SC")
+            {
+                Details = WPFCheatUITemplate.Properties.Resources.Details_sc;
+                Modulename = WPFCheatUITemplate.Properties.Resources.Modulename_sc;
+                mouduleOffset = WPFCheatUITemplate.Properties.Resources.mouduleOffset_sc;
+                PointerOffset = WPFCheatUITemplate.Properties.Resources.PointerOffset_sc;
+                Signature = WPFCheatUITemplate.Properties.Resources.Signature_sc;
+                Signatureoffset = WPFCheatUITemplate.Properties.Resources.Signatureoffset_Sc;
+                Wrongaddress = WPFCheatUITemplate.Properties.Resources.Wrongaddress_sc;
+                Exception = WPFCheatUITemplate.Properties.Resources.Exception_sc;
+            }
+            if (mode == "TC")
+            {
+                Details = WPFCheatUITemplate.Properties.Resources.Details_sc.ToTraditional();
+                Modulename = WPFCheatUITemplate.Properties.Resources.Modulename_sc.ToTraditional();
+                mouduleOffset = WPFCheatUITemplate.Properties.Resources.mouduleOffset_sc.ToTraditional();
+                PointerOffset = WPFCheatUITemplate.Properties.Resources.PointerOffset_sc.ToTraditional();
+                Signature = WPFCheatUITemplate.Properties.Resources.Signature_sc.ToTraditional();
+                Signatureoffset = WPFCheatUITemplate.Properties.Resources.Signatureoffset_Sc.ToTraditional();
+                Wrongaddress = WPFCheatUITemplate.Properties.Resources.Wrongaddress_sc.ToTraditional();
+                Exception = WPFCheatUITemplate.Properties.Resources.Exception_sc.ToTraditional();
+            }
+            if (mode == "EN")
+            {
+                Details = WPFCheatUITemplate.Properties.Resources.Details;
+                Modulename = WPFCheatUITemplate.Properties.Resources.Modulename;
+                mouduleOffset = WPFCheatUITemplate.Properties.Resources.mouduleOffset;
+                PointerOffset = WPFCheatUITemplate.Properties.Resources.PointerOffset;
+                Signature = WPFCheatUITemplate.Properties.Resources.Signature;
+                Signatureoffset = WPFCheatUITemplate.Properties.Resources.Signatureoffset;
+                Wrongaddress = WPFCheatUITemplate.Properties.Resources.Wrongaddress;
+                Exception = WPFCheatUITemplate.Properties.Resources.Exception;
+            }
+
+
             string text = "";
 
             text += GameInformation.CurentVersion.ToString();
 
-            #region 详细错误信息
+            
 
             if (g.IsIntPtr)
             {
@@ -756,39 +827,39 @@ namespace CheatUITemplt
                         offset += " ";
                     }
 
-                    text = e.Message + "\n" +
-                    "详细信息:\n" +
-                    "模块名称:" + g.ModuleName + "\n" +
-                    "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
-                    "指针偏移:" + offset + "\n";
+                    text = Wrongaddress + "\n" +
+                    Details + "\n" +
+                    Modulename + g.ModuleName + "\n" +
+                    mouduleOffset + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
+                    PointerOffset + offset + "\n";
 
                 }else
                 {
-                    text = e.Message + "\n" +
-                    "详细信息:\n" +
-                    "模块名称:" + g.ModuleName + "\n" +
-                    "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X");
+                    text = Wrongaddress + "\n" +
+                    Details + "\n" +
+                    Modulename + g.ModuleName + "\n" +
+                    mouduleOffset + "0x" + g.ModuleOffsetAddress.ToString("X");
                 }
                
             }else if (g.IsSignatureCode)
             {
-                text = e.Message + "\n" +
-               "详细信息:\n" +
-               "模块名称:" + g.ModuleName + "\n" +
-               "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
-               "特征码:" + g.SignatureCode + "\n" +
-               "特征码偏移:" + "0x" + g.SignatureCodeOffset.ToString("X") + "\n";
+                text = Wrongaddress + "\n" +
+                Details + "\n" +
+                Modulename + g.ModuleName + "\n" +
+                mouduleOffset + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
+                Signature + g.SignatureCode + "\n" +
+                Signatureoffset + "0x" + g.SignatureCodeOffset.ToString("X") + "\n";
             }else
             {
-                text = e.Message + "\n" +
-              "详细信息:\n" +
-              "模块名称:" + g.ModuleName + "\n" +
-              "模块偏移:" + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n";
+                text = Wrongaddress + "\n" +
+                Details + "\n" +
+                Modulename + g.ModuleName + "\n" +
+                mouduleOffset + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n";
             }
 
-            #endregion
+            System.Windows.MessageBox.Show(text, Exception, MessageBoxButton.OK, MessageBoxImage.Error);
 
-            System.Windows.MessageBox.Show(text, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            #endregion
 
             System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);//重启软件
 
