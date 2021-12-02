@@ -378,7 +378,25 @@ namespace CheatUITemplt
 
             return address;
         }
-
+        public static uint GetProcessModuleSize(uint pid, string moduleName)
+        {
+            //获取该系统下所有进程
+            Process[] processes = Process.GetProcesses();
+            foreach (var process in processes)
+            {
+                if (process.Id == pid)
+                {
+                    foreach (ProcessModule item in process.Modules)
+                    {
+                        if (item.ModuleName == moduleName)
+                        {
+                            return (uint)item.ModuleMemorySize;
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
         public static uint MyGetProcessModuleHandle(uint pid, string moduleName)
         {
             //获取该系统下所有进程

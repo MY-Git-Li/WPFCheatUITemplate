@@ -124,6 +124,7 @@ namespace WPFCheatUITemplate.Other
 
             IntPtr handle = CheatTools.GetProcessHandle(GameMode.GameInformation.Pid);
             ModuleAddress = CheatTools.GetProcessModuleHandle((uint)GameMode.GameInformation.Pid, ModuleName);
+            uint mouduleSize = CheatTools.GetProcessModuleSize((uint)GameMode.GameInformation.Pid, ModuleName);
 
             if (!IsSignatureCode)
             {
@@ -141,7 +142,7 @@ namespace WPFCheatUITemplate.Other
             }
             else
             {
-                var offset = CheatTools.FindData(handle, ModuleAddress, ModuleAddress + 0x4000000, SignatureCode);
+                var offset = CheatTools.FindData(handle, ModuleAddress, ModuleAddress + mouduleSize, SignatureCode);
 
                 if (offset.Count == 0)
                 {
