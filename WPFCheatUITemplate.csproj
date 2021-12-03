@@ -179,8 +179,6 @@
     <Content Include="SoundEffect\ext09-vnxd7.wav" />
     <Resource Include="ICO\黑洞%28blackhole%29-ico.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Other\Event\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
