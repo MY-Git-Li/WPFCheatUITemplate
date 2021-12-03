@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using WPFCheatUITemplate;
 using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.Events;
 using WPFCheatUITemplate.Other.Exceptions;
 using WPFCheatUITemplate.Other.Interface;
 using WPFCheatUITemplate.Other.Tools.Extensions;
@@ -18,6 +19,7 @@ namespace CheatUITemplt
 
     class AppGameFunManager
     {
+        #region 引用类型
 
         List<GameFunUI> gameFunUIs = new List<GameFunUI>();
 
@@ -40,6 +42,8 @@ namespace CheatUITemplt
         CreateUIGrid createUIGrid;
 
         InvestigateGame investigateGame;
+
+        #endregion
 
         #region 单例模式
         //单例模式
@@ -192,7 +196,7 @@ namespace CheatUITemplt
             DataManagerInit();
             RunAllGameFunAwake();
             GetAllGameFunData();
-            
+            Events.DoOnGameRunEventAsync();
         }
         /// <summary>
         /// 找到游戏后，主线程执行的函数，解决跨线程处理ui的问题
@@ -217,7 +221,7 @@ namespace CheatUITemplt
             SetViewPid(GameInformation.Pid);
             StartFlashAnimation();
             RunAllGameFunEnding();
-
+            Events.DoOnGameEndEventAsync();
         }
 
         #endregion
@@ -571,6 +575,7 @@ namespace CheatUITemplt
                             RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
                             new HotSystemFun(() =>
                             {
+                                Events.DoRunGameFunsEventAsync(item.gameFun,true,true);
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
@@ -585,7 +590,7 @@ namespace CheatUITemplt
                                 {
                                     HandleZeroAddressExceptionOnRunGameFun(e);
                                 }
-                                
+
                             }));
                         }
                         else
@@ -593,6 +598,7 @@ namespace CheatUITemplt
                             RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.checkBox),
                             new HotSystemFun(() =>
                             {
+                                Events.DoRunGameFunsEventAsync(item.gameFun,false,true);
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
@@ -619,6 +625,7 @@ namespace CheatUITemplt
 
                             }, () =>
                             {
+                                Events.DoRunGameFunsEventAsync(item.gameFun,false,false);
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
@@ -793,7 +800,10 @@ namespace CheatUITemplt
 
         void HandleZeroAddressExceptionOnRunGameFun(ZeroAddressException e)
         {
+           
             var g = e.gameData;
+
+            Events.DoZeroAddressExceptionEventAsync(g);
 
             #region 详细错误信息
 

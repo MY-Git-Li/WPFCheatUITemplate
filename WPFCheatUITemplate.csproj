@@ -95,6 +95,7 @@
     <Compile Include="Other\Draw\DrawManager.cs" />
     <Compile Include="Other\Draw\DrawWindow.cs" />
     <Compile Include="Other\Draw\Memory.cs" />
+    <Compile Include="Other\Events\Events.cs" />
     <Compile Include="Other\Exceptions\ZeroAddressException.cs" />
     <Compile Include="Other\Extends\AddressDatas.cs" />
     <Compile Include="Other\Extends\Extends.cs" />
