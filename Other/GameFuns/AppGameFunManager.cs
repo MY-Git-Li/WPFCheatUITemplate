@@ -47,16 +47,16 @@ namespace CheatUITemplt
 
         #region 事件
 
-        public static event Events.OnGameRunHandler OnGameRunEvent;
+        public event Events.OnGameRunHandler OnGameRunEvent;
 
-        public static event Events.OnGameEndHandler OnGameEndEvent;
+        public event Events.OnGameEndHandler OnGameEndEvent;
 
-        public static event Events.OnRunGameFunsHandler OnRunGameFunsEvent;
+        public event Events.OnRunGameFunsHandler OnRunGameFunsEvent;
 
-        public static event Events.OnZeroAddressExceptionHandler OnZeroAddressExceptionEvent;
+        public event Events.OnZeroAddressExceptionHandler OnZeroAddressExceptionEvent;
 
 
-        public static async void DoOnGameRunEventAsync()
+        async void DoOnGameRunEventAsync()
         {
             var t = Task.Run(() =>
             {
@@ -64,7 +64,7 @@ namespace CheatUITemplt
             });
             await t;
         }
-        public static async void DoOnGameEndEventAsync()
+        async void DoOnGameEndEventAsync()
         {
             var t = Task.Run(() =>
             {
@@ -72,7 +72,7 @@ namespace CheatUITemplt
             });
             await t;
         }
-        public static async void DoRunGameFunsEventAsync(GameFun gameFun, bool isTrigger, bool isActive)
+        async void DoRunGameFunsEventAsync(GameFun gameFun, bool isTrigger, bool isActive)
         {
             var t = Task.Run(() =>
             {
@@ -80,7 +80,7 @@ namespace CheatUITemplt
             });
             await t;
         }
-        public static async void DoZeroAddressExceptionEventAsync(GameData gameData)
+        async void DoZeroAddressExceptionEventAsync(GameData gameData)
         {
             var t = Task.Run(() =>
             {
