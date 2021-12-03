@@ -43,7 +43,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             });
         }
 
-        public static void GetAllGameDataAddress()
+        static void GetAllGameDataAddress()
         {
             foreach (var item in data_Dic[GameVersion.Version.Default])
             {

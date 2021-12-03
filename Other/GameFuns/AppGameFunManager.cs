@@ -45,6 +45,52 @@ namespace CheatUITemplt
 
         #endregion
 
+        #region 事件
+
+        public static event Events.OnGameRunHandler OnGameRunEvent;
+
+        public static event Events.OnGameEndHandler OnGameEndEvent;
+
+        public static event Events.OnRunGameFunsHandler OnRunGameFunsEvent;
+
+        public static event Events.OnZeroAddressExceptionHandler OnZeroAddressExceptionEvent;
+
+
+        public static async void DoOnGameRunEventAsync()
+        {
+            var t = Task.Run(() =>
+            {
+                OnGameRunEvent?.Invoke();
+            });
+            await t;
+        }
+        public static async void DoOnGameEndEventAsync()
+        {
+            var t = Task.Run(() =>
+            {
+                OnGameEndEvent?.Invoke();
+            });
+            await t;
+        }
+        public static async void DoRunGameFunsEventAsync(GameFun gameFun, bool isTrigger, bool isActive)
+        {
+            var t = Task.Run(() =>
+            {
+                OnRunGameFunsEvent?.Invoke(gameFun, isTrigger, isActive);
+            });
+            await t;
+        }
+        public static async void DoZeroAddressExceptionEventAsync(GameData gameData)
+        {
+            var t = Task.Run(() =>
+            {
+                OnZeroAddressExceptionEvent?.Invoke(gameData);
+            });
+            await t;
+        }
+
+        #endregion
+
         #region 单例模式
         //单例模式
         private static AppGameFunManager instance;
@@ -196,7 +242,7 @@ namespace CheatUITemplt
             DataManagerInit();
             RunAllGameFunAwake();
             GetAllGameFunData();
-            Events.DoOnGameRunEventAsync();
+            DoOnGameRunEventAsync();
         }
         /// <summary>
         /// 找到游戏后，主线程执行的函数，解决跨线程处理ui的问题
@@ -221,7 +267,7 @@ namespace CheatUITemplt
             SetViewPid(GameInformation.Pid);
             StartFlashAnimation();
             RunAllGameFunEnding();
-            Events.DoOnGameEndEventAsync();
+            DoOnGameEndEventAsync();
         }
 
         #endregion
@@ -575,7 +621,7 @@ namespace CheatUITemplt
                             RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
                             new HotSystemFun(() =>
                             {
-                                Events.DoRunGameFunsEventAsync(item.gameFun,true,true);
+                                DoRunGameFunsEventAsync(item.gameFun,true,true);
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
@@ -598,7 +644,7 @@ namespace CheatUITemplt
                             RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.checkBox),
                             new HotSystemFun(() =>
                             {
-                                Events.DoRunGameFunsEventAsync(item.gameFun,false,true);
+                                DoRunGameFunsEventAsync(item.gameFun,false,true);
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
@@ -625,7 +671,7 @@ namespace CheatUITemplt
 
                             }, () =>
                             {
-                                Events.DoRunGameFunsEventAsync(item.gameFun,false,false);
+                                DoRunGameFunsEventAsync(item.gameFun,false,false);
 
                                 Slider slider = item.myStackPanel.ValueEntered;
 
@@ -803,7 +849,7 @@ namespace CheatUITemplt
            
             var g = e.gameData;
 
-            Events.DoZeroAddressExceptionEventAsync(g);
+            DoZeroAddressExceptionEventAsync(g);
 
             #region 详细错误信息
 
