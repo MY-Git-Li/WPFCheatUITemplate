@@ -249,21 +249,80 @@ namespace CheatUITemplt
                 RunAllGameFunEnding();
         }
 
+        #region 扩展方法相关
+
+        void GetAllExtend()
+        {
+            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            foreach (var type in types)
+            {
+                if (type.IsInterface)
+                    continue;
+                Type[] ins = type.GetInterfaces();
+                foreach (Type ty in ins)
+                {
+                    if (ty == typeof(IExtend))
+                    {
+                        if (!type.IsAbstract)
+                        {
+                            IExtend extend = Activator.CreateInstance(type) as IExtend;
+                            extends.Add(extend);
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        async void  StartExtendAsync(IExtend item)
+        { 
+            Task t = Task.Run(() =>
+            {
+                item.StartAsync();
+            });
+
+            await t;
+        }
+
+        async void EndExtendAync(IExtend item)
+        {
+            Task t = Task.Run(() =>
+            {
+                item.EndAsync();
+            });
+
+            await t;
+        }
+
+        void StartExtend(IExtend item)
+        {
+            item.Start();
+        }
+
+        void EndExtend(IExtend item)
+        {
+            item.End();
+        }
+
         void StartExtends()
         {
             foreach (var item in extends)
             {
-                Task.Factory.StartNew(() => item.Start());
+                StartExtend(item);
+                StartExtendAsync(item);
             }
         }
-
         void EndExtends()
         {
             foreach (var item in extends)
             {
-                Task.Factory.StartNew(() => item.End());
+                EndExtend(item);
+                EndExtendAync(item);
             }
         }
+
+        #endregion
 
         void SetViewPid(int pid)
         {
@@ -341,6 +400,9 @@ namespace CheatUITemplt
                 RegisterManger(new CreateLayout(Resdictionary), grid);
             }
 
+            GetAllExtend();
+
+            StartExtends();
         }
 
         private void mainWindows_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -355,8 +417,6 @@ namespace CheatUITemplt
         {
             System.Windows.Interop.WindowInteropHelper wndHelper = new System.Windows.Interop.WindowInteropHelper(mainWindow);
             Hwnd = wndHelper.Handle;
-
-            StartExtends();
 
             investigateGame.FindingGame();
 
@@ -393,35 +453,11 @@ namespace CheatUITemplt
                 this.soundEffect = soundEffect;
         }
 
-        void GetAllExtend()
-        {
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (var type in types)
-            {
-                if (type.IsInterface)
-                    continue;
-                Type[] ins = type.GetInterfaces();
-                foreach (Type ty in ins)
-                {
-                    if (ty == typeof(IExtend))
-                    {
-                        if (!type.IsAbstract)
-                        {
-                            IExtend extend = Activator.CreateInstance(type) as IExtend;
-                            extends.Add(extend);
-                        }
-
-                    }
-
-                }
-            }
-        }
 
         public void StartUI(System.Action action)
         {
             action?.Invoke();
             DrawUI();
-            GetAllExtend();
         }
 
         private void DrawUI()

@@ -96,6 +96,8 @@
     <Compile Include="Other\Draw\DrawWindow.cs" />
     <Compile Include="Other\Draw\Memory.cs" />
     <Compile Include="Other\Exceptions\ZeroAddressException.cs" />
+    <Compile Include="Other\Extends\AddressDatas.cs" />
+    <Compile Include="Other\Extends\Extends.cs" />
     <Compile Include="Other\Interface\IAddressDatas.cs" />
     <Compile Include="Other\GameFuns\AddressDataManager.cs" />
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
@@ -176,6 +178,9 @@
     <Content Include="SoundEffect\afpiz-if2hn.wav" />
     <Content Include="SoundEffect\ext09-vnxd7.wav" />
     <Resource Include="ICO\黑洞%28blackhole%29-ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Other\Event\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
