@@ -119,5 +119,67 @@ namespace WPFCheatUITemplate
 
         }
     }
+    class MyAddressDatas_1_0_0 : IAddressDatas
+    {
+        public void Init()
+        {
+           
+            AddressDataManager.AddData("sun", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768, 0x5560 },
+                IsIntPtr = true,
+            });
+
+            AddressDataManager.AddData("coin", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x82C, 0x28 },
+                IsIntPtr = true,
+            });
+
+            AddressDataManager.AddData("adventureLevel", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x82C, 0x24 },
+                IsIntPtr = true,
+            });
+
+            AddressDataManager.AddData("changeMode", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x91c },
+                IsIntPtr = true,
+            });
+
+            AddressDataManager.AddData("tree", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x824, 0xF4 },
+                IsIntPtr = true,
+            });
+
+        }
+    }
 
 }

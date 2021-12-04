@@ -243,6 +243,7 @@ namespace CheatUITemplt
             RunAllGameFunAwake();
             GetAllGameFunData();
             //DoOnGameRunEventAsync();
+            ExtendsOnGameRun();
         }
         /// <summary>
         /// 找到游戏后，主线程执行的函数，解决跨线程处理ui的问题
@@ -325,7 +326,7 @@ namespace CheatUITemplt
             }
         }
 
-        async void  StartExtendAsync(IExtend item)
+        async void StartExtendAsync(IExtend item)
         { 
             Task t = Task.Run(() =>
             {
@@ -340,6 +341,16 @@ namespace CheatUITemplt
             Task t = Task.Run(() =>
             {
                 item.EndAsync();
+            });
+
+            await t;
+        }
+
+        async void OnGameRunAsync(IExtend item)
+        {
+            Task t = Task.Run(() =>
+            {
+                item.OnGameRunAsync();
             });
 
             await t;
@@ -363,12 +374,21 @@ namespace CheatUITemplt
                 StartExtendAsync(item);
             }
         }
+
         void EndExtends()
         {
             foreach (var item in extends)
             {
                 EndExtend(item);
                 EndExtendAync(item);
+            }
+        }
+
+       void ExtendsOnGameRun()
+       {
+            foreach (var item in extends)
+            {
+                OnGameRunAsync(item);
             }
         }
 
