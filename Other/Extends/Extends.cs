@@ -19,7 +19,7 @@ namespace WPFCheatUITemplate.Other.Extends
             
         }
 
-        public void OnGameRunAsync()
+        public virtual void OnGameRunAsync()
         {
             
         }
