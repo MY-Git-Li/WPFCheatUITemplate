@@ -53,7 +53,15 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             foreach (var item in data_Dic[version])
             {
-                curentGameDataAddress.Add(item.Key,item.Value.GetDataAddress());
+                if (curentGameDataAddress.ContainsKey(item.Key))
+                {
+                    curentGameDataAddress[item.Key] = item.Value.GetDataAddress();
+                }
+                else
+                {
+                    curentGameDataAddress.Add(item.Key, item.Value.GetDataAddress());
+                }
+
             }
         }
 

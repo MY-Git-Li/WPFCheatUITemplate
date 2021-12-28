@@ -8,7 +8,7 @@ namespace WPFCheatUITemplate
     {
         public void Init()
         {
-            AddressDataManager.AddData("supershoot", GameVersion.Version.Default,new GameData()
+            AddressDataManager.AddData("supershoot", GameVersion.Version.Default, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x6DC21,
@@ -83,6 +83,7 @@ namespace WPFCheatUITemplate
 
             AddressDataManager.AddData("noCd", GameVersion.Version.Default, new Other.GameData()
             {
+                //FF 46 ?? 8B 46 ?? 3B 46 ?? 7E 16
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x9ce02,
                 IsSignatureCode = false,
@@ -91,6 +92,7 @@ namespace WPFCheatUITemplate
 
             AddressDataManager.AddData("autoGet", GameVersion.Version.Default, new Other.GameData()
             {
+                //E8 34 F5 FF FF EB 16
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x3CC72,
 
@@ -123,7 +125,14 @@ namespace WPFCheatUITemplate
     {
         public void Init()
         {
-           
+            AddressDataManager.AddData("noCd", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x87296,
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
+
             AddressDataManager.AddData("sun", GameVersion.Version.V1_0_0_1051, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
@@ -177,6 +186,16 @@ namespace WPFCheatUITemplate
 
                 IntPtrOffset = new uint[] { 0x824, 0xF4 },
                 IsIntPtr = true,
+            });
+
+            AddressDataManager.AddData("autoGet", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                //E8 34 F5 FF FF EB 16
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x3158F,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
             });
 
         }
