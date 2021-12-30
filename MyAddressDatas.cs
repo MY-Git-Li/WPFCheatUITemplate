@@ -198,6 +198,14 @@ namespace WPFCheatUITemplate
                 IsIntPtr = false,
             });
 
+            AddressDataManager.AddData("arbitrarilyPlant", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0xFE2F,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
         }
     }
 
