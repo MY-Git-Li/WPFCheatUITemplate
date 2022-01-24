@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -38,6 +39,82 @@ namespace CheatUITemplt
         #endregion
 
         #region 内存相关方法
+
+        #region 32-64位通用泛型读写
+
+        [DllImport("kernel32.dll")]
+        public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out IntPtr lpNumberOfBytesRead);
+        [DllImport("kernel32.dll")]
+        public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out int lpNumberOfBytesWritten);
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T ReadMemory<T>(IntPtr _processHandle, IntPtr address) where T : struct
+        {
+            var ByteSize = Marshal.SizeOf(typeof(T));
+
+            var buffer = new byte[ByteSize];
+
+            ReadProcessMemory(_processHandle, address, buffer, buffer.Length, out var readBytes);
+
+            return ByteArrayToStructure<T>(buffer);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte[] ReadMemory(IntPtr _processHandle, IntPtr address, int size)
+        {
+            var buffer = new byte[size];
+
+            ReadProcessMemory(_processHandle, address, buffer, size, out var readBytes);
+
+            return buffer;
+        }
+
+
+        private static float[] ConvertToFloatArray(byte[] bytes)
+        {
+            if (bytes.Length % 4 != 0) throw new ArgumentException();
+
+            var floats = new float[bytes.Length / 4];
+
+            for (var i = 0; i < floats.Length; i++) floats[i] = BitConverter.ToSingle(bytes, i * 4);
+
+            return floats;
+        }
+
+        public static float[] ReadMatrix<T>(IntPtr _processHandle, IntPtr address, int matrixSize) where T : struct
+        {
+            var ByteSize = Marshal.SizeOf(typeof(T));
+
+            var buffer = new byte[ByteSize * matrixSize];
+
+            ReadProcessMemory(_processHandle, address, buffer, buffer.Length, out var readBytes);
+
+            return ConvertToFloatArray(buffer);
+        }
+
+        public static string ReadString(IntPtr _processHandle, IntPtr address, Encoding encoding, int maximumLength = 512)
+        {
+            var buffer = ReadMemory(_processHandle, address, maximumLength);
+            var ret = encoding.GetString(buffer);
+
+            if (ret.IndexOf('\0') != -1)
+            {
+                ret = ret.Remove(ret.IndexOf('\0'));
+            }
+
+            return ret;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool WriteMemory<T>(IntPtr _processHandle, IntPtr address, object value) where T : struct
+        {
+            var buffer = StructureToByteArray(value);
+
+            return WriteProcessMemory(_processHandle, address, buffer, buffer.Length, out var writtenBytes) && writtenBytes != 0;
+        }
+
+        #endregion
 
         #region 泛型读写
 
