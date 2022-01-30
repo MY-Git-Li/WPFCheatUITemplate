@@ -18,6 +18,15 @@ namespace WPFCheatUITemplate.Other.GameFuns
         static Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
         static Dictionary<string, GameDataAddress> curentGameDataAddress = new Dictionary<string, GameDataAddress>();
+        
+        struct ChangeData
+        {
+            public byte[] modifyData;
+            public byte[] orcData;
+        }
+
+        static Dictionary<GameVersion.Version, Dictionary<string, ChangeData>> DataSet = new Dictionary<GameVersion.Version,Dictionary<string, ChangeData>>();  
+
 
         public static void Init()
         {
@@ -81,6 +90,62 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         }
 
+        public static void AddData(string id, GameVersion.Version v, GameData gameData,byte[] modifyData, byte[] orcData)
+        {
+
+            if (!data_Dic.ContainsKey(v))
+            {
+                var dic = new Dictionary<string, GameData>();
+                dic[id] = gameData;
+                data_Dic[v] = dic;
+            }
+            else
+            {
+                data_Dic[v][id] = gameData;
+            }
+
+            var dicx = new Dictionary<string, ChangeData>();
+
+            ChangeData changeData;
+            changeData.orcData = orcData;
+            changeData.modifyData = modifyData;
+            dicx[id] = changeData;
+
+            DataSet[v] = dicx;
+
+        }
+
+        public static byte[] GetModifyData(string id)
+        {
+            if (DataSet.ContainsKey(version))
+            {
+                return HandleGetData(id, DataSet[version],false);
+            }
+            else if (DataSet.ContainsKey(GameVersion.Version.Default))
+            {
+                return HandleGetData(id, DataSet[GameVersion.Version.Default], false);
+            }
+            return new byte[] { 0 };
+
+        }
+
+
+        public static byte[] GetOrcData(string id)
+        {
+            if (DataSet.ContainsKey(version))
+            {
+                return HandleGetData(id, DataSet[version], true);
+            }
+            else if (DataSet.ContainsKey(GameVersion.Version.Default))
+            {
+                return HandleGetData(id, DataSet[GameVersion.Version.Default], true);
+            }
+
+            return new byte[] { 0 };
+        }
+
+
+
         public static int GetAddress(string id)
         {
             int ret = 0;
@@ -103,7 +168,21 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return ret;
         }
 
+        static byte[] HandleGetData(string id, Dictionary<string, ChangeData> dic,bool isOrc)
+        {
+            if (dic.ContainsKey(id))
+            {
+                if (isOrc)
+                {
+                    return dic[id].orcData;
+                }else
+                {
+                    return dic[id].modifyData;
+                }
+            }
 
+            return new byte[] { 0 };
+        }
         static int HandleGetAddress(GameVersion.Version v, Dictionary<string, GameData> dic,string id)
         {
             int ret = 0;

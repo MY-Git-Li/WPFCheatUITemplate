@@ -113,6 +113,18 @@ namespace WPFCheatUITemplate.Other.Draw
         }
 
 
+        public void WriteMemoryByID(string id,bool isOrc = false)
+        {
+            if (isOrc)
+            {
+                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("allowBackground"), Other.GameFuns.AddressDataManager.GetOrcData("allowBackground"));
+            }else
+            {
+                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("allowBackground"), Other.GameFuns.AddressDataManager.GetModifyData("allowBackground"));
+            }
+
+        }
+
 
         public float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
         {

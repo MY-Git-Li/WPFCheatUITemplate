@@ -15,7 +15,9 @@ namespace WPFCheatUITemplate
 
                 IsSignatureCode = false,
                 IsIntPtr = false,
-            });
+            },
+            new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 },
+            new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
 
             AddressDataManager.AddData("supershoot2", GameVersion.Version.Default, new GameData()
             {
@@ -24,7 +26,9 @@ namespace WPFCheatUITemplate
 
                 IsSignatureCode = false,
                 IsIntPtr = false,
-            });
+            },
+            new byte[] { 0x0F, 0x84 },
+            new byte[] { 0x0F, 0x85 });
 
             AddressDataManager.AddData("sun", GameVersion.Version.Default, new Other.GameData()
             {
@@ -117,7 +121,9 @@ namespace WPFCheatUITemplate
                 ModuleOffsetAddress = 0x5D040,
                 IsSignatureCode = false,
                 IsIntPtr = false,
-            });
+            }, 
+            new byte[] { 0xC2, 0x04, 0x00 },
+            new byte[] { 0x55, 0x8B, 0xEC });
 
         }
     }
@@ -206,6 +212,16 @@ namespace WPFCheatUITemplate
                 IsSignatureCode = false,
                 IsIntPtr = false,
             });
+
+            AddressDataManager.AddData("allowBackground", GameVersion.Version.V1_0_0_1051, new Other.GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x14EBA8,
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+           new byte[] {112},
+           new byte[] {116});
         }
     }
 

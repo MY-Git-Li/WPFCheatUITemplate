@@ -36,13 +36,13 @@ namespace WPFCheatUITemplate
 
                 doFirstTime = (i, v) =>
                 {
-                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot"), new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 });
-                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot2"), new byte[] { 0x0F, 0x84 });
+                    i.memory.WriteMemoryByID("supershoot");
+                    i.memory.WriteMemoryByID("supershoot2");
                 },
                 doRunAgain = (i, v) =>
                 {
-                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot"), new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
-                    i.memory.WriteMemory<byte>(AddressDataManager.GetAddress("supershoot2"), new byte[] { 0x0F, 0x85 });
+                    i.memory.WriteMemoryByID("supershoot", true);
+                    i.memory.WriteMemoryByID("supershoot2", true);
                 },
 
             }.Go();
