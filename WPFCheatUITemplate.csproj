@@ -103,6 +103,9 @@
     <Compile Include="Other\GameFuns\AddressDataManager.cs" />
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
     <Compile Include="Other\GameFuns\GameFunDataAndUIStruct.cs" />
+    <Compile Include="Other\Tools\EcanConvertToCh.cs" />
+    <Compile Include="Other\Tools\KeybdAndMouser\Keybd.cs" />
+    <Compile Include="Other\Tools\KeybdAndMouser\mouse.cs" />
     <Compile Include="Other\UI\UIManager.cs" />
     <Compile Include="Other\Interface\IExtend.cs" />
     <Compile Include="Other\Tools\ASM.cs" />
