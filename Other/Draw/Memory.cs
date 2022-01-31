@@ -130,6 +130,11 @@ namespace WPFCheatUITemplate.Other.Draw
             WriteMemory<T>(Other.GameFuns.AddressDataManager.GetAddress(id), value);
         }
 
+        public void WriteMemoryByID<T>(string id, byte[] value) where T : struct
+        {
+            WriteMemory<T>(Other.GameFuns.AddressDataManager.GetAddress(id), value);
+        }
+
 
         public float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
         {
