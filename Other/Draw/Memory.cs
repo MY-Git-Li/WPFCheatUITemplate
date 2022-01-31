@@ -117,10 +117,10 @@ namespace WPFCheatUITemplate.Other.Draw
         {
             if (isOrc)
             {
-                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("allowBackground"), Other.GameFuns.AddressDataManager.GetOrcData("allowBackground"));
+                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress(id), Other.GameFuns.AddressDataManager.GetOrcData(id));
             }else
             {
-                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("allowBackground"), Other.GameFuns.AddressDataManager.GetModifyData("allowBackground"));
+                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress(id), Other.GameFuns.AddressDataManager.GetModifyData(id));
             }
 
         }
