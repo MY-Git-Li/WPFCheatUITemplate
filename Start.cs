@@ -32,7 +32,7 @@ namespace WPFCheatUITemplate
             UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             new FastGameFun()
             {
-                gameFunDataAndUIStruct = UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed",false),
+                gameFunDataAndUIStruct = UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed"),
 
                 doFirstTime = (i, v) =>
                 {
