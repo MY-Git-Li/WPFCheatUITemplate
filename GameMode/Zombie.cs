@@ -5,119 +5,59 @@ using System.Collections.Generic;
 namespace WPFCheatUITemplate.GameMode
 {
 
-    public struct AttributeOffset<T> where T : struct
+    class Zombie:GameModeData
     {
-        public int baseaddress;
-        public int offset;
+        private float x;
 
-        public AttributeOffset(int basess,int offset=0)
+        private float y;
+
+        private int row;
+
+        private bool islive;
+
+        private int hathp;
+
+        private int hattmax;
+
+        private int annexhp;
+
+        private int annexmaxhp;
+
+        private int hp;
+
+        private int hpmax;
+
+
+        public float X { get => GetValue<float>("X"); set => x = SetValue<float>("X", value); }
+        public float Y { get => GetValue<float>("Y"); set => y = SetValue<float>("Y", value); }
+        public int Row { get => GetValue<int>("Row"); set => row = SetValue<int>("Row", value); }
+        public bool IsLive { get => GetValue<bool>("IsLive"); set => islive = SetValue<bool>("IsLive", value); }
+        public int HatHp { get => GetValue<int>("HatHp"); set => hathp = SetValue<int>("HatHp", value); }
+        public int HatMaxHp { get => GetValue<int>("HatMaxHp"); set => hattmax = SetValue<int>("HatMaxHp", value); }
+        public int AnnexHp { get => GetValue<int>("AnnexHp"); set => annexhp = SetValue<int>("AnnexHp", value); }
+        public int AnnexMaxHp { get => GetValue<int>("AnnexMaxHp"); set => annexmaxhp = SetValue<int>("AnnexMaxHp", value); }
+        public int Hp { get => GetValue<int>("Hp"); set => hp = SetValue<int>("Hp", value); }
+        public int HpMax { get => GetValue<int>("HpMax"); set => hpmax = SetValue<int>("HpMax", value); }
+
+        public Zombie(IntPtr BaseAddress) : base(BaseAddress)
         {
-            baseaddress = basess;
-            this.offset = offset;
+            
         }
 
-        public T Value
+        public override void InitData()
         {
-            get
-            {
-                return CheatTools.ReadMemory<T>(GameInformation.Handle, (IntPtr)(baseaddress + offset));
-            }
+            var Def = GameVersion.Version.Default;
 
-            set
-            {
-                CheatTools.WriteMemory<T>(GameInformation.Handle, (IntPtr)(baseaddress + offset), Value);
-            }
-        }
-    }
-
-    class Zombie
-    {
-        public AttributeOffset<float> X;
-
-        public AttributeOffset<float> Y;
-
-        public AttributeOffset<int> Row;
-
-        public AttributeOffset<bool> IsLive;
-
-        public AttributeOffset<int>  HatHp;
-
-        public AttributeOffset<int> HatMaxHp;
-
-        public AttributeOffset<int> AnnexHp;
-
-        public AttributeOffset<int> AnnexMaxHp;
-
-        public AttributeOffset<int> Hp;
-
-        public AttributeOffset<int> HpMax;
-
-        public Zombie(int BaseAddress, GameVersion.Version Version)
-        {
-            X = new AttributeOffset<float>(BaseAddress);
-
-            Y = new AttributeOffset<float>(BaseAddress);
-
-            Row = new AttributeOffset<int>(BaseAddress);
-
-            IsLive = new AttributeOffset<bool>(BaseAddress);
-
-            HatHp = new AttributeOffset<int>(BaseAddress);
-
-            HatMaxHp = new AttributeOffset<int>(BaseAddress);
-
-            AnnexMaxHp = new AttributeOffset<int>(BaseAddress);
-
-            AnnexHp = new AttributeOffset<int>(BaseAddress);
-
-            Hp = new AttributeOffset<int>(BaseAddress);
-
-            HpMax = new AttributeOffset<int>(BaseAddress);
-
-            SetZombieOffset(Version);
-        }
-
-
-        public void SetZombieOffset(GameVersion.Version Version)
-        {
-            //根据版本来更新数据
-            switch (Version)
-            {
-                case GameVersion.Version.Default:
-                    DefaultVersion();
-                    break;
-                case GameVersion.Version.V1_0_0_1051:
-                    DefaultVersion();
-                    break;
-                default:
-                    break;
-            }
-
-        }
-
-
-        void DefaultVersion()
-        {
-            X.offset = 0x2C;
-
-            Y.offset = 0x30;
-
-            Row.offset = 0x1c;
-
-            IsLive.offset = 0xeC;
-
-            HatHp.offset = 0xD0;
-
-            HatMaxHp.offset = 0xD4;
-
-            AnnexHp.offset = 0xDC;
-
-            AnnexMaxHp.offset = 0xE0;
-
-            Hp.offset = 0xC8;
-
-            HpMax.offset = 0xCC;
-
+            AddData("X", Def, 0x2C);
+            AddData("Y", Def, 0x30);
+            AddData("Row", Def, 0x1c);
+            AddData("IsLive", Def, 0xeC);
+            AddData("HatHp", Def, 0xD0);
+            AddData("HatMaxHp", Def, 0xD4);
+            AddData("AnnexHp", Def, 0xDC);
+            AddData("AnnexMaxHp", Def, 0xE0);
+            AddData("Hp", Def, 0xC8);
+            AddData("HpMax", Def, 0xCC);
         }
 
     }

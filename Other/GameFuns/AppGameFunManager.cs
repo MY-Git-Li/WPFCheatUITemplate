@@ -47,47 +47,47 @@ namespace CheatUITemplt
 
         #region 事件
 
-        //public event Events.OnGameRunHandler OnGameRunEvent;
+        public event Events.OnGameRunHandler OnGameRunEvent;
 
-        //public event Events.OnGameEndHandler OnGameEndEvent;
+        public event Events.OnGameEndHandler OnGameEndEvent;
 
-        //public event Events.OnRunGameFunsHandler OnRunGameFunsEvent;
+        public event Events.OnRunGameFunsHandler OnRunGameFunsEvent;
 
-        //public event Events.OnZeroAddressExceptionHandler OnZeroAddressExceptionEvent;
+        public event Events.OnZeroAddressExceptionHandler OnZeroAddressExceptionEvent;
 
 
-        //async void DoOnGameRunEventAsync()
-        //{
-        //    var t = Task.Run(() =>
-        //    {
-        //        OnGameRunEvent?.Invoke();
-        //    });
-        //    await t;
-        //}
-        //async void DoOnGameEndEventAsync()
-        //{
-        //    var t = Task.Run(() =>
-        //    {
-        //        OnGameEndEvent?.Invoke();
-        //    });
-        //    await t;
-        //}
-        //async void DoRunGameFunsEventAsync(GameFun gameFun, bool isTrigger, bool isActive)
-        //{
-        //    var t = Task.Run(() =>
-        //    {
-        //        OnRunGameFunsEvent?.Invoke(gameFun, isTrigger, isActive);
-        //    });
-        //    await t;
-        //}
-        //async void DoZeroAddressExceptionEventAsync(GameData gameData)
-        //{
-        //    var t = Task.Run(() =>
-        //    {
-        //        OnZeroAddressExceptionEvent?.Invoke(gameData);
-        //    });
-        //    await t;
-        //}
+        async void DoOnGameRunEventAsync()
+        {
+            var t = Task.Run(() =>
+            {
+                OnGameRunEvent?.Invoke();
+            });
+            await t;
+        }
+        async void DoOnGameEndEventAsync()
+        {
+            var t = Task.Run(() =>
+            {
+                OnGameEndEvent?.Invoke();
+            });
+            await t;
+        }
+        async void DoRunGameFunsEventAsync(GameFun gameFun, bool isTrigger, bool isActive)
+        {
+            var t = Task.Run(() =>
+            {
+                OnRunGameFunsEvent?.Invoke(gameFun, isTrigger, isActive);
+            });
+            await t;
+        }
+        async void DoZeroAddressExceptionEventAsync(GameData gameData)
+        {
+            var t = Task.Run(() =>
+            {
+                OnZeroAddressExceptionEvent?.Invoke(gameData);
+            });
+            await t;
+        }
 
         #endregion
 
@@ -246,7 +246,7 @@ namespace CheatUITemplt
             DataManagerInit();
             RunAllGameFunAwake();
             GetAllGameFunData();
-            //DoOnGameRunEventAsync();
+            DoOnGameRunEventAsync();
             ExtendsOnGameRun();
         }
         /// <summary>
@@ -273,7 +273,7 @@ namespace CheatUITemplt
             SetViewPid(GameInformation.Pid);
             StartFlashAnimation();
             RunAllGameFunEnding();
-            //DoOnGameEndEventAsync();
+            DoOnGameEndEventAsync();
         }
 
         #endregion
@@ -630,7 +630,7 @@ namespace CheatUITemplt
                                 RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, null,
                                 new HotSystemFun(() =>
                                 {
-
+                                    DoRunGameFunsEventAsync(item.gameFun, true, true);
                                     try
                                     {
                                         item.gameFun.DoFirstTime(0);
@@ -650,7 +650,7 @@ namespace CheatUITemplt
                                 RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, null,
                                 new HotSystemFun(() =>
                                 {
-
+                                    DoRunGameFunsEventAsync(item.gameFun, false, true);
                                     try
                                     {
                                         item.gameFun.DoFirstTime(0);
@@ -667,7 +667,7 @@ namespace CheatUITemplt
 
                                 }, () =>
                                 {
-                                   
+                                    DoRunGameFunsEventAsync(item.gameFun, false, false);
                                     try
                                     {
                                         item.gameFun.DoRunAgain(0);
@@ -725,7 +725,7 @@ namespace CheatUITemplt
                                 RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
                                 new HotSystemFun(() =>
                                 {
-                                    //DoRunGameFunsEventAsync(item.gameFun,true,true);
+                                    DoRunGameFunsEventAsync(item.gameFun,true,true);
 
                                     Slider slider = item.myStackPanel.ValueEntered;
 
@@ -748,7 +748,7 @@ namespace CheatUITemplt
                                 RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.checkBox),
                                 new HotSystemFun(() =>
                                 {
-                                    //DoRunGameFunsEventAsync(item.gameFun,false,true);
+                                    DoRunGameFunsEventAsync(item.gameFun,false,true);
 
                                     Slider slider = item.myStackPanel.ValueEntered;
 
@@ -776,7 +776,7 @@ namespace CheatUITemplt
 
                                 }, () =>
                                 {
-                                    //DoRunGameFunsEventAsync(item.gameFun,false,false);
+                                    DoRunGameFunsEventAsync(item.gameFun,false,false);
 
                                     Slider slider = item.myStackPanel.ValueEntered;
 
@@ -961,7 +961,7 @@ namespace CheatUITemplt
            
             var g = e.gameData;
 
-            //DoZeroAddressExceptionEventAsync(g);
+            DoZeroAddressExceptionEventAsync(g);
 
             #region 详细错误信息
 

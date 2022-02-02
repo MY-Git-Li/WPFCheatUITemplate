@@ -66,7 +66,7 @@ namespace WPFCheatUITemplate.GameMode
         {
             List<Zombie> zombies = new List<Zombie>();
             int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle, zombieMaxNumOffset.pointer);
-
+            
 
             for (int i = -maxnum; i < maxnum; i++)
             {
@@ -76,10 +76,10 @@ namespace WPFCheatUITemplate.GameMode
                 if (address == 0)
                 {
                     int BaseAddress = CheatTools.ReadMemory<int>(GameInformation.Handle, zombieOffset.pointer) + zombieOffset.sizeOrOffset * i;
-                    
 
-                    Zombie zombie = new Zombie(BaseAddress, GameInformation.CurentVersion);
-                    
+
+                    Zombie zombie = new Zombie((IntPtr)BaseAddress);
+
                     zombies.Add(zombie);
                 }
 
