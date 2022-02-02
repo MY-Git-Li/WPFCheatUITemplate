@@ -176,6 +176,34 @@ namespace CheatUITemplt
             return ByteArrayToStructure<T>(buffer);
         }
 
+        public static byte[] ReadMemory(IntPtr m_pProcessHandle, IntPtr[] address, int size)
+        {
+            var buffer = new byte[size];
+
+            for (int i = 0; i < address.Length; i++)
+            {
+                if (i != address.Length - 1)
+                {
+                    ReadProcessMemory(m_pProcessHandle, (IntPtr)(ByteArrayToStructure<IntPtr>(buffer).ToInt64() + address[i].ToInt64()), buffer, buffer.Length, out _);
+
+                    int ret = ByteArrayToStructure<int>(buffer);
+
+
+                    if (ret == 0)
+                        return new byte[] { 0 };
+                }
+                else
+                {
+                    ReadProcessMemory(m_pProcessHandle, (IntPtr)(ByteArrayToStructure<IntPtr>(buffer).ToInt64() + address[i].ToInt64()), buffer, buffer.Length, out _);
+
+                    return buffer;
+                }
+
+            }
+           
+            return buffer;
+        }
+
         public static void WriteMemory<T>(IntPtr m_pProcessHandle, IntPtr[] address, T vaule) where T : struct
         {
 
