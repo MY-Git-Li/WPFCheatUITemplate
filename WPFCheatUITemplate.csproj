@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameMode\GameMode.cs" />
     <Compile Include="MyAddressDatas.cs" />
     <Compile Include="GameFuns\AdventureLevel.cs" />
     <Compile Include="GameFuns\AllowBackground.cs" />
