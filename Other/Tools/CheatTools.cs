@@ -114,15 +114,15 @@ namespace CheatUITemplt
             return WriteProcessMemory(_processHandle, address, buffer, buffer.Length, out var writtenBytes) && writtenBytes != 0;
         }
 
+        public static void WriteMemory<T>(IntPtr m_pProcessHandle, IntPtr address, byte[] Value) where T : struct
+        {
+            //byte[] buffer = StructureToByteArray(Value);
+            WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
+        }
+
         #endregion
 
-        #region 泛型读写
-
-        [DllImport("kernel32.dll")]
-        public static extern bool ReadProcessMemory(IntPtr hProcess, int lpBaseAddress, [In, Out] byte[] lpBuffer, int nsize, out IntPtr lpNumberOfBytesRead);
-
-        [DllImport("kernel32.dll")]
-        public static extern bool WriteProcessMemory(IntPtr hProcess, int lpBaseAddress, [In, Out] byte[] lpBuffer, int nsize, out IntPtr lpNumberOfBytesWritten);
+        #region 指针泛型读写
 
         private static T ByteArrayToStructure<T>(byte[] bytes) where T : struct
         {
@@ -148,7 +148,7 @@ namespace CheatUITemplt
             return array;
         }
 
-        public static T ReadMemory<T>(IntPtr m_pProcessHandle, int[] address) where T : struct
+        public static T ReadMemory<T>(IntPtr m_pProcessHandle, IntPtr[] address) where T : struct
         {
 
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
@@ -157,7 +157,7 @@ namespace CheatUITemplt
             {
                 if (i != address.Length - 1)
                 {
-                    ReadProcessMemory(m_pProcessHandle, (ByteArrayToStructure<int>(buffer) + address[i]), buffer, buffer.Length, out _);
+                    ReadProcessMemory(m_pProcessHandle, (IntPtr)(ByteArrayToStructure<IntPtr>(buffer).ToInt64() + address[i].ToInt64()), buffer, buffer.Length, out _);
 
                     int ret = ByteArrayToStructure<int>(buffer);
 
@@ -167,7 +167,7 @@ namespace CheatUITemplt
                 }
                 else
                 {
-                    ReadProcessMemory(m_pProcessHandle, (ByteArrayToStructure<int>(buffer) + address[i]), buffer, buffer.Length, out _);
+                    ReadProcessMemory(m_pProcessHandle, (IntPtr)(ByteArrayToStructure<IntPtr>(buffer).ToInt64() + address[i].ToInt64()), buffer, buffer.Length, out _);
 
                     return ByteArrayToStructure<T>(buffer);
                 }
@@ -176,7 +176,7 @@ namespace CheatUITemplt
             return ByteArrayToStructure<T>(buffer);
         }
 
-        public static void WriteMemory<T>(IntPtr m_pProcessHandle, int[] address, T vaule) where T : struct
+        public static void WriteMemory<T>(IntPtr m_pProcessHandle, IntPtr[] address, T vaule) where T : struct
         {
 
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
@@ -185,7 +185,7 @@ namespace CheatUITemplt
             {
                 if (i != address.Length - 1)
                 {
-                    ReadProcessMemory(m_pProcessHandle, (ByteArrayToStructure<int>(buffer) + address[i]), buffer, buffer.Length, out _);
+                    ReadProcessMemory(m_pProcessHandle, (IntPtr)(ByteArrayToStructure<IntPtr>(buffer).ToInt64() + address[i].ToInt64()), buffer, buffer.Length, out _);
 
                     int ret = ByteArrayToStructure<int>(buffer);
 
@@ -197,7 +197,7 @@ namespace CheatUITemplt
                 {
                     var dd = StructureToByteArray(vaule);
 
-                    WriteProcessMemory(m_pProcessHandle, (ByteArrayToStructure<int>(buffer) + address[i]), dd, dd.Length, out _);
+                    WriteProcessMemory(m_pProcessHandle, (IntPtr)(ByteArrayToStructure<IntPtr>(buffer).ToInt64() + address[i].ToInt64()), dd, dd.Length, out _);
 
                 }
 
@@ -205,31 +205,11 @@ namespace CheatUITemplt
 
         }
 
-        public static T ReadMemory<T>(IntPtr m_pProcessHandle, int address) where T : struct
-        {
-            byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
-            ReadProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
-            return ByteArrayToStructure<T>(buffer);
-        }
-
-        public static void WriteMemory<T>(IntPtr m_pProcessHandle, int address, object Value) where T : struct
-        {
-            byte[] buffer = StructureToByteArray(Value);
-            WriteProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
-        }
-
-        public static void WriteMemory<T>(IntPtr m_pProcessHandle, int address, byte[] Value) where T : struct
-        {
-            //byte[] buffer = StructureToByteArray(Value);
-           WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
-        }
-
-
         #endregion
 
         #region 字符串读写
 
-        public string ReadStringASCII(IntPtr m_pProcessHandle, int address, int size)
+        public string ReadStringASCII(IntPtr m_pProcessHandle, IntPtr address, int size)
         {
             byte[] buffer = new byte[size];
             ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);
@@ -247,7 +227,7 @@ namespace CheatUITemplt
             return Encoding.ASCII.GetString(buffer);
         }
 
-        public string ReadStringUnicode(IntPtr m_pProcessHandle, int address, int size)
+        public string ReadStringUnicode(IntPtr m_pProcessHandle, IntPtr address, int size)
         {
             byte[] buffer = new byte[size];
             ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);
@@ -267,7 +247,7 @@ namespace CheatUITemplt
 
         #endregion
 
-        #region 指定读写
+        #region 指定读写--不建议使用，推荐使用上面的泛型
         //读内存模块  
         public static IntPtr ReadModule(string ModuleName)
         {
@@ -379,16 +359,18 @@ namespace CheatUITemplt
         {
             WinAPI.CloseHandle(hProcess);
         }
+        #endregion
 
+        #region 特征码相关
         //寻找地址
-        public static List<uint> FindData(IntPtr hProcess, uint beginAddr, uint endAddr, String data)
+        public static List<IntPtr> FindData(IntPtr hProcess, IntPtr beginAddr, IntPtr endAddr, String data)
         {
-            List<uint> result = new List<uint>();
+            List<IntPtr> result = new List<IntPtr>();
             data = data.ToUpper();
             data = data.Replace(" ", "");
             data = data.Replace("??", @"\S{2}");
             Console.WriteLine(data);
-            uint len = (endAddr - beginAddr) / 2;
+            long len = ((endAddr.ToInt64() - beginAddr.ToInt64()) / 2);
             int pageSize = 0x8000;
             int dlen = data.Length;
             int count = (int)(len / pageSize + 1);
@@ -399,16 +381,16 @@ namespace CheatUITemplt
                 {
                     byte[] buffer = new byte[pageSize + dlen];
                     IntPtr byteAddress = Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
-                    uint b = (uint)(beginAddr + i * pageSize);
+                    long b = (long)(beginAddr + i * pageSize);
                     WinAPI.ReadProcessMemory(hProcess, (IntPtr)b, byteAddress, slen, IntPtr.Zero);
                     String hex = BitConverter.ToString(buffer, 0).Replace("-", "").ToUpper();
                     Regex regex = new Regex(data, RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     MatchCollection matchs = regex.Matches(hex);
                     foreach (Match m in matchs)
                     {
-                        uint r = (uint)(m.Index / 2 + m.Index % 2 + b);
+                        long r = (long)(m.Index / 2 + m.Index % 2 + b);
                         //Console.WriteLine(r.ToString("X8"));
-                        result.Add(r);
+                        result.Add((IntPtr)r);
                     }
                 }
                 return result;
@@ -437,18 +419,18 @@ namespace CheatUITemplt
         }
 
         //获得目标进程的模块地址
-        public static uint GetProcessModuleHandle(uint pid, string moduleName)
+        public static IntPtr GetProcessModuleHandle(uint pid, string moduleName)
         {
-            uint address;
+            IntPtr address;
             address = MyGetProcessModuleHandle(pid, moduleName);
             //如果自己的方法读取不到，则使用MyAPI.dll的方法去读
-            if (address == 0)
+            if (address.ToInt64() == 0)
             {
-                address = WinAPI.GetProcessModuleHandle(pid, moduleName);
+                address = (IntPtr)WinAPI.GetProcessModuleHandle(pid, moduleName);
                 int count = 0;
-                while (address < 5 && count < 1000)
+                while (address.ToInt64() < 5 && address.ToInt64() < 1000)
                 {
-                    address = WinAPI.GetProcessModuleHandle(pid, moduleName);
+                    address = (IntPtr)WinAPI.GetProcessModuleHandle(pid, moduleName);
                     count++;
                 }
             }
@@ -474,7 +456,7 @@ namespace CheatUITemplt
             }
             return 0;
         }
-        public static uint MyGetProcessModuleHandle(uint pid, string moduleName)
+        public static IntPtr MyGetProcessModuleHandle(uint pid, string moduleName)
         {
             //获取该系统下所有进程
             Process[] processes = Process.GetProcesses();
@@ -486,12 +468,12 @@ namespace CheatUITemplt
                     {
                         if (item.ModuleName == moduleName)
                         {
-                            return (uint)item.BaseAddress;
+                            return item.BaseAddress;
                         }
                     }
                 }
             }
-            return 0;
+            return IntPtr.Zero;
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using CheatUITemplt;
+using System;
 using System.Collections.Generic;
 
 namespace WPFCheatUITemplate.GameMode
@@ -19,12 +20,12 @@ namespace WPFCheatUITemplate.GameMode
         {
             get
             {
-                return CheatTools.ReadMemory<T>(GameInformation.Handle, new int[] { baseaddress + offset });
+                return CheatTools.ReadMemory<T>(GameInformation.Handle, (IntPtr)(baseaddress + offset));
             }
 
             set
             {
-                CheatTools.WriteMemory<T>(GameInformation.Handle, new int[] { baseaddress + offset },Value);
+                CheatTools.WriteMemory<T>(GameInformation.Handle, (IntPtr)(baseaddress + offset), Value);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace WPFCheatUITemplate.GameMode
 {
     public struct OffsetBase
     {
-        public int[] pointer;
+        public IntPtr[] pointer;
         public int sizeOrOffset;
     };
 
@@ -40,10 +40,10 @@ namespace WPFCheatUITemplate.GameMode
         }
         static void V1_0_0_1051Version()
         {
-            zombieOffset.pointer = new int[] { 0x6A9EC0, 0x768, 0x90 };
+            zombieOffset.pointer = new IntPtr[] { (IntPtr)0x6A9EC0, (IntPtr)0x768, (IntPtr)0x90 };
             zombieOffset.sizeOrOffset = 0x15c;
 
-            zombieMaxNumOffset.pointer = new int[] { 0x6A9EC0, 0x768, 0x94 };
+            zombieMaxNumOffset.pointer = new IntPtr[] { (IntPtr)0x6A9EC0, (IntPtr)0x768, (IntPtr)0x94 };
             zombieMaxNumOffset.sizeOrOffset = 0;
 
             zombieIslive.pointer = zombieOffset.pointer;
@@ -51,10 +51,10 @@ namespace WPFCheatUITemplate.GameMode
         }
         static void DefaultVersion()
         {
-            zombieOffset.pointer = new int[] { 0x755e0c, 0x868, 0xA8 };
+            zombieOffset.pointer = new IntPtr[] { (IntPtr)0x755e0c, (IntPtr)0x868, (IntPtr)0xA8 };
             zombieOffset.sizeOrOffset = 0x168;
 
-            zombieMaxNumOffset.pointer = new int[] { 0x755e0c, 0x868, 0xac };
+            zombieMaxNumOffset.pointer = new IntPtr[] { (IntPtr)0x755e0c, (IntPtr)0x868, (IntPtr)0xac };
             zombieMaxNumOffset.sizeOrOffset = 0;
 
             zombieIslive.pointer = zombieOffset.pointer;
@@ -71,7 +71,7 @@ namespace WPFCheatUITemplate.GameMode
             for (int i = -maxnum; i < maxnum; i++)
             {
                 int address = CheatTools.ReadMemory<int>(GameInformation.Handle, 
-                    new int[] { zombieIslive.pointer[0], zombieIslive.pointer[1], zombieIslive.pointer[2], zombieIslive.sizeOrOffset + zombieOffset.sizeOrOffset * i });
+                    new IntPtr[] { zombieIslive.pointer[0], zombieIslive.pointer[1], zombieIslive.pointer[2], (IntPtr)(zombieIslive.sizeOrOffset + zombieOffset.sizeOrOffset * i) });
 
                 if (address == 0)
                 {

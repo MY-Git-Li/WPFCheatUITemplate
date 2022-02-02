@@ -86,7 +86,7 @@ namespace WPFCheatUITemplate.Other
         /// <summary>
         /// 模块地址
         /// </summary>
-        public uint ModuleAddress { get; set; }
+        public IntPtr ModuleAddress { get; set; }
 
         /// <summary>
         /// 模块偏移----必填
@@ -131,25 +131,25 @@ namespace WPFCheatUITemplate.Other
                 if (IsIntPtr)
                 {
                    
-                        return new GameDataAddress(handle, ModuleAddress + ModuleOffsetAddress, IntPtrOffset);
+                        return new GameDataAddress(handle, (IntPtr)(ModuleAddress.ToInt64() + ModuleOffsetAddress), IntPtrOffset);
 
                 }
                 else
                 {
                    
-                      return new GameDataAddress(handle, ModuleAddress + ModuleOffsetAddress);
+                      return new GameDataAddress(handle, (IntPtr)(ModuleAddress.ToInt64() + ModuleOffsetAddress));
                 }
             }
             else
             {
-                var offset = CheatTools.FindData(handle, ModuleAddress, ModuleAddress + mouduleSize, SignatureCode);
+                var offset = CheatTools.FindData(handle, ModuleAddress, (IntPtr)(ModuleAddress.ToInt64() + mouduleSize), SignatureCode);
 
                 if (offset.Count == 0)
                 {
                     return null;
                 }
 
-                var obj = new GameDataAddress(handle, offset[0] + SignatureCodeOffset);
+                var obj = new GameDataAddress(handle, (IntPtr)(offset[0].ToInt64() + SignatureCodeOffset));
 
                 return obj;
                 

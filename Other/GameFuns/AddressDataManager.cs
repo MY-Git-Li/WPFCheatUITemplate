@@ -56,7 +56,11 @@ namespace WPFCheatUITemplate.Other.GameFuns
         {
             foreach (var item in data_Dic[GameVersion.Version.Default])
             {
-                curentGameDataAddress.Add(item.Key, item.Value.GetDataAddress());
+                if (!curentGameDataAddress.ContainsKey(item.Key))
+                {
+                    curentGameDataAddress.Add(item.Key, item.Value.GetDataAddress());
+                }
+               
             }
 
 
@@ -146,9 +150,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
 
 
-        public static int GetAddress(string id)
+        public static IntPtr GetAddress(string id)
         {
-            int ret = 0;
+            IntPtr ret = IntPtr.Zero;
 
             if (data_Dic.ContainsKey(version))
             {
@@ -183,9 +187,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             return new byte[] { 0 };
         }
-        static int HandleGetAddress(GameVersion.Version v, Dictionary<string, GameData> dic,string id)
+        static IntPtr HandleGetAddress(GameVersion.Version v, Dictionary<string, GameData> dic,string id)
         {
-            int ret = 0;
+            IntPtr ret = IntPtr.Zero;
             if (dic.ContainsKey(id))
             {
                 if (!curentGameDataAddress.ContainsKey(id))

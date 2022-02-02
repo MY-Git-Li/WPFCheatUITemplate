@@ -94,22 +94,26 @@ namespace WPFCheatUITemplate.Other.Draw
             };
         }
 
-        public T ReadMemory<T>(int address) where T : struct
+        public T ReadMemory<T>(IntPtr address) where T : struct
         {
             byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
-            WinAPI.ReadProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
+            //WinAPI.ReadProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
+            CheatUITemplt.CheatTools.ReadMemory(m_pProcessHandle, address, buffer.Length);
+
             return ByteArrayToStructure<T>(buffer);
         }
 
-        public void WriteMemory<T>(int address, object Value) where T : struct
+        public void WriteMemory<T>(IntPtr address, object Value) where T : struct
         {
             byte[] buffer = StructureToByteArray(Value);
-            WinAPI.WriteProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
+            CheatUITemplt.CheatTools.WriteMemory<T>(m_pProcessHandle, address, buffer);
+            //WinAPI.WriteProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
         }
-        public void WriteMemory<T>(int address, byte[] Value) where T : struct
+        public void WriteMemory<T>(IntPtr address, byte[] Value) where T : struct
         {
             //byte[] buffer = StructureToByteArray(Value);
-            WinAPI.WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
+            //WinAPI.WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
+            CheatUITemplt.CheatTools.WriteMemory<T>(m_pProcessHandle, address, Value);
         }
 
 

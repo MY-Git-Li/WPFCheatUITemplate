@@ -10,18 +10,18 @@ namespace WPFCheatUITemplate.GameMode
 {
     class GameMode: IAddressDatas
     {
-        Dictionary<string, int> _data;
+        Dictionary<string, IntPtr> _data;
 
         public GameMode()
         {
-            _data = new Dictionary<string, int>();
+            _data = new Dictionary<string, IntPtr>();
         }
 
         virtual public void Init() { }
        
         virtual public void InitData() { }
 
-        public int GetAddress(string ID)
+        public IntPtr GetAddress(string ID)
         {
             if (_data.ContainsKey(ID))
             {
