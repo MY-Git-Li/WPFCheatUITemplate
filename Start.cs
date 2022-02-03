@@ -17,6 +17,27 @@ namespace WPFCheatUITemplate
             new AdventureLevel();
             new ChangeMode();
             new Tree();
+            //"直接胜利"
+            new FastGameFun()
+            {
+
+                gameFunDataAndUIStruct = UIManager.GetButtonDateStruct("直接胜利", "Win", false),
+
+                doFirstTime = (i, v) =>
+                {
+                    var add = AddressDataManager.GetAddress("Win_Call_ECX");
+                    var ecx = i.memory.ReadMemory<int>(add);
+                    ASM asm = new ASM();
+                    asm.Mov_EAX(ecx);
+                    asm.Mov_ECX_EAX();
+                    asm.Mov_EAX(AddressDataManager.GetAddress("Win_Call").ToInt32());
+                    asm.Call_EAX();
+                    asm.Ret();
+                    asm.RunAsm(GameMode.GameInformation.Pid);
+
+                },
+
+            }.Go();
             new DefaultPlantLayout();
             new NoCd();
             new DrawWindow();
@@ -30,6 +51,7 @@ namespace WPFCheatUITemplate
             new AllowBackground();
 
             UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
+            //"超级攻速"
             new FastGameFun()
             {
                 gameFunDataAndUIStruct = UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed"),

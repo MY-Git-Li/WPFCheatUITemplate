@@ -96,11 +96,7 @@ namespace WPFCheatUITemplate.Other.Draw
 
         public T ReadMemory<T>(IntPtr address) where T : struct
         {
-            byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
-            //WinAPI.ReadProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
-            CheatUITemplt.CheatTools.ReadMemory(m_pProcessHandle, address, buffer.Length);
-
-            return ByteArrayToStructure<T>(buffer);
+            return CheatUITemplt.CheatTools.ReadMemory<T>(m_pProcessHandle, address);
         }
 
         public void WriteMemory<T>(IntPtr address, object Value) where T : struct

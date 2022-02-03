@@ -125,6 +125,25 @@ namespace WPFCheatUITemplate
             new byte[] { 0xC2, 0x04, 0x00 },
             new byte[] { 0x55, 0x8B, 0xEC });
 
+            AddressDataManager.AddData("Win_Call", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x18140,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
+
+            AddressDataManager.AddData("Win_Call_ECX", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868 },
+                IsIntPtr = true,
+            });
         }
     }
     class MyAddressDatas_1_0_0 : IAddressDatas
@@ -220,8 +239,29 @@ namespace WPFCheatUITemplate
                 IsSignatureCode = false,
                 IsIntPtr = false,
             },
-           new byte[] {112},
-           new byte[] {116});
+            new byte[] {112},
+            new byte[] {116});
+
+            AddressDataManager.AddData("Win_Call", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0xC3E0,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
+
+            AddressDataManager.AddData("Win_Call_ECX", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768 },
+                IsIntPtr = true,
+            });
+
         }
     }
 
