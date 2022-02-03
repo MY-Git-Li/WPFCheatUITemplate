@@ -18,7 +18,7 @@ namespace WPFCheatUITemplate
         public static Version GetCurrentVersion(IntPtr handle)
         {
             GameVersion.Version ret = Version.Default;
-            var ver = CheatUITemplt.CheatTools.ReadMemoryValue(0x552013, handle);
+            var ver = CheatUITemplt.CheatTools.ReadMemory<int>(handle, (IntPtr)0x552013);
             switch ((uint)ver)
             {
                 case 0xC35EDB74:

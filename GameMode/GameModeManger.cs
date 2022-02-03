@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.Interface;
 
 namespace WPFCheatUITemplate.GameMode
 {
@@ -14,79 +15,101 @@ namespace WPFCheatUITemplate.GameMode
         public int sizeOrOffset;
     };
 
-    class GameModeManger
+    class GameModeManger: GameModeManagerBase
     {
 
-
-        static OffsetBase zombieOffset;
-        static OffsetBase zombieMaxNumOffset;
-        static OffsetBase zombieIslive;
-
-        public static void SetData(GameVersion.Version CurentVersion)
+        public override void Init()
         {
-            //根据版本设置数据地址,GameDate
-            switch (CurentVersion)
-            {
-                case GameVersion.Version.Default:
-                    DefaultVersion();
-                    break;
-                case GameVersion.Version.V1_0_0_1051:
-                    V1_0_0_1051Version();
-                    break;
-                default:
-                    break;
-            }
+
+            DefaultVersion();
+
+            V1_0_0_1051Version();
 
         }
+
         static void V1_0_0_1051Version()
         {
-            zombieOffset.pointer = new IntPtr[] { (IntPtr)0x6A9EC0, (IntPtr)0x768, (IntPtr)0x90 };
-            zombieOffset.sizeOrOffset = 0x15c;
 
-            zombieMaxNumOffset.pointer = new IntPtr[] { (IntPtr)0x6A9EC0, (IntPtr)0x768, (IntPtr)0x94 };
-            zombieMaxNumOffset.sizeOrOffset = 0;
+            AddData("zombieHead", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
 
-            zombieIslive.pointer = zombieOffset.pointer;
-            zombieIslive.sizeOrOffset = 0xEC;
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768, 0x90 },
+                IsIntPtr = true,
+            });
+
+            AddData("zombieSize", GameVersion.Version.V1_0_0_1051, 0x15c);
+
+            AddData("zombieMaxNum", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768, 0x94 },
+                IsIntPtr = true,
+            });
+
         }
         static void DefaultVersion()
         {
-            zombieOffset.pointer = new IntPtr[] { (IntPtr)0x755e0c, (IntPtr)0x868, (IntPtr)0xA8 };
-            zombieOffset.sizeOrOffset = 0x168;
+            AddData("zombieHead", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
 
-            zombieMaxNumOffset.pointer = new IntPtr[] { (IntPtr)0x755e0c, (IntPtr)0x868, (IntPtr)0xac };
-            zombieMaxNumOffset.sizeOrOffset = 0;
+                IsSignatureCode = false,
 
-            zombieIslive.pointer = zombieOffset.pointer;
-            zombieIslive.sizeOrOffset = 0xEC;
+                IntPtrOffset = new uint[] { 0x868, 0xA8 },
+                IsIntPtr = true,
+            });
+
+            AddData("zombieSize", GameVersion.Version.Default, 0x168);
+
+            AddData("zombieMaxNum", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0xAC },
+                IsIntPtr = true,
+            });
         }
 
 
         public static List<Zombie> GetZombies()
         {
             List<Zombie> zombies = new List<Zombie>();
-            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle, zombieMaxNumOffset.pointer);
-            
+            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle,GetAddress("zombieMaxNum"));
+
+            var zombieHead = GetAddress("zombieHead");
+
+            var zombieSize = GetOffset("zombieSize");
 
             for (int i = -maxnum; i < maxnum; i++)
             {
-                int address = CheatTools.ReadMemory<int>(GameInformation.Handle, 
-                    new IntPtr[] { zombieIslive.pointer[0], zombieIslive.pointer[1], zombieIslive.pointer[2], (IntPtr)(zombieIslive.sizeOrOffset + zombieOffset.sizeOrOffset * i) });
 
-                if (address == 0)
+
+                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<IntPtr>(GameInformation.Handle, zombieHead).ToInt64() + zombieSize * i);
+
+                Zombie zombie = new Zombie(BaseAddress);
+
+                if (!zombie.IsDie && zombie.Hp > 0 && zombie.Hp <= 100000 && zombie.Row >= 0 && zombie.Row <= 5)
                 {
-                    int BaseAddress = CheatTools.ReadMemory<int>(GameInformation.Handle, zombieOffset.pointer) + zombieOffset.sizeOrOffset * i;
-
-
-                    Zombie zombie = new Zombie((IntPtr)BaseAddress);
-
                     zombies.Add(zombie);
                 }
 
-
             }
+
             return zombies;
         }
 
+        
     }
 }

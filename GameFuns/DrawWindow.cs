@@ -42,7 +42,7 @@ namespace WPFCheatUITemplate.GameFuns
             //int address = CheatTools.ReadMemoryValue(ret[ASM.RegisterType.EDI], gameFunDateStruct.Handle);
 
             //CheatTools.WriteMemoryInt(address+0x5578, gameFunDateStruct.Handle, (int)value);
-            GameModeManger.SetData(GameInformation.CurentVersion);
+           
             tt = new Thread(Draw);
             tt.IsBackground = true;
             tt.Start();
@@ -67,29 +67,28 @@ namespace WPFCheatUITemplate.GameFuns
 
                 foreach (var item in zombies)
                 {
-                    //g.DrawRectangle(drawManager._brushes["blue"],
-                    //item.X+20,item.Y,item.X+100,item.Y+115,1f);
 
-                    //g.DrawBox2D(drawManager._brushes["blue"], drawManager._brushes["red"], item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
-                    if (!item.IsLive)
-                    {
-                        if (item.X != 0 && item.Y != 0)
-                        {
-                            float HpMax = (float)(item.HatMaxHp + item.AnnexMaxHp + item.HpMax);
-                            float curentHp = (float)(item.HatHp + item.AnnexHp + item.Hp);
-                            float percenttage = curentHp / HpMax;
-                            percenttage = percenttage * 100;
-                            g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"],
-                                Rectangle.Create(item.X + 20, item.Y - 10, 80, 6), 1f, percenttage);
-                            g.DrawRectangle(drawManager._brushes["blue"],
-                            item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
-                            g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
-                                drawManager._brushes["blue"],
-                                item.X + 20, item.Y - 26,
-                                curentHp.ToString() + "/" + HpMax.ToString());
-                        }
+                    float HpMax = (float)(item.HatMaxHp + item.AnnexMaxHp + item.HpMax);
+                    float curentHp = (float)(item.HatHp + item.AnnexHp + item.Hp);
+                    float percenttage = curentHp / HpMax;
+                    percenttage = percenttage * 100;
+                    g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"],
+                        Rectangle.Create(item.X + 20, item.Y - 10, 80, 6), 1f, percenttage);
 
-                    }
+                    g.DrawRectangle(drawManager._brushes["blue"],
+                    item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
+
+                    g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
+                        drawManager._brushes["blue"],
+                        item.X + 20, item.Y - 26,
+                        curentHp.ToString() + "/" + HpMax.ToString());
+
+                    //g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
+                    //    drawManager._brushes["blue"],
+                    //    item.X + 20, item.Y + 46,
+                    //    "INDEX:" + zombies.FindIndex(i => i == item));
+
+
                 }
 
 

@@ -30,6 +30,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static void Init()
         {
+            //已知问题，由于是异步的导致，启动运用后立马使用，出现重复添加key问题
             Task.Factory.StartNew(() =>
             {
                 Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -128,7 +129,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 dic[id] = offset;
                 data_Offset[v] = dic;
             }
-            else
+            else if (!data_Offset[v].ContainsKey(id))
             {
                 data_Offset[v][id] = offset;
             }
@@ -173,16 +174,16 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             int ret = 0;
 
-            if (data_Dic.ContainsKey(version))
+            if (data_Offset.ContainsKey(version))
             {
 
-                ret = data_Offset[version][id];
+                ret = HandleGetOffset(id,data_Offset[version]);
 
             }
-            else if (data_Dic.ContainsKey(GameVersion.Version.Default))
+            else if (data_Offset.ContainsKey(GameVersion.Version.Default))
             {
 
-                ret = data_Offset[GameVersion.Version.Default][id];
+                ret = HandleGetOffset(id, data_Offset[GameVersion.Version.Default]);
             }
 
             return ret;
@@ -259,5 +260,18 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return ret;
         }
 
+        static int HandleGetOffset(string id, Dictionary<string, int> dic)
+        {
+            if (dic.ContainsKey(id))
+            {
+                return dic[id];
+            }
+            else if(data_Offset[GameVersion.Version.Default].ContainsKey(id))
+            {
+                return data_Offset[GameVersion.Version.Default][id];
+            }
+            
+            return 0;
+        }
     }
 }

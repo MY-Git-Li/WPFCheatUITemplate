@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GameMode\Other\GameModeData.cs" />
+    <Compile Include="GameMode\Other\GameModeManagerBase.cs" />
     <Compile Include="MyAddressDatas.cs" />
     <Compile Include="GameFuns\AdventureLevel.cs" />
     <Compile Include="GameFuns\AllowBackground.cs" />

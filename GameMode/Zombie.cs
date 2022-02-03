@@ -31,7 +31,7 @@ namespace WPFCheatUITemplate.GameMode
         public float X { get => GetValue<float>("X"); set => x = SetValue<float>("X", value); }
         public float Y { get => GetValue<float>("Y"); set => y = SetValue<float>("Y", value); }
         public int Row { get => GetValue<int>("Row"); set => row = SetValue<int>("Row", value); }
-        public bool IsLive { get => GetValue<bool>("IsLive"); set => islive = SetValue<bool>("IsLive", value); }
+        public bool IsDie { get => GetValue<bool>("IsDie"); set => islive = SetValue<bool>("IsDie", value); }
         public int HatHp { get => GetValue<int>("HatHp"); set => hathp = SetValue<int>("HatHp", value); }
         public int HatMaxHp { get => GetValue<int>("HatMaxHp"); set => hattmax = SetValue<int>("HatMaxHp", value); }
         public int AnnexHp { get => GetValue<int>("AnnexHp"); set => annexhp = SetValue<int>("AnnexHp", value); }
@@ -49,15 +49,25 @@ namespace WPFCheatUITemplate.GameMode
             var Def = GameVersion.Version.Default;
 
             AddData("X", Def, 0x2C);
+
             AddData("Y", Def, 0x30);
+
             AddData("Row", Def, 0x1c);
-            AddData("IsLive", Def, 0xeC);
+
+            AddData("IsDie", Def, 0xeC);
+
             AddData("HatHp", Def, 0xD0);
+
             AddData("HatMaxHp", Def, 0xD4);
+
             AddData("AnnexHp", Def, 0xDC);
+
             AddData("AnnexMaxHp", Def, 0xE0);
+
             AddData("Hp", Def, 0xC8);
+
             AddData("HpMax", Def, 0xCC);
+
         }
 
     }
