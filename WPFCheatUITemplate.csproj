@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameMode\Entity\Plant.cs" />
     <Compile Include="GameMode\Other\GameModeData.cs" />
     <Compile Include="GameMode\Other\GameModeManagerBase.cs" />
     <Compile Include="MyAddressDatas.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="GameFuns\Tree.cs" />
     <Compile Include="GameMode\GameInformation.cs" />
     <Compile Include="GameMode\GameModeManger.cs" />
-    <Compile Include="GameMode\Zombie.cs" />
+    <Compile Include="GameMode\Entity\Zombie.cs" />
     <Compile Include="GameMode\GameVersion.cs" />
     <Compile Include="Other\DataBase.cs" />
     <Compile Include="Other\Draw\WinAPI.cs" />

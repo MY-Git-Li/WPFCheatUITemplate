@@ -23,7 +23,48 @@ namespace WPFCheatUITemplate.GameMode
 
         static void V1_0_0_1051Version()
         {
+            ZomBie_V1_0_0();
 
+            Plant_v1_0_0();
+
+        }
+        static void DefaultVersion()
+        {
+            Zombie_VDef();
+
+            Plant_VDef();
+
+        }
+
+        private static void Plant_v1_0_0()
+        {
+            AddData("plantHead", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768, 0xAC },
+                IsIntPtr = true,
+            });
+
+            AddData("plantSize", GameVersion.Version.V1_0_0_1051, 0x14C);
+
+            AddData("plantMaxNum", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768, 0xB0 },
+                IsIntPtr = true,
+            });
+        }
+
+        private static void ZomBie_V1_0_0()
+        {
             AddData("zombieHead", GameVersion.Version.V1_0_0_1051, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
@@ -35,7 +76,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("zombieSize", GameVersion.Version.V1_0_0_1051, 0x15c);
+            AddData("zombieSize", GameVersion.Version.V1_0_0_1051, 0x15C);
 
             AddData("zombieMaxNum", GameVersion.Version.V1_0_0_1051, new GameData()
             {
@@ -47,9 +88,36 @@ namespace WPFCheatUITemplate.GameMode
                 IntPtrOffset = new uint[] { 0x768, 0x94 },
                 IsIntPtr = true,
             });
-
         }
-        static void DefaultVersion()
+
+        private static void Plant_VDef()
+        {
+            AddData("plantHead", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0xC4 },
+                IsIntPtr = true,
+            });
+
+            AddData("plantSize", GameVersion.Version.Default, 0x14C);
+
+            AddData("plantMaxNum", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0xC8 },
+                IsIntPtr = true,
+            });
+        }
+
+        private static void Zombie_VDef()
         {
             AddData("zombieHead", GameVersion.Version.Default, new GameData()
             {
@@ -76,7 +144,6 @@ namespace WPFCheatUITemplate.GameMode
             });
         }
 
-
         public static List<Zombie> GetZombies()
         {
             List<Zombie> zombies = new List<Zombie>();
@@ -88,7 +155,6 @@ namespace WPFCheatUITemplate.GameMode
 
             for (int i = -maxnum; i < maxnum; i++)
             {
-
 
                 IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<IntPtr>(GameInformation.Handle, zombieHead).ToInt64() + zombieSize * i);
 
@@ -104,6 +170,29 @@ namespace WPFCheatUITemplate.GameMode
             return zombies;
         }
 
-        
+        public static List<Plant> GetPlants()
+        {
+            List<Plant> plants = new List<Plant>();
+            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle, GetAddress("plantMaxNum"));
+
+            var plantHead = GetAddress("plantHead");
+
+            var plantSize = GetOffSet("plantSize");
+
+            for (int i = -maxnum; i < maxnum; i++)
+            {
+
+                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<IntPtr>(GameInformation.Handle, plantHead).ToInt64() + plantSize * i);
+
+                Plant plant = new Plant(BaseAddress);
+                if (plant.Hp > 0 && plant.Exist == 0)
+                {
+                    plants.Add(plant);
+                }
+
+            }
+
+            return plants;
+        }
     }
 }

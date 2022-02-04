@@ -49,10 +49,11 @@ namespace WPFCheatUITemplate.GameFuns
           
         }
         List<GameMode.Zombie> zombies;
+        List<GameMode.Plant> plants; 
         void Draw()
         {
            
-            drawManager.Init(GameInformation.ProcessName);
+            drawManager.Init(GameInformation.ProcessName,60);
             drawManager.SetBrushes((g) => { drawManager._brushes["blue"] = g.CreateSolidBrush(30, 144, 255); });
             drawManager.SetFonts((g) => { drawManager._fonts["Microsoft YaHei"] = g.CreateFont("Microsoft YaHei", 12); });
             drawManager.DrawFun((g) =>
@@ -64,22 +65,23 @@ namespace WPFCheatUITemplate.GameFuns
                     "测试文字");
 
                 zombies = GameMode.GameModeManger.GetZombies();
+                plants = GameMode.GameModeManger.GetPlants();
 
                 foreach (var item in zombies)
                 {
-
+                   
                     float HpMax = (float)(item.HatMaxHp + item.AnnexMaxHp + item.HpMax);
                     float curentHp = (float)(item.HatHp + item.AnnexHp + item.Hp);
                     float percenttage = curentHp / HpMax;
                     percenttage = percenttage * 100;
-                    g.DrawVerticalProgressBar(drawManager._brushes["blue"], drawManager._brushes["red"],
+                    g.DrawVerticalProgressBar(drawManager._brushes["black"], drawManager._brushes["red"],
                         Rectangle.Create(item.X + 20, item.Y - 10, 80, 6), 1f, percenttage);
 
-                    g.DrawRectangle(drawManager._brushes["blue"],
+                    g.DrawRectangle(drawManager._brushes["black"],
                     item.X + 20, item.Y, item.X + 100, item.Y + 115, 1f);
 
                     g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
-                        drawManager._brushes["blue"],
+                        drawManager._brushes["black"],
                         item.X + 20, item.Y - 26,
                         curentHp.ToString() + "/" + HpMax.ToString());
 
@@ -88,10 +90,28 @@ namespace WPFCheatUITemplate.GameFuns
                     //    item.X + 20, item.Y + 46,
                     //    "INDEX:" + zombies.FindIndex(i => i == item));
 
-
+                    if (item.X<400)
+                    {
+                        item.IsCharm = true;
+                    }
+                    
                 }
 
+                foreach (var item in plants)
+                {
+                    float HpMax = (float)(item.HpMax);
+                    float curentHp = (float)(item.Hp);
+                    float percenttage = curentHp / HpMax;
+                    percenttage = percenttage * 100;
 
+                    g.DrawVerticalProgressBar(drawManager._brushes["black"], drawManager._brushes["red"],
+                       Rectangle.Create(item.X + 10, item.Y - 10, 65, 6), 1f, percenttage);
+
+                    g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
+                       drawManager._brushes["black"],
+                       item.X + 10, item.Y - 26,
+                       curentHp.ToString() + "/" + HpMax.ToString());
+                }
 
 
 
