@@ -9,12 +9,6 @@ using WPFCheatUITemplate.Other.Interface;
 
 namespace WPFCheatUITemplate.GameMode
 {
-    public struct OffsetBase
-    {
-        public IntPtr[] pointer;
-        public int sizeOrOffset;
-    };
-
     class GameModeManger: GameModeManagerBase
     {
 

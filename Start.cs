@@ -7,11 +7,11 @@ using WPFCheatUITemplate.Other.GameFuns;
 
 namespace WPFCheatUITemplate
 {
-    class Start
+    class Start: ViewMenu
     {
        public static void Init()
         {
-            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.None, Keys.NumPad1);
+           SetCurentKeyModifiers(HotKey.KeyModifiers.None, Keys.NumPad1);
             new Sun();
             new Coin();
             new AdventureLevel();
@@ -21,7 +21,7 @@ namespace WPFCheatUITemplate
             new FastGameFun()
             {
 
-                gameFunDataAndUIStruct = UIManager.GetButtonDateStruct("直接胜利", "Win", false),
+                gameFunDataAndUIStruct = GetButtonDateStruct("直接胜利", "Win", false),
 
                 doFirstTime = (i, v) =>
                 {
@@ -42,19 +42,19 @@ namespace WPFCheatUITemplate
             new NoCd();
             new DrawWindow();
 
-            UIManager.CreatSeparate("基本属性", "Basic properties");
-            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Shift, Keys.W);
+            CreatSeparate("基本属性", "Basic properties");
+            SetCurentKeyModifiers(HotKey.KeyModifiers.Shift, Keys.W);
             new AutoGet();
 
-            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Ctrl, Keys.NumPad1);
+            SetCurentKeyModifiers(HotKey.KeyModifiers.Ctrl, Keys.NumPad1);
             new ArbitrarilyPlant();
             new AllowBackground();
 
-            UIManager.SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
+            SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             //"超级攻速"
             new FastGameFun()
             {
-                gameFunDataAndUIStruct = UIManager.GetCheckButtonDateStruct("超级攻速", "Super attack speed"),
+                gameFunDataAndUIStruct = GetCheckButtonDateStruct("超级攻速", "Super attack speed"),
 
                 doFirstTime = (i, v) =>
                 {
