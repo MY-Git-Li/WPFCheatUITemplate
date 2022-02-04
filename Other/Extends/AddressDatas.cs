@@ -7,10 +7,9 @@ using WPFCheatUITemplate.Other.Interface;
 
 namespace WPFCheatUITemplate.Other.Extends
 {
-    class AddressDatas : IAddressDatas
+    abstract class AddressDatas : DataBase ,IAddressDatas
     {
-        public virtual void Init()
-        {
-        }
+        abstract public void Init();
+        
     }
 }

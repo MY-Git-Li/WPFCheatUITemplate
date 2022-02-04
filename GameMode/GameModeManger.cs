@@ -90,7 +90,7 @@ namespace WPFCheatUITemplate.GameMode
 
             var zombieHead = GetAddress("zombieHead");
 
-            var zombieSize = GetOffset("zombieSize");
+            var zombieSize = GetOffSet("zombieSize");
 
             for (int i = -maxnum; i < maxnum; i++)
             {

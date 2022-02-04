@@ -93,6 +93,7 @@
     <Compile Include="GameMode\GameModeManger.cs" />
     <Compile Include="GameMode\Zombie.cs" />
     <Compile Include="GameMode\GameVersion.cs" />
+    <Compile Include="Other\DataBase.cs" />
     <Compile Include="Other\Draw\WinAPI.cs" />
     <Compile Include="Other\Draw\DrawManager.cs" />
     <Compile Include="Other\Draw\DrawWindow.cs" />

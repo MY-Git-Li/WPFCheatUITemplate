@@ -25,7 +25,7 @@ namespace WPFCheatUITemplate.GameMode
 
         }
 
-        abstract public void InitData();
+        virtual public void InitData() { }
 
 
         virtual public T GetValue<T>(string name) where T : struct

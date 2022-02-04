@@ -7,7 +7,7 @@ namespace CheatUITemplt
     /// <summary>
     /// 游戏功能基类
     /// </summary>
-    abstract class GameFun
+    abstract class GameFun : DataBase
     {
         /// <summary>
         /// 设置UI后续才能起作用-显示ui，设置data后gameDataAddress才有内容

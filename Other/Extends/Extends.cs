@@ -7,7 +7,7 @@ using WPFCheatUITemplate.Other.Interface;
 
 namespace WPFCheatUITemplate.Other.Extends
 {
-    class Extends : IExtend
+    class Extends : DataBase , IExtend
     {
         public virtual void End()
         {
