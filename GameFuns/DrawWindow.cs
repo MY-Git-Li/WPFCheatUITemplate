@@ -105,11 +105,11 @@ namespace WPFCheatUITemplate.GameFuns
                     percenttage = percenttage * 100;
 
                     g.DrawVerticalProgressBar(drawManager._brushes["black"], drawManager._brushes["red"],
-                       Rectangle.Create(item.X + 10, item.Y - 10, 65, 6), 1f, percenttage);
+                       Rectangle.Create(item.X + 10, item.Y - 5, 65, 6), 1f, percenttage);
 
                     g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
                        drawManager._brushes["black"],
-                       item.X + 10, item.Y - 26,
+                       item.X + 10, item.Y - 22,
                        curentHp.ToString() + "/" + HpMax.ToString());
                 }
 

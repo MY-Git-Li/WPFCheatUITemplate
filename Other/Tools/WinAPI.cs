@@ -71,7 +71,8 @@ namespace CheatUITemplt
         [DllImport("KERNEL32.DLL ")]
         public static extern int GetProcessId(IntPtr Process);
 
-
+        [DllImport("User32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetWindowThreadProcessId(IntPtr hwnd, out int ID);
 
         [DllImport("MyAPI.dll")]
         public static extern uint GetProcessModuleHandle(uint pid, [MarshalAs(UnmanagedType.LPWStr)] string moduleName);

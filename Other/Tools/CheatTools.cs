@@ -29,6 +29,15 @@ namespace CheatUITemplt
             return WinAPI.GetProcessId(handle);
         }
 
+        public static int GetPidByWindowsName(string lpClassName, string lpWindowName)
+        {
+            int pid;
+            var handle =  WinAPI.FindWindow(lpClassName, lpWindowName);
+            WinAPI.GetWindowThreadProcessId(handle, out pid);
+
+            return pid;
+        }
+
 
         //打开进程handle  0x1F0FFF 最高权限
         public static IntPtr GetProcessHandle(int Pid)
