@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GameMode\Entity\Plant.cs" />
+    <Compile Include="GameMode\Entity\Projectile.cs" />
     <Compile Include="GameMode\Other\GameModeData.cs" />
     <Compile Include="GameMode\Other\GameModeManagerBase.cs" />
     <Compile Include="MyAddressDatas.cs" />

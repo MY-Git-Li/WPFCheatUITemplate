@@ -27,6 +27,7 @@ namespace WPFCheatUITemplate.GameMode
 
             Plant_v1_0_0();
 
+            Projectile_v1_0_0();
         }
         static void DefaultVersion()
         {
@@ -34,6 +35,62 @@ namespace WPFCheatUITemplate.GameMode
 
             Plant_VDef();
 
+            Projectile_vDef();
+        }
+
+
+        private static void Projectile_vDef()
+        {
+            AddData("projectileHead", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0xE0 },
+                IsIntPtr = true,
+            });
+
+            AddData("projectileSize", GameVersion.Version.Default, 0x94);
+
+            AddData("projectileMaxNum", GameVersion.Version.Default, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x355E0C,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0xE4 },
+                IsIntPtr = true,
+            });
+        }
+
+        private static void Projectile_v1_0_0()
+        {
+            AddData("projectileHead", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768, 0xC8 },
+                IsIntPtr = true,
+            });
+
+            AddData("projectileSize", GameVersion.Version.V1_0_0_1051, 0x94);
+
+            AddData("projectileMaxNum", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2A9EC0,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x768, 0xCC },
+                IsIntPtr = true,
+            });
         }
 
         private static void Plant_v1_0_0()
@@ -193,6 +250,32 @@ namespace WPFCheatUITemplate.GameMode
             }
 
             return plants;
+        }
+
+
+        public static List<Projectile> GetProjectiles()
+        {
+            List<Projectile> projectiles = new List<Projectile>();
+            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle, GetAddress("projectileMaxNum"));
+
+            var plantHead = GetAddress("projectileHead");
+
+            var plantSize = GetOffSet("projectileSize");
+
+            for (int i = -maxnum; i < maxnum; i++)
+            {
+
+                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<IntPtr>(GameInformation.Handle, plantHead).ToInt64() + plantSize * i);
+
+                Projectile pro = new Projectile(BaseAddress);
+
+                if (!pro.NotExist)
+                {
+                    projectiles.Add(pro);
+                }
+            }
+
+            return projectiles;
         }
     }
 }

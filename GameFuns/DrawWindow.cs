@@ -49,7 +49,8 @@ namespace WPFCheatUITemplate.GameFuns
           
         }
         List<GameMode.Zombie> zombies;
-        List<GameMode.Plant> plants; 
+        List<GameMode.Plant> plants;
+        //List<GameMode.Projectile> projectiles;
         void Draw()
         {
            
@@ -112,6 +113,19 @@ namespace WPFCheatUITemplate.GameFuns
                        item.X + 10, item.Y - 22,
                        curentHp.ToString() + "/" + HpMax.ToString());
                 }
+
+
+                //projectiles = GameMode.GameModeManger.GetProjectiles();
+
+
+                //foreach (var item in projectiles)
+                //{
+                //    g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f,
+                //      drawManager._brushes["black"],
+                //      item.X, item.Y + 20,
+                //      "/...");
+                //}
+
 
 
 
