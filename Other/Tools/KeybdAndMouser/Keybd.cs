@@ -197,22 +197,22 @@ namespace WPFCheatUITemplate.Other.Tools
 
             for (int i = 0; i < list.Count; i++)
             {
-                if ((byte)list[i] == 16)//?
+                if (list[i] == 16)//?
                 {
 
                     KeyClick((byte)Keys.Space);
 
-                    KeyClick((byte)list[i], (byte)list[++i]);
+                    KeyClick(list[i], list[++i]);
                     System.Threading.Thread.Sleep(delay);
                     continue;
                 }
-                else if ((byte)list[i] == 188 || (byte)list[i] == 190)//, 。
+                else if (list[i] == 188 || list[i] == 190)//, 。
                 {
                     KeyClick((byte)Keys.Space);
                     System.Threading.Thread.Sleep(delay);
                 }
 
-                KeyClick((byte)list[i]);
+                KeyClick(list[i]);
                 System.Threading.Thread.Sleep(delay);
 
                 //if (i == list.Count - 1)
@@ -228,9 +228,9 @@ namespace WPFCheatUITemplate.Other.Tools
         /// </summary>
         /// <param name="str">待转换的字符串</param>
         /// <returns>返回键码集合</returns>
-        static ArrayList GetKeyValues(string str)
+        static List<byte> GetKeyValues(string str)
         {
-            ArrayList kvList = new ArrayList();
+            List<byte> kvList = new List<byte>();
             for (int i = 0; i < str.Length; i++)
             {
 
@@ -240,11 +240,11 @@ namespace WPFCheatUITemplate.Other.Tools
 
                 if (ch == "," || ch == "，")
                 {
-                    kvList.Add((byte)188);
+                    kvList.Add(188);
                 }
                 else if (ch == "。" || ch == ".")
                 {
-                    kvList.Add((byte)190);
+                    kvList.Add(190);
                 }
                 else if (ch == " ")
                 {
@@ -252,13 +252,13 @@ namespace WPFCheatUITemplate.Other.Tools
                 }
                 else if (ch == "?" || ch == "？")
                 {
-                    kvList.Add((byte)16);  //shift
-                    kvList.Add((byte)191); //  /?
+                    kvList.Add(16);  //shift
+                    kvList.Add(191); //  /?
                 }
                 else if (ch == "!" || ch == "！")
                 {
-                    kvList.Add((byte)16);  //shift
-                    kvList.Add((byte)49); //  /！
+                    kvList.Add(16);  //shift
+                    kvList.Add(49); //  /！
                 }
                 else
                 {
