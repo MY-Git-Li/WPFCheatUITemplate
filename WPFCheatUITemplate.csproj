@@ -118,6 +118,7 @@
     <Compile Include="Other\GameFuns\FastGameFun.cs" />
     <Compile Include="Other\GameFuns\GameFunDataAndUIStruct.cs" />
     <Compile Include="Other\Tools\BaseInjector.cs" />
+    <Compile Include="Other\Tools\ProcessMgr.cs" />
     <Compile Include="Other\ViewMenu.cs" />
     <Compile Include="Other\Tools\EcanConvertToCh.cs" />
     <Compile Include="Other\Tools\KeybdAndMouser\Keybd.cs" />

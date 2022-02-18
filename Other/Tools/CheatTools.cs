@@ -5,10 +5,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-
+using WPFCheatUITemplate.Other.Tools;
 namespace CheatUITemplt
 {
-    class CheatTools
+    static class CheatTools
     {
 
         #region 进程相关方法
@@ -38,6 +38,15 @@ namespace CheatUITemplt
             return pid;
         }
 
+        public static void SuspendProcess(int processId)
+        {
+            ProcessMgr.SuspendProcess(processId);
+        }
+
+        public static void ResumeProcess(int processId)
+        {
+            ProcessMgr.ResumeProcess(processId);
+        }
 
         //打开进程handle  0x1F0FFF 最高权限
         public static IntPtr GetProcessHandle(int Pid)
@@ -246,7 +255,7 @@ namespace CheatUITemplt
 
         #region 字符串读写
 
-        public string ReadStringASCII(IntPtr m_pProcessHandle, IntPtr address, int size)
+        public static string ReadStringASCII(IntPtr m_pProcessHandle, IntPtr address, int size)
         {
             byte[] buffer = new byte[size];
             ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);
@@ -264,7 +273,7 @@ namespace CheatUITemplt
             return Encoding.ASCII.GetString(buffer);
         }
 
-        public string ReadStringUnicode(IntPtr m_pProcessHandle, IntPtr address, int size)
+        public static string ReadStringUnicode(IntPtr m_pProcessHandle, IntPtr address, int size)
         {
             byte[] buffer = new byte[size];
             ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);
