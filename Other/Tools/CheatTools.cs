@@ -464,8 +464,9 @@ namespace CheatUITemplt
             if (address.ToInt64() == 0)
             {
                 address = (IntPtr)WinAPI.GetProcessModuleHandle(pid, moduleName);
+                //尝试读取5次，有时候会取不到值，原因未知
                 int count = 0;
-                while (address.ToInt64() < 5 && address.ToInt64() < 1000)
+                while (count < 5)
                 {
                     address = (IntPtr)WinAPI.GetProcessModuleHandle(pid, moduleName);
                     count++;
@@ -539,9 +540,20 @@ namespace CheatUITemplt
         }
         #endregion
 
-       
+        #region DLL注入与卸载
+        public static void DLLInjector(int ProcId, string DllPath)
+        {
+            WPFCheatUITemplate.Other.Tools.BaseInjector.DLLInjector(ProcId, DllPath);
+        }
+        public static void DLLUnInjector(int ProcId, string DllPath)
+        {
+            WPFCheatUITemplate.Other.Tools.BaseInjector.DLLUnInjector(ProcId, DllPath);
+        }
+
+        #endregion
+
     }
-    
-   
+
+
 
 }
