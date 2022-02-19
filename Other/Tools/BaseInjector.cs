@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace WPFCheatUITemplate.Other.Tools
 {
+    //本注入方法，与本程序运行的平台有关
+    //当本平台为x86时，注入的dll与目标程序都为x86时，成功
+    //当本平台为x64时，注入的dll与目标程序都为x64时，成功
     class BaseInjector
     {
 
