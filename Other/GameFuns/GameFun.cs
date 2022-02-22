@@ -23,9 +23,12 @@ namespace CheatUITemplt
         /// </summary>
         public GameDataAddress gameDataAddress;
 
+        public bool IsStartRun;
+
         public GameFun()
         {
             AppGameFunManager.Instance.RegisterGameFun(this);
+            IsStartRun = false;
         }
 
         public void GetGameData()
@@ -40,11 +43,15 @@ namespace CheatUITemplt
             memory = new WPFCheatUITemplate.Other.Draw.Memory();
             memory.SetProcessHandle(gameFunDataAndUIStruct.Handle);
         }
+        /// <summary>
+        /// 可以实现自定义数据获取，列如人造指针等，当功能启用前调用
+        /// </summary>
+        public virtual void Start() { }
 
         /// <summary>
-        /// 可以实现自定义数据获取，列如人造指针等，运行一次
+        /// 可以实现自定义数据获取，列如人造指针等，当游戏启动时调用
         /// </summary>
-        public abstract void Awake();
+        public virtual void Awake() { }
 
         /// <summary>
         /// 初次点击函数
@@ -58,9 +65,9 @@ namespace CheatUITemplt
         /// <param name="value">IsAcceptValue为真时 value为slider的值 否则为0</param>
         public abstract void DoRunAgain(double value);
         /// <summary>
-        /// 与Awake 相对应的Ending方法，用来释放Awake方法中的一些资源等
+        /// 用来释放Awake、Start方法中的一些资源等
         /// </summary>
-        public abstract void Ending();
+        public virtual void Ending() { }
 
     }
 }

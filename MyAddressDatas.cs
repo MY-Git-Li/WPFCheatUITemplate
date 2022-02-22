@@ -114,7 +114,9 @@ namespace WPFCheatUITemplate
                 SignatureCode = "8B 54 24 0C 53 52 57",
 
                 IsIntPtr = false,
-            });
+            }, 
+            new byte[] { 0xE9, 0x47, 0x09, 0x00, 0x00, 0x90 }, 
+            new byte[] { 0x0f, 0x84, 0x46, 0x09, 0x00, 0x00 });
 
             AddData("allowBackground", GameVersion.Version.Default, new Other.GameData()
             {
@@ -231,7 +233,9 @@ namespace WPFCheatUITemplate
 
                 IsSignatureCode = false,
                 IsIntPtr = false,
-            });
+            },
+            new byte[] { 0xE9, 0x20, 0x09, 0x00, 0x00, 0x90 },
+            new byte[] { 0x0f, 0x84, 0x1F, 0x09, 0x00, 0x00 });
 
             AddData("allowBackground", GameVersion.Version.V1_0_0_1051, new Other.GameData()
             {

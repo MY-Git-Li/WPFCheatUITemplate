@@ -420,6 +420,7 @@ namespace CheatUITemplt
                 if (item.gameFun != null)
                 {
                     item.gameFun.Ending();
+                    item.gameFun.IsStartRun = false;
                 }
             }
 
@@ -633,6 +634,12 @@ namespace CheatUITemplt
                                     DoRunGameFunsEventAsync(item.gameFun, true, true);
                                     try
                                     {
+                                        if (!item.gameFun.IsStartRun)
+                                        {
+                                            item.gameFun.Start();
+                                            item.gameFun.IsStartRun = true;
+                                        }
+
                                         item.gameFun.DoFirstTime(0);
 
                                         soundEffect.PlayTurnOnEffect();
@@ -731,6 +738,13 @@ namespace CheatUITemplt
 
                                     try
                                     {
+
+                                        if (!item.gameFun.IsStartRun)
+                                        {
+                                            item.gameFun.Start();
+                                            item.gameFun.IsStartRun = true;
+                                        }
+
                                         item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
 
                                         soundEffect.PlayTurnOnEffect();
@@ -758,6 +772,13 @@ namespace CheatUITemplt
 
                                     try
                                     {
+
+                                        if (!item.gameFun.IsStartRun)
+                                        {
+                                            item.gameFun.Start();
+                                            item.gameFun.IsStartRun = true;
+                                        }
+
                                         item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
 
                                         if (slider != null)
@@ -786,6 +807,13 @@ namespace CheatUITemplt
 
                                     try
                                     {
+
+                                        if (!item.gameFun.IsStartRun)
+                                        {
+                                            item.gameFun.Start();
+                                            item.gameFun.IsStartRun = true;
+                                        }
+
                                         item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
 
                                         if (slider != null)

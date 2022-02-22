@@ -18,12 +18,12 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            memory.WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("noCd"), new byte[] { 0x74 });
+            memory.WriteMemoryByID<byte>("noCd", new byte[] { 0x74 });
         }
 
         public override void DoRunAgain(double value)
         {
-            memory.WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress("noCd"), new byte[] { 0x7e });
+            memory.WriteMemoryByID<byte>("noCd", new byte[] { 0x7e });
         }
         public override void Ending()
         {

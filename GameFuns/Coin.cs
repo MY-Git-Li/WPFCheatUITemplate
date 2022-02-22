@@ -23,7 +23,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            memory.WriteMemory<int>(Other.GameFuns.AddressDataManager.GetAddress("coin"), (int)value);
+            memory.WriteMemoryByID<int>("coin", (int)value);
         }
 
         public override void DoRunAgain(double value)
