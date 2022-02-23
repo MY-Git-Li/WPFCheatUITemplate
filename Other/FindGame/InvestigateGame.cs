@@ -1,19 +1,15 @@
 ﻿using System.ComponentModel;
-
+using WPFCheatUITemplate.GameMode;
 
 namespace CheatUITemplt
 {
     class InvestigateGame
     {
-        string processName;
-      
         BackgroundWorker startFindGame;
         BackgroundWorker findGameing;
 
-        public InvestigateGame(string processName)
+        public InvestigateGame()
         {
-            this.processName = processName;
-
             startFindGame = new BackgroundWorker();
             findGameing = new BackgroundWorker();
         }
@@ -37,13 +33,7 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void findGameing_DoWork(object sender, DoWorkEventArgs e)
         {
-            int pid = CheatTools.GetPidByProcessName(processName);
-            while (pid != 0)
-            {
-                pid = CheatTools.GetPidByProcessName(processName);
-                System.Threading.Thread.Sleep(100);
-            }
-
+            GetPid_Work(false);
         }
         /// <summary>
         /// 找到游戏后结束后，开始继续寻找游戏
@@ -64,12 +54,7 @@ namespace CheatUITemplt
         /// <param name="e"></param>
         private void startFindGame_DoWork(object sender, DoWorkEventArgs e)
         {
-            int pid = CheatTools.GetPidByProcessName(processName);
-            while(pid == 0)
-            {
-                pid = CheatTools.GetPidByProcessName(processName);
-                System.Threading.Thread.Sleep(100);
-            }
+            var pid = GetPid_Work(true);
 
             AppGameFunManager.Instance.startFindGame_DoWork(pid);
         }
@@ -86,5 +71,28 @@ namespace CheatUITemplt
             findGameing.RunWorkerAsync();
         }
 
+        int GetPid_Work(bool isFind)
+        {
+            int pid = GetPid();
+            while (isFind ? pid == 0 : pid != 0)
+            {
+                pid = GetPid();
+                System.Threading.Thread.Sleep(100);
+            }
+
+            return pid;
+        }
+
+        int GetPid(bool isByWindowsName = false)
+        {
+            if (isByWindowsName)
+            {
+                return CheatTools.GetPidByWindowsName(GameInformation.ClassWindowsName, GameInformation.WindowsName);
+            }
+            else
+            {
+                return CheatTools.GetPidByProcessName(GameInformation.ProcessName);
+            }
+        }
     }
 }

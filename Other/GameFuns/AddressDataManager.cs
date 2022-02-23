@@ -19,6 +19,8 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         static Dictionary<GameVersion.Version, Dictionary<string, int>> data_Offset = new Dictionary<GameVersion.Version, Dictionary<string, int>>();
 
+        static bool isAddDataInitComplete = false;
+
         struct ChangeData
         {
             public byte[] modifyData;
@@ -30,7 +32,8 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static void Init()
         {
-           
+            isAddDataInitComplete = false;
+
             Task.Factory.StartNew(() =>
             {
                 Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -49,9 +52,16 @@ namespace WPFCheatUITemplate.Other.GameFuns
                     }
 
                 }
-                GetAllGameDataAddress();
+
+                isAddDataInitComplete = true;
             });
         }
+
+        public static void DataInit()
+        {
+            Task.Factory.StartNew(() => { while (!isAddDataInitComplete) ; GetAllGameDataAddress(); });
+        }
+
 
         static void GetAllGameDataAddress()
         {
@@ -98,26 +108,26 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static void AddData(string id, GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
         {
+            AddData(id, v, gameData);
 
-            if (!data_Dic.ContainsKey(v))
+            if (!DataSet.ContainsKey(v))
             {
-                var dic = new Dictionary<string, GameData>();
-                dic[id] = gameData;
-                data_Dic[v] = dic;
-            }
-            else
+                var dicx = new Dictionary<string, ChangeData>();
+
+                ChangeData changeData;
+                changeData.orcData = orcData;
+                changeData.modifyData = modifyData;
+                dicx[id] = changeData;
+
+                DataSet[v] = dicx;
+            }else
             {
-                data_Dic[v][id] = gameData;
+                ChangeData changeData;
+                changeData.orcData = orcData;
+                changeData.modifyData = modifyData;
+
+                DataSet[v][id] = changeData;
             }
-
-            var dicx = new Dictionary<string, ChangeData>();
-
-            ChangeData changeData;
-            changeData.orcData = orcData;
-            changeData.modifyData = modifyData;
-            dicx[id] = changeData;
-
-            DataSet[v] = dicx;
 
         }
 

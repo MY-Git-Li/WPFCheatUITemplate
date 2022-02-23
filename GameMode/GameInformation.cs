@@ -14,6 +14,9 @@ namespace WPFCheatUITemplate.GameMode
 
         static string processName = "PlantsVsZombies";
 
+        static string windowsName = "";
+
+        static string classWindowsName = "";
 
         public static IntPtr Handle
         {
@@ -27,6 +30,7 @@ namespace WPFCheatUITemplate.GameMode
                 handle = value;
             }
         }
+
         public static int Pid
         {
             get
@@ -46,12 +50,11 @@ namespace WPFCheatUITemplate.GameMode
             {
                 return processName;
             }
-
-            set
-            {
-                processName = value;
-            }
         }
+
+        public static string WindowsName { get => windowsName;}
+
+        public static string ClassWindowsName { get => classWindowsName; }
 
         public static GameVersion.Version CurentVersion
         {
@@ -61,5 +64,7 @@ namespace WPFCheatUITemplate.GameMode
             }
 
         }
+
+       
     }
 }

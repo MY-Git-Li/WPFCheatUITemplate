@@ -12,6 +12,7 @@ using WPFCheatUITemplate.Other.Events;
 using WPFCheatUITemplate.Other.Exceptions;
 using WPFCheatUITemplate.Other.Interface;
 using WPFCheatUITemplate.Other.Tools.Extensions;
+using WPFCheatUITemplate.Other.GameFuns;
 using static CheatUITemplt.HotKey;
 
 namespace CheatUITemplt
@@ -105,7 +106,7 @@ namespace CheatUITemplt
                     instance.myButtonManger = new MyButtonManger();
                     instance.hotSystem = new HotSystem();
                     instance.soundEffect = new SoundEffect();
-                    instance.investigateGame = new InvestigateGame(GameInformation.ProcessName);
+                    instance.investigateGame = new InvestigateGame();
                     instance.uILangerManger = new UILangerManger();
                 }
                 return instance;
@@ -255,6 +256,7 @@ namespace CheatUITemplt
         public void startFindGame_RunWorkerCompleted()
         {
             SetViewPid(GameInformation.Pid);
+            DataManagerDataInit();
             StopFlashAnimation();
             EnableControl();
             RegisterAllHotKey();
@@ -291,9 +293,14 @@ namespace CheatUITemplt
             }
         }
 
+        void DataManagerDataInit()
+        {
+            AddressDataManager.DataInit();
+        }
+
         void DataManagerInit()
         {
-            WPFCheatUITemplate.Other.GameFuns.AddressDataManager.Init();
+            AddressDataManager.Init();
         }
 
         /// <summary>
