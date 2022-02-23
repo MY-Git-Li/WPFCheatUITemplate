@@ -11,8 +11,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 {
     static class AddressDataManager
     {
-        static GameVersion.Version version = GameInformation.CurentVersion;
-
+       
         static Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
         static ConcurrentDictionary<string, GameDataAddress> curentGameDataAddress = new ConcurrentDictionary<string, GameDataAddress>();
@@ -80,7 +79,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             }
 
 
-            foreach (var item in data_Dic[version])
+            foreach (var item in data_Dic[GameInformation.CurentVersion])
             {
                 if (curentGameDataAddress.ContainsKey(item.Key))
                 {
@@ -152,7 +151,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             
         public static byte[] GetModifyData(string id)
         {
-            version = GameInformation.CurentVersion;
+           var version = GameInformation.CurentVersion;
 
             if (DataSet.ContainsKey(version))
             {
@@ -169,7 +168,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static byte[] GetOrcData(string id)
         {
-            version = GameInformation.CurentVersion;
+            var version = GameInformation.CurentVersion;
 
             if (DataSet.ContainsKey(version))
             {
@@ -185,7 +184,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static int GetOffSet(string id)
         {
-            version = GameInformation.CurentVersion;
+            var version = GameInformation.CurentVersion;
 
             int ret = 0;
 
@@ -206,7 +205,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static IntPtr GetAddress(string id)
         {
-            version = GameInformation.CurentVersion;
+            var version = GameInformation.CurentVersion;
 
             IntPtr ret = IntPtr.Zero;
 

@@ -108,6 +108,7 @@ namespace CheatUITemplt
                     instance.soundEffect = new SoundEffect();
                     instance.investigateGame = new InvestigateGame();
                     instance.uILangerManger = new UILangerManger();
+                    AddressDataManager.Init();
                 }
                 return instance;
             }
@@ -244,7 +245,6 @@ namespace CheatUITemplt
         public void startFindGame_DoWork(int pid)
         {
             SetGameInformation(pid);
-            AddressDataManager.Init();
             RunAllGameFunAwake();
             GetAllGameFunData();
             DoOnGameRunEventAsync();
@@ -476,7 +476,7 @@ namespace CheatUITemplt
             }
 
             GetAllExtend();
-
+           
             StartExtends();
         }
 
