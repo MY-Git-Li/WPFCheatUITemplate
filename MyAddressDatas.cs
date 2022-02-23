@@ -9,7 +9,7 @@ namespace WPFCheatUITemplate
     {
         public override void Init()
         {
-            AddData("supershoot", GameVersion.Version.Default, new GameData()
+            AddData("supershoot", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x6DC21,
@@ -20,7 +20,7 @@ namespace WPFCheatUITemplate
             new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 },
             new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
 
-            AddData("supershoot2", GameVersion.Version.Default, new GameData()
+            AddData("supershoot2", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x72EE4,
@@ -31,7 +31,7 @@ namespace WPFCheatUITemplate
             new byte[] { 0x0F, 0x84 },
             new byte[] { 0x0F, 0x85 });
 
-            AddData("sun", GameVersion.Version.Default, new Other.GameData()
+            AddData("sun", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -42,7 +42,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = true,
             });
 
-            AddData("coin", GameVersion.Version.Default, new Other.GameData()
+            AddData("coin", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -53,7 +53,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = true,
             });
 
-            AddData("adventureLevel", GameVersion.Version.Default, new Other.GameData()
+            AddData("adventureLevel", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -64,7 +64,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = true,
             });
 
-            AddData("changeMode", GameVersion.Version.Default, new Other.GameData()
+            AddData("changeMode", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -75,7 +75,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = true,
             });
 
-            AddData("tree", GameVersion.Version.Default, new Other.GameData()
+            AddData("tree", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -86,7 +86,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = true,
             });
 
-            AddData("noCd", GameVersion.Version.Default, new Other.GameData()
+            AddData("noCd", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 //FF 46 ?? 8B 46 ?? 3B 46 ?? 7E 16
                 ModuleName = "PlantsVsZombies.exe",
@@ -95,7 +95,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = false,
             });
 
-            AddData("autoGet", GameVersion.Version.Default, new Other.GameData()
+            AddData("autoGet", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 //E8 34 F5 FF FF EB 16
                 ModuleName = "PlantsVsZombies.exe",
@@ -105,7 +105,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = false,
             });
 
-            AddData("arbitrarilyPlant", GameVersion.Version.Default, new Other.GameData()
+            AddData("arbitrarilyPlant", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
 
@@ -118,7 +118,7 @@ namespace WPFCheatUITemplate
             new byte[] { 0xE9, 0x47, 0x09, 0x00, 0x00, 0x90 }, 
             new byte[] { 0x0f, 0x84, 0x46, 0x09, 0x00, 0x00 });
 
-            AddData("allowBackground", GameVersion.Version.Default, new Other.GameData()
+            AddData("allowBackground", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x5D040,
@@ -128,7 +128,7 @@ namespace WPFCheatUITemplate
             new byte[] { 0xC2, 0x04, 0x00 },
             new byte[] { 0x55, 0x8B, 0xEC });
 
-            AddData("Win_Call", GameVersion.Version.Default, new GameData()
+            AddData("Win_Call", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x18140,
@@ -137,7 +137,7 @@ namespace WPFCheatUITemplate
                 IsIntPtr = false,
             });
 
-            AddData("Win_Call_ECX", GameVersion.Version.Default, new GameData()
+            AddData("Win_Call_ECX", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,

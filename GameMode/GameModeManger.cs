@@ -15,7 +15,7 @@ namespace WPFCheatUITemplate.GameMode
         public override void Init()
         {
 
-            DefaultVersion();
+            V1_1_0_1056Version();
 
             V1_0_0_1051Version();
 
@@ -29,19 +29,19 @@ namespace WPFCheatUITemplate.GameMode
 
             Projectile_v1_0_0();
         }
-        static void DefaultVersion()
+        static void V1_1_0_1056Version()
         {
-            Zombie_VDef();
+            Zombie_v1_1_0();
 
-            Plant_VDef();
+            Plant_V1_1_0();
 
-            Projectile_vDef();
+            Projectile_v1_1_0();
         }
 
 
-        private static void Projectile_vDef()
+        private static void Projectile_v1_1_0()
         {
-            AddData("projectileHead", GameVersion.Version.Default, new GameData()
+            AddData("projectileHead", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -52,9 +52,9 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("projectileSize", GameVersion.Version.Default, 0x94);
+            AddData("projectileSize", GameVersion.Version.V1_1_0_1056, 0x94);
 
-            AddData("projectileMaxNum", GameVersion.Version.Default, new GameData()
+            AddData("projectileMaxNum", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -147,9 +147,9 @@ namespace WPFCheatUITemplate.GameMode
             });
         }
 
-        private static void Plant_VDef()
+        private static void Plant_V1_1_0()
         {
-            AddData("plantHead", GameVersion.Version.Default, new GameData()
+            AddData("plantHead", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -160,9 +160,9 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("plantSize", GameVersion.Version.Default, 0x14C);
+            AddData("plantSize", GameVersion.Version.V1_1_0_1056, 0x14C);
 
-            AddData("plantMaxNum", GameVersion.Version.Default, new GameData()
+            AddData("plantMaxNum", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -174,9 +174,9 @@ namespace WPFCheatUITemplate.GameMode
             });
         }
 
-        private static void Zombie_VDef()
+        private static void Zombie_v1_1_0()
         {
-            AddData("zombieHead", GameVersion.Version.Default, new GameData()
+            AddData("zombieHead", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -187,9 +187,9 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("zombieSize", GameVersion.Version.Default, 0x168);
+            AddData("zombieSize", GameVersion.Version.V1_1_0_1056, 0x168);
 
-            AddData("zombieMaxNum", GameVersion.Version.Default, new GameData()
+            AddData("zombieMaxNum", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,

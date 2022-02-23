@@ -72,29 +72,35 @@ namespace WPFCheatUITemplate.Other.GameFuns
         }
 
 
-        void  GetAllGameDataAddress()
+        void GetAllGameDataAddress()
         {
-            foreach (var item in data_Dic[GameVersion.Version.Default])
-            {
-                if (!curentGameDataAddress.ContainsKey(item.Key))
-                {
-                    curentGameDataAddress.TryAdd(item.Key, item.Value.GetDataAddress());
-                }
 
+            if (data_Dic.ContainsKey(GameVersion.Version.Default))
+            {
+                foreach (var item in data_Dic[GameVersion.Version.Default])
+                {
+                    if (!curentGameDataAddress.ContainsKey(item.Key))
+                    {
+                        curentGameDataAddress.TryAdd(item.Key, item.Value.GetDataAddress());
+                    }
+
+                }
             }
 
-
-            foreach (var item in data_Dic[GameInformation.CurentVersion])
+            if (data_Dic.ContainsKey(GameInformation.CurentVersion))
             {
-                if (curentGameDataAddress.ContainsKey(item.Key))
+                foreach (var item in data_Dic[GameInformation.CurentVersion])
                 {
-                    curentGameDataAddress[item.Key] = item.Value.GetDataAddress();
-                }
-                else
-                {
-                    curentGameDataAddress.TryAdd(item.Key, item.Value.GetDataAddress());
-                }
+                    if (curentGameDataAddress.ContainsKey(item.Key))
+                    {
+                        curentGameDataAddress[item.Key] = item.Value.GetDataAddress();
+                    }
+                    else
+                    {
+                        curentGameDataAddress.TryAdd(item.Key, item.Value.GetDataAddress());
+                    }
 
+                }
             }
         }
 
