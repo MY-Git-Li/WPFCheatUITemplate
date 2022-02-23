@@ -25,12 +25,12 @@ namespace WPFCheatUITemplate
 
                 doFirstTime = (i, v) =>
                 {
-                    var add = AddressDataManager.GetAddress("Win_Call_ECX");
+                    var add = GetAddress("Win_Call_ECX");
                     var ecx = i.memory.ReadMemory<int>(add);
                     ASM asm = new ASM();
                     asm.Mov_EAX(ecx);
                     asm.Mov_ECX_EAX();
-                    asm.Mov_EAX(AddressDataManager.GetAddress("Win_Call").ToInt32());
+                    asm.Mov_EAX(GetAddress("Win_Call").ToInt32());
                     asm.Call_EAX();
                     asm.Ret();
                     asm.RunAsm(GameMode.GameInformation.Pid);

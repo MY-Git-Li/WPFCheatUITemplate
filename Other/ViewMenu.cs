@@ -7,7 +7,7 @@ using WPFCheatUITemplate.Other.GameFuns;
 
 namespace WPFCheatUITemplate.Other
 {
-    abstract class ViewMenu
+    abstract class ViewMenu : DataBase
     {
 
         public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers)

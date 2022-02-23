@@ -244,7 +244,7 @@ namespace CheatUITemplt
         public void startFindGame_DoWork(int pid)
         {
             SetGameInformation(pid);
-            DataManagerInit();
+            AddressDataManager.Init();
             RunAllGameFunAwake();
             GetAllGameFunData();
             DoOnGameRunEventAsync();
@@ -256,7 +256,7 @@ namespace CheatUITemplt
         public void startFindGame_RunWorkerCompleted()
         {
             SetViewPid(GameInformation.Pid);
-            DataManagerDataInit();
+            AddressDataManager.DataInit();
             StopFlashAnimation();
             EnableControl();
             RegisterAllHotKey();
@@ -275,6 +275,7 @@ namespace CheatUITemplt
             SetViewPid(GameInformation.Pid);
             StartFlashAnimation();
             RunAllGameFunEnding();
+            AddressDataManager.DataClear();
             DoOnGameEndEventAsync();
         }
 
@@ -293,15 +294,6 @@ namespace CheatUITemplt
             }
         }
 
-        void DataManagerDataInit()
-        {
-            AddressDataManager.DataInit();
-        }
-
-        void DataManagerInit()
-        {
-            AddressDataManager.Init();
-        }
 
         /// <summary>
         /// 程序在游戏前退出清理资源

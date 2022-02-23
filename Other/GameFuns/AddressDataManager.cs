@@ -57,6 +57,11 @@ namespace WPFCheatUITemplate.Other.GameFuns
             });
         }
 
+        public static void DataClear()
+        {
+            curentGameDataAddress.Clear();
+        }
+
         public static void DataInit()
         {
             Task.Factory.StartNew(() => { while (!isAddDataInitComplete) ; GetAllGameDataAddress(); });

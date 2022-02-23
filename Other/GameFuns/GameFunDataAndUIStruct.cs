@@ -122,7 +122,7 @@ namespace WPFCheatUITemplate.Other
         public GameDataAddress GetDataAddress()
         {
 
-            IntPtr handle = CheatTools.GetProcessHandle(GameMode.GameInformation.Pid);
+            IntPtr handle = GameMode.GameInformation.Handle;
             ModuleAddress = CheatTools.GetProcessModuleHandle((uint)GameMode.GameInformation.Pid, ModuleName);
             uint mouduleSize = CheatTools.GetProcessModuleSize((uint)GameMode.GameInformation.Pid, ModuleName);
 
