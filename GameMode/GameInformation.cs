@@ -15,16 +15,6 @@ namespace WPFCheatUITemplate.GameMode
         static string processName = "PlantsVsZombies";
 
 
-        public static void InitInformation(IntPtr handle, int pid)
-        {
-            Handle = handle;
-            Pid = pid;
-
-            //GameModeManger.SetData(CurentVersion);
-        }
-
-
-
         public static IntPtr Handle
         {
             get
