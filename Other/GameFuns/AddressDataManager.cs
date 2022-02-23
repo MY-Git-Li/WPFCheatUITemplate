@@ -1,5 +1,6 @@
 ﻿using CheatUITemplt;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -10,12 +11,11 @@ namespace WPFCheatUITemplate.Other.GameFuns
 {
     static class AddressDataManager
     {
-
         static GameVersion.Version version = GameInformation.CurentVersion;
 
         static Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
-        static Dictionary<string, GameDataAddress> curentGameDataAddress = new Dictionary<string, GameDataAddress>();
+        static ConcurrentDictionary<string, GameDataAddress> curentGameDataAddress = new ConcurrentDictionary<string, GameDataAddress>();
 
         static Dictionary<GameVersion.Version, Dictionary<string, int>> data_Offset = new Dictionary<GameVersion.Version, Dictionary<string, int>>();
 
@@ -30,7 +30,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         public static void Init()
         {
-            //已知问题，由于是异步的导致，启动运用后立马使用，出现重复添加key问题
+           
             Task.Factory.StartNew(() =>
             {
                 Type[] types = Assembly.GetExecutingAssembly().GetTypes();
@@ -59,7 +59,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             {
                 if (!curentGameDataAddress.ContainsKey(item.Key))
                 {
-                    curentGameDataAddress.Add(item.Key, item.Value.GetDataAddress());
+                    curentGameDataAddress.TryAdd(item.Key, item.Value.GetDataAddress());
                 }
 
             }
@@ -73,7 +73,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 }
                 else
                 {
-                    curentGameDataAddress.Add(item.Key, item.Value.GetDataAddress());
+                    curentGameDataAddress.TryAdd(item.Key, item.Value.GetDataAddress());
                 }
 
             }
@@ -243,7 +243,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                         throw new ZeroAddressException("地址错误！", data_Dic[v][id]);
                     }
 
-                    curentGameDataAddress.Add(id, dataAddress);
+                    curentGameDataAddress.TryAdd(id, dataAddress);
                     ret = dataAddress.Address;
                 }
                 else
