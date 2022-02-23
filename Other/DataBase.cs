@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheatUITemplt;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,38 +11,38 @@ namespace WPFCheatUITemplate.Other
     {
         static public void AddData(string id, WPFCheatUITemplate.GameVersion.Version v, int offset)
         {
-            GameFuns.AddressDataManager.AddData(id, v, offset);
+            AppGameFunManager.Instance.AddressDataMg.AddData(id, v, offset);
         }
 
         static public void AddData(string id, WPFCheatUITemplate.GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
         {
-            GameFuns.AddressDataManager.AddData(id, v, gameData, modifyData, orcData);
+            AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData, modifyData, orcData);
         }
 
 
         static public void AddData(string id, WPFCheatUITemplate.GameVersion.Version v, GameData gameData)
         {
-            GameFuns.AddressDataManager.AddData(id, v, gameData);
+            AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData);
         }
 
         static public void GetModifyData(string id)
         {
-            GameFuns.AddressDataManager.GetModifyData(id);
+            AppGameFunManager.Instance.AddressDataMg.GetModifyData(id);
         }
 
         static public int GetOffSet(string id)
         {
-          return GameFuns.AddressDataManager.GetOffSet(id);
+          return AppGameFunManager.Instance.AddressDataMg.GetOffSet(id);
         }
 
         static public void GetOrcData(string id)
         {
-            GameFuns.AddressDataManager.GetOrcData(id);
+            AppGameFunManager.Instance.AddressDataMg.GetOrcData(id);
         }
 
         static public IntPtr GetAddress(string id)
         {
-          return GameFuns.AddressDataManager.GetAddress(id);
+          return AppGameFunManager.Instance.AddressDataMg.GetAddress(id);
         }
     }
 }

@@ -44,6 +44,8 @@ namespace CheatUITemplt
 
         InvestigateGame investigateGame;
 
+        AddressDataManager addressDataMg;
+
         #endregion
 
         #region 事件
@@ -108,7 +110,7 @@ namespace CheatUITemplt
                     instance.soundEffect = new SoundEffect();
                     instance.investigateGame = new InvestigateGame();
                     instance.uILangerManger = new UILangerManger();
-                    AddressDataManager.Init();
+                    instance.addressDataMg = new AddressDataManager();
                 }
                 return instance;
             }
@@ -122,6 +124,8 @@ namespace CheatUITemplt
             }
 
         }
+
+        internal AddressDataManager AddressDataMg { get => addressDataMg;}
 
 
         #endregion
@@ -256,7 +260,7 @@ namespace CheatUITemplt
         public void startFindGame_RunWorkerCompleted()
         {
             SetViewPid(GameInformation.Pid);
-            AddressDataManager.DataInit();
+            AddressDataMg.DataInit();
             StopFlashAnimation();
             EnableControl();
             RegisterAllHotKey();
@@ -275,7 +279,7 @@ namespace CheatUITemplt
             SetViewPid(GameInformation.Pid);
             StartFlashAnimation();
             RunAllGameFunEnding();
-            AddressDataManager.DataClear();
+            AddressDataMg.DataClear();
             DoOnGameEndEventAsync();
         }
 

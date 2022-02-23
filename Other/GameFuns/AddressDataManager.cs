@@ -9,16 +9,16 @@ using WPFCheatUITemplate.Other.Exceptions;
 
 namespace WPFCheatUITemplate.Other.GameFuns
 {
-    static class AddressDataManager
+    class AddressDataManager
     {
-       
-        static Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
-        static ConcurrentDictionary<string, GameDataAddress> curentGameDataAddress = new ConcurrentDictionary<string, GameDataAddress>();
+        Dictionary<GameVersion.Version, Dictionary<string, GameData>> data_Dic = new Dictionary<GameVersion.Version, Dictionary<string, GameData>>();
 
-        static Dictionary<GameVersion.Version, Dictionary<string, int>> data_Offset = new Dictionary<GameVersion.Version, Dictionary<string, int>>();
+        ConcurrentDictionary<string, GameDataAddress> curentGameDataAddress = new ConcurrentDictionary<string, GameDataAddress>();
 
-        static bool isAddDataInitComplete = false;
+        Dictionary<GameVersion.Version, Dictionary<string, int>> data_Offset = new Dictionary<GameVersion.Version, Dictionary<string, int>>();
+
+        bool isAddDataInitComplete = false;
 
         struct ChangeData
         {
@@ -29,7 +29,12 @@ namespace WPFCheatUITemplate.Other.GameFuns
         static Dictionary<GameVersion.Version, Dictionary<string, ChangeData>> DataSet = new Dictionary<GameVersion.Version, Dictionary<string, ChangeData>>();
 
 
-        public static void Init()
+        public AddressDataManager()
+        {
+            Init();
+        }
+
+        void Init()
         {
             isAddDataInitComplete = false;
 
@@ -56,18 +61,18 @@ namespace WPFCheatUITemplate.Other.GameFuns
             });
         }
 
-        public static void DataClear()
+        public void DataClear()
         {
             curentGameDataAddress.Clear();
         }
 
-        public static void DataInit()
+        public void DataInit()
         {
             Task.Factory.StartNew(() => { while (!isAddDataInitComplete) ; GetAllGameDataAddress(); });
         }
 
 
-        static void GetAllGameDataAddress()
+        void  GetAllGameDataAddress()
         {
             foreach (var item in data_Dic[GameVersion.Version.Default])
             {
@@ -93,7 +98,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             }
         }
 
-        public static void AddData(string id, GameVersion.Version v, GameData gameData)
+        public void AddData(string id, GameVersion.Version v, GameData gameData)
         {
 
             if (!data_Dic.ContainsKey(v))
@@ -110,7 +115,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         }
 
-        public static void AddData(string id, GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
+        public void AddData(string id, GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
         {
             AddData(id, v, gameData);
 
@@ -124,7 +129,8 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 dicx[id] = changeData;
 
                 DataSet[v] = dicx;
-            }else
+            }
+            else
             {
                 ChangeData changeData;
                 changeData.orcData = orcData;
@@ -135,7 +141,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         }
 
-        public static void AddData(string id,GameVersion.Version v,int offset)
+        public void AddData(string id, GameVersion.Version v, int offset)
         {
             if (!data_Offset.ContainsKey(v))
             {
@@ -148,10 +154,10 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 data_Offset[v][id] = offset;
             }
         }
-            
-        public static byte[] GetModifyData(string id)
+
+        public byte[] GetModifyData(string id)
         {
-           var version = GameInformation.CurentVersion;
+            var version = GameInformation.CurentVersion;
 
             if (DataSet.ContainsKey(version))
             {
@@ -166,7 +172,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
         }
 
 
-        public static byte[] GetOrcData(string id)
+        public byte[] GetOrcData(string id)
         {
             var version = GameInformation.CurentVersion;
 
@@ -182,7 +188,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return new byte[] { 0 };
         }
 
-        public static int GetOffSet(string id)
+        public int GetOffSet(string id)
         {
             var version = GameInformation.CurentVersion;
 
@@ -191,7 +197,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             if (data_Offset.ContainsKey(version))
             {
 
-                ret = HandleGetOffset(id,data_Offset[version]);
+                ret = HandleGetOffset(id, data_Offset[version]);
 
             }
             else if (data_Offset.ContainsKey(GameVersion.Version.Default))
@@ -203,7 +209,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return ret;
         }
 
-        public static IntPtr GetAddress(string id)
+        public IntPtr GetAddress(string id)
         {
             var version = GameInformation.CurentVersion;
 
@@ -227,7 +233,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return ret;
         }
 
-        static byte[] HandleGetData(string id, Dictionary<string, ChangeData> dic, bool isOrc)
+        byte[] HandleGetData(string id, Dictionary<string, ChangeData> dic, bool isOrc)
         {
             if (dic.ContainsKey(id))
             {
@@ -243,7 +249,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             return new byte[] { 0 };
         }
-        static IntPtr HandleGetAddress(GameVersion.Version v, Dictionary<string, GameData> dic, string id)
+        IntPtr HandleGetAddress(GameVersion.Version v, Dictionary<string, GameData> dic, string id)
         {
             IntPtr ret = IntPtr.Zero;
             if (dic.ContainsKey(id))
@@ -274,17 +280,17 @@ namespace WPFCheatUITemplate.Other.GameFuns
             return ret;
         }
 
-        static int HandleGetOffset(string id, Dictionary<string, int> dic)
+        int HandleGetOffset(string id, Dictionary<string, int> dic)
         {
             if (dic.ContainsKey(id))
             {
                 return dic[id];
             }
-            else if(data_Offset[GameVersion.Version.Default].ContainsKey(id))
+            else if (data_Offset[GameVersion.Version.Default].ContainsKey(id))
             {
                 return data_Offset[GameVersion.Version.Default][id];
             }
-            
+
             return 0;
         }
     }

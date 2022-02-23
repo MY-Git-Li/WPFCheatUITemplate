@@ -117,22 +117,22 @@ namespace WPFCheatUITemplate.Other.Draw
         {
             if (isOrc)
             {
-                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress(id), Other.GameFuns.AddressDataManager.GetOrcData(id));
+                WriteMemory<byte>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetOrcData(id));
             }else
             {
-                WriteMemory<byte>(Other.GameFuns.AddressDataManager.GetAddress(id), Other.GameFuns.AddressDataManager.GetModifyData(id));
+                WriteMemory<byte>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetModifyData(id));
             }
 
         }
 
         public void WriteMemoryByID<T>(string id, object value) where T : struct
         {
-            WriteMemory<T>(Other.GameFuns.AddressDataManager.GetAddress(id), value);
+            WriteMemory<T>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
         }
 
         public void WriteMemoryByID<T>(string id, byte[] value) where T : struct
         {
-            WriteMemory<T>(Other.GameFuns.AddressDataManager.GetAddress(id), value);
+            WriteMemory<T>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
         }
 
 
