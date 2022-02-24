@@ -19,6 +19,63 @@ namespace WPFCheatUITemplate.GameMode
 
             V1_0_0_1051Version();
 
+            VSteamVersion();
+        }
+
+        static void VSteamVersion()
+        {
+            AddData("plantHead", GameVersion.Version.Steam, new GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x331C50,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0xAC + 0x18 },
+                IsIntPtr = true,
+            });
+
+            AddData("plantSize", GameVersion.Version.Steam, 0x14C);
+
+            AddData("plantMaxNum", GameVersion.Version.Steam, new GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x331C50,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0xB0 + 0x18 },
+                IsIntPtr = true,
+            });
+
+
+            AddData("zombieHead", GameVersion.Version.Steam, new GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x331C50,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0x90 + 0x18},
+                IsIntPtr = true,
+            });
+
+            AddData("zombieSize", GameVersion.Version.Steam, 0x168);
+
+            AddData("zombieMaxNum", GameVersion.Version.Steam, new GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x331C50,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x868, 0x94 + 0x18 },
+                IsIntPtr = true,
+            });
+
+
+
+
         }
 
         static void V1_0_0_1051Version()

@@ -33,6 +33,14 @@ namespace WPFCheatUITemplate
             _fonts = drawWindow._fonts;
         }
 
+        public void Init(int Pid,int maxFPS)
+        {
+            drawWindow = new DrawWindow(Pid, maxFPS);
+            _windowData = drawWindow._WindowData;
+            _brushes = drawWindow._brushes;
+            _fonts = drawWindow._fonts;
+        }
+
 
         public void DrawFun(Action<Graphics> action)
         {

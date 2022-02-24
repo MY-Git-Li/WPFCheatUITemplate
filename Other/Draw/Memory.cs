@@ -26,6 +26,16 @@ namespace WPFCheatUITemplate.Other.Draw
             m_pProcessHandle = WinAPI.OpenProcess(WinAPI.PROCESS_VM_READ | WinAPI.PROCESS_VM_WRITE | WinAPI.PROCESS_VM_OPERATION, false, m_Process.Id);
         }
 
+        public void Initialize(int pid)
+        {
+            m_Process = Process.GetProcessById(pid);
+            m_pWindowHandle = m_Process.MainWindowHandle;
+            m_pProcessHandle = WinAPI.OpenProcess(WinAPI.PROCESS_VM_READ | WinAPI.PROCESS_VM_WRITE | WinAPI.PROCESS_VM_OPERATION, false, m_Process.Id);
+        }
+
+
+
+
         public void SetProcessHandle(IntPtr handle)
         {
             m_pProcessHandle = handle;

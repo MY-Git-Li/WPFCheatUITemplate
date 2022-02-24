@@ -27,11 +27,17 @@ namespace WPFCheatUITemplate.Other.Draw
         public Action<Graphics> SetFonts;
 
         public Memory memory;
-        public DrawWindow(string WinDowName)
+
+        public DrawWindow(int pid):this(pid,300)
+        {
+
+        }
+
+        public DrawWindow(int pid, int maxfps)
         {
             memory = new Memory();
 
-            memory.Initialize(WinDowName);
+            memory.Initialize(pid);
             memory.SetForegroundWindow();
 
             _WindowData = memory.GetGameWindowData();
@@ -39,7 +45,7 @@ namespace WPFCheatUITemplate.Other.Draw
 
             _brushes = new Dictionary<string, SolidBrush>();
             _fonts = new Dictionary<string, Font>();
-           
+
 
             var gfx = new Graphics()
             {
@@ -51,7 +57,7 @@ namespace WPFCheatUITemplate.Other.Draw
 
             _window = new GraphicsWindow(_WindowData.Left, _WindowData.Top, _WindowData.Width, _WindowData.Height, gfx)
             {
-                FPS = 300,
+                FPS = maxfps,
                 IsTopmost = true,
                 IsVisible = true
             };
@@ -59,6 +65,11 @@ namespace WPFCheatUITemplate.Other.Draw
             _window.SetupGraphics += _window_SetupGraphics;
             _window.DrawGraphics += _window_DrawGraphics;
             _window.DestroyGraphics += _window_DestroyGraphics;
+        }
+
+        public DrawWindow(string WinDowName):this(WinDowName,300)
+        {
+           
         }
 
         public DrawWindow(string WinDowName,int maxfps)

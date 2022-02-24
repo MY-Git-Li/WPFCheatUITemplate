@@ -54,7 +54,7 @@ namespace WPFCheatUITemplate.GameFuns
         void Draw()
         {
            
-            drawManager.Init(GameInformation.ProcessName,60);
+            drawManager.Init(GameInformation.Pid,60);
             drawManager.SetBrushes((g) => { drawManager._brushes["blue"] = g.CreateSolidBrush(30, 144, 255); });
             drawManager.SetFonts((g) => { drawManager._fonts["Microsoft YaHei"] = g.CreateFont("Microsoft YaHei", 12); });
             drawManager.DrawFun((g) =>
