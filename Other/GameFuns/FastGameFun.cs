@@ -27,6 +27,34 @@ namespace WPFCheatUITemplate.Other
         public Action<FastGameFun> setGameDate;
 
         #endregion
+
+
+        public FastGameFun(GameFunDataAndUIStruct gameFunDataAndUIStruct, params string[] Id)
+        {
+            this.gameFunDataAndUIStruct = gameFunDataAndUIStruct;
+
+            gameDataAddresseList = new List<GameDataAddress>();
+            gameDates = new Dictionary<GameVersion.Version, GameData>();
+
+            doFirstTime = (i,v) => 
+            {
+                for (int j = 0; j < Id.Length; j++)
+                {
+                    i.memory.WriteMemoryByID(Id[j]);
+                }
+
+            };
+
+            doRunAgain = (i, v) =>
+            {
+                for (int j = 0; j < Id.Length; j++)
+                {
+                    i.memory.WriteMemoryByID(Id[j],true);
+                }
+            };
+
+        }
+            
         public FastGameFun()
         {
             gameDataAddresseList = new List<GameDataAddress>();

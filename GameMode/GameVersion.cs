@@ -20,9 +20,9 @@ namespace WPFCheatUITemplate
         public static Version GetCurrentVersion(IntPtr handle)
         {
             GameVersion.Version ret = Version.Default;
-            var ver = CheatUITemplt.CheatTools.ReadMemory<int>(handle, (IntPtr)0x552013);
+            var ver = CheatUITemplt.CheatTools.ReadMemory<uint>(handle, (IntPtr)0x552013);
 
-            switch ((uint)ver)
+            switch (ver)
             {
                 case 80439528:
                     ret = Version.Steam;

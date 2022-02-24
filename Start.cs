@@ -69,21 +69,8 @@ namespace WPFCheatUITemplate
 
             };
             //"超级传送带"
-            new FastGameFun() 
-            {
-                gameFunDataAndUIStruct = GetCheckButtonDateStruct("超级传送带", "Super conveyor belt"),
-
-                doFirstTime = (i, v) =>
-                {
-                    i.memory.WriteMemoryByID("fast_belt_1");
-                    i.memory.WriteMemoryByID("fast_belt_2");
-                },
-                doRunAgain = (i, v) =>
-                {
-                    i.memory.WriteMemoryByID("fast_belt_1", true);
-                    i.memory.WriteMemoryByID("fast_belt_2", true);
-                },
-            };
+            new FastGameFun(GetCheckButtonDateStruct("超级传送带", "Super conveyor belt"), "fast_belt_1", "fast_belt_2");
+           
         }
     }
 }

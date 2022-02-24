@@ -65,8 +65,6 @@ namespace CheatUITemplt
         [DllImport("kernel32.dll")]
         public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out int lpNumberOfBytesWritten);
 
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T ReadMemory<T>(IntPtr _processHandle, IntPtr address) where T : struct
         {
             var ByteSize = Marshal.SizeOf(typeof(T));
@@ -78,7 +76,7 @@ namespace CheatUITemplt
             return ByteArrayToStructure<T>(buffer);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+       
         public static byte[] ReadMemory(IntPtr _processHandle, IntPtr address, int size)
         {
             var buffer = new byte[size];
@@ -124,7 +122,7 @@ namespace CheatUITemplt
             return ret;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        
         public static bool WriteMemory<T>(IntPtr _processHandle, IntPtr address, object value) where T : struct
         {
             var buffer = StructureToByteArray(value);
