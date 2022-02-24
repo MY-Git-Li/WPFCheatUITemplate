@@ -157,6 +157,18 @@ namespace WPFCheatUITemplate.DataSet
                 IntPtrOffset = new uint[] { 0x868 },
                 IsIntPtr = true,
             });
+
+            AddData("see_vase", GameVersion.Version.V1_1_0_1056, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x59C1A,
+
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+            new byte[] { 0x66, 0xB8, 0x33, 0x00 },
+            new byte[] { 0x85, 0xC0, 0x7E, 0x04 });
         }
     }
     

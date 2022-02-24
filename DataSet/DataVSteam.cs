@@ -169,8 +169,6 @@ namespace WPFCheatUITemplate.DataSet
             new byte[] { 0x33 },
             new byte[] { 0x85 });
 
-
-
             AddData("Secondary_Offset", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
@@ -181,6 +179,18 @@ namespace WPFCheatUITemplate.DataSet
                 IntPtrOffset = new uint[] { 0x868 },
                 IsIntPtr = true,
             });
+
+            AddData("see_vase", GameVersion.Version.Steam, new GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x531CA,
+
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+            new byte[] { 0x66, 0xB8, 0x33, 0x00 },
+            new byte[] { 0x85, 0xC0, 0x7E, 0x04 });
         }
     }
 }
