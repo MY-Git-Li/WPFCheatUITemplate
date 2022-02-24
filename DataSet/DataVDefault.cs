@@ -3,7 +3,7 @@ using WPFCheatUITemplate.Other.Extends;
 
 namespace WPFCheatUITemplate.DataSet
 {
-    internal class DataDefault : AddressDatas
+    internal class DataVDefault : AddressDatas
     {
         public override void Init()
         {
@@ -19,7 +19,6 @@ namespace WPFCheatUITemplate.DataSet
             },
             new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 },
             new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
-
 
             AddData("supershoot2", GameVersion.Version.Default, new GameData()
             {

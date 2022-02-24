@@ -14,6 +14,7 @@ namespace WPFCheatUITemplate
             Default,
             V1_0_0_1051,
             V1_1_0_1056,
+            Steam,
         }
 
         public static Version GetCurrentVersion(IntPtr handle)
@@ -22,6 +23,9 @@ namespace WPFCheatUITemplate
             var ver = CheatUITemplt.CheatTools.ReadMemory<int>(handle, (IntPtr)0x552013);
             switch ((uint)ver)
             {
+                case 0x04CB68E8:
+                    ret = Version.Steam;
+                    break;
                 case 0x878B0000:
                     ret = Version.V1_1_0_1056;
                     break;

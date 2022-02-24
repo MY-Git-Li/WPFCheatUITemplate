@@ -84,8 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataSet\DataDefault.cs" />
+    <Compile Include="DataSet\DataVDefault.cs" />
     <Compile Include="DataSet\DataV1_0_0_1051.cs" />
+    <Compile Include="DataSet\DataVSteam.cs" />
     <Compile Include="GameMode\Entity\Plant.cs" />
     <Compile Include="GameMode\Entity\Projectile.cs" />
     <Compile Include="GameMode\Other\GameModeData.cs" />
