@@ -122,6 +122,30 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = false,
             });
 
+            AddData("fast_belt_1", GameVersion.Version.V1_1_0_1056, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x2E58F,
+
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+           new byte[] { 0x80 },
+           new byte[] { 0x8f });
+
+            AddData("fast_belt_2", GameVersion.Version.V1_1_0_1056, new GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x9F6FE,
+
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+            new byte[] { 0x33 },
+            new byte[] { 0x85 });
+
 
             AddData("Secondary_Offset", GameVersion.Version.V1_1_0_1056, new GameData()
             {

@@ -21,9 +21,10 @@ namespace WPFCheatUITemplate
         {
             GameVersion.Version ret = Version.Default;
             var ver = CheatUITemplt.CheatTools.ReadMemory<int>(handle, (IntPtr)0x552013);
+
             switch ((uint)ver)
             {
-                case 0x04CB68E8:
+                case 80439528:
                     ret = Version.Steam;
                     break;
                 case 0x878B0000:

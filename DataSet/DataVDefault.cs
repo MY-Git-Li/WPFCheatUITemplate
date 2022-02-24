@@ -32,7 +32,7 @@ namespace WPFCheatUITemplate.DataSet
             },
             new byte[] { 0x0F, 0x84 },
             new byte[] { 0x0F, 0x85 });
-            
+
         }
     }
 }

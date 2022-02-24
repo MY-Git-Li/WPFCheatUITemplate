@@ -60,7 +60,7 @@ namespace WPFCheatUITemplate.GameMode
         {
             get
             {
-                return GameVersion.GetCurrentVersion(handle);
+                return GameVersion.GetCurrentVersion(Handle);
             }
 
         }

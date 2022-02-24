@@ -37,7 +37,7 @@ namespace WPFCheatUITemplate
 
                 },
 
-            }.Go();
+            };
             new DefaultPlantLayout();
             new NoCd();
             new DrawWindow();
@@ -67,8 +67,23 @@ namespace WPFCheatUITemplate
                     i.memory.WriteMemoryByID("supershoot2", true);
                 },
 
-            }.Go();
-            //new Test();
+            };
+            //"超级传送带"
+            new FastGameFun() 
+            {
+                gameFunDataAndUIStruct = GetCheckButtonDateStruct("超级传送带", "Super conveyor belt"),
+
+                doFirstTime = (i, v) =>
+                {
+                    i.memory.WriteMemoryByID("fast_belt_1");
+                    i.memory.WriteMemoryByID("fast_belt_2");
+                },
+                doRunAgain = (i, v) =>
+                {
+                    i.memory.WriteMemoryByID("fast_belt_1", true);
+                    i.memory.WriteMemoryByID("fast_belt_2", true);
+                },
+            };
         }
     }
 }

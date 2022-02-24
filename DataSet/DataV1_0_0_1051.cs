@@ -130,6 +130,30 @@ namespace WPFCheatUITemplate.DataSet
                 IntPtrOffset = new uint[] { 0x768 },
                 IsIntPtr = true,
             });
+
+            AddData("fast_belt_1", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x22D20,
+
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+            new byte[] { 0x80 },
+            new byte[] { 0x8f });
+
+            AddData("fast_belt_2", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x89CA1,
+
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+            new byte[] { 0x33 },
+            new byte[] { 0x85 });
         }
     }
 }
