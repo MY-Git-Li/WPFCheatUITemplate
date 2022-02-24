@@ -84,11 +84,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataSet\DataDefault.cs" />
+    <Compile Include="DataSet\DataV1_0_0_1051.cs" />
     <Compile Include="GameMode\Entity\Plant.cs" />
     <Compile Include="GameMode\Entity\Projectile.cs" />
     <Compile Include="GameMode\Other\GameModeData.cs" />
     <Compile Include="GameMode\Other\GameModeManagerBase.cs" />
-    <Compile Include="MyAddressDatas.cs" />
+    <Compile Include="DataSet\DataV1_1_0_1056.cs" />
     <Compile Include="GameFuns\AdventureLevel.cs" />
     <Compile Include="GameFuns\AllowBackground.cs" />
     <Compile Include="GameFuns\ArbitrarilyPlant.cs" />

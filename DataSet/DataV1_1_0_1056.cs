@@ -7,28 +7,6 @@ namespace WPFCheatUITemplate.DataSet
     {
         public override void Init()
         {
-            AddData("supershoot", GameVersion.Version.V1_1_0_1056, new GameData()
-            {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x6DC21,
-
-                IsSignatureCode = false,
-                IsIntPtr = false,
-            },
-            new byte[] { 0xB9, 0x22, 0x00, 0x00, 0x00 },
-            new byte[] { 0x8B, 0x4E, 0x5C, 0x2B, 0xC8 });
-
-            AddData("supershoot2", GameVersion.Version.V1_1_0_1056, new GameData()
-            {
-                ModuleName = "PlantsVsZombies.exe",
-                ModuleOffsetAddress = 0x72EE4,
-
-                IsSignatureCode = false,
-                IsIntPtr = false,
-            },
-            new byte[] { 0x0F, 0x84 },
-            new byte[] { 0x0F, 0x85 });
-
             AddData("sun", GameVersion.Version.V1_1_0_1056, new Other.GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",

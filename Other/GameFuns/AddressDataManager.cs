@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other.Exceptions;
@@ -167,7 +168,18 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             if (DataSet.ContainsKey(version))
             {
-                return HandleGetData(id, DataSet[version], false);
+                var ret = HandleGetData(id, DataSet[version], false);
+                if (ByteArrayToStructure<int>(ret).Equals(0))
+                {
+                    if (DataSet.ContainsKey(GameVersion.Version.Default))
+                    {
+                        var dicx = DataSet[GameVersion.Version.Default];
+
+                        ret = HandleGetData(id, dicx, false);
+                    }
+                }
+
+                return ret;
             }
             else if (DataSet.ContainsKey(GameVersion.Version.Default))
             {
@@ -184,7 +196,20 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             if (DataSet.ContainsKey(version))
             {
-                return HandleGetData(id, DataSet[version], true);
+
+                var ret = HandleGetData(id, DataSet[version], true);
+                if (ByteArrayToStructure<int>(ret).Equals(0))
+                {
+                    if (DataSet.ContainsKey(GameVersion.Version.Default))
+                    {
+                        var dicx = DataSet[GameVersion.Version.Default];
+
+                        ret = HandleGetData(id, dicx, true);
+                    }
+                }
+
+                return ret;
+
             }
             else if (DataSet.ContainsKey(GameVersion.Version.Default))
             {
@@ -202,8 +227,15 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             if (data_Offset.ContainsKey(version))
             {
-
                 ret = HandleGetOffset(id, data_Offset[version]);
+
+                if (ret == 0)
+                {
+                    if (data_Offset.ContainsKey(GameVersion.Version.Default))
+                    {
+                        ret = HandleGetOffset(id, data_Offset[GameVersion.Version.Default]);
+                    }
+                }
 
             }
             else if (data_Offset.ContainsKey(GameVersion.Version.Default))
@@ -227,6 +259,16 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
                 ret = HandleGetAddress(version, dic, id);
 
+                if (ret.Equals(IntPtr.Zero))
+                {
+                    if (data_Dic.ContainsKey(GameVersion.Version.Default))
+                    {
+                        var dicx = data_Dic[GameVersion.Version.Default];
+
+                        ret = HandleGetAddress(GameVersion.Version.Default, dicx, id);
+                    }
+                }
+                
             }
             else if (data_Dic.ContainsKey(GameVersion.Version.Default))
             {
@@ -282,7 +324,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                     ret = curentGameDataAddress[id].Address;
                 }
             }
-
+           
             return ret;
         }
 
@@ -299,5 +341,50 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
             return 0;
         }
+
+
+
+
+
+        #region Conversion
+        private static T ByteArrayToStructure<T>(byte[] bytes) where T : struct
+        {
+            var handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
+            try
+            {
+                return (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
+            }
+            finally
+            {
+                handle.Free();
+            }
+        }
+
+        private static byte[] StructureToByteArray(object obj)
+        {
+            int length = Marshal.SizeOf(obj);
+            byte[] array = new byte[length];
+            IntPtr pointer = Marshal.AllocHGlobal(length);
+            Marshal.StructureToPtr(obj, pointer, true);
+            Marshal.Copy(pointer, array, 0, length);
+            Marshal.FreeHGlobal(pointer);
+            return array;
+        }
+
+        private static float[] ConvertToFloatArray(byte[] bytes)
+        {
+            if (bytes.Length % 4 != 0)
+            {
+                throw new ArgumentException();
+            }
+
+            float[] floats = new float[bytes.Length / 4];
+            for (int i = 0; i < floats.Length; i++)
+            {
+                floats[i] = BitConverter.ToSingle(bytes, i * 4);
+            }
+            return floats;
+        }
+        #endregion
     }
 }
