@@ -14,9 +14,9 @@ namespace WPFCheatUITemplate.GameMode
 
         static string processName = "PlantsVsZombies";
 
-        static string windowsName = "";
+        static string windowsName = "Plants vs. Zombies";
 
-        static string classWindowsName = "";
+        static string classWindowsName = "MainWindow";
 
         public static IntPtr Handle
         {

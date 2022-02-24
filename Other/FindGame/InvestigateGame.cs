@@ -83,15 +83,31 @@ namespace CheatUITemplt
             return pid;
         }
 
-        int GetPid(bool isByWindowsName = false)
+        int GetPid(bool isByWindowsNamePrecedence = true)
         {
-            if (isByWindowsName)
+            if (isByWindowsNamePrecedence)
             {
-                return CheatTools.GetPidByWindowsName(GameInformation.ClassWindowsName, GameInformation.WindowsName);
+                var pid = CheatTools.GetPidByWindowsName(GameInformation.ClassWindowsName, GameInformation.WindowsName);
+                if (pid == 0)
+                {
+                    return CheatTools.GetPidByProcessName(GameInformation.ProcessName);
+                }else
+                {
+                    return pid;
+                }
+
             }
             else
             {
-                return CheatTools.GetPidByProcessName(GameInformation.ProcessName);
+                var pid = CheatTools.GetPidByProcessName(GameInformation.ProcessName);
+                if (pid == 0)
+                {
+                    return CheatTools.GetPidByWindowsName(GameInformation.ClassWindowsName, GameInformation.WindowsName);
+                }
+                else
+                {
+                    return pid;
+                }
             }
         }
     }
