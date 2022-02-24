@@ -1,17 +1,15 @@
 ﻿using CheatUITemplt;
-using System;
 using System.Windows.Forms;
 using WPFCheatUITemplate.GameFuns;
 using WPFCheatUITemplate.Other;
-using WPFCheatUITemplate.Other.GameFuns;
 
 namespace WPFCheatUITemplate
 {
-    class Start: ViewMenu
+    class Start : ViewMenu
     {
-       public static void Init()
+        public static void Init()
         {
-           SetCurentKeyModifiers(HotKey.KeyModifiers.None, Keys.NumPad1);
+            SetCurentKeyModifiers(HotKey.KeyModifiers.None, Keys.NumPad1);
             new Sun();
             new Coin();
             new AdventureLevel();
