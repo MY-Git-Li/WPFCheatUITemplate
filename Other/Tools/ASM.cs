@@ -899,6 +899,21 @@ namespace CheatUITemplt
 
         }
 
+        public void Mov_EBP_DWORD_Ptr_EBP_Add(int addre)
+
+        {
+
+            if ((addre <= 127) && (addre >= -128))
+
+                this.Asmcode = this.Asmcode + "3E8B6D" + intTohex(addre, 2);
+
+            else
+
+                this.Asmcode = this.Asmcode + "3E8BAD" + intTohex(addre, 8);
+
+        }
+
+
         public void Mov_ECX_DWORD_Ptr_EDX_Add(int addre)
 
         {

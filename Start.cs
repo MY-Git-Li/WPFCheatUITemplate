@@ -25,7 +25,7 @@ namespace WPFCheatUITemplate
 
                 doFirstTime = (i, v) =>
                 {
-                    var add = GetAddress("Win_Call_ECX");
+                    var add = GetAddress("Secondary_Offset");
                     var ecx = i.memory.ReadMemory<int>(add);
                     ASM asm = new ASM();
                     asm.Mov_EAX(ecx);

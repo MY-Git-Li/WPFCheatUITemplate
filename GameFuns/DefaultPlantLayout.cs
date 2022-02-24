@@ -21,44 +21,63 @@ namespace WPFCheatUITemplate.GameFuns
             asm.Push68(id);
             asm.Mov_EAX(x);
             asm.Push68(y);
-            asm.Mov_ECX_DWORD_Ptr(0x755E0C);
-            asm.Mov_ECX_DWORD_Ptr_ECX_Add(0x868);
-            asm.Push_ECX();
-            asm.Mov_EBX(0x00418D70);
+            var offset = memory.ReadMemory<int>(GetAddress("Secondary_Offset"));
+            asm.Push68(offset);
+            asm.Mov_EBX(GetAddress("Plant_Call").ToInt32());
             asm.Call_EBX();
             asm.Popad();
-            asm.Ret();
+            asm.Ret(); 
             asm.RunAsm(pid);
-        }
-
-        public override void Awake()
-        {
-
         }
 
         public override void DoFirstTime(double value)
         {
-            pid = CheatTools.GetPidByHandle(gameFunDataAndUIStruct.Handle);
+            pid = GameMode.GameInformation.Pid;
+
             for (int i = 0; i < 5; i++)
             {
                 Plant(i, 0, 40);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 0, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 1, 40);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 1, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 2, 43);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 2, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 3, 43);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 3, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 4, 44);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 4, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 5, 44);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 5, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 6, 22);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 6, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 7, 23);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
+                Plant(i, 7, 30);
+                Thread.Sleep(10);
+
                 Plant(i, 8, 46);
-                Thread.Sleep(50);
+                Thread.Sleep(10);
             }
         }
 

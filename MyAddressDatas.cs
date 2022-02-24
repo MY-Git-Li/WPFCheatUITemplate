@@ -137,7 +137,17 @@ namespace WPFCheatUITemplate
                 IsIntPtr = false,
             });
 
-            AddData("Win_Call_ECX", GameVersion.Version.V1_1_0_1056, new GameData()
+            AddData("Plant_Call", GameVersion.Version.V1_1_0_1056, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x18D70,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
+
+
+            AddData("Secondary_Offset", GameVersion.Version.V1_1_0_1056, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x355E0C,
@@ -256,7 +266,17 @@ namespace WPFCheatUITemplate
                 IsIntPtr = false,
             });
 
-            AddData("Win_Call_ECX", GameVersion.Version.V1_0_0_1051, new GameData()
+            AddData("Plant_Call", GameVersion.Version.V1_0_0_1051, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0xD120,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            });
+
+
+            AddData("Secondary_Offset", GameVersion.Version.V1_0_0_1051, new GameData()
             {
                 ModuleName = "PlantsVsZombies.exe",
                 ModuleOffsetAddress = 0x2A9EC0,
