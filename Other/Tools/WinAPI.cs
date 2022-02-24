@@ -127,5 +127,11 @@ namespace CheatUITemplt
 
         #endregion
 
+        #region 按键相关
+
+        [DllImport("User32")]
+        public static extern short GetAsyncKeyState(int vKey);
+
+        #endregion
     }
 }

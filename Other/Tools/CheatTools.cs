@@ -559,6 +559,19 @@ namespace CheatUITemplt
 
         #endregion
 
+        #region 按键相关
+        public static bool GetKeyStateIsDown(System.Windows.Forms.Keys keys)
+        {
+            if ((WinAPI.GetAsyncKeyState((int)keys) & 0x8000) != 0)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+                
+        }
+        #endregion
     }
 
 
