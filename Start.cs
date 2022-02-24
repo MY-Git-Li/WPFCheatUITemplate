@@ -52,22 +52,7 @@ namespace WPFCheatUITemplate
 
             SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             //"超级攻速"
-            new FastGameFun()
-            {
-                gameFunDataAndUIStruct = GetCheckButtonDateStruct("超级攻速", "Super attack speed"),
-
-                doFirstTime = (i, v) =>
-                {
-                    i.memory.WriteMemoryByID("supershoot");
-                    i.memory.WriteMemoryByID("supershoot2");
-                },
-                doRunAgain = (i, v) =>
-                {
-                    i.memory.WriteMemoryByID("supershoot", true);
-                    i.memory.WriteMemoryByID("supershoot2", true);
-                },
-
-            };
+            new FastGameFun(GetCheckButtonDateStruct("超级攻速", "Super attack speed"), "supershoot", "supershoot2");
             //"超级传送带"
             new FastGameFun(GetCheckButtonDateStruct("超级传送带", "Super conveyor belt"), "fast_belt_1", "fast_belt_2");
            
