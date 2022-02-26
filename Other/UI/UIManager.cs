@@ -184,14 +184,14 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         static void Update()
         {
-            if ((int)curentKey == 105)
+            if (curentKey.Equals(System.Windows.Forms.Keys.NumPad9))
             {
-                curentKey = (System.Windows.Forms.Keys)65;
+                curentKey = System.Windows.Forms.Keys.A;
                 UpdateCurentKeyModifiers();
 
-            }else if ((int)curentKey == 90)
+            }else if ((curentKey.Equals(System.Windows.Forms.Keys.Z)))
             {
-                curentKey = (System.Windows.Forms.Keys)96;
+                curentKey = System.Windows.Forms.Keys.NumPad0;
             }else
             {
                 UpdateCurentKey();
@@ -249,6 +249,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
                     break;
                 case CheatUITemplt.HotKey.KeyModifiers.Shift:
                     heaKeyModifierd = "Shift";
+                    break;
+                case CheatUITemplt.HotKey.KeyModifiers.Shift | CheatUITemplt.HotKey.KeyModifiers.Ctrl:
+                    heaKeyModifierd = "Shift+Ctrl";
                     break;
                 default:
                     break;
