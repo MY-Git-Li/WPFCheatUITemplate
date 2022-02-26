@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using WPFCheatUITemplate.GameMode;
 
 namespace CheatUITemplt
@@ -88,10 +89,14 @@ namespace CheatUITemplt
             if (isByWindowsNamePrecedence)
             {
                 var pid = CheatTools.GetPidByWindowsName(GameInformation.ClassWindowsName, GameInformation.WindowsName);
-                if (pid == 0)
+
+                var wphandle = Process.GetProcessById(pid).MainWindowHandle;
+
+                if (!wphandle.Equals(System.IntPtr.Zero))
                 {
                     return CheatTools.GetPidByProcessName(GameInformation.ProcessName);
-                }else
+                }
+                else
                 {
                     return pid;
                 }
@@ -100,6 +105,7 @@ namespace CheatUITemplt
             else
             {
                 var pid = CheatTools.GetPidByProcessName(GameInformation.ProcessName);
+
                 if (pid == 0)
                 {
                     return CheatTools.GetPidByWindowsName(GameInformation.ClassWindowsName, GameInformation.WindowsName);
