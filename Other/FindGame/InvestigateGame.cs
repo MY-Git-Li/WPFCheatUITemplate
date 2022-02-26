@@ -92,9 +92,16 @@ namespace CheatUITemplt
 
                 var wphandle = Process.GetProcessById(pid).MainWindowHandle;
 
-                if (!wphandle.Equals(System.IntPtr.Zero))
+                if (wphandle.Equals(System.IntPtr.Zero))
                 {
-                    return CheatTools.GetPidByProcessName(GameInformation.ProcessName);
+                    if (pid.Equals(0))
+                    {
+                        return CheatTools.GetPidByProcessName(GameInformation.ProcessName);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
                 else
                 {
