@@ -187,12 +187,16 @@ namespace WPFCheatUITemplate.Other.GameFuns
             if (curentKey.Equals(System.Windows.Forms.Keys.NumPad9))
             {
                 curentKey = System.Windows.Forms.Keys.A;
-                UpdateCurentKeyModifiers();
-
+             
             }else if ((curentKey.Equals(System.Windows.Forms.Keys.Z)))
             {
+                curentKey = System.Windows.Forms.Keys.F1;
+            }else if ((curentKey.Equals(System.Windows.Forms.Keys.F12)))
+            {
                 curentKey = System.Windows.Forms.Keys.NumPad0;
-            }else
+                UpdateCurentKeyModifiers();
+            }
+            else
             {
                 UpdateCurentKey();
             }
@@ -201,12 +205,18 @@ namespace WPFCheatUITemplate.Other.GameFuns
         }
         static void UpdateCurentKey()
         {
+            //A -- Z
             if ((int)curentKey <= 90 && (int)curentKey >= 65)
             {
                 curentKey++;
             }
-
+            //NumPad0 - NumPad9
             if ((int)curentKey <= 105 && (int)curentKey >= 96)
+            {
+                curentKey++;
+            }
+            //F1 -- F12
+            if ((int)curentKey <= 123 && (int)curentKey >= 112)
             {
                 curentKey++;
             }
@@ -376,6 +386,42 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 case System.Windows.Forms.Keys.NumPad9:
                     key += "Number 9";
                     break;
+                case System.Windows.Forms.Keys.F1:
+                    key += "F1";
+                    break;
+                case System.Windows.Forms.Keys.F2:
+                    key += "F2";
+                    break;
+                case System.Windows.Forms.Keys.F3:
+                    key += "F3";
+                    break;
+                case System.Windows.Forms.Keys.F4:
+                    key += "F4";
+                    break;
+                case System.Windows.Forms.Keys.F5:
+                    key += "F5";
+                    break;
+                case System.Windows.Forms.Keys.F6:
+                    key += "F6";
+                    break;
+                case System.Windows.Forms.Keys.F7:
+                    key += "F7";
+                    break;
+                case System.Windows.Forms.Keys.F8:
+                    key += "F8";
+                    break;
+                case System.Windows.Forms.Keys.F9:
+                    key += "F9";
+                    break;
+                case System.Windows.Forms.Keys.F10:
+                    key += "F10";
+                    break;
+                case System.Windows.Forms.Keys.F11:
+                    key += "F11";
+                    break;
+                case System.Windows.Forms.Keys.F12:
+                    key += "F12";
+                    break;
                 default:
                     break;
             }
@@ -500,6 +546,42 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 case System.Windows.Forms.Keys.NumPad9:
                     key += "数字键9";
                     break;
+                case System.Windows.Forms.Keys.F1:
+                    key += "F1";
+                    break;
+                case System.Windows.Forms.Keys.F2:
+                    key += "F2";
+                    break;
+                case System.Windows.Forms.Keys.F3:
+                    key += "F3";
+                    break;
+                case System.Windows.Forms.Keys.F4:
+                    key += "F4";
+                    break;
+                case System.Windows.Forms.Keys.F5:
+                    key += "F5";
+                    break;
+                case System.Windows.Forms.Keys.F6:
+                    key += "F6";
+                    break;
+                case System.Windows.Forms.Keys.F7:
+                    key += "F7";
+                    break;
+                case System.Windows.Forms.Keys.F8:
+                    key += "F8";
+                    break;
+                case System.Windows.Forms.Keys.F9:
+                    key += "F9";
+                    break;
+                case System.Windows.Forms.Keys.F10:
+                    key += "F10";
+                    break;
+                case System.Windows.Forms.Keys.F11:
+                    key += "F11";
+                    break;
+                case System.Windows.Forms.Keys.F12:
+                    key += "F12";
+                    break;
                 default:
                     break;
             }
@@ -623,6 +705,42 @@ namespace WPFCheatUITemplate.Other.GameFuns
                     break;
                 case System.Windows.Forms.Keys.NumPad9:
                     key += "数字鍵9";
+                    break;
+                case System.Windows.Forms.Keys.F1:
+                    key += "F1";
+                    break;
+                case System.Windows.Forms.Keys.F2:
+                    key += "F2";
+                    break;
+                case System.Windows.Forms.Keys.F3:
+                    key += "F3";
+                    break;
+                case System.Windows.Forms.Keys.F4:
+                    key += "F4";
+                    break;
+                case System.Windows.Forms.Keys.F5:
+                    key += "F5";
+                    break;
+                case System.Windows.Forms.Keys.F6:
+                    key += "F6";
+                    break;
+                case System.Windows.Forms.Keys.F7:
+                    key += "F7";
+                    break;
+                case System.Windows.Forms.Keys.F8:
+                    key += "F8";
+                    break;
+                case System.Windows.Forms.Keys.F9:
+                    key += "F9";
+                    break;
+                case System.Windows.Forms.Keys.F10:
+                    key += "F10";
+                    break;
+                case System.Windows.Forms.Keys.F11:
+                    key += "F11";
+                    break;
+                case System.Windows.Forms.Keys.F12:
+                    key += "F12";
                     break;
                 default:
                     break;
