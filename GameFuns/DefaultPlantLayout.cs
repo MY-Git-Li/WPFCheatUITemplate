@@ -10,7 +10,7 @@ namespace WPFCheatUITemplate.GameFuns
         int pid;
         public DefaultPlantLayout()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetButtonDateStruct("默认植物种植", "Default planting", false);
+            gameFunDataAndUIStruct = GetButtonDateStruct("默认植物种植", "Default planting", false);
         }
 
         public void Plant(int x, int y, int id)

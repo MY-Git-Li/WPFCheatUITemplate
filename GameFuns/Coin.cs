@@ -12,7 +12,7 @@ namespace WPFCheatUITemplate.GameFuns
     {
         public Coin()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetButtonDateStruct("设置硬币", "Coin number", true);
+            gameFunDataAndUIStruct = GetButtonDateStruct("设置硬币", "Coin number", true);
            
         }
 

@@ -8,7 +8,7 @@ namespace WPFCheatUITemplate.GameFuns
        
         public NoCd()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetCheckButtonDateStruct("无冷却时间", "No cool down time", false);
+            gameFunDataAndUIStruct = GetCheckButtonDateStruct("无冷却时间", "No cool down time", false);
         }
 
         public override void Awake()

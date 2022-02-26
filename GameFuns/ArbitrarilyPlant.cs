@@ -8,7 +8,7 @@ namespace WPFCheatUITemplate.GameFuns
        
         public ArbitrarilyPlant()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetCheckButtonDateStruct("随意种植", "Planting will", false);
+            gameFunDataAndUIStruct = GetCheckButtonDateStruct("随意种植", "Planting will", false);
         }
         public override void Awake()
         {

@@ -7,7 +7,7 @@ namespace WPFCheatUITemplate.GameFuns
     {
         public AutoGet()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetCheckButtonDateStruct("自动获取", "Automatic acquisition", false);
+            gameFunDataAndUIStruct = GetCheckButtonDateStruct("自动获取", "Automatic acquisition", false);
         }
         public override void Awake()
         {

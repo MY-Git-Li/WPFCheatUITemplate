@@ -8,7 +8,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public Tree()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetButtonDateStruct("设置智慧树高度", "Tree height", true);
+            gameFunDataAndUIStruct = GetButtonDateStruct("设置智慧树高度", "Tree height", true);
 
         }
 

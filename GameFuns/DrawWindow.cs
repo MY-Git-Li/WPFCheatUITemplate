@@ -18,7 +18,7 @@ namespace WPFCheatUITemplate.GameFuns
 
         public DrawWindow()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetCheckButtonDateStruct("外部绘制", "External draw", false);
+            gameFunDataAndUIStruct = GetCheckButtonDateStruct("外部绘制", "External draw", false);
 
             drawManager = new DrawManager();
            

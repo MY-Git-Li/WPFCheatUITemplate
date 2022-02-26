@@ -8,7 +8,7 @@ namespace WPFCheatUITemplate.GameFuns
        
         public AllowBackground()
         {
-            gameFunDataAndUIStruct = Other.GameFuns.UIManager.GetCheckButtonDateStruct("允许后台运行", "Running in background", false);
+            gameFunDataAndUIStruct = GetCheckButtonDateStruct("允许后台运行", "Running in background", false);
         }
 
         public override void Awake()
