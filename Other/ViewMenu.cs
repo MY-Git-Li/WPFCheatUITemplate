@@ -89,12 +89,12 @@ namespace WPFCheatUITemplate.Other
 
 
         public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
-          string FunDescribe_EN, bool IsAcceptValue, bool IsShowDecimal  = false, double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
+          string FunDescribe_EN, bool IsAcceptValue = false, bool IsShowDecimal  = false, double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
         {
             return UIManager.GetButtonDateStruct(FunDescribe_SC, FunDescribe_EN, IsAcceptValue, IsShowDecimal, SliderMinNum, SliderMaxNum, IsHide);
         }
         public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
-           string FunDescribe_EN, bool IsAcceptValue, bool IsShowDecimal = false, double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
+           string FunDescribe_EN, bool IsAcceptValue = false, bool IsShowDecimal = false, double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
         {
             return UIManager.GetCheckButtonDateStruct(FunDescribe_SC,FunDescribe_EN, IsAcceptValue, IsShowDecimal, SliderMinNum, SliderMaxNum, IsHide);
         }
