@@ -89,6 +89,13 @@ namespace CheatUITemplt
                 textBinding.Source = slider;
                 //设置要绑定属性
                 textBinding.Path = new PropertyPath("Value");
+
+                if(gameFun.gameFunDataAndUIStruct.uIData.IsShowDecimal)
+                {
+                    slider.IsSnapToTickEnabled = false;
+                    textBinding.StringFormat = "{0:F2}";
+                }
+
                 //设置绑定到要绑定的控件
                 textBox.SetBinding(TextBox.TextProperty, textBinding);
 

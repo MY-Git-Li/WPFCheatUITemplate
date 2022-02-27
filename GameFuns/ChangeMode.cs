@@ -9,7 +9,7 @@ namespace WPFCheatUITemplate.GameFuns
       
         public ChangeMode()
         {
-            gameFunDataAndUIStruct = GetButtonDateStruct("改变模式", "Change mode", true, 1, 70);
+            gameFunDataAndUIStruct = GetButtonDateStruct("改变模式", "Change mode", true, false ,1, 70);
            
         }
 

@@ -211,6 +211,10 @@ namespace WPFCheatUITemplate.Other
         /// 是否隐藏，不在界面显示
         /// </summary>
         public bool IsHide { get; set; }
+        /// <summary>
+        /// 是否界面显示小数
+        /// </summary>
+        public bool IsShowDecimal { get; set; }
     }
     /// <summary>
     /// 快捷键设置类

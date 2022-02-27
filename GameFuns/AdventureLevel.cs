@@ -9,7 +9,7 @@ namespace WPFCheatUITemplate.GameFuns
        
         public AdventureLevel()
         {
-            gameFunDataAndUIStruct = GetButtonDateStruct("设置冒险关卡", "Adventure level", true, 1, 50); 
+            gameFunDataAndUIStruct = GetButtonDateStruct("设置冒险关卡", "Adventure level", true, false, 1, 50); 
         }
 
         public override void Awake()
