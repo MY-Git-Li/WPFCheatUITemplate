@@ -191,6 +191,17 @@ namespace WPFCheatUITemplate.DataSet
             },
             new byte[] { 0x66, 0xB8, 0x33, 0x00 },
             new byte[] { 0x85, 0xC0, 0x7E, 0x04 });
+
+            AddData("GameRunSpeed", GameVersion.Version.Steam, new Other.GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x331C50,
+
+                IsSignatureCode = false,
+
+                IntPtrOffset = new uint[] { 0x454 + 0x60 },
+                IsIntPtr = true,
+            });
         }
     }
 }

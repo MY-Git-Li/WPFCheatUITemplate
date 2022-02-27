@@ -9,12 +9,26 @@ namespace WPFCheatUITemplate
     {
         public static void Init()
         {
-            SetCurentKeyModifiers(HotKey.KeyModifiers.None, Keys.NumPad1);
             new Sun();
             new Coin();
             new AdventureLevel();
             new ChangeMode();
             new Tree();
+            //"游戏速度"
+            new FastGameFun()
+            {
+                gameFunDataAndUIStruct = GetCheckButtonDateStruct("游戏速度", "Game speed", 0f, 10f),
+
+                doFirstTime = (i, v) =>
+                {
+                    i.memory.WriteMemory<int>(GetAddress("GameRunSpeed"), (int)(v == 0 ? 10 : 10f / v ));
+                },
+
+                doRunAgain = (i, v) =>
+                {
+                    i.memory.WriteMemory<int>(GetAddress("GameRunSpeed"), 10);
+                },
+            };
             //"直接胜利"
             new FastGameFun()
             {
