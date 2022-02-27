@@ -261,7 +261,7 @@ namespace WPFCheatUITemplate.GameMode
         public static List<Zombie> GetZombies()
         {
             List<Zombie> zombies = new List<Zombie>();
-            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle,GetAddress("zombieMaxNum"));
+            int maxnum = ReadMemoryByID<int>("zombieMaxNum");
 
             var zombieHead = GetAddress("zombieHead");
 
@@ -287,7 +287,7 @@ namespace WPFCheatUITemplate.GameMode
         public static List<Plant> GetPlants()
         {
             List<Plant> plants = new List<Plant>();
-            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle, GetAddress("plantMaxNum"));
+            int maxnum = ReadMemoryByID<int>("plantMaxNum");
 
             var plantHead = GetAddress("plantHead");
 
@@ -313,7 +313,7 @@ namespace WPFCheatUITemplate.GameMode
         public static List<Projectile> GetProjectiles()
         {
             List<Projectile> projectiles = new List<Projectile>();
-            int maxnum = CheatTools.ReadMemory<int>(GameInformation.Handle, GetAddress("projectileMaxNum"));
+            int maxnum = ReadMemoryByID<int>("projectileMaxNum");
 
             var plantHead = GetAddress("projectileHead");
 
