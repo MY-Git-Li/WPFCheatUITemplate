@@ -74,17 +74,17 @@ namespace CheatUITemplt
 
         int GetPid_Work(bool isFind)
         {
-            int pid = GetPid();
+            int pid = GetPid(GameInformation.IsByWindowsNamePrecedence);
             while (isFind ? pid == 0 : pid != 0)
             {
-                pid = GetPid();
+                pid = GetPid(GameInformation.IsByWindowsNamePrecedence);
                 System.Threading.Thread.Sleep(100);
             }
 
             return pid;
         }
 
-        int GetPid(bool isByWindowsNamePrecedence = true)
+        int GetPid(bool isByWindowsNamePrecedence)
         {
             if (isByWindowsNamePrecedence)
             {

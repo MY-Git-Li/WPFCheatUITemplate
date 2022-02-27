@@ -18,6 +18,8 @@ namespace WPFCheatUITemplate.GameMode
 
         static string classWindowsName = "MainWindow";
 
+        static bool isByWindowsNamePrecedence = true;
+
         public static IntPtr Handle
         {
             get
@@ -52,19 +54,12 @@ namespace WPFCheatUITemplate.GameMode
             }
         }
 
-        public static string WindowsName { get => windowsName;}
+        public static string WindowsName { get => windowsName; }
 
         public static string ClassWindowsName { get => classWindowsName; }
 
-        public static GameVersion.Version CurentVersion
-        {
-            get
-            {
-                return GameVersion.GetCurrentVersion(Handle);
-            }
-
-        }
-
-       
+        public static GameVersion.Version CurentVersion { get => GameVersion.GetCurrentVersion(Handle);}
+            
+        public static bool IsByWindowsNamePrecedence { get => isByWindowsNamePrecedence;}
     }
 }
