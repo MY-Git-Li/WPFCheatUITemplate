@@ -93,7 +93,7 @@ namespace CheatUITemplt
                 if(gameFun.gameFunDataAndUIStruct.uIData.IsShowDecimal)
                 {
                     slider.IsSnapToTickEnabled = false;
-                    textBinding.StringFormat = "{0:F2}";
+                    textBinding.StringFormat = "{0:F1}";
                 }
 
                 //设置绑定到要绑定的控件
