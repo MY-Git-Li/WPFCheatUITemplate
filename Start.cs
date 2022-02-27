@@ -19,14 +19,14 @@ namespace WPFCheatUITemplate
             {
                 gameFunDataAndUIStruct = GetCheckButtonDateStruct("游戏速度", "Game speed", 0f, 10f),
 
-                doFirstTime = (i, v) =>
+                doFirstTime = (v) =>
                 {
-                    i.memory.WriteMemory<int>(GetAddress("GameRunSpeed"), (int)(v == 0 ? 10 : 10f / v ));
+                    WriteMemoryByID<int>("GameRunSpeed", (int)(v == 0 ? 10 : 10f / v ));
                 },
 
-                doRunAgain = (i, v) =>
+                doRunAgain = (v) =>
                 {
-                    i.memory.WriteMemory<int>(GetAddress("GameRunSpeed"), 10);
+                    WriteMemoryByID<int>("GameRunSpeed", 10);
                 },
             };
             //"直接胜利"
@@ -35,10 +35,9 @@ namespace WPFCheatUITemplate
 
                 gameFunDataAndUIStruct = GetButtonDateStruct("直接胜利", "Win", false),
 
-                doFirstTime = (i, v) =>
+                doFirstTime = (v) =>
                 {
-                    var add = GetAddress("Secondary_Offset");
-                    var ecx = i.memory.ReadMemory<int>(add);
+                    var ecx = ReadMemoryByID<int>("Secondary_Offset");
                     ASM asm = new ASM();
                     asm.Mov_EAX(ecx);
                     asm.Mov_ECX_EAX();

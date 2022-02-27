@@ -21,7 +21,7 @@ namespace WPFCheatUITemplate.GameFuns
             asm.Push68(id);
             asm.Mov_EAX(x);
             asm.Push68(y);
-            var offset = memory.ReadMemory<int>(GetAddress("Secondary_Offset"));
+            var offset = ReadMemory<int>(GetAddress("Secondary_Offset"));
             asm.Push68(offset);
             asm.Mov_EBX(GetAddress("Plant_Call").ToInt32());
             asm.Call_EBX();

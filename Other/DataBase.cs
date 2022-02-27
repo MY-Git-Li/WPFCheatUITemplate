@@ -1,9 +1,6 @@
 ﻿using CheatUITemplt;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace WPFCheatUITemplate.Other
 {
@@ -32,7 +29,7 @@ namespace WPFCheatUITemplate.Other
 
         static public int GetOffSet(string id)
         {
-          return AppGameFunManager.Instance.AddressDataMg.GetOffSet(id);
+            return AppGameFunManager.Instance.AddressDataMg.GetOffSet(id);
         }
 
         static public void GetOrcData(string id)
@@ -42,7 +39,93 @@ namespace WPFCheatUITemplate.Other
 
         static public IntPtr GetAddress(string id)
         {
-          return AppGameFunManager.Instance.AddressDataMg.GetAddress(id);
+            return AppGameFunManager.Instance.AddressDataMg.GetAddress(id);
+        }
+
+
+        static public void WriteMemoryByID<T>(string id, object value) where T : struct
+        {
+            WriteMemory<T>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
+        }
+
+        static public void WriteMemoryByID<T>(string id, byte[] value) where T : struct
+        {
+            WriteMemory<T>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
+        }
+
+        static public void WriteMemoryByID(string id, bool isOrc = false)
+        {
+            if (isOrc)
+            {
+                WriteMemory<byte>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), AppGameFunManager.Instance.AddressDataMg.GetOrcData(id));
+            }
+            else
+            {
+                WriteMemory<byte>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), AppGameFunManager.Instance.AddressDataMg.GetModifyData(id));
+            }
+
+        }
+
+
+        static public T ReadMemory<T>(IntPtr address) where T : struct
+        {
+            return CheatTools.ReadMemory<T>(GameMode.GameInformation.Handle, address);
+        }
+
+        static public T ReadMemoryByID<T>(string id) where T : struct
+        {
+            return ReadMemory<T>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id));
+        }
+
+        static public void WriteMemory<T>(IntPtr address, object Value) where T : struct
+        {
+            byte[] buffer = StructureToByteArray(Value);
+            CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, buffer);
+            
+        }
+
+        static public void WriteMemory<T>(IntPtr address, byte[] Value) where T : struct
+        {
+            CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, Value);
+        }
+
+        static public T ByteArrayToStructure<T>(byte[] bytes) where T : struct
+        {
+            var handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
+            try
+            {
+                return (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
+            }
+            finally
+            {
+                handle.Free();
+            }
+        }
+
+        static public byte[] StructureToByteArray(object obj)
+        {
+            int length = Marshal.SizeOf(obj);
+            byte[] array = new byte[length];
+            IntPtr pointer = Marshal.AllocHGlobal(length);
+            Marshal.StructureToPtr(obj, pointer, true);
+            Marshal.Copy(pointer, array, 0, length);
+            Marshal.FreeHGlobal(pointer);
+            return array;
+        }
+
+        static public float[] ConvertToFloatArray(byte[] bytes)
+        {
+            if (bytes.Length % 4 != 0)
+            {
+                throw new ArgumentException();
+            }
+
+            float[] floats = new float[bytes.Length / 4];
+            for (int i = 0; i < floats.Length; i++)
+            {
+                floats[i] = BitConverter.ToSingle(bytes, i * 4);
+            }
+            return floats;
         }
     }
 }

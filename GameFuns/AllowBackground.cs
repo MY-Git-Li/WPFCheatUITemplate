@@ -18,13 +18,13 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            memory.WriteMemoryByID("allowBackground");
+            WriteMemoryByID("allowBackground");
       
         }
 
         public override void DoRunAgain(double value)
         {
-            memory.WriteMemoryByID("allowBackground",true);
+            WriteMemoryByID("allowBackground",true);
         }
         public override void Ending()
         {

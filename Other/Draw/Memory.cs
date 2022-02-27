@@ -123,29 +123,6 @@ namespace WPFCheatUITemplate.Other.Draw
         }
 
 
-        public void WriteMemoryByID(string id,bool isOrc = false)
-        {
-            if (isOrc)
-            {
-                WriteMemory<byte>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetOrcData(id));
-            }else
-            {
-                WriteMemory<byte>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetModifyData(id));
-            }
-
-        }
-
-        public void WriteMemoryByID<T>(string id, object value) where T : struct
-        {
-            WriteMemory<T>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
-        }
-
-        public void WriteMemoryByID<T>(string id, byte[] value) where T : struct
-        {
-            WriteMemory<T>(CheatUITemplt.AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
-        }
-
-
         public float[] ReadMatrix<T>(int address, int MatrixSize) where T : struct
         {
             int ByteSize = Marshal.SizeOf(typeof(T));

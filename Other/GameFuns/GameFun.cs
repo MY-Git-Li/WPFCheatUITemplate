@@ -12,11 +12,7 @@ namespace CheatUITemplt
         /// <summary>
         /// 设置UI后续才能起作用-显示ui，设置data后gameDataAddress才有内容
         /// </summary>
-        public WPFCheatUITemplate.Other.GameFunDataAndUIStruct gameFunDataAndUIStruct;
-        /// <summary>
-        /// 读写内存实例
-        /// </summary>
-        public WPFCheatUITemplate.Other.Draw.Memory memory;
+        public GameFunDataAndUIStruct gameFunDataAndUIStruct;
 
         /// <summary>
         /// 游戏数据----设置了前面的属性后不用赋值，可直接定位到地址，也可自定义数据
@@ -40,8 +36,7 @@ namespace CheatUITemplt
                     gameDataAddress = gameFunDataAndUIStruct.currentGameDate.GetDataAddress();
                 }
             }
-            memory = new WPFCheatUITemplate.Other.Draw.Memory();
-            memory.SetProcessHandle(gameFunDataAndUIStruct.Handle);
+           
         }
         /// <summary>
         /// 可以实现自定义数据获取，列如人造指针等，当功能启用前调用

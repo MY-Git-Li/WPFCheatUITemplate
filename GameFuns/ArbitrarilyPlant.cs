@@ -17,12 +17,12 @@ namespace WPFCheatUITemplate.GameFuns
 
         public override void DoFirstTime(double value)
         {
-            memory.WriteMemoryByID("arbitrarilyPlant");
+            WriteMemoryByID("arbitrarilyPlant");
         }
 
         public override void DoRunAgain(double value)
         {
-            memory.WriteMemoryByID("arbitrarilyPlant", true);
+            WriteMemoryByID("arbitrarilyPlant", true);
         }
         public override void Ending()
         {

@@ -9,11 +9,11 @@ namespace WPFCheatUITemplate.Other
         /// <summary>
         /// awake为Awake的委托，ending为Ending的委托,start为Start的委托
         /// </summary>
-        public Action<FastGameFun> awake, ending, start;
+        public Action awake, ending, start;
         /// <summary>
         /// doFirstTime为DoFirstTime的委托，doRunAgain为DoRunAgain的委托
         /// </summary>
-        public Action<FastGameFun, double> doFirstTime, doRunAgain;
+        public Action<double> doFirstTime, doRunAgain;
 
         #region 陈旧--目前存放数据建议使用AddData方法
 
@@ -36,20 +36,20 @@ namespace WPFCheatUITemplate.Other
             gameDataAddresseList = new List<GameDataAddress>();
             gameDates = new Dictionary<GameVersion.Version, GameData>();
 
-            doFirstTime = (i,v) => 
+            doFirstTime = (v) => 
             {
                 for (int j = 0; j < Id.Length; j++)
                 {
-                    i.memory.WriteMemoryByID(Id[j]);
+                    WriteMemoryByID(Id[j]);
                 }
 
             };
 
-            doRunAgain = (i, v) =>
+            doRunAgain = (v) =>
             {
                 for (int j = 0; j < Id.Length; j++)
                 {
-                    i.memory.WriteMemoryByID(Id[j],true);
+                    WriteMemoryByID(Id[j],true);
                 }
             };
 
@@ -83,28 +83,28 @@ namespace WPFCheatUITemplate.Other
 
         public override void Start()
         {
-            start?.Invoke(this);
+            start?.Invoke();
         }
 
 
         public override void Awake()
         {
-            awake?.Invoke(this);
+            awake?.Invoke();
         }
 
         public override void DoFirstTime(double value)
         {
-            doFirstTime?.Invoke(this, value);
+            doFirstTime?.Invoke(value);
         }
 
         public override void DoRunAgain(double value)
         {
-            doRunAgain?.Invoke(this, value);
+            doRunAgain?.Invoke(value);
         }
 
         public override void Ending()
         {
-            ending?.Invoke(this);
+            ending?.Invoke();
             gameDataAddresseList.Clear();
             gameDates.Clear();
         }
