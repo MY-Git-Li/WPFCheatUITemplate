@@ -51,13 +51,50 @@ namespace WPFCheatUITemplate.Other
         {
             UIManager.NextPage(offset);
         }
+
+
         public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
-          string FunDescribe_EN, bool IsAcceptValue = true, bool IsShowDecimal = false , double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
+          string FunDescribe_EN,double SliderMinNum, double SliderMaxNum, bool IsHide = false)
+        {
+            return GetButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, true, SliderMinNum, SliderMaxNum, IsHide);
+        }
+
+        public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
+          string FunDescribe_EN, int SliderMinNum, int SliderMaxNum, bool IsHide = false)
+        {
+            return GetButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, false, SliderMinNum, SliderMaxNum, IsHide);
+        }
+
+        public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
+          string FunDescribe_EN, double SliderMinNum, double SliderMaxNum, bool IsHide = false)
+        {
+            return GetCheckButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, true, SliderMinNum, SliderMaxNum, IsHide);
+        }
+
+        public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
+         string FunDescribe_EN, int SliderMinNum, int SliderMaxNum, bool IsHide = false)
+        {
+            return GetCheckButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, false, SliderMinNum, SliderMaxNum, IsHide);
+        }
+
+        public static GameFunDataAndUIStruct GetCheckButtonDateStructWithHide()
+        {
+            return GetCheckButtonDateStruct("","",false,false,1 ,1 ,true);
+        }
+
+        public static GameFunDataAndUIStruct GetButtonDateStructWithHide()
+        {
+            return GetButtonDateStruct("", "", false,false, 1, 1, true);
+        }
+
+
+        public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
+          string FunDescribe_EN, bool IsAcceptValue, bool IsShowDecimal  = false, double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
         {
             return UIManager.GetButtonDateStruct(FunDescribe_SC, FunDescribe_EN, IsAcceptValue, IsShowDecimal, SliderMinNum, SliderMaxNum, IsHide);
         }
         public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
-           string FunDescribe_EN, bool IsAcceptValue = false, bool IsShowDecimal = false, double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
+           string FunDescribe_EN, bool IsAcceptValue, bool IsShowDecimal = false, double SliderMinNum = 1, double SliderMaxNum = 9999, bool IsHide = false)
         {
             return UIManager.GetCheckButtonDateStruct(FunDescribe_SC,FunDescribe_EN, IsAcceptValue, IsShowDecimal, SliderMinNum, SliderMaxNum, IsHide);
         }

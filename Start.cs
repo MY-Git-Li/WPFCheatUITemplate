@@ -50,11 +50,11 @@ namespace WPFCheatUITemplate
 
             SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             //"超级攻速"
-            new FastGameFun(GetCheckButtonDateStruct("超级攻速", "Super attack speed"), "supershoot", "supershoot2");
+            new FastGameFun(GetCheckButtonDateStruct("超级攻速", "Super attack speed",false), "supershoot", "supershoot2");
             //"超级传送带"
-            new FastGameFun(GetCheckButtonDateStruct("超级传送带", "Super conveyor belt"), "fast_belt_1", "fast_belt_2");
+            new FastGameFun(GetCheckButtonDateStruct("超级传送带", "Super conveyor belt",false), "fast_belt_1", "fast_belt_2");
             //"花瓶透视"
-            new FastGameFun(GetCheckButtonDateStruct("花瓶透视", "Vase Perspective"), "see_vase");
+            new FastGameFun(GetCheckButtonDateStruct("花瓶透视", "Vase Perspective",false), "see_vase");
         }
     }
 }
