@@ -10,9 +10,9 @@ using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other;
 using WPFCheatUITemplate.Other.Events;
 using WPFCheatUITemplate.Other.Exceptions;
+using WPFCheatUITemplate.Other.GameFuns;
 using WPFCheatUITemplate.Other.Interface;
 using WPFCheatUITemplate.Other.Tools.Extensions;
-using WPFCheatUITemplate.Other.GameFuns;
 using static CheatUITemplt.HotKey;
 
 namespace CheatUITemplt
@@ -227,7 +227,7 @@ namespace CheatUITemplt
                         item.showDescription.keyDescription.FontSize = size;
                         item.showDescription.funDescription.FontSize = size;
                     }
-                    
+
                 }
 
             }
@@ -260,7 +260,7 @@ namespace CheatUITemplt
             StopFlashAnimation();
             EnableControl();
             RegisterAllHotKey();
-            
+
 
         }
 
@@ -285,10 +285,11 @@ namespace CheatUITemplt
         private void SetGameInformation(int pid)
         {
             GameInformation.Pid = pid;
-            if (pid!=0)
+            if (pid != 0)
             {
                 GameInformation.Handle = CheatTools.GetProcessHandle(pid);
-            }else
+            }
+            else
             {
                 GameInformation.Handle = IntPtr.Zero;
             }
@@ -331,7 +332,7 @@ namespace CheatUITemplt
         }
 
         async void StartExtendAsync(IExtend item)
-        { 
+        {
             Task t = Task.Run(() =>
             {
                 item.StartAsync();
@@ -388,8 +389,8 @@ namespace CheatUITemplt
             }
         }
 
-       void ExtendsOnGameRun()
-       {
+        void ExtendsOnGameRun()
+        {
             foreach (var item in extends)
             {
                 OnGameRunAsync(item);
@@ -427,7 +428,7 @@ namespace CheatUITemplt
 
         private void RunAllGameFunAwake()
         {
-           
+
             foreach (var item in gameFunUIs)
             {
                 if (item.gameFun != null)
@@ -464,19 +465,19 @@ namespace CheatUITemplt
 
         #region 窗口相关
 
-        public void RegisterWindow(Window window, ResourceDictionary Resdictionary,Grid grid)
+        public void RegisterWindow(Window window, ResourceDictionary Resdictionary, Grid grid)
         {
             this.mainWindow = (MainWindow)window;
             mainWindow.Loaded += mainWindows_Loaded;
             mainWindow.Closing += mainWindows_Closing;
 
-            if (Resdictionary !=  null)
+            if (Resdictionary != null)
             {
                 RegisterManger(new CreateLayout(Resdictionary), grid);
             }
 
             GetAllExtend();
-           
+
             StartExtends();
         }
 
@@ -515,13 +516,13 @@ namespace CheatUITemplt
             {
                 createUIGrid = new CreateUIGrid(grid, this.createLayout);
             }
-            
+
         }
 
 
         public void RegisterManger(UILangerManger uILangerManger)
         {
-            if(uILangerManger!=null)
+            if (uILangerManger != null)
                 this.uILangerManger = uILangerManger;
         }
 
@@ -532,7 +533,7 @@ namespace CheatUITemplt
         }
 
 
-        public void StartUI(System.Action action)
+        public void StartUI(Action action)
         {
             action?.Invoke();
             DrawUI();
@@ -636,7 +637,7 @@ namespace CheatUITemplt
                     }));
             }
             #endregion
-            
+
             foreach (var item in gameFunUIs)
             {
                 if (item.gameFun != null)
@@ -809,7 +810,7 @@ namespace CheatUITemplt
             {
                 myButtonManger.SetButtonFun(buttonClick, id, hotSystem);
             }
-           
+
 
             //ButtonFunId.Add(id);
             //index += 1;
@@ -871,7 +872,7 @@ namespace CheatUITemplt
 
         private void HandleZeroAddressExceptionOnRunGameFun(ZeroAddressException e)
         {
-           
+
             var g = e.gameData;
 
             DoZeroAddressExceptionEventAsync(g);
@@ -929,7 +930,7 @@ namespace CheatUITemplt
 
             text += GameInformation.CurentVersion.ToString();
 
-            
+
 
             if (g.IsIntPtr)
             {
@@ -950,15 +951,17 @@ namespace CheatUITemplt
                     mouduleOffset + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
                     PointerOffset + offset + "\n";
 
-                }else
+                }
+                else
                 {
                     text = Wrongaddress + "\n" +
                     Details + "\n" +
                     Modulename + g.ModuleName + "\n" +
                     mouduleOffset + "0x" + g.ModuleOffsetAddress.ToString("X");
                 }
-               
-            }else if (g.IsSignatureCode)
+
+            }
+            else if (g.IsSignatureCode)
             {
                 text = Wrongaddress + "\n" +
                 Details + "\n" +
@@ -966,7 +969,8 @@ namespace CheatUITemplt
                 mouduleOffset + "0x" + g.ModuleOffsetAddress.ToString("X") + "\n" +
                 Signature + g.SignatureCode + "\n" +
                 Signatureoffset + "0x" + g.SignatureCodeOffset.ToString("X") + "\n";
-            }else
+            }
+            else
             {
                 text = Wrongaddress + "\n" +
                 Details + "\n" +
@@ -982,7 +986,7 @@ namespace CheatUITemplt
 
             Environment.Exit(0);//关闭程序
 
-            
+
         }
 
         public void WndProcWPF(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
