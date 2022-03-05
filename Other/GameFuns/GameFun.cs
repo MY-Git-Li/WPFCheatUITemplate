@@ -15,7 +15,7 @@ namespace CheatUITemplt
         public GameFunDataAndUIStruct gameFunDataAndUIStruct;
 
         /// <summary>
-        /// 游戏数据----设置了前面的属性后不用赋值，可直接定位到地址，也可自定义数据
+        /// 游戏数据----设置了gameFunDataAndUIStruct的GameData后，可直接定位到地址，也可自定义数据
         /// </summary>
         public GameDataAddress gameDataAddress;
 
@@ -55,7 +55,8 @@ namespace CheatUITemplt
         public abstract void DoFirstTime(double value);
 
         /// <summary>
-        /// 再次点击函数，需设置触发器为假
+        /// 再次点击函数，需设置gameFunDataAndUIStruct中的UIData的IsTrigger为假
+        /// ----或者使用GetCheckButtonDateStruct得到gameFunDataAndUIStruct
         /// </summary>
         /// <param name="value">IsAcceptValue为真时 value为slider的值 否则为0</param>
         public abstract void DoRunAgain(double value);
