@@ -27,6 +27,9 @@ namespace CheatUITemplt
             button.Click += Button_Click;
         }
 
+        public bool IsHave { get => button != null; }
+
+
         private void Button_Click(object sender, EventArgs e)
         {
             myButtonFun(index);

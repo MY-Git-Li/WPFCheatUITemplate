@@ -150,9 +150,8 @@ namespace CheatUITemplt
 
     class HotSystemFun
     {
-        public delegate void funcation();
-        public funcation run;
-        public funcation runed;
+        public Action run;
+        public Action runed;
 
         public bool isRun = false;
         public bool locked = false;
@@ -162,7 +161,7 @@ namespace CheatUITemplt
         /// </summary>
         /// <param name="run">首次运行方法</param>
         /// <param name="runed">再次运行方法</param>
-        public HotSystemFun(funcation run, funcation runed)
+        public HotSystemFun(Action run, Action runed)
         {
 
             this.run = run;
@@ -176,7 +175,7 @@ namespace CheatUITemplt
         /// 
         /// </summary>
         /// <param name="run">运行的方法</param>
-        public HotSystemFun(funcation run)
+        public HotSystemFun(Action run)
         {
 
             this.run = run;

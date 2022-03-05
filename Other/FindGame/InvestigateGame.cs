@@ -18,8 +18,7 @@ namespace CheatUITemplt
 
         public void FindingGame()
         {
-            AppGameFunManager.Instance.DisableControl();
-
+            
             startFindGame.RunWorkerCompleted += new RunWorkerCompletedEventHandler(startFindGame_RunWorkerCompleted);
             startFindGame.DoWork += new DoWorkEventHandler(startFindGame_DoWork);
             startFindGame.RunWorkerAsync();
@@ -72,7 +71,7 @@ namespace CheatUITemplt
             findGameing.RunWorkerAsync();
         }
 
-        int GetPid_Work(bool isFind)
+        private int GetPid_Work(bool isFind)
         {
             int pid = GetPid(GameInformation.IsByWindowsNamePrecedence);
             while (isFind ? pid == 0 : pid != 0)
@@ -84,7 +83,7 @@ namespace CheatUITemplt
             return pid;
         }
 
-        int GetPid(bool isByWindowsNamePrecedence)
+        private int GetPid(bool isByWindowsNamePrecedence)
         {
             if (isByWindowsNamePrecedence)
             {

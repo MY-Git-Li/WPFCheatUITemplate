@@ -48,6 +48,14 @@ namespace CheatUITemplt
 
         #endregion
 
+        #region 字段
+
+        internal UILangerManger UILangerManger { get => uILangerManger; }
+
+        internal AddressDataManager AddressDataMg { get => addressDataMg; }
+
+        #endregion
+
         #region 事件
 
         public event Events.OnGameRunHandler OnGameRunEvent;
@@ -115,18 +123,6 @@ namespace CheatUITemplt
                 return instance;
             }
         }
-
-        internal UILangerManger UILangerManger
-        {
-            get
-            {
-                return uILangerManger;
-            }
-
-        }
-
-        internal AddressDataManager AddressDataMg { get => addressDataMg;}
-
 
         #endregion
 
@@ -264,7 +260,7 @@ namespace CheatUITemplt
             StopFlashAnimation();
             EnableControl();
             RegisterAllHotKey();
-            RegisterHideHotKey();
+            
 
         }
 
@@ -302,7 +298,7 @@ namespace CheatUITemplt
         /// <summary>
         /// 程序在游戏前退出清理资源
         /// </summary>
-        void ClearRes()
+        private void ClearRes()
         {
             if (GameInformation.Pid != 0)
                 RunAllGameFunEnding();
@@ -402,7 +398,7 @@ namespace CheatUITemplt
 
         #endregion
 
-        void SetViewPid(int pid)
+        private void SetViewPid(int pid)
         {
             if (pid == 0)
             {
@@ -416,7 +412,7 @@ namespace CheatUITemplt
 
         }
 
-        public void RunAllGameFunEnding()
+        private void RunAllGameFunEnding()
         {
             foreach (var item in gameFunUIs)
             {
@@ -429,7 +425,7 @@ namespace CheatUITemplt
 
         }
 
-        public void RunAllGameFunAwake()
+        private void RunAllGameFunAwake()
         {
            
             foreach (var item in gameFunUIs)
@@ -448,7 +444,7 @@ namespace CheatUITemplt
 
         }
 
-        public void GetAllGameFunData()
+        private void GetAllGameFunData()
         {
 
             foreach (var item in gameFunUIs)
@@ -490,6 +486,9 @@ namespace CheatUITemplt
             ClearRes();
 
             EndExtends();
+
+            //为了使关闭时声音关闭播放完
+            System.Threading.Thread.Sleep(320);
         }
 
         private void mainWindows_Loaded(object sender, RoutedEventArgs e)
@@ -497,6 +496,8 @@ namespace CheatUITemplt
             System.Windows.Interop.WindowInteropHelper wndHelper = new System.Windows.Interop.WindowInteropHelper(mainWindow);
             Hwnd = wndHelper.Handle;
 
+
+            DisableControl();
             investigateGame.FindingGame();
 
             SetDefaultLanguage();
@@ -617,89 +618,6 @@ namespace CheatUITemplt
 
         }
 
-        public void RegisterHideHotKey()
-        {
-            foreach (var item in gameFunUIs)
-            {
-                if (item.gameFun != null)
-                {
-                    if (item.gameFun.gameFunDataAndUIStruct != null)
-                    {
-                        if (item.gameFun.gameFunDataAndUIStruct.uIData.IsHide)
-                        {
-                            RefHotKey refHotKey = item.gameFun.gameFunDataAndUIStruct.refHotKey;
-
-                            if (item.gameFun.gameFunDataAndUIStruct.uIData.IsTrigger)
-                            {
-                                RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, null,
-                                new HotSystemFun(() =>
-                                {
-                                    DoRunGameFunsEventAsync(item.gameFun, true, true);
-                                    try
-                                    {
-                                        if (!item.gameFun.IsStartRun)
-                                        {
-                                            item.gameFun.Start();
-                                            item.gameFun.IsStartRun = true;
-                                        }
-
-                                        item.gameFun.DoFirstTime(0);
-
-                                        soundEffect.PlayTurnOnEffect();
-
-                                    }
-                                    catch (ZeroAddressException e)
-                                    {
-                                        HandleZeroAddressExceptionOnRunGameFun(e);
-                                    }
-
-                                }));
-                            }
-                            else
-                            {
-                                RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, null,
-                                new HotSystemFun(() =>
-                                {
-                                    DoRunGameFunsEventAsync(item.gameFun, false, true);
-                                    try
-                                    {
-                                        item.gameFun.DoFirstTime(0);
-
-
-                                        soundEffect.PlayTurnOnEffect();
-
-                                    }
-                                    catch (ZeroAddressException e)
-                                    {
-                                        HandleZeroAddressExceptionOnRunGameFun(e);
-                                    }
-
-
-                                }, () =>
-                                {
-                                    DoRunGameFunsEventAsync(item.gameFun, false, false);
-                                    try
-                                    {
-                                        item.gameFun.DoRunAgain(0);
-
-                                        soundEffect.PlayTurnOffEffect();
-
-                                    }
-                                    catch (ZeroAddressException e)
-                                    {
-                                        HandleZeroAddressExceptionOnRunGameFun(e);
-                                    }
-
-                                }));
-                            }
-
-
-                        }
-                    }
-                }
-            }
-        }
-
         public void RegisterAllHotKey()
         {
             #region//快捷键禁用/启用
@@ -727,115 +645,33 @@ namespace CheatUITemplt
                 {
                     if (item.gameFun.gameFunDataAndUIStruct != null)
                     {
-                        if (!item.gameFun.gameFunDataAndUIStruct.uIData.IsHide)
+
+                        RefHotKey refHotKey = item.gameFun.gameFunDataAndUIStruct.refHotKey;
+                        bool IsTrigger = item.gameFun.gameFunDataAndUIStruct.uIData.IsTrigger;
+
+                        if (IsTrigger)
                         {
-                            RefHotKey refHotKey = item.gameFun.gameFunDataAndUIStruct.refHotKey;
-                            if (item.gameFun.gameFunDataAndUIStruct.uIData.IsTrigger)
+                            RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
+                            new HotSystemFun(() =>
                             {
-                                RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.button),
-                                new HotSystemFun(() =>
-                                {
-                                    DoRunGameFunsEventAsync(item.gameFun,true,true);
+                                RegisterCore(item, true, IsTrigger);
 
-                                    Slider slider = item.myStackPanel.ValueEntered;
-
-                                    try
-                                    {
-
-                                        if (!item.gameFun.IsStartRun)
-                                        {
-                                            item.gameFun.Start();
-                                            item.gameFun.IsStartRun = true;
-                                        }
-
-                                        item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
-
-                                        soundEffect.PlayTurnOnEffect();
-
-                                    }
-                                    catch (ZeroAddressException e)
-                                    {
-                                        HandleZeroAddressExceptionOnRunGameFun(e);
-                                    }
-
-                                }));
-                            }
-                            else
-                            {
-                                RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.checkBox),
-                                new HotSystemFun(() =>
-                                {
-                                    DoRunGameFunsEventAsync(item.gameFun,false,true);
-
-                                    Slider slider = item.myStackPanel.ValueEntered;
-
-                                    System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
-
-                                    checkBox.IsChecked = true;
-
-                                    try
-                                    {
-
-                                        if (!item.gameFun.IsStartRun)
-                                        {
-                                            item.gameFun.Start();
-                                            item.gameFun.IsStartRun = true;
-                                        }
-
-                                        item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
-
-                                        if (slider != null)
-                                        {
-                                            slider.IsEnabled = !slider.IsEnabled;
-                                        }
-
-                                        soundEffect.PlayTurnOnEffect();
-
-                                    }
-                                    catch (ZeroAddressException e)
-                                    {
-                                        HandleZeroAddressExceptionOnRunGameFun(e);
-                                    }
-
-
-                                }, () =>
-                                {
-                                    DoRunGameFunsEventAsync(item.gameFun,false,false);
-
-                                    Slider slider = item.myStackPanel.ValueEntered;
-
-                                    System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
-
-                                    checkBox.IsChecked = false;
-
-                                    try
-                                    {
-
-                                        if (!item.gameFun.IsStartRun)
-                                        {
-                                            item.gameFun.Start();
-                                            item.gameFun.IsStartRun = true;
-                                        }
-
-                                        item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
-
-                                        if (slider != null)
-                                        {
-                                            slider.IsEnabled = !slider.IsEnabled;
-                                        }
-
-                                        soundEffect.PlayTurnOffEffect();
-
-                                    }
-                                    catch (ZeroAddressException e)
-                                    {
-                                        HandleZeroAddressExceptionOnRunGameFun(e);
-                                    }
-
-                                }));
-                            }
+                            }));
                         }
-                       
+                        else
+                        {
+                            RegisterHotKey(refHotKey.FsModifiers, refHotKey.Vk, new MyButton(item.myStackPanel.checkBox),
+                            new HotSystemFun(() =>
+                            {
+                                RegisterCore(item, true, IsTrigger);
+
+                            }, () =>
+                            {
+                                RegisterCore(item, false, IsTrigger);
+                            }));
+                        }
+
+
                     }
                 }
 
@@ -843,7 +679,50 @@ namespace CheatUITemplt
             }
         }
 
-        public void EnableControl()
+        private void RegisterCore(GameFunUI item, bool Isfirst, bool IsTrigger)
+        {
+            DoRunGameFunsEventAsync(item.gameFun, IsTrigger, Isfirst);
+
+            Slider slider = item.myStackPanel.ValueEntered;
+
+            System.Windows.Controls.CheckBox checkBox = item.myStackPanel.checkBox;
+
+            if (checkBox != null)
+            {
+                checkBox.IsChecked = Isfirst;
+            }
+
+            try
+            {
+
+                if (!item.gameFun.IsStartRun)
+                {
+                    item.gameFun.Start();
+                    item.gameFun.IsStartRun = true;
+                }
+
+                if (Isfirst)
+                {
+                    item.gameFun.DoFirstTime(slider == null ? 0 : slider.Value);
+
+                    soundEffect.PlayTurnOnEffect();
+                }
+                else
+                {
+                    item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
+
+                    soundEffect.PlayTurnOnEffect();
+                }
+
+            }
+            catch (ZeroAddressException e)
+            {
+                HandleZeroAddressExceptionOnRunGameFun(e);
+            }
+        }
+
+
+        private void EnableControl()
         {
             //foreach (var item in gameFunUIs)
             //{
@@ -867,7 +746,7 @@ namespace CheatUITemplt
             }
 
         }
-        public void DisableControl()
+        private void DisableControl()
         {
             //foreach (var item in gameFunUIs)
             //{
@@ -893,18 +772,18 @@ namespace CheatUITemplt
 
         }
 
-        public void EndHotsystem()
+        private void EndHotsystem()
         {
             hotSystem.UnRegisterHotKeyAll(Hwnd);
             hotSystem.CloseHotKeyFunAll();
         }
 
-        public void StartFlashAnimation()
+        private void StartFlashAnimation()
         {
             mainWindow.PlayFlashAinimation();
         }
 
-        public void StopFlashAnimation()
+        private void StopFlashAnimation()
         {
             mainWindow.StopFlashAinimation();
         }
@@ -923,7 +802,7 @@ namespace CheatUITemplt
             int id;
             id = hotSystem.RegisterHotKey(Hwnd, fsModifiers, vk, fun);
 
-            if (buttonClick != null)
+            if (buttonClick.IsHave)
             {
                 myButtonManger.SetButtonFun(buttonClick, id, hotSystem);
             }
@@ -940,7 +819,7 @@ namespace CheatUITemplt
         }
 
 
-        void ButtonHandlerNoGamePro(object sender, RoutedEventArgs e)
+        private void ButtonHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
 
             string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
@@ -963,7 +842,7 @@ namespace CheatUITemplt
             System.Windows.MessageBox.Show(error.Split('@')[0], error.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
-        void CheckBoxHandlerNoGamePro(object sender, RoutedEventArgs e)
+        private void CheckBoxHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
 
             string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
@@ -987,7 +866,7 @@ namespace CheatUITemplt
             check.IsChecked = false;
         }
 
-        void HandleZeroAddressExceptionOnRunGameFun(ZeroAddressException e)
+        private void HandleZeroAddressExceptionOnRunGameFun(ZeroAddressException e)
         {
            
             var g = e.gameData;
@@ -1112,6 +991,7 @@ namespace CheatUITemplt
         {
             hotSystem.WndProcWinForm(ref m);
         }
+
     }
 
 }
