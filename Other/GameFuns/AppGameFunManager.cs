@@ -483,12 +483,10 @@ namespace CheatUITemplt
         private void mainWindows_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             EndHotsystem();
+
             ClearRes();
 
             EndExtends();
-
-            //为了使关闭时声音关闭播放完
-            System.Threading.Thread.Sleep(320);
         }
 
         private void mainWindows_Loaded(object sender, RoutedEventArgs e)
@@ -716,7 +714,7 @@ namespace CheatUITemplt
                 {
                     item.gameFun.DoRunAgain(slider == null ? 0 : slider.Value);
 
-                    soundEffect.PlayTurnOnEffect();
+                    soundEffect.PlayTurnOffEffect();
                 }
 
             }
