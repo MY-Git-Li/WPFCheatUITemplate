@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -84,6 +85,7 @@ namespace CheatUITemplt
                 slider.Value = slider.Minimum > 1 ? slider.Minimum : 1;
 
                 myStackPanel.ValueEntered = slider;
+
                 //实例化绑定对象
                 Binding textBinding = new Binding();
                 //设置要绑定源控件
@@ -111,6 +113,46 @@ namespace CheatUITemplt
                 textBinding2.Path = new PropertyPath("IsEnabled");
                 //设置绑定到要绑定的控件
                 textBox.SetBinding(TextBox.IsEnabledProperty, textBinding2);
+
+
+                //设置只允许输入数字
+                textBox.PreviewTextInput += (sender, e) =>
+                {
+                    System.Text.RegularExpressions.Regex re;
+
+                    re = new System.Text.RegularExpressions.Regex("[^0-9-]+");
+                    
+                    e.Handled = re.IsMatch(e.Text);
+                };
+
+                //及时显示更改
+                textBox.TextChanged += (s, e) => 
+                {
+                    var tt = s as TextBox;
+                    double v;
+                    try
+                    {
+                        v = System.Double.Parse(tt.Text);
+                    }
+                    catch
+                    {
+                        v = 0;
+                    }
+                    
+
+                    if (v > slider.Maximum)
+                    {
+                        tt.Text = ((float)slider.Maximum).ToString();
+                    }
+
+                    if (v < slider.Minimum)
+                    {
+                        tt.Text = ((float)slider.Minimum).ToString();
+                    }
+
+
+                    slider.Value = v;
+                };
 
                 stackPanel.Children.Add(slider);
                 stackPanel.Children.Add(textBox);
@@ -239,4 +281,5 @@ namespace CheatUITemplt
         }
 
     }
+
 }
