@@ -691,7 +691,7 @@ namespace CheatUITemplt
                 checkBox.IsChecked = Isfirst;
             }
 
-            if (slider != null)
+            if (slider != null && !IsTrigger)
             {
                 slider.IsEnabled = !Isfirst;
             }
