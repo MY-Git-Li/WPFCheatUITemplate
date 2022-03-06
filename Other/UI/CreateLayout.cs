@@ -81,6 +81,7 @@ namespace CheatUITemplt
 
                 slider.Maximum = gameFun.gameFunDataAndUIStruct.uIData.SliderMaxNum;
                 slider.Minimum = gameFun.gameFunDataAndUIStruct.uIData.SliderMinNum;
+                slider.Value = slider.Minimum > 1 ? slider.Minimum : 1;
 
                 myStackPanel.ValueEntered = slider;
                 //实例化绑定对象
@@ -90,7 +91,9 @@ namespace CheatUITemplt
                 //设置要绑定属性
                 textBinding.Path = new PropertyPath("Value");
 
-                if(gameFun.gameFunDataAndUIStruct.uIData.IsShowDecimal)
+                textBinding.Mode = BindingMode.TwoWay;
+
+                if (gameFun.gameFunDataAndUIStruct.uIData.IsShowDecimal)
                 {
                     slider.IsSnapToTickEnabled = false;
                     textBinding.StringFormat = "{0:F1}";
@@ -108,19 +111,6 @@ namespace CheatUITemplt
                 textBinding2.Path = new PropertyPath("IsEnabled");
                 //设置绑定到要绑定的控件
                 textBox.SetBinding(TextBox.IsEnabledProperty, textBinding2);
-
-
-                //实例化绑定对象
-                Binding sliderBind = new Binding();
-                //设置要绑定源控件
-                sliderBind.Source = textBox;
-                //设置要绑定属性
-                sliderBind.Path = new PropertyPath("Text");
-                //设置绑定到要绑定的控件
-                slider.SetBinding(Slider.ValueProperty, sliderBind);
-
-
-
 
                 stackPanel.Children.Add(slider);
                 stackPanel.Children.Add(textBox);

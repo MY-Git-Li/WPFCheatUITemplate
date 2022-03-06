@@ -17,11 +17,11 @@ namespace WPFCheatUITemplate
             //"游戏速度"
             new FastGameFun()
             {
-                gameFunDataAndUIStruct = GetCheckButtonDateStruct("游戏速度", "Game speed", 0f, 10f),
+                gameFunDataAndUIStruct = GetCheckButtonDateStruct("游戏速度", "Game speed", 0.1f, 10f),
 
                 doFirstTime = (v) =>
                 {
-                    WriteMemoryByID<int>("GameRunSpeed", (int)(v == 0 ? 10 : 10f / v ));
+                    WriteMemoryByID<int>("GameRunSpeed", (int)(10f / v ));
                 },
 
                 doRunAgain = (v) =>
