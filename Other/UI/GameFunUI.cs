@@ -29,8 +29,7 @@ namespace CheatUITemplt
     {
         public GameFun gameFun;
 
-        public LanguageUI keylanguageUI;
-        public LanguageUI funlanguageUI;
+        public LanguageUI separatelanguageUI;
 
         public bool doNextPage;
         public int  nextPageOffset;

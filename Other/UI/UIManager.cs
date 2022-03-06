@@ -158,7 +158,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 Description_SC = Description_SC,
                 Description_TC = Description_TC
             };
-            gameFunUI.keylanguageUI = languageUI;
+            gameFunUI.separatelanguageUI = languageUI;
 
             gameFunUI.SeparateOffset = offset < 30 ? 30 : offset;
 

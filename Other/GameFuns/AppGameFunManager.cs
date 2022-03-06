@@ -191,7 +191,7 @@ namespace CheatUITemplt
         {
             UILangerManger.SetTraditionalChinese();
 
-            Changelanguage();
+            ChangeGameFunlanguageSize();
 
             SaveLanguage("TC");
         }
@@ -200,7 +200,7 @@ namespace CheatUITemplt
         {
             UILangerManger.SetEnglish();
 
-            Changelanguage();
+            ChangeGameFunlanguageSize(16);
 
             SaveLanguage("EN");
         }
@@ -209,12 +209,12 @@ namespace CheatUITemplt
         {
             UILangerManger.SetSimplifiedChinese();
 
-            Changelanguage();
+            ChangeGameFunlanguageSize();
 
             SaveLanguage("SC");
         }
 
-        void Changelanguage(int size = 17)
+        void ChangeGameFunlanguageSize(double size = 17)
         {
             foreach (var item in gameFunUIs)
             {
@@ -222,8 +222,6 @@ namespace CheatUITemplt
                 {
                     if (!item.gameFun.gameFunDataAndUIStruct.uIData.IsHide)
                     {
-                        item.showDescription.keyDescription.Text = item.keylanguageUI.ShowText;
-                        item.showDescription.funDescription.Text = item.funlanguageUI.ShowText;
                         item.showDescription.keyDescription.FontSize = size;
                         item.showDescription.funDescription.FontSize = size;
                     }
@@ -560,8 +558,7 @@ namespace CheatUITemplt
                             Description_SC = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_SC,
                             Description_TC = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_TC
                         };
-                        item.funlanguageUI = funlanguageUI;
-                        item.keylanguageUI = keylanguageUI;
+                        
 
                         UILangerManger.RegisterLanguageUI(funlanguageUI);
                         UILangerManger.RegisterLanguageUI(keylanguageUI);
@@ -569,6 +566,9 @@ namespace CheatUITemplt
                         createLayout.AddRowDefin();
 
                         item.showDescription = createLayout.CreatShowDescription(item.gameFun);
+
+                        funlanguageUI.textBlock = item.showDescription.funDescription;
+                        keylanguageUI.textBlock = item.showDescription.keyDescription;
 
                         item.myStackPanel = createLayout.CreatMyStackPanel(item.gameFun, item);
 
@@ -579,9 +579,9 @@ namespace CheatUITemplt
                 {
                     createUIGrid.NextPage(item.nextPageOffset);
                 }
-                else if (item.keylanguageUI != null)
+                else if (item.separatelanguageUI != null)
                 {
-                    createLayout.CreatSeparate(item.keylanguageUI, item.SeparateOffset);
+                    createLayout.CreatSeparate(item.separatelanguageUI, item.SeparateOffset);
 
                 }
                 else
