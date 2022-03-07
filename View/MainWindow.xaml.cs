@@ -1,11 +1,10 @@
-﻿using CheatUITemplt;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.UI;
 
 namespace WPFCheatUITemplate
 {

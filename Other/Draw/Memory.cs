@@ -106,20 +106,20 @@ namespace WPFCheatUITemplate.Other.Draw
 
         public T ReadMemory<T>(IntPtr address) where T : struct
         {
-            return CheatUITemplt.CheatTools.ReadMemory<T>(m_pProcessHandle, address);
+            return CheatTools.ReadMemory<T>(m_pProcessHandle, address);
         }
 
         public void WriteMemory<T>(IntPtr address, object Value) where T : struct
         {
             byte[] buffer = StructureToByteArray(Value);
-            CheatUITemplt.CheatTools.WriteMemory<T>(m_pProcessHandle, address, buffer);
+            CheatTools.WriteMemory<T>(m_pProcessHandle, address, buffer);
             //WinAPI.WriteProcessMemory(m_pProcessHandle, address, buffer, buffer.Length, out _);
         }
         public void WriteMemory<T>(IntPtr address, byte[] Value) where T : struct
         {
             //byte[] buffer = StructureToByteArray(Value);
             //WinAPI.WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
-            CheatUITemplt.CheatTools.WriteMemory<T>(m_pProcessHandle, address, Value);
+            CheatTools.WriteMemory<T>(m_pProcessHandle, address, Value);
         }
 
 

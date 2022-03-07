@@ -1,10 +1,7 @@
-﻿using CheatUITemplt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WPFCheatUITemplate.Other.Tools.Extensions;
+﻿using WPFCheatUITemplate.Other.Tools.Extensions;
+using WPFCheatUITemplate.Other.UI;
+using WPFCheatUITemplate.Other.Tools;
+
 namespace WPFCheatUITemplate.Other.GameFuns
 {
     static class UIManager
@@ -12,12 +9,12 @@ namespace WPFCheatUITemplate.Other.GameFuns
         #region 配置
 
         static System.Windows.Forms.Keys curentKey = System.Windows.Forms.Keys.NumPad0;
-        static CheatUITemplt.HotKey.KeyModifiers curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.None;
+        static HotKey.KeyModifiers curentKeyModifiers = HotKey.KeyModifiers.None;
 
         static System.Windows.Forms.Keys formerKey = curentKey;
-        static CheatUITemplt.HotKey.KeyModifiers formerKeyModifiers = curentKeyModifiers;
+        static HotKey.KeyModifiers formerKeyModifiers = curentKeyModifiers;
 
-        static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys,bool iskeys, CheatUITemplt.HotKey.KeyModifiers keyModifiers, bool iskeyModifiers)
+        static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys,bool iskeys, HotKey.KeyModifiers keyModifiers, bool iskeyModifiers)
         {
             SaveCurentKey();
 
@@ -37,22 +34,22 @@ namespace WPFCheatUITemplate.Other.GameFuns
             curentKeyModifiers = formerKeyModifiers;
         }
 
-        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        public static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers)
         {
             SetCurentKeyModifiers(System.Windows.Forms.Keys.G,false, keyModifiers,true);
         }
 
         public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys)
         {
-            SetCurentKeyModifiers(keys, true, CheatUITemplt.HotKey.KeyModifiers.None, false);
+            SetCurentKeyModifiers(keys, true, HotKey.KeyModifiers.None, false);
         }
 
-        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys, CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys, HotKey.KeyModifiers keyModifiers)
         {
             SetCurentKeyModifiers(keys, true, keyModifiers, true);
         }
 
-        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers, System.Windows.Forms.Keys keys)
+        public static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers, System.Windows.Forms.Keys keys)
         {
             SetCurentKeyModifiers(keys, true, keyModifiers, true);
         }
@@ -71,9 +68,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
         bool IsAcceptValue = true,bool IsShowDecimal = false, double SliderMinNum = 1, double SliderMaxNum = 9999, 
         bool IsButton = true, bool IsHide = false)
         {
-            var gameFunDateStruct = new Other.GameFunDataAndUIStruct();
+            var gameFunDateStruct = new GameFunDataAndUIStruct();
 
-            gameFunDateStruct.uIData = new Other.UIData()
+            gameFunDateStruct.uIData = new UIData()
             {
                 KeyDescription_SC = KeyDescription_SC,
                 FunDescribe_SC = FunDescribe_SC,
@@ -95,7 +92,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 SliderMaxNum = SliderMaxNum
 
             };
-            gameFunDateStruct.refHotKey = new Other.RefHotKey()
+            gameFunDateStruct.refHotKey = new RefHotKey()
             {
                 Vk = curentKey,
                 FsModifiers = curentKeyModifiers,
@@ -229,17 +226,17 @@ namespace WPFCheatUITemplate.Other.GameFuns
         {
             switch (curentKeyModifiers)
             {
-                case CheatUITemplt.HotKey.KeyModifiers.None:
-                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Alt;
+                case HotKey.KeyModifiers.None:
+                    curentKeyModifiers = HotKey.KeyModifiers.Alt;
                     break;
-                case CheatUITemplt.HotKey.KeyModifiers.Alt:
-                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Ctrl;
+                case HotKey.KeyModifiers.Alt:
+                    curentKeyModifiers = HotKey.KeyModifiers.Ctrl;
                     break;
-                case CheatUITemplt.HotKey.KeyModifiers.Ctrl:
-                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Shift;
+                case HotKey.KeyModifiers.Ctrl:
+                    curentKeyModifiers = HotKey.KeyModifiers.Shift;
                     break;
-                case CheatUITemplt.HotKey.KeyModifiers.Shift:
-                    curentKeyModifiers = CheatUITemplt.HotKey.KeyModifiers.Shift| CheatUITemplt.HotKey.KeyModifiers.Ctrl;
+                case HotKey.KeyModifiers.Shift:
+                    curentKeyModifiers = HotKey.KeyModifiers.Shift| HotKey.KeyModifiers.Ctrl;
                     break;
                 default:
                     break;
@@ -251,19 +248,19 @@ namespace WPFCheatUITemplate.Other.GameFuns
             string heaKeyModifierd = "";
             switch (curentKeyModifiers)
             {
-                case CheatUITemplt.HotKey.KeyModifiers.None:
+                case HotKey.KeyModifiers.None:
                     heaKeyModifierd = "";
                     break;
-                case CheatUITemplt.HotKey.KeyModifiers.Alt:
+                case HotKey.KeyModifiers.Alt:
                     heaKeyModifierd = "Alt";
                     break;
-                case CheatUITemplt.HotKey.KeyModifiers.Ctrl:
+                case HotKey.KeyModifiers.Ctrl:
                     heaKeyModifierd = "Ctrl";
                     break;
-                case CheatUITemplt.HotKey.KeyModifiers.Shift:
+                case HotKey.KeyModifiers.Shift:
                     heaKeyModifierd = "Shift";
                     break;
-                case CheatUITemplt.HotKey.KeyModifiers.Shift | CheatUITemplt.HotKey.KeyModifiers.Ctrl:
+                case HotKey.KeyModifiers.Shift | HotKey.KeyModifiers.Ctrl:
                     heaKeyModifierd = "Shift+Ctrl";
                     break;
                 default:

@@ -1,12 +1,11 @@
-﻿using CheatUITemplt;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WPFCheatUITemplate.Other.Exceptions;
+using WPFCheatUITemplate.Other.Tools;
 
-namespace WPFCheatUITemplate.Other
+namespace WPFCheatUITemplate.Other.GameFuns
 {
 
     class GameFunDataAndUIStruct

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace CheatUITemplt
+using WPFCheatUITemplate.Other.Tools;
+namespace WPFCheatUITemplate.Other.UI
 {
     class MyButtonManger
     {

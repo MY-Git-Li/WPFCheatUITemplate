@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using WPFCheatUITemplate.Other;
+using WPFCheatUITemplate.Other.GameFuns;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.GameFuns
 {
     /// <summary>
     /// 游戏功能基类

@@ -1,6 +1,6 @@
-﻿using CheatUITemplt;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using WPFCheatUITemplate.Other.GameFuns;
 
 namespace WPFCheatUITemplate.Other
 {

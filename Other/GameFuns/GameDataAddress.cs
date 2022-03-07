@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.GameFuns
 {
    public class GameDataAddress
    {

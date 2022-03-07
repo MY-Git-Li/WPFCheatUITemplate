@@ -3,7 +3,7 @@ using System.Media;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WPFCheatUITemplate.Other
+namespace WPFCheatUITemplate.Other.Voice
 {
     class SoundEffect
     {

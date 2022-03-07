@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFCheatUITemplate.Other.GameFuns;
-
+using WPFCheatUITemplate;
 namespace WPFCheatUITemplate
 {
     class GameVersion
@@ -19,8 +19,8 @@ namespace WPFCheatUITemplate
 
         public static Version GetCurrentVersion(IntPtr handle)
         {
-            GameVersion.Version ret = Version.Default;
-            var ver = CheatUITemplt.CheatTools.ReadMemory<uint>(handle, (IntPtr)0x552013);
+            Version ret = Version.Default;
+            var ver = CheatTools.ReadMemory<uint>(handle, (IntPtr)0x552013);
 
             switch (ver)
             {

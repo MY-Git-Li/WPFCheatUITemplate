@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using WPFCheatUITemplate;
+using WPFCheatUITemplate.Other.GameFuns;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.UI
 {
     struct Description
     {

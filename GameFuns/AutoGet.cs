@@ -1,6 +1,5 @@
-﻿using CheatUITemplt;
-using System.Windows.Forms;
-
+﻿using System.Windows.Forms;
+using WPFCheatUITemplate.Other.GameFuns;
 namespace WPFCheatUITemplate.GameFuns
 {
     class AutoGet:GameFun

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using WPFCheatUITemplate.Other.Tools;
-namespace CheatUITemplt
+namespace WPFCheatUITemplate
 {
     static class CheatTools
     {

@@ -1,4 +1,4 @@
-﻿using WPFCheatUITemplate.Other;
+﻿using WPFCheatUITemplate.Other.GameFuns;
 using WPFCheatUITemplate.Other.Extends;
 
 namespace WPFCheatUITemplate.DataSet
@@ -33,7 +33,7 @@ namespace WPFCheatUITemplate.DataSet
             new byte[] { 0x0F, 0x84 },
             new byte[] { 0x0F, 0x85 });
 
-            AddData("noCd", GameVersion.Version.Steam, new Other.GameData()
+            AddData("noCd", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x958C5,
@@ -41,7 +41,7 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = false,
             });
 
-            AddData("sun", GameVersion.Version.Steam, new Other.GameData()
+            AddData("sun", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x331C50,
@@ -52,7 +52,7 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = true,
             });
 
-            AddData("coin", GameVersion.Version.Steam, new Other.GameData()
+            AddData("coin", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x331C50,
@@ -63,7 +63,7 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = true,
             });
 
-            AddData("adventureLevel", GameVersion.Version.Steam, new Other.GameData()
+            AddData("adventureLevel", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x331C50,
@@ -74,7 +74,7 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = true,
             });
 
-            AddData("changeMode", GameVersion.Version.Steam, new Other.GameData()
+            AddData("changeMode", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x331C50,
@@ -85,7 +85,7 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = true,
             });
 
-            AddData("tree", GameVersion.Version.Steam, new Other.GameData()
+            AddData("tree", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x331C50,
@@ -96,7 +96,7 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = true,
             });
 
-            AddData("autoGet", GameVersion.Version.Steam, new Other.GameData()
+            AddData("autoGet", GameVersion.Version.Steam, new GameData()
             {
                 //E8 34 F5 FF FF EB 16
                 ModuleName = "popcapgame1.exe",
@@ -106,7 +106,7 @@ namespace WPFCheatUITemplate.DataSet
                 IsIntPtr = false,
             });
 
-            AddData("arbitrarilyPlant", GameVersion.Version.Steam, new Other.GameData()
+            AddData("arbitrarilyPlant", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x13350,
@@ -117,7 +117,7 @@ namespace WPFCheatUITemplate.DataSet
             new byte[] { 0x81},
             new byte[] { 0x84});
 
-            AddData("allowBackground", GameVersion.Version.Steam, new Other.GameData()
+            AddData("allowBackground", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x1D87C9,
@@ -192,7 +192,7 @@ namespace WPFCheatUITemplate.DataSet
             new byte[] { 0x66, 0xB8, 0x33, 0x00 },
             new byte[] { 0x85, 0xC0, 0x7E, 0x04 });
 
-            AddData("GameRunSpeed", GameVersion.Version.Steam, new Other.GameData()
+            AddData("GameRunSpeed", GameVersion.Version.Steam, new GameData()
             {
                 ModuleName = "popcapgame1.exe",
                 ModuleOffsetAddress = 0x331C50,

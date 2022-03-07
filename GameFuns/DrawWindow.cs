@@ -1,9 +1,8 @@
-﻿using CheatUITemplt;
-using GameOverlay.Drawing;
+﻿using GameOverlay.Drawing;
 using System.Collections.Generic;
 using System.Threading;
 using WPFCheatUITemplate.GameMode;
-
+using WPFCheatUITemplate.Other.GameFuns;
 namespace WPFCheatUITemplate.GameFuns
 {
     class DrawWindow : GameFun

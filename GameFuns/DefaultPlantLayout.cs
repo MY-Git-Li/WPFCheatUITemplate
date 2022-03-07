@@ -1,7 +1,6 @@
-﻿using CheatUITemplt;
-using System.Threading;
+﻿using System.Threading;
 using System.Windows.Forms;
-
+using WPFCheatUITemplate.Other.GameFuns;
 namespace WPFCheatUITemplate.GameFuns
 {
     class DefaultPlantLayout:GameFun

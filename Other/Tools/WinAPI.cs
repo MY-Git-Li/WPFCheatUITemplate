@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.Tools
 {
     class WinAPI
     {

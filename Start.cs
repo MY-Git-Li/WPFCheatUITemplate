@@ -1,8 +1,8 @@
-﻿using CheatUITemplt;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using WPFCheatUITemplate.GameFuns;
 using WPFCheatUITemplate.Other;
-
+using WPFCheatUITemplate.Other.GameFuns;
+using WPFCheatUITemplate.Other.Tools;
 namespace WPFCheatUITemplate
 {
     class Start : ViewMenu

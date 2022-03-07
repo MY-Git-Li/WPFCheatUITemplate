@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static CheatUITemplt.HotKey;
+using static WPFCheatUITemplate.Other.Tools.HotKey;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.Tools
 {
     class HotSystem
     {

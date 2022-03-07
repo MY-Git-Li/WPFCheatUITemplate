@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPFCheatUITemplate.Other.GameFuns;
+using WPFCheatUITemplate.Other.Tools;
+using WPFCheatUITemplate.Other.UI;
 
 namespace WPFCheatUITemplate.Other
 {
     abstract class ViewMenu : DataBase
     {
 
-        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        public static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers)
         {
             UIManager.SetCurentKeyModifiers(keyModifiers);
         }
@@ -20,12 +22,12 @@ namespace WPFCheatUITemplate.Other
             UIManager.SetCurentKeyModifiers(keys);
         }
 
-        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys, CheatUITemplt.HotKey.KeyModifiers keyModifiers)
+        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys, HotKey.KeyModifiers keyModifiers)
         {
             UIManager.SetCurentKeyModifiers(keys, keyModifiers);
         }
 
-        public static void SetCurentKeyModifiers(CheatUITemplt.HotKey.KeyModifiers keyModifiers, System.Windows.Forms.Keys keys)
+        public static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers, System.Windows.Forms.Keys keys)
         {
             UIManager.SetCurentKeyModifiers(keyModifiers, keys);
         }

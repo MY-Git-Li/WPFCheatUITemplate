@@ -5,17 +5,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using WPFCheatUITemplate;
+using WPFCheatUITemplate.Other.UI;
 using WPFCheatUITemplate.GameMode;
-using WPFCheatUITemplate.Other;
 using WPFCheatUITemplate.Other.Events;
 using WPFCheatUITemplate.Other.Exceptions;
 using WPFCheatUITemplate.Other.GameFuns;
 using WPFCheatUITemplate.Other.Interface;
 using WPFCheatUITemplate.Other.Tools.Extensions;
-using static CheatUITemplt.HotKey;
+using static WPFCheatUITemplate.Other.Tools.HotKey;
+using WPFCheatUITemplate.Other.Tools;
+using WPFCheatUITemplate.Other.FindGame;
+using WPFCheatUITemplate.Other.Voice;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate
 {
 
     class AppGameFunManager

@@ -5,7 +5,6 @@ using System.Numerics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CheatUITemplt;
 using GameOverlay.Drawing;
 using GameOverlay.Windows;
 using static WPFCheatUITemplate.Other.Draw.Memory;

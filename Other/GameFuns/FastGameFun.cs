@@ -1,8 +1,8 @@
-﻿using CheatUITemplt;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using WPFCheatUITemplate.Other;
 
-namespace WPFCheatUITemplate.Other
+namespace WPFCheatUITemplate.Other.GameFuns
 {
     class FastGameFun : GameFun
     {

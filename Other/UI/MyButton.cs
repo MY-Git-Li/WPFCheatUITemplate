@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.UI
 {
     class MyButton
     {

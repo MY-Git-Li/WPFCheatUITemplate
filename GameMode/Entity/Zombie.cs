@@ -1,5 +1,4 @@
-﻿using CheatUITemplt;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace WPFCheatUITemplate.GameMode

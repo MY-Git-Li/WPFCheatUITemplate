@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using WPFCheatUITemplate.GameMode;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.FindGame
 {
     class InvestigateGame
     {

@@ -2,8 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using WPFCheatUITemplate.Other.GameFuns;
 
-namespace CheatUITemplt
+namespace WPFCheatUITemplate.Other.UI
 {
 
     class CreateLayout
@@ -41,7 +42,7 @@ namespace CheatUITemplt
             UpDateRow();
         }
 
-        public void CreatSeparate(WPFCheatUITemplate.LanguageUI languageUI,int offset = 30)
+        public void CreatSeparate(LanguageUI languageUI,int offset = 30)
         {
             AddRowDefin(offset);
 

@@ -1,4 +1,4 @@
-﻿using WPFCheatUITemplate.Other;
+﻿using WPFCheatUITemplate.Other.GameFuns;
 using WPFCheatUITemplate.Other.Extends;
 
 namespace WPFCheatUITemplate.DataSet

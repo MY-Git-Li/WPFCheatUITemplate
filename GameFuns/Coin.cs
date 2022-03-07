@@ -1,11 +1,10 @@
-﻿using CheatUITemplt;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using WPFCheatUITemplate.Other.GameFuns;
 namespace WPFCheatUITemplate.GameFuns
 {
     class Coin: GameFun
