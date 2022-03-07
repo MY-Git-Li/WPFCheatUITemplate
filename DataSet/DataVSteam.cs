@@ -202,6 +202,17 @@ namespace WPFCheatUITemplate.DataSet
                 IntPtrOffset = new uint[] { 0x454 + 0x60 },
                 IsIntPtr = true,
             });
+
+            AddData("unlock_sun_limit", GameVersion.Version.Steam, new GameData()
+            {
+                ModuleName = "popcapgame1.exe",
+                ModuleOffsetAddress = 0x1F4E5,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+            new byte[] { 0xEB },
+            new byte[] { 0x7E });
         }
     }
 }

@@ -63,7 +63,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
         /// <param name="value">IsAcceptValue为真时 value为slider的值 否则为0</param>
         public abstract void DoRunAgain(double value);
         /// <summary>
-        /// 用来释放Awake、Start方法中的一些资源等
+        /// 用来释放Awake、Start方法中的一些资源等.当游戏结束时调用
         /// </summary>
         public virtual void Ending() { }
 

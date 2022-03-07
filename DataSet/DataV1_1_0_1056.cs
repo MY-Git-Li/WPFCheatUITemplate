@@ -179,6 +179,17 @@ namespace WPFCheatUITemplate.DataSet
                 IntPtrOffset = new uint[] { 0x454 + 0x60 },
                 IsIntPtr = true,
             });
+
+            AddData("unlock_sun_limit", GameVersion.Version.V1_1_0_1056, new GameData()
+            {
+                ModuleName = "PlantsVsZombies.exe",
+                ModuleOffsetAddress = 0x3C0C1,
+
+                IsSignatureCode = false,
+                IsIntPtr = false,
+            },
+            new byte[] { 0xEB },
+            new byte[] { 0x7E });
         }
     }
     

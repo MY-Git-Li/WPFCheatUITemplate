@@ -14,11 +14,8 @@ namespace WPFCheatUITemplate
             new AdventureLevel();
             new ChangeMode();
             new Tree();
-            //"游戏速度"
-            new FastGameFun()
+            new FastGameFun(GetCheckButtonDateStruct("游戏速度", "Game speed", 0.1f, 10f))
             {
-                gameFunDataAndUIStruct = GetCheckButtonDateStruct("游戏速度", "Game speed", 0.1f, 10f),
-
                 doFirstTime = (v) =>
                 {
                     WriteMemoryByID<int>("GameRunSpeed", (int)(10f / v ));
@@ -29,12 +26,8 @@ namespace WPFCheatUITemplate
                     WriteMemoryByID<int>("GameRunSpeed", 10);
                 },
             };
-            //"直接胜利"
-            new FastGameFun()
+            new FastGameFun(GetButtonDateStruct("直接胜利", "Win"))
             {
-
-                gameFunDataAndUIStruct = GetButtonDateStruct("直接胜利", "Win", false),
-
                 doFirstTime = (v) =>
                 {
                     var ecx = ReadMemoryByID<int>("Secondary_Offset");

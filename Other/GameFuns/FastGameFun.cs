@@ -28,14 +28,14 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         #endregion
 
-
-        public FastGameFun(GameFunDataAndUIStruct gameFunDataAndUIStruct, params string[] Id)
+        public FastGameFun(GameFunDataAndUIStruct gameFunDataAndUIStruct):this()
         {
             this.gameFunDataAndUIStruct = gameFunDataAndUIStruct;
+        }
 
-            gameDataAddresseList = new List<GameDataAddress>();
-            gameDates = new Dictionary<GameVersion.Version, GameData>();
 
+        public FastGameFun(GameFunDataAndUIStruct gameFunDataAndUIStruct, params string[] Id):this(gameFunDataAndUIStruct)
+        {
             doFirstTime = (v) => 
             {
                 for (int j = 0; j < Id.Length; j++)
