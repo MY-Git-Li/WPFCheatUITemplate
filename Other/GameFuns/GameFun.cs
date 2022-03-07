@@ -10,7 +10,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
     abstract class GameFun : GameFunBase
     {
         /// <summary>
-        /// 设置UI后续才能起作用-显示ui，设置data后gameDataAddress才有内容
+        /// 设置UI后续才能起作用---显示ui，设置data后gameDataAddress才有内容，
+        /// 或者可以使用使用GetCheckButtonDateStruct/GetButtonDateStruct得到gameFunDataAndUIStruct用来显示UI
+        /// 利用AddData添加数据地址，使用WriteMemoryByID来写地址，GetAddress来得到地址
         /// </summary>
         public GameFunDataAndUIStruct gameFunDataAndUIStruct;
 

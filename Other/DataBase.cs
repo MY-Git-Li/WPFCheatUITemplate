@@ -6,18 +6,18 @@ namespace WPFCheatUITemplate.Other
 {
     abstract class DataBase
     {
-        static public void AddData(string id, WPFCheatUITemplate.GameVersion.Version v, int offset)
+        static public void AddData(string id, GameVersion.Version v, int offset)
         {
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, offset);
         }
 
-        static public void AddData(string id, WPFCheatUITemplate.GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
+        static public void AddData(string id, GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
         {
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData, modifyData, orcData);
         }
 
 
-        static public void AddData(string id, WPFCheatUITemplate.GameVersion.Version v, GameData gameData)
+        static public void AddData(string id, GameVersion.Version v, GameData gameData)
         {
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData);
         }
