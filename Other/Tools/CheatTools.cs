@@ -484,6 +484,11 @@ namespace WPFCheatUITemplate
         }
         public static uint GetProcessModuleSize(uint pid, string moduleName)
         {
+            if (pid.Equals(0))
+            {
+                return 0;
+            }
+
             Process processes = Process.GetProcessById((int)pid);
 
             foreach (ProcessModule item in processes.Modules)
@@ -498,6 +503,11 @@ namespace WPFCheatUITemplate
         }
         public static IntPtr MyGetProcessModuleHandle(uint pid, string moduleName)
         {
+            if (pid.Equals(0))
+            {
+                return IntPtr.Zero;
+            }
+
             Process processes = Process.GetProcessById((int)pid);
 
             foreach (ProcessModule item in processes.Modules)
