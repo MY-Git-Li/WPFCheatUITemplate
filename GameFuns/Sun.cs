@@ -4,20 +4,15 @@ namespace WPFCheatUITemplate.GameFuns
 {
     class Sun : GameFun
     {
-        bool isDo;
         public Sun()
         {
             gameFunDataAndUIStruct = GetButtonDateStruct("设置阳光", "Sun number", 1, 99999);
-            isDo = true;
+           
         }
 
         public override void Start()
         {
-            if (isDo)
-            {
-                WriteMemoryByID("unlock_sun_limit");
-                isDo = false;
-            }
+           WriteMemoryByID("unlock_sun_limit");
         }
 
         public override void DoFirstTime(double value)
@@ -31,9 +26,8 @@ namespace WPFCheatUITemplate.GameFuns
         }
 
         public override void Ending()
-        {
-            isDo = true;
-            WriteMemoryByID("unlock_sun_limit",true);
+        { 
+           WriteMemoryByID("unlock_sun_limit",true);
         }
     }
 }

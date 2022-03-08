@@ -41,7 +41,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
            
         }
         /// <summary>
-        /// 可以实现自定义数据获取，列如人造指针等，当功能启用前调用
+        /// 可以实现自定义数据获取，列如人造指针等，当第一次功能启用前调用
         /// </summary>
         public virtual void Start() { }
 
