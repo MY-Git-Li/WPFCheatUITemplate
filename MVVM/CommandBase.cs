@@ -9,7 +9,7 @@ namespace WPFCheatUITemplate
 {
     public class CommandBase : ICommand
     {
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged = (sender, e) => { };
 
         public bool CanExecute(object parameter)
         {
