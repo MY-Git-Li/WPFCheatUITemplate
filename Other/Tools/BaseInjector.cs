@@ -145,29 +145,10 @@ namespace WPFCheatUITemplate.Other.Tools
         private static IntPtr GetDLLHandle(string szDName, int dwPID)
         {
             IntPtr address;
-            address = MyGetProcessModuleHandle((uint)dwPID, szDName);
+            address = CheatTools.MyGetProcessModuleHandle((uint)dwPID, szDName);
 
             return address;
         }
 
-        private static IntPtr MyGetProcessModuleHandle(uint pid, string moduleName)
-        {
-            //获取该系统下所有进程
-            Process[] processes = Process.GetProcesses();
-            foreach (var process in processes)
-            {
-                if (process.Id == pid)
-                {
-                    foreach (ProcessModule item in process.Modules)
-                    {
-                        if (item.ModuleName == moduleName)
-                        {
-                            return item.BaseAddress;
-                        }
-                    }
-                }
-            }
-            return IntPtr.Zero;
-        }
     }
 }
