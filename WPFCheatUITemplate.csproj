@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Configuration\Configure.cs" />
     <Compile Include="DataSet\DataVDefault.cs" />
     <Compile Include="DataSet\DataV1_0_0_1051.cs" />
     <Compile Include="DataSet\DataVSteam.cs" />

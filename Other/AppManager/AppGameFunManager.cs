@@ -10,6 +10,7 @@ using WPFCheatUITemplate.GameMode;
 using WPFCheatUITemplate.Other.Events;
 using WPFCheatUITemplate.Other.Exceptions;
 using WPFCheatUITemplate.Other.GameFuns;
+using WPFCheatUITemplate.Configuration;
 using WPFCheatUITemplate.Other.Interface;
 using WPFCheatUITemplate.Other.Tools.Extensions;
 using static WPFCheatUITemplate.Other.Tools.HotKey;
@@ -19,7 +20,6 @@ using WPFCheatUITemplate.Other.Voice;
 
 namespace WPFCheatUITemplate
 {
-
     class AppGameFunManager
     {
         #region 引用类型
@@ -519,7 +519,6 @@ namespace WPFCheatUITemplate
 
         }
 
-
         public void RegisterManger(UILangerManger uILangerManger)
         {
             if (uILangerManger != null)
@@ -532,11 +531,97 @@ namespace WPFCheatUITemplate
                 this.soundEffect = soundEffect;
         }
 
+        #region 窗口UI相关
 
         public void StartUI(Action action)
         {
             action?.Invoke();
+
+            InitUi();
+
             DrawUI();
+        }
+
+        private void InitUi()
+        {
+            mainWindow.Title = Configure.WindowTitle;
+            mainWindow.Height = Configure.WindowHeight;
+            mainWindow.Width = Configure.WindowWidth;
+
+            mainWindow.lbl_gemeProcess.Text = Configure.processName + ".exe";
+            mainWindow.lbl_processID.Text = "";
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.MainTitle,
+                Description_SC = Configure.MainTitle_SC,
+                Description_TC = Configure.MainTitle_TC.Equals("") ? Configure.MainTitle_SC.ToTraditional() : Configure.MainTitle_TC,
+                Description_EN = Configure.MainTitle_EN
+
+            });
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.subtitle,
+                Description_SC = Configure.Subtitle_SC,
+                Description_TC = Configure.Subtitle_TC.Equals("") ? Configure.Subtitle_SC.ToTraditional() : Configure.Subtitle_TC,
+                Description_EN = Configure.Subtitle_EN
+
+            });
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.keyDes,
+                Description_SC = Configure.KeyDes_SC,
+                Description_TC = Configure.KeyDes_TC.Equals("") ? Configure.KeyDes_SC.ToTraditional(): Configure.KeyDes_TC,
+                Description_EN = Configure.KeyDes_EN
+
+            });
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.funDes,
+                Description_SC = Configure.FunDes_SC,
+                Description_TC = Configure.FunDes_TC.Equals("")? Configure.FunDes_SC.ToTraditional(): Configure.FunDes_TC,
+                Description_EN = Configure.FunDes_EN
+
+            });
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.process,
+                Description_SC = Configure.ProcessDes_SC,
+                Description_TC = Configure.ProcessDes_TC.Equals("") ? Configure.ProcessDes_SC.ToTraditional() : Configure.ProcessDes_TC,
+                Description_EN = Configure.ProcessDes_EN
+
+            });
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.pid,
+                Description_SC = Configure.PidDes_SC,
+                Description_TC = Configure.PidDes_TC.Equals("") ? Configure.PidDes_SC.ToTraditional() : Configure.PidDes_TC,
+                Description_EN = Configure.PidDes_EN
+
+            });
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.author,
+                Description_SC = Configure.AuthorDes_SC,
+                Description_TC = Configure.AuthorDes_TC.Equals("") ? Configure.AuthorDes_SC.ToTraditional() : Configure.AuthorDes_TC,
+                Description_EN = Configure.AuthorDes_EN
+
+            });
+
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.otherDes,
+                Description_SC = Configure.OtherDes_SC,
+                Description_TC = Configure.OtherDes_TC.Equals("") ? Configure.OtherDes_SC.ToTraditional() : Configure.OtherDes_TC,
+                Description_EN = Configure.OtherDes_EN
+
+            });
         }
 
         private void DrawUI()
@@ -560,7 +645,7 @@ namespace WPFCheatUITemplate
                             Description_SC = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_SC,
                             Description_TC = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_TC
                         };
-                        
+
 
                         UILangerManger.RegisterLanguageUI(funlanguageUI);
                         UILangerManger.RegisterLanguageUI(keylanguageUI);
@@ -593,6 +678,8 @@ namespace WPFCheatUITemplate
 
             }
         }
+
+        #endregion
 
         #region 布局相关
 
@@ -1001,6 +1088,37 @@ namespace WPFCheatUITemplate
             hotSystem.WndProcWinForm(ref m);
         }
 
+
+        public int GetGameFunCount(bool IsIncludeHide = false)
+        {
+            if (IsIncludeHide)
+            {
+                return gameFunUIs.Count;
+            }
+
+            int count = 0;
+            for (int i = 0; i < gameFunUIs.Count; i++)
+            {
+                GameFunUI gameFun = gameFunUIs[i];
+                if (gameFun != null)
+                {
+                    if (gameFun.gameFun!=null)
+                    {
+                        var dd = gameFun.gameFun.gameFunDataAndUIStruct;
+                        if (dd != null)
+                        {
+                            if (!dd.uIData.IsHide)
+                            {
+                                count++;
+                            }
+                        }
+                    }
+                }
+
+               
+            }
+            return count;
+        }
     }
 
 }

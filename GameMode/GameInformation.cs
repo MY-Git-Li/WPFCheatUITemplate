@@ -12,13 +12,13 @@ namespace WPFCheatUITemplate.GameMode
 
         static int pid;
 
-        static string processName = "PlantsVsZombies";
+        static string processName = Configuration.Configure.processName;
 
-        static string windowsName = "Plants vs. Zombies";
+        static string windowsName = Configuration.Configure.windowsName;
 
-        static string classWindowsName = "MainWindow";
+        static string classWindowsName = Configuration.Configure.classWindowsName;
 
-        static bool isByWindowsNamePrecedence = true;
+        static bool isByWindowsNamePrecedence = Configuration.Configure.isByWindowsNamePrecedence;
 
         public static IntPtr Handle
         {
