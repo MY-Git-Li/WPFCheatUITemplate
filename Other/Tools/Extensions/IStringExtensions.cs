@@ -41,7 +41,7 @@ namespace WPFCheatUITemplate.Other.Tools.Extensions
         #region 数字转汉字
         public static string NumberToChinese(this string inputNum)
         {
-            string[] intArr = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", };
+            //string[] intArr = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", };
             string[] strArr = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", };
             string[] Chinese = { "", "十", "百", "千", "万", "十", "百", "千", "亿" };
             //金额
@@ -50,8 +50,17 @@ namespace WPFCheatUITemplate.Other.Tools.Extensions
             string tmpVal = "";
             for (int i = 0; i < tmpArr.Length; i++)
             {
-                tmpVal += strArr[tmpArr[i] - 48];//ASCII编码 0为48
-                tmpVal += Chinese[tmpArr.Length - 1 - i];//根据对应的位数插入对应的单位
+
+                if (strArr[tmpArr[i] - 48].Equals("一") && Chinese[tmpArr.Length - 1 - i].Equals("十"))
+                {
+                    tmpVal += Chinese[tmpArr.Length - 1 - i];//根据对应的位数插入对应的单位
+                }
+                else
+                {
+                    tmpVal += strArr[tmpArr[i] - 48];//ASCII编码 0为48
+                    tmpVal += Chinese[tmpArr.Length - 1 - i];//根据对应的位数插入对应的单位
+                }
+
             }
 
             return tmpVal;
