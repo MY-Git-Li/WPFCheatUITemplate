@@ -51,7 +51,7 @@ namespace WPFCheatUITemplate.Other.Tools.Extensions
             for (int i = 0; i < tmpArr.Length; i++)
             {
 
-                if (strArr[tmpArr[i] - 48].Equals("一") && Chinese[tmpArr.Length - 1 - i].Equals("十"))
+                if (strArr[tmpArr[i] - 48].Equals("一") && Chinese[tmpArr.Length - 1 - i].Equals("十") && tmpArr.Length == 2)
                 {
                     tmpVal += Chinese[tmpArr.Length - 1 - i];//根据对应的位数插入对应的单位
                 }
