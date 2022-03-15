@@ -1091,12 +1091,8 @@ namespace WPFCheatUITemplate
 
         public int GetGameFunCount(bool IsIncludeHide = false)
         {
-            if (IsIncludeHide)
-            {
-                return gameFunUIs.Count;
-            }
-
-            int count = 0;
+            int NoHidecount = 0;
+            int AllCount = 0;
             for (int i = 0; i < gameFunUIs.Count; i++)
             {
                 GameFunUI gameFun = gameFunUIs[i];
@@ -1107,9 +1103,10 @@ namespace WPFCheatUITemplate
                         var dd = gameFun.gameFun.gameFunDataAndUIStruct;
                         if (dd != null)
                         {
+                            AllCount++;
                             if (!dd.uIData.IsHide)
                             {
-                                count++;
+                                NoHidecount++;
                             }
                         }
                     }
@@ -1117,7 +1114,15 @@ namespace WPFCheatUITemplate
 
                
             }
-            return count;
+
+            if (IsIncludeHide)
+            {
+                return AllCount;
+            }else
+            {
+                return NoHidecount;
+
+            }
         }
     }
 
