@@ -133,7 +133,7 @@ namespace WPFCheatUITemplate
 
         void SetDefaultLanguage()
         {
-            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
+            string mode = Properties.Settings.Default.langer;
             if (mode == "SC")
             {
                 SetSimplifiedChinese();
@@ -147,13 +147,31 @@ namespace WPFCheatUITemplate
                 SetEnglish();
             }
 
+            InitErrorMessageString(mode);
+        }
+
+        void InitErrorMessageString(string mode)
+        {
+            UILangerManger.AddString("Details", "详细信息：", "Details", mode);
+            UILangerManger.AddString("Exception", "意外的错误", "Exception", mode);
+            UILangerManger.AddString("messbox", 
+                "未检测到游戏进程，" +
+                "请先运行游戏在激活修改功能.@错误", 
+                "The game process is not detected. " +
+                "Please run the game first and activate the modification function. @error", mode);
+            UILangerManger.AddString("Modulename", "模块名称：", "Module name:", mode);
+            UILangerManger.AddString("mouduleOffset", "模块偏移：", "Module offset:", mode);
+            UILangerManger.AddString("PointerOffset", "指针偏移：", "Pointer offset:", mode);
+            UILangerManger.AddString("Signature", "特征码：", "Signature:", mode);
+            UILangerManger.AddString("Signatureoffset", "特征码偏移：", "Signature offset:", mode);
+            UILangerManger.AddString("Wrongaddress", "地址错误！", "Wrong address!", mode);
         }
 
         void ChangRadioButton(string mode)
         {
-            var en = WPFCheatUITemplate.Properties.Settings.Default.RadioButton_EN;
-            var sc = WPFCheatUITemplate.Properties.Settings.Default.RadioButton_SC;
-            var tc = WPFCheatUITemplate.Properties.Settings.Default.RadioButton_TC;
+            var en = Properties.Settings.Default.RadioButton_EN;
+            var sc = Properties.Settings.Default.RadioButton_SC;
+            var tc = Properties.Settings.Default.RadioButton_TC;
 
             if (mode == "SC")
             {
@@ -174,9 +192,9 @@ namespace WPFCheatUITemplate
                 tc = false;
             }
 
-            WPFCheatUITemplate.Properties.Settings.Default.RadioButton_EN = en;
-            WPFCheatUITemplate.Properties.Settings.Default.RadioButton_SC = sc;
-            WPFCheatUITemplate.Properties.Settings.Default.RadioButton_TC = tc;
+            Properties.Settings.Default.RadioButton_EN = en;
+            Properties.Settings.Default.RadioButton_SC = sc;
+            Properties.Settings.Default.RadioButton_TC = tc;
 
         }
 
@@ -184,9 +202,9 @@ namespace WPFCheatUITemplate
         {
             ChangRadioButton(langer);
 
-            WPFCheatUITemplate.Properties.Settings.Default.langer = langer;
+            Properties.Settings.Default.langer = langer;
 
-            WPFCheatUITemplate.Properties.Settings.Default.Save();
+            Properties.Settings.Default.Save();
         }
 
         public void SetTraditionalChinese()
@@ -891,49 +909,22 @@ namespace WPFCheatUITemplate
 
         private void ButtonHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
-
-            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
-            string error = "";
-            if (mode == "SC")
-            {
-                error = WPFCheatUITemplate.Properties.Resources.messbox_sc;
-            }
-            if (mode == "TC")
-            {
-                error = WPFCheatUITemplate.Properties.Resources.messbox_sc.ToTraditional();
-            }
-            if (mode == "EN")
-            {
-                error = WPFCheatUITemplate.Properties.Resources.messbox;
-            }
-
-
-
-            System.Windows.MessageBox.Show(error.Split('@')[0], error.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+            ShowErrorMessage();
         }
 
         private void CheckBoxHandlerNoGamePro(object sender, RoutedEventArgs e)
         {
+            ShowErrorMessage();
 
-            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
-            string error = "";
-            if (mode == "SC")
-            {
-                error = WPFCheatUITemplate.Properties.Resources.messbox_sc;
-            }
-            if (mode == "TC")
-            {
-                error = WPFCheatUITemplate.Properties.Resources.messbox_sc.ToTraditional();
-            }
-            if (mode == "EN")
-            {
-                error = WPFCheatUITemplate.Properties.Resources.messbox;
-            }
-
-
-            var check = sender as System.Windows.Controls.CheckBox;
-            System.Windows.MessageBox.Show(error.Split('@')[0], error.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
+             var check = sender as System.Windows.Controls.CheckBox;
+            
             check.IsChecked = false;
+        }
+
+        void ShowErrorMessage()
+        {
+            string error = UILangerManger.GetString("messbox");
+            System.Windows.MessageBox.Show(error.Split('@')[0], error.Split('@')[1], MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void HandleZeroAddressExceptionOnRunGameFun(ZeroAddressException e)
@@ -945,58 +936,19 @@ namespace WPFCheatUITemplate
 
             #region 详细错误信息
 
-            string mode = WPFCheatUITemplate.Properties.Settings.Default.langer;
-            string Details = "";
-            string Modulename = "";
-            string mouduleOffset = "";
-            string PointerOffset = "";
-            string Signature = "";
-            string Signatureoffset = "";
-            string Wrongaddress = "";
-            string Exception = "";
-
-
-
-            if (mode == "SC")
-            {
-                Details = WPFCheatUITemplate.Properties.Resources.Details_sc;
-                Modulename = WPFCheatUITemplate.Properties.Resources.Modulename_sc;
-                mouduleOffset = WPFCheatUITemplate.Properties.Resources.mouduleOffset_sc;
-                PointerOffset = WPFCheatUITemplate.Properties.Resources.PointerOffset_sc;
-                Signature = WPFCheatUITemplate.Properties.Resources.Signature_sc;
-                Signatureoffset = WPFCheatUITemplate.Properties.Resources.Signatureoffset_Sc;
-                Wrongaddress = WPFCheatUITemplate.Properties.Resources.Wrongaddress_sc;
-                Exception = WPFCheatUITemplate.Properties.Resources.Exception_sc;
-            }
-            if (mode == "TC")
-            {
-                Details = WPFCheatUITemplate.Properties.Resources.Details_sc.ToTraditional();
-                Modulename = WPFCheatUITemplate.Properties.Resources.Modulename_sc.ToTraditional();
-                mouduleOffset = WPFCheatUITemplate.Properties.Resources.mouduleOffset_sc.ToTraditional();
-                PointerOffset = WPFCheatUITemplate.Properties.Resources.PointerOffset_sc.ToTraditional();
-                Signature = WPFCheatUITemplate.Properties.Resources.Signature_sc.ToTraditional();
-                Signatureoffset = WPFCheatUITemplate.Properties.Resources.Signatureoffset_Sc.ToTraditional();
-                Wrongaddress = WPFCheatUITemplate.Properties.Resources.Wrongaddress_sc.ToTraditional();
-                Exception = WPFCheatUITemplate.Properties.Resources.Exception_sc.ToTraditional();
-            }
-            if (mode == "EN")
-            {
-                Details = WPFCheatUITemplate.Properties.Resources.Details;
-                Modulename = WPFCheatUITemplate.Properties.Resources.Modulename;
-                mouduleOffset = WPFCheatUITemplate.Properties.Resources.mouduleOffset;
-                PointerOffset = WPFCheatUITemplate.Properties.Resources.PointerOffset;
-                Signature = WPFCheatUITemplate.Properties.Resources.Signature;
-                Signatureoffset = WPFCheatUITemplate.Properties.Resources.Signatureoffset;
-                Wrongaddress = WPFCheatUITemplate.Properties.Resources.Wrongaddress;
-                Exception = WPFCheatUITemplate.Properties.Resources.Exception;
-            }
-
+            string mode = Properties.Settings.Default.langer;
+            string Details = UILangerManger.GetString("Details");
+            string Modulename = UILangerManger.GetString("Modulename");
+            string mouduleOffset = UILangerManger.GetString("mouduleOffset");
+            string PointerOffset = UILangerManger.GetString("PointerOffset");
+            string Signature = UILangerManger.GetString("Signature");
+            string Signatureoffset = UILangerManger.GetString("Signatureoffset");
+            string Wrongaddress = UILangerManger.GetString("Wrongaddress");
+            string Exception = UILangerManger.GetString("Exception");
 
             string text = "";
 
             text += GameInformation.CurentVersion.ToString();
-
-
 
             if (g.IsIntPtr)
             {

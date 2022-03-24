@@ -19,7 +19,7 @@ namespace WPFCheatUITemplate.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -89,24 +89,6 @@ namespace WPFCheatUITemplate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Details: 的本地化字符串。
-        /// </summary>
-        internal static string Details {
-            get {
-                return ResourceManager.GetString("Details", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 详细信息: 的本地化字符串。
-        /// </summary>
-        internal static string Details_sc {
-            get {
-                return ResourceManager.GetString("Details_sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 We&apos;re sorry, the current application has encountered some problems. The operation has been terminated. Please try again. If the problem persists, please contact the administrator. @unexpected operation 的本地化字符串。
         /// </summary>
         internal static string error_en {
@@ -125,155 +107,11 @@ namespace WPFCheatUITemplate.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Exception 的本地化字符串。
-        /// </summary>
-        internal static string Exception {
-            get {
-                return ResourceManager.GetString("Exception", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 意外的错误 的本地化字符串。
-        /// </summary>
-        internal static string Exception_sc {
-            get {
-                return ResourceManager.GetString("Exception_sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
         /// </summary>
         internal static System.IO.UnmanagedMemoryStream ext09_vnxd7 {
             get {
                 return ResourceManager.GetStream("ext09_vnxd7", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 The game process is not detected. Please run the game first and activate the modification function. @error 的本地化字符串。
-        /// </summary>
-        internal static string messbox {
-            get {
-                return ResourceManager.GetString("messbox", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 未检测到游戏进程，请先运行游戏在激活修改功能.@错误 的本地化字符串。
-        /// </summary>
-        internal static string messbox_sc {
-            get {
-                return ResourceManager.GetString("messbox_sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Module name: 的本地化字符串。
-        /// </summary>
-        internal static string Modulename {
-            get {
-                return ResourceManager.GetString("Modulename", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 模块名称: 的本地化字符串。
-        /// </summary>
-        internal static string Modulename_sc {
-            get {
-                return ResourceManager.GetString("Modulename_sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Module offset: 的本地化字符串。
-        /// </summary>
-        internal static string mouduleOffset {
-            get {
-                return ResourceManager.GetString("mouduleOffset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 模块偏移: 的本地化字符串。
-        /// </summary>
-        internal static string mouduleOffset_sc {
-            get {
-                return ResourceManager.GetString("mouduleOffset_sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Pointer offset: 的本地化字符串。
-        /// </summary>
-        internal static string PointerOffset {
-            get {
-                return ResourceManager.GetString("PointerOffset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 指针偏移: 的本地化字符串。
-        /// </summary>
-        internal static string PointerOffset_sc {
-            get {
-                return ResourceManager.GetString("PointerOffset_sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Signature: 的本地化字符串。
-        /// </summary>
-        internal static string Signature {
-            get {
-                return ResourceManager.GetString("Signature", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 特征码: 的本地化字符串。
-        /// </summary>
-        internal static string Signature_sc {
-            get {
-                return ResourceManager.GetString("Signature_sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Signature offset: 的本地化字符串。
-        /// </summary>
-        internal static string Signatureoffset {
-            get {
-                return ResourceManager.GetString("Signatureoffset", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 特征码偏移: 的本地化字符串。
-        /// </summary>
-        internal static string Signatureoffset_Sc {
-            get {
-                return ResourceManager.GetString("Signatureoffset_Sc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 Wrong address! 的本地化字符串。
-        /// </summary>
-        internal static string Wrongaddress {
-            get {
-                return ResourceManager.GetString("Wrongaddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 地址错误！ 的本地化字符串。
-        /// </summary>
-        internal static string Wrongaddress_sc {
-            get {
-                return ResourceManager.GetString("Wrongaddress_sc", resourceCulture);
             }
         }
     }

@@ -1242,23 +1242,11 @@
         AAAAAAAAAAs=
 </value>
   </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details:</value>
-  </data>
-  <data name="Details_sc" xml:space="preserve">
-    <value>详细信息:</value>
-  </data>
   <data name="error_en" xml:space="preserve">
     <value>We're sorry, the current application has encountered some problems. The operation has been terminated. Please try again. If the problem persists, please contact the administrator. @unexpected operation</value>
   </data>
   <data name="error_sc" xml:space="preserve">
     <value>我们很抱歉，当前应用程序遇到一些问题，该操作已经终止，请进行重试，如果问题继续存在，请联系管理员.@意外的操作</value>
-  </data>
-  <data name="Exception" xml:space="preserve">
-    <value>Exception</value>
-  </data>
-  <data name="Exception_sc" xml:space="preserve">
-    <value>意外的错误</value>
   </data>
   <data name="ext09_vnxd7" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -3884,53 +3872,11 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAs=
 </value>
   </data>
-  <data name="messbox" xml:space="preserve">
-    <value>The game process is not detected. Please run the game first and activate the modification function. @error</value>
-  </data>
-  <data name="messbox_sc" xml:space="preserve">
-    <value>未检测到游戏进程，请先运行游戏在激活修改功能.@错误</value>
-  </data>
-  <data name="Modulename" xml:space="preserve">
-    <value>Module name:</value>
-  </data>
-  <data name="Modulename_sc" xml:space="preserve">
-    <value>模块名称:</value>
-  </data>
-  <data name="mouduleOffset" xml:space="preserve">
-    <value>Module offset:</value>
-  </data>
-  <data name="mouduleOffset_sc" xml:space="preserve">
-    <value>模块偏移:</value>
-  </data>
-  <data name="PointerOffset" xml:space="preserve">
-    <value>Pointer offset:</value>
-  </data>
-  <data name="PointerOffset_sc" xml:space="preserve">
-    <value>指针偏移:</value>
-  </data>
-  <data name="Signature" xml:space="preserve">
-    <value>Signature:</value>
-  </data>
-  <data name="Signatureoffset" xml:space="preserve">
-    <value>Signature offset:</value>
-  </data>
-  <data name="Signatureoffset_Sc" xml:space="preserve">
-    <value>特征码偏移:</value>
-  </data>
-  <data name="Signature_sc" xml:space="preserve">
-    <value>特征码:</value>
-  </data>
-  <data name="Wrongaddress" xml:space="preserve">
-    <value>Wrong address!</value>
-  </data>
-  <data name="Wrongaddress_sc" xml:space="preserve">
-    <value>地址错误！</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_2" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAhkAAAFmCAYAAADAhogCAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAA/7JJREFUeF7c/WWUHMm27wmeWfNlPkxPv7V6umf1W69n9bv33XvPKa4SMzMzl1Ri
+        wQAADsEBuJFr7QAA/7JJREFUeF7c/WWUHMm27wmeWfNlPkxPv7V6umf1W69n9bv33XvPKa4SMzMzl1Ri
         ZmUqmZmZOSOZmZmZWQliJTNK+s/eHuGpUChSUOfc9+50Vv1lHu7m5ka+98/MLTz+op5VC7WcBlIT1LJb
         pOJtYR+rDo9zRTVIldMiSD23mdQ4H344RxZPiVTkpJrXCJV8qR7l1ZFof379vMR9H9QkSCVXGvJxFZJG
         dhM0sqR5f0x5F/P7KKsaqjm1wrU0cmtgkF0Cs4RkhGVnITLCH656txCg/TuCNQ8gVmcnEjTWIFNzLZLv
