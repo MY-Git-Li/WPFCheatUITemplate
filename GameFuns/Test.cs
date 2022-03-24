@@ -36,9 +36,13 @@ namespace WPFCheatUITemplate.GameFuns
             //mouse.mouse_move(new System.Drawing.Point(10, 10), new System.Drawing.Point(100, 100), 5);
 
             //#endregion
-           
-            //var dd = "12".NumberToChinese();
-        }
 
+            //var dd = "12".NumberToChinese();
+
+            //AppGameFunManager.Instance.UILangerManger.AddString("gg", "你好", "hi");
+            
+            //System.Windows.Forms.MessageBox.Show(AppGameFunManager.Instance.UILangerManger.GetString("gg"));
+        }
+       
     }
 }

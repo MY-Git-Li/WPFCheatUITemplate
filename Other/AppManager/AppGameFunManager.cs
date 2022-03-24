@@ -465,16 +465,13 @@ namespace WPFCheatUITemplate
 
         #region 窗口相关
 
-        public void RegisterWindow(Window window, ResourceDictionary Resdictionary, Grid grid)
+        public void RegisterWindow(Window window, Grid grid)
         {
             this.mainWindow = (MainWindow)window;
             mainWindow.Loaded += mainWindows_Loaded;
             mainWindow.Closing += mainWindows_Closing;
 
-            if (Resdictionary != null)
-            {
-                RegisterManger(new CreateLayout(Resdictionary), grid);
-            }
+            RegisterManger(new CreateLayout(System.Windows.Application.Current.Resources), grid);
 
             GetAllExtend();
 

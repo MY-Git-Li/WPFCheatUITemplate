@@ -23,7 +23,7 @@ namespace WPFCheatUITemplate
 
             this.DataContext = new MainWindowsViewModel();
 
-            AppGameFunManager.Instance.RegisterWindow(this, Resources, keyAndDescribelayouts);
+            AppGameFunManager.Instance.RegisterWindow(this, keyAndDescribelayouts);
 
             AppGameFunManager.Instance.StartUI(Start.Init);
 

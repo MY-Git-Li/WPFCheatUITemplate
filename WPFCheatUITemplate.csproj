@@ -138,6 +138,10 @@
     <Compile Include="Start.cs" />
     <Compile Include="GameFuns\Sun.cs" />
     <Compile Include="Other\UI\UILangerManger.cs" />
+    <Page Include="Theme\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
