@@ -516,17 +516,6 @@ namespace WPFCheatUITemplate
 
         }
 
-        public void RegisterManger(UILangerManger uILangerManger)
-        {
-            if (uILangerManger != null)
-                this.uILangerManger = uILangerManger;
-        }
-
-        public void RegisterManger(SoundEffect soundEffect)
-        {
-            if (soundEffect != null)
-                this.soundEffect = soundEffect;
-        }
 
         #region 窗口UI相关
 
@@ -811,7 +800,6 @@ namespace WPFCheatUITemplate
             }
         }
 
-
         private void EnableControl()
         {
             //foreach (var item in gameFunUIs)
@@ -878,14 +866,6 @@ namespace WPFCheatUITemplate
             mainWindow.StopFlashAinimation();
         }
 
-        private void SetControlEnable(System.Windows.Controls.Control control, bool enable)
-        {
-            if (control != null)
-            {
-                control.IsEnabled = enable;
-            }
-
-        }
 
         private void RegisterHotKey(KeyModifiers fsModifiers, Keys vk, MyButton buttonClick, HotSystemFun fun)
         {
