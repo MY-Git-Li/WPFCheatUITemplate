@@ -492,8 +492,6 @@ namespace WPFCheatUITemplate
 
             RegisterManger(new CreateLayout(System.Windows.Application.Current.Resources), grid);
 
-            SetDefaultLanguage();
-
             GetAllExtend();
 
             StartExtends();
@@ -516,6 +514,8 @@ namespace WPFCheatUITemplate
 
             DisableControl();
             investigateGame.FindingGame();
+
+            SetDefaultLanguage();
 
             StartFlashAnimation();
         }
