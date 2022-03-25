@@ -21,7 +21,7 @@ namespace WPFCheatUITemplate.Other.UI
             languageUIs.Add(languageUI);
         }
 
-        public void AddString(string id, string Description_SC, string Description_TC, string Description_EN,string mode)
+        public void AddString(string id, string Description_SC, string Description_TC, string Description_EN)
         {
             var obj = new LanguageUI()
             {
@@ -32,6 +32,8 @@ namespace WPFCheatUITemplate.Other.UI
             };
 
             RegisterLanguageUI(obj);
+
+            string mode = Properties.Settings.Default.langer;
 
             if (mode == "SC")
             {
@@ -56,9 +58,9 @@ namespace WPFCheatUITemplate.Other.UI
 
         }
 
-        public void AddString(string id, string Description_SC, string Description_EN, string mode = "SC")
+        public void AddString(string id, string Description_SC, string Description_EN)
         {
-            AddString(id, Description_SC, Description_SC.ToTraditional(), Description_EN, mode);
+            AddString(id, Description_SC, Description_SC.ToTraditional(), Description_EN);
         }
 
 

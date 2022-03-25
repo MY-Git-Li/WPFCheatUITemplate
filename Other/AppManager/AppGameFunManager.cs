@@ -133,6 +133,8 @@ namespace WPFCheatUITemplate
 
         void SetDefaultLanguage()
         {
+            InitErrorMessageString();
+
             string mode = Properties.Settings.Default.langer;
             if (mode == "SC")
             {
@@ -147,24 +149,23 @@ namespace WPFCheatUITemplate
                 SetEnglish();
             }
 
-            InitErrorMessageString(mode);
         }
 
-        void InitErrorMessageString(string mode)
+        void InitErrorMessageString()
         {
-            UILangerManger.AddString("Details", "详细信息：", "Details", mode);
-            UILangerManger.AddString("Exception", "意外的错误", "Exception", mode);
+            UILangerManger.AddString("Details", "详细信息：", "Details");
+            UILangerManger.AddString("Exception", "意外的错误", "Exception");
             UILangerManger.AddString("messbox", 
                 "未检测到游戏进程，" +
                 "请先运行游戏在激活修改功能.@错误", 
                 "The game process is not detected. " +
-                "Please run the game first and activate the modification function. @error", mode);
-            UILangerManger.AddString("Modulename", "模块名称：", "Module name:", mode);
-            UILangerManger.AddString("mouduleOffset", "模块偏移：", "Module offset:", mode);
-            UILangerManger.AddString("PointerOffset", "指针偏移：", "Pointer offset:", mode);
-            UILangerManger.AddString("Signature", "特征码：", "Signature:", mode);
-            UILangerManger.AddString("Signatureoffset", "特征码偏移：", "Signature offset:", mode);
-            UILangerManger.AddString("Wrongaddress", "地址错误！", "Wrong address!", mode);
+                "Please run the game first and activate the modification function. @error");
+            UILangerManger.AddString("Modulename", "模块名称：", "Module name:");
+            UILangerManger.AddString("mouduleOffset", "模块偏移：", "Module offset:");
+            UILangerManger.AddString("PointerOffset", "指针偏移：", "Pointer offset:");
+            UILangerManger.AddString("Signature", "特征码：", "Signature:");
+            UILangerManger.AddString("Signatureoffset", "特征码偏移：", "Signature offset:");
+            UILangerManger.AddString("Wrongaddress", "地址错误！", "Wrong address!");
         }
 
         void ChangRadioButton(string mode)
@@ -491,6 +492,8 @@ namespace WPFCheatUITemplate
 
             RegisterManger(new CreateLayout(System.Windows.Application.Current.Resources), grid);
 
+            SetDefaultLanguage();
+
             GetAllExtend();
 
             StartExtends();
@@ -514,7 +517,6 @@ namespace WPFCheatUITemplate
             DisableControl();
             investigateGame.FindingGame();
 
-            SetDefaultLanguage();
             StartFlashAnimation();
         }
 
