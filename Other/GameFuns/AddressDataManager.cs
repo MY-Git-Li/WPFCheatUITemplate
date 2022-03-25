@@ -113,9 +113,12 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 dic[id] = gameData;
                 data_Dic[v] = dic;
             }
-            else
+            else if(!data_Dic[v].ContainsKey(id))
             {
                 data_Dic[v][id] = gameData;
+            }else
+            {
+                throw new Exception($"重复添加id:{id}，版本：{v}");
             }
 
 
@@ -142,7 +145,14 @@ namespace WPFCheatUITemplate.Other.GameFuns
                 changeData.orcData = orcData;
                 changeData.modifyData = modifyData;
 
-                DataSet[v][id] = changeData;
+                if(!DataSet[v].ContainsKey(id))
+                {
+                    DataSet[v][id] = changeData;
+                }else
+                {
+                    throw new Exception($"重复添加id:{id}，版本：{v}");
+                }
+
             }
 
         }
@@ -158,6 +168,9 @@ namespace WPFCheatUITemplate.Other.GameFuns
             else if (!data_Offset[v].ContainsKey(id))
             {
                 data_Offset[v][id] = offset;
+            }else
+            {
+                throw new Exception($"重复添加id:{id}，版本：{v}");
             }
         }
 

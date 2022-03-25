@@ -40,6 +40,15 @@ namespace WPFCheatUITemplate.Other
         static public void AddLockData<T>(IntPtr address, T value) where T : struct
         {
             byte[] buffer = StructureToByteArray(value);
+
+            foreach (var item in lockDatas)
+            {
+                if (item.address.Equals(address))
+                {
+                    throw new Exception($"重复添加锁定地址:{address.ToInt64():X}");
+                }
+            }
+
             lockDatas.Add(
                 new LockData()
                 {
