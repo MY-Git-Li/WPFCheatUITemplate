@@ -1,11 +1,74 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using WPFCheatUITemplate.Other.GameFuns;
 
 namespace WPFCheatUITemplate.Other
 {
     abstract class DataBase
     {
+
+        class LockData
+        {
+            public IntPtr address;
+            public byte[] value;
+        }
+
+        static ConcurrentBag<LockData> lockDatas = new ConcurrentBag<LockData>();
+
+        static DataBase()
+        {
+            var writeTask = new Task(() => 
+            {
+                while(true)
+                {
+                    foreach (var item in lockDatas)
+                    {
+                        WriteMemory<byte>(item.address, item.value);
+                    }
+
+                    Thread.Sleep(100);
+                }
+                
+            });
+            writeTask.Start();
+        }
+
+
+        static public void AddLockData<T>(IntPtr address, T value) where T : struct
+        {
+            byte[] buffer = StructureToByteArray(value);
+            lockDatas.Add(
+                new LockData()
+                {
+                    address = address,
+                    value = buffer,
+                });
+        }
+
+        static public void DecLockData(IntPtr address)
+        {
+            foreach (var item in lockDatas)
+            {
+                if (item.address.Equals(address))
+                {
+                    var dd = item;
+                    lockDatas.TryTake(out dd);
+                }
+            }
+        }
+
+        static public void AddLockDataById<T>(string id, T value) where T : struct
+        {
+            AddLockData(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
+        }
+        static public void DecLockDataById(string id)
+        {
+            DecLockData(AppGameFunManager.Instance.AddressDataMg.GetAddress(id));
+        }
+
         static public void AddData(string id, GameVersion.Version v, int offset)
         {
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, offset);
