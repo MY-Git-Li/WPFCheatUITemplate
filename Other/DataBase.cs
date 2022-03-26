@@ -37,7 +37,7 @@ namespace WPFCheatUITemplate.Other
         }
 
 
-        static public void AddLockData<T>(IntPtr address, T value) where T : struct
+        static public void AddLockData<T>(IntPtr address, object value) where T : struct
         {
             byte[] buffer = StructureToByteArray(value);
 
@@ -69,14 +69,21 @@ namespace WPFCheatUITemplate.Other
             }
         }
 
-        static public void AddLockDataById<T>(string id, T value) where T : struct
+        static public void AddLockDataById<T>(string id, object value) where T : struct
         {
-            AddLockData(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
+            AddLockData<T>(GetAddress(id), value);
         }
+
         static public void DecLockDataById(string id)
         {
-            DecLockData(AppGameFunManager.Instance.AddressDataMg.GetAddress(id));
+            DecLockData(GetAddress(id));
         }
+
+        static public void AddLockDataById<T>(string id) where T : struct
+        {
+            AddLockData<T>(GetAddress(id), GetModifyData(id));
+        }
+
 
         static public void AddData(string id, GameVersion.Version v, int offset)
         {
@@ -94,9 +101,9 @@ namespace WPFCheatUITemplate.Other
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData);
         }
 
-        static public void GetModifyData(string id)
+        static public byte[] GetModifyData(string id)
         {
-            AppGameFunManager.Instance.AddressDataMg.GetModifyData(id);
+            return AppGameFunManager.Instance.AddressDataMg.GetModifyData(id);
         }
 
         static public int GetOffSet(string id)
@@ -104,9 +111,9 @@ namespace WPFCheatUITemplate.Other
             return AppGameFunManager.Instance.AddressDataMg.GetOffSet(id);
         }
 
-        static public void GetOrcData(string id)
+        static public byte[] GetOrcData(string id)
         {
-            AppGameFunManager.Instance.AddressDataMg.GetOrcData(id);
+            return AppGameFunManager.Instance.AddressDataMg.GetOrcData(id);
         }
 
         static public IntPtr GetAddress(string id)
@@ -117,23 +124,23 @@ namespace WPFCheatUITemplate.Other
 
         static public void WriteMemoryByID<T>(string id, object value) where T : struct
         {
-            WriteMemory<T>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
+            WriteMemory<T>(GetAddress(id), value);
         }
 
         static public void WriteMemoryByID<T>(string id, byte[] value) where T : struct
         {
-            WriteMemory<T>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), value);
+            WriteMemory<T>(GetAddress(id), value);
         }
 
         static public void WriteMemoryByID(string id, bool isOrc = false)
         {
             if (isOrc)
             {
-                WriteMemory<byte>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), AppGameFunManager.Instance.AddressDataMg.GetOrcData(id));
+                WriteMemory<byte>(GetAddress(id), GetOrcData(id));
             }
             else
             {
-                WriteMemory<byte>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id), AppGameFunManager.Instance.AddressDataMg.GetModifyData(id));
+                WriteMemory<byte>(GetAddress(id), GetModifyData(id));
             }
 
         }
