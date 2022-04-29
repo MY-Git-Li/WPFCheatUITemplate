@@ -81,9 +81,13 @@ namespace WPFCheatUITemplate.Other.UI
                 Slider slider = CreatSlider();
                 TextBox textBox = CreatTextBox();
 
-                slider.Maximum = gameFun.gameFunDataAndUIStruct.uIData.SliderMaxNum;
-                slider.Minimum = gameFun.gameFunDataAndUIStruct.uIData.SliderMinNum;
-                slider.Value = slider.Minimum > 1 ? slider.Minimum : 1;
+                var maxValue = gameFun.gameFunDataAndUIStruct.uIData.SliderMaxNum;
+                var minValue = gameFun.gameFunDataAndUIStruct.uIData.SliderMinNum;
+                var showValue = gameFun.gameFunDataAndUIStruct.uIData.SliderShowNum;
+
+                slider.Maximum = maxValue;
+                slider.Minimum = minValue;
+                slider.Value = showValue >= minValue ? showValue : minValue;
 
                 myStackPanel.ValueEntered = slider;
 

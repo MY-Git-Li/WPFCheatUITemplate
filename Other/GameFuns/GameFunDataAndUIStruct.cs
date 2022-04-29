@@ -207,6 +207,10 @@ namespace WPFCheatUITemplate.Other.GameFuns
         /// </summary>
         public double SliderMinNum { get; set; }
         /// <summary>
+        /// 当IsAcceptValue真时起效，设置数据的显示值
+        /// </summary>
+        public double SliderShowNum { get; set; }
+        /// <summary>
         /// 是否隐藏，不在界面显示
         /// </summary>
         public bool IsHide { get; set; }

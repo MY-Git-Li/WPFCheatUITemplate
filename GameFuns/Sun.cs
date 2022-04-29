@@ -6,7 +6,7 @@ namespace WPFCheatUITemplate.GameFuns
     {
         public Sun()
         {
-            gameFunDataAndUIStruct = GetButtonDateStruct("设置阳光", "Sun number", 1, 99999);
+            gameFunDataAndUIStruct = GetButtonDateStruct("设置阳光", "Sun number", 1, 99999,99999);
            
         }
 
