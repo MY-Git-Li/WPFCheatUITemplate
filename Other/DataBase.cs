@@ -85,9 +85,9 @@ namespace WPFCheatUITemplate.Other
         }
 
 
-        static public void AddData(string id, GameVersion.Version v, int offset)
+        static public void AddOffsetData(string id, GameVersion.Version v, int offset)
         {
-            AppGameFunManager.Instance.AddressDataMg.AddData(id, v, offset);
+            AppGameFunManager.Instance.AddressDataMg.AddOffsetData(id, v, offset);
         }
 
         static public void AddData(string id, GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
@@ -95,6 +95,10 @@ namespace WPFCheatUITemplate.Other
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData, modifyData, orcData);
         }
 
+        static public void AddData(string id,IntPtr address)
+        {
+            AppGameFunManager.Instance.AddressDataMg.AddData(id, address);
+        }
 
         static public void AddData(string id, GameVersion.Version v, GameData gameData)
         {

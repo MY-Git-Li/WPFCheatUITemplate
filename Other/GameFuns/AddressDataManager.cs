@@ -18,6 +18,8 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         Dictionary<GameVersion.Version, Dictionary<string, int>> data_Offset = new Dictionary<GameVersion.Version, Dictionary<string, int>>();
 
+        Dictionary<string,IntPtr> generalAddress = new Dictionary<string, IntPtr>();
+
         bool isAddDataInitComplete = false;
 
         struct ChangeData
@@ -64,6 +66,8 @@ namespace WPFCheatUITemplate.Other.GameFuns
         public void DataClear()
         {
             curentGameDataAddress.Clear();
+
+            generalAddress.Clear();
         }
 
         public void DataInit()
@@ -102,6 +106,26 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
                 }
             }
+        }
+
+        public void AddData(string id,IntPtr address)
+        {
+            var version = GameInformation.CurentVersion;
+
+            if (data_Dic[version].ContainsKey(id))
+            {
+                throw new Exception($"重复添加id:{id}");
+            }
+
+
+            if (!generalAddress.ContainsKey(id))
+            {
+                generalAddress.Add(id, address);
+            }else
+            {
+                throw new Exception($"重复添加通用型地址id:{id}");
+            }
+                
         }
 
         public void AddData(string id, GameVersion.Version v, GameData gameData)
@@ -157,7 +181,7 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
         }
 
-        public void AddData(string id, GameVersion.Version v, int offset)
+        public void AddOffsetData(string id, GameVersion.Version v, int offset)
         {
             if (!data_Offset.ContainsKey(v))
             {
@@ -288,6 +312,10 @@ namespace WPFCheatUITemplate.Other.GameFuns
 
                 ret = HandleGetAddress(GameVersion.Version.Default, dic, id);
 
+            }
+            else if(generalAddress.ContainsKey(id))
+            {
+                ret = generalAddress[id];
             }
 
             return ret;

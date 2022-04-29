@@ -31,7 +31,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("plantSize", GameVersion.Version.Steam, 0x14C);
+            AddOffsetData("plantSize", GameVersion.Version.Steam, 0x14C);
 
             AddData("plantMaxNum", GameVersion.Version.Steam, new GameData()
             {
@@ -56,7 +56,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("zombieSize", GameVersion.Version.Steam, 0x168);
+            AddOffsetData("zombieSize", GameVersion.Version.Steam, 0x168);
 
             AddData("zombieMaxNum", GameVersion.Version.Steam, new GameData()
             {
@@ -105,7 +105,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("projectileSize", GameVersion.Version.V1_1_0_1056, 0x94);
+            AddOffsetData("projectileSize", GameVersion.Version.V1_1_0_1056, 0x94);
 
             AddData("projectileMaxNum", GameVersion.Version.V1_1_0_1056, new GameData()
             {
@@ -132,7 +132,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("projectileSize", GameVersion.Version.V1_0_0_1051, 0x94);
+            AddOffsetData("projectileSize", GameVersion.Version.V1_0_0_1051, 0x94);
 
             AddData("projectileMaxNum", GameVersion.Version.V1_0_0_1051, new GameData()
             {
@@ -159,7 +159,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("plantSize", GameVersion.Version.V1_0_0_1051, 0x14C);
+            AddOffsetData("plantSize", GameVersion.Version.V1_0_0_1051, 0x14C);
 
             AddData("plantMaxNum", GameVersion.Version.V1_0_0_1051, new GameData()
             {
@@ -186,7 +186,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("zombieSize", GameVersion.Version.V1_0_0_1051, 0x15C);
+            AddOffsetData("zombieSize", GameVersion.Version.V1_0_0_1051, 0x15C);
 
             AddData("zombieMaxNum", GameVersion.Version.V1_0_0_1051, new GameData()
             {
@@ -213,7 +213,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("plantSize", GameVersion.Version.V1_1_0_1056, 0x14C);
+            AddOffsetData("plantSize", GameVersion.Version.V1_1_0_1056, 0x14C);
 
             AddData("plantMaxNum", GameVersion.Version.V1_1_0_1056, new GameData()
             {
@@ -240,7 +240,7 @@ namespace WPFCheatUITemplate.GameMode
                 IsIntPtr = true,
             });
 
-            AddData("zombieSize", GameVersion.Version.V1_1_0_1056, 0x168);
+            AddOffsetData("zombieSize", GameVersion.Version.V1_1_0_1056, 0x168);
 
             AddData("zombieMaxNum", GameVersion.Version.V1_1_0_1056, new GameData()
             {
