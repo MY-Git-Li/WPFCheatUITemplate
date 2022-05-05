@@ -66,7 +66,7 @@ namespace WPFCheatUITemplate.DataSet
 
                 IsSignatureCode = false,
 
-                IntPtrOffset = new uint[] { 0x824, 0xF4 },
+                IntPtrOffset = new uint[] { 0x82C, 0xF4 },
                 IsIntPtr = true,
             });
 
