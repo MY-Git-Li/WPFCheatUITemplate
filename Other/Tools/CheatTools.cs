@@ -407,7 +407,7 @@ namespace WPFCheatUITemplate
 
         #region 特征码相关
         //寻找地址
-        public static List<IntPtr> FindData(IntPtr hProcess, IntPtr beginAddr, IntPtr endAddr, String data)
+        public static List<IntPtr> FindData(IntPtr hProcess, IntPtr beginAddr, IntPtr endAddr, string data)
         {
             List<IntPtr> result = new List<IntPtr>();
             data = data.ToUpper();
@@ -450,6 +450,13 @@ namespace WPFCheatUITemplate
                 //WinAPI.CloseHandle(hProcess);
             }
         }
+
+        public static long FindPattern(IntPtr hProcess, IntPtr beginAddr, IntPtr endAddr, string data)
+        {
+            return Aobscan.FindPattern(hProcess, beginAddr, endAddr, data);
+        }
+
+
 
         //字节数组变为浮点数值
         private static float ByteToFloat(byte[] data)
