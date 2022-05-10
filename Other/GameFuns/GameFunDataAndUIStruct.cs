@@ -141,17 +141,18 @@ namespace WPFCheatUITemplate.Other.GameFuns
             }
             else
             {
-                var offset = CheatTools.FindData(handle, ModuleAddress, (IntPtr)(ModuleAddress.ToInt64() + mouduleSize), SignatureCode);
 
-                if (offset.Count == 0)
+                var offset = CheatTools.FindPattern(handle, ModuleAddress, (IntPtr)(ModuleAddress.ToInt64() + mouduleSize), SignatureCode);
+
+                if (offset == 0)
                 {
                     return null;
                 }
 
-                var obj = new GameDataAddress(handle, (IntPtr)(offset[0].ToInt64() + SignatureCodeOffset));
+                var obj = new GameDataAddress(handle, (IntPtr)(offset + SignatureCodeOffset));
 
                 return obj;
-                
+
             }
 
 
