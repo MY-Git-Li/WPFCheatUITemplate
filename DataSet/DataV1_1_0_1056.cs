@@ -1,5 +1,5 @@
-﻿using WPFCheatUITemplate.Other.Extends;
-using WPFCheatUITemplate.Other.GameFuns;
+﻿using WPFCheatUITemplate.Core.Extends;
+using WPFCheatUITemplate.Core.GameFuns;
 namespace WPFCheatUITemplate.DataSet
 {
     class DataV1_1_0_1056 : AddressDatas

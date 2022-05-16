@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using WPFCheatUITemplate.Other.Extends;
-using WPFCheatUITemplate.Other.GameFuns;
-using WPFCheatUITemplate.Other.Interface;
+using WPFCheatUITemplate.Core.Extends;
+using WPFCheatUITemplate.Core.GameFuns;
+using WPFCheatUITemplate.Core.Interface;
 
 namespace WPFCheatUITemplate.GameMode
 {

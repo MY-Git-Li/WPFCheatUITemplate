@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using WPFCheatUITemplate.Other.GameFuns;
+using WPFCheatUITemplate.Core.GameFuns;
 
 
 namespace WPFCheatUITemplate.GameMode

@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using WPFCheatUITemplate.Other.Tools.Extensions;
+using WPFCheatUITemplate.Core.Tools.Extensions;
 namespace WPFCheatUITemplate
 {
     /// <summary>

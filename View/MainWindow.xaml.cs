@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
-using WPFCheatUITemplate.Other.UI;
+using WPFCheatUITemplate.Core.UI;
 
 namespace WPFCheatUITemplate
 {

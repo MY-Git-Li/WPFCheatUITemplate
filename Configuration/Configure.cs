@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WPFCheatUITemplate.Other.Tools.Extensions;
+using WPFCheatUITemplate.Core.Tools.Extensions;
 namespace WPFCheatUITemplate.Configuration
 {
     static class Configure

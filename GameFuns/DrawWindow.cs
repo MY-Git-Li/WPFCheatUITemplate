@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using WPFCheatUITemplate.GameMode;
-using WPFCheatUITemplate.Other.GameFuns;
+using WPFCheatUITemplate.Core.GameFuns;
 namespace WPFCheatUITemplate.GameFuns
 {
     class DrawWindow : GameFun
