@@ -300,6 +300,18 @@ namespace WPFCheatUITemplate
 
         #endregion
 
+        #region 开启或者关闭声音
+
+        public void SoundEffectOpen()
+        {
+            soundEffect.OPen();
+        }
+        public void SoundEffectClose()
+        {
+            soundEffect.Close();
+        }
+
+        #endregion
 
         private void SetGameInformation(int pid)
         {

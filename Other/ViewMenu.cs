@@ -100,5 +100,14 @@ namespace WPFCheatUITemplate.Other
         {
             return UIManager.GetCheckButtonDateStruct(FunDescribe_SC,FunDescribe_EN, IsAcceptValue, IsShowDecimal, SliderMinNum, SliderMaxNum, SliderShowNum, IsHide);
         }
+
+        public static void SoundEffectOpen()
+        {
+            AppGameFunManager.Instance.SoundEffectOpen();
+        }
+        public static void SoundEffectClose()
+        {
+            AppGameFunManager.Instance.SoundEffectClose();
+        }
     }
 }
