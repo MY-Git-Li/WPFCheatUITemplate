@@ -118,10 +118,9 @@ namespace WPFCheatUITemplate.Core.GameFuns
         public uint SignatureCodeOffset { get; set; }
         /// <summary>
         /// 特征码处理函数------传入的地址为特征码定位的地址加上特征码偏移，返回值为该GameData储存的地址
-        /// 参数一：进程句柄
-        /// 参数二：特征码得到的地址
+        /// 参数一：特征码得到的地址
         /// </summary>
-        public Func<IntPtr, IntPtr, IntPtr> SignatureHandle { get; set; }
+        public Func<IntPtr, IntPtr> SignatureHandle { get; set; }
 
         public GameDataAddress GetDataAddress()
         {
@@ -157,7 +156,7 @@ namespace WPFCheatUITemplate.Core.GameFuns
                 IntPtr add;
                 if (SignatureHandle != null)
                 {
-                    add = (IntPtr)(SignatureHandle?.Invoke(handle, (IntPtr)(offset + SignatureCodeOffset)));
+                    add = (IntPtr)(SignatureHandle?.Invoke((IntPtr)(offset + SignatureCodeOffset)));
                 }
                 else
                 {
