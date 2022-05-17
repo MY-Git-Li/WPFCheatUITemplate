@@ -53,7 +53,7 @@ namespace WPFCheatUITemplate.GameFuns
         void Draw()
         {
            
-            drawManager.Init(GameInformation.Pid,60);
+            drawManager.Init(60);
             drawManager.SetBrushes((g) => { drawManager._brushes["blue"] = g.CreateSolidBrush(30, 144, 255); });
             drawManager.SetFonts((g) => { drawManager._fonts["Microsoft YaHei"] = g.CreateFont("Microsoft YaHei", 12); });
             drawManager.DrawFun((g) =>
@@ -61,11 +61,11 @@ namespace WPFCheatUITemplate.GameFuns
 
                 g.DrawText(drawManager._fonts["Microsoft YaHei"], 12.0f, 
                     drawManager._brushes["blue"],
-                    10, drawManager._windowData.Height / 2,
+                    10, GetGameWindowData().Height / 2,
                     "测试文字");
 
-                zombies = GameMode.GameModeManger.GetZombies();
-                plants = GameMode.GameModeManger.GetPlants();
+                zombies = GameModeManger.GetZombies();
+                plants = GameModeManger.GetPlants();
 
                 foreach (var item in zombies)
                 {

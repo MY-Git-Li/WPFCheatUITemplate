@@ -266,7 +266,7 @@ namespace WPFCheatUITemplate.GameMode
             for (int i = -maxnum; i < maxnum; i++)
             {
 
-                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<IntPtr>(GameInformation.Handle, zombieHead).ToInt64() + zombieSize * i);
+                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<int>(GameInformation.Handle, zombieHead) + zombieSize * i);
 
                 Zombie zombie = new Zombie(BaseAddress);
 
@@ -292,7 +292,7 @@ namespace WPFCheatUITemplate.GameMode
             for (int i = -maxnum; i < maxnum; i++)
             {
 
-                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<IntPtr>(GameInformation.Handle, plantHead).ToInt64() + plantSize * i);
+                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<int>(GameInformation.Handle, plantHead) + plantSize * i);
 
                 Plant plant = new Plant(BaseAddress);
                 if (plant.Hp > 0 && plant.Exist == 0)
@@ -318,7 +318,7 @@ namespace WPFCheatUITemplate.GameMode
             for (int i = -maxnum; i < maxnum; i++)
             {
 
-                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<IntPtr>(GameInformation.Handle, plantHead).ToInt64() + plantSize * i);
+                IntPtr BaseAddress = (IntPtr)(CheatTools.ReadMemory<int>(GameInformation.Handle, plantHead) + plantSize * i);
 
                 Projectile pro = new Projectile(BaseAddress);
 

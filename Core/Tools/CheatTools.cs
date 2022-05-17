@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using WPFCheatUITemplate.Core.Tools;
+using static WPFCheatUITemplate.Core.Tools.WinAPI;
+
 namespace WPFCheatUITemplate
 {
     static class CheatTools
@@ -563,6 +565,57 @@ namespace WPFCheatUITemplate
         #endregion
 
         #region Windows窗口相关方法
+
+        public struct WindowData
+        {
+            public int Left;
+            public int Top;
+            public int Width;
+            public int Height;
+        }
+        public static WindowData GetGameWindowData(IntPtr WindowHandle)
+        {
+            // 获取指定窗口句柄的窗口矩形数据和客户区矩形数据
+            WinAPI.GetWindowRect(WindowHandle, out RECT windowRect);
+            WinAPI.GetClientRect(WindowHandle, out RECT clientRect);
+
+            // 计算窗口区的宽和高
+            int windowWidth = windowRect.Right - windowRect.Left;
+            int windowHeight = windowRect.Bottom - windowRect.Top;
+
+            // 处理窗口最小化
+            if (windowRect.Left < 0)
+            {
+                return new WindowData()
+                {
+                    Left = 0,
+                    Top = 0,
+                    Width = 1,
+                    Height = 1
+                };
+            }
+
+            // 计算客户区的宽和高
+            int clientWidth = clientRect.Right - clientRect.Left;
+            int clientHeight = clientRect.Bottom - clientRect.Top;
+
+            // 计算边框
+            int borderWidth = (windowWidth - clientWidth) / 2;
+            int borderHeight = windowHeight - clientHeight - borderWidth;
+
+            return new WindowData()
+            {
+                Left = windowRect.Left += borderWidth,
+                Top = windowRect.Top += borderHeight,
+                Width = clientWidth,
+                Height = clientHeight
+            };
+        }
+
+        public static int SetForegroundWindow(IntPtr hwnd)
+        {
+            return WinAPI.SetForegroundWindow(hwnd);
+        }
 
         /// 设置窗体具有鼠标穿透效果
         public static void SetPenetrate(IntPtr Handle)

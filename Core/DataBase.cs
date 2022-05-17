@@ -264,6 +264,62 @@ namespace WPFCheatUITemplate.Core
             CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, Value);
         }
         /// <summary>
+        /// 读矩阵
+        /// </summary>
+        /// <param name="address">矩阵地址</param>
+        /// <param name="size">矩阵大小</param>
+        /// <returns></returns>
+        static public float[] ReadMatrix(IntPtr address,int size)
+        {
+           return CheatTools.ReadMatrix<float>(GameMode.GameInformation.Handle, address, size);
+        }
+        /// <summary>
+        /// 读字符串转ASCII
+        /// </summary>
+        /// <param name="address">字符串地址</param>
+        /// <param name="size">大小</param>
+        /// <returns></returns>
+        static public string ReadStringToASCII(IntPtr address, int size)
+        {
+            return CheatTools.ReadStringToASCII(GameMode.GameInformation.Handle, address, size);
+        }
+        /// <summary>
+        /// 读字符串转Unicode
+        /// </summary>
+        /// <param name="address">字符串地址</param>
+        /// <param name="size">大小</param>
+        /// <returns></returns>
+        static public string ReadStringToUnicode(IntPtr address, int size)
+        {
+            return CheatTools.ReadStringToUnicode(GameMode.GameInformation.Handle, address, size);
+        }
+        /// <summary>
+        /// 读字符串转UTF8
+        /// </summary>
+        /// <param name="address">字符串地址</param>
+        /// <param name="size">大小</param>
+        /// <returns></returns>
+        static public string ReadStringToUTF8(IntPtr address, int size)
+        {
+            return CheatTools.ReadStringToUTF8(GameMode.GameInformation.Handle, address, size);
+        }
+        /// <summary>
+        /// 得到窗口大小
+        /// </summary>
+        /// <returns></returns>
+        static public CheatTools.WindowData GetGameWindowData()
+        {
+            return CheatTools.GetGameWindowData(GameMode.GameInformation.WindowHandle);
+        }
+        /// <summary>
+        /// 将游戏窗口至前
+        /// </summary>
+        /// <returns></returns>
+        static public int SetGameWindowForegroundWindow()
+        {
+            return CheatTools.SetForegroundWindow(GameMode.GameInformation.WindowHandle);
+        }
+        /// <summary>
         /// 转换字节数组到指定结构
         /// </summary>
         /// <typeparam name="T">结构</typeparam>

@@ -129,6 +129,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\Configure.cs" />
+    <Compile Include="Core\Algorithm\Algorithm.cs" />
     <Compile Include="DataSet\DataVDefault.cs" />
     <Compile Include="DataSet\DataV1_0_0_1051.cs" />
     <Compile Include="DataSet\DataVSteam.cs" />
@@ -153,10 +154,8 @@
     <Compile Include="GameMode\Entity\Zombie.cs" />
     <Compile Include="GameMode\GameVersion.cs" />
     <Compile Include="Core\DataBase.cs" />
-    <Compile Include="Core\Draw\WinAPI.cs" />
     <Compile Include="Core\Draw\DrawManager.cs" />
     <Compile Include="Core\Draw\DrawWindow.cs" />
-    <Compile Include="Core\Draw\Memory.cs" />
     <Compile Include="Core\Events\Events.cs" />
     <Compile Include="Core\Exceptions\ZeroAddressException.cs" />
     <Compile Include="Core\Extends\AddressDatas.cs" />

@@ -7,11 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using GameOverlay.Drawing;
 using GameOverlay.Windows;
-using static WPFCheatUITemplate.Core.Draw.Memory;
 
 namespace WPFCheatUITemplate.Core.Draw
 {
-    class DrawWindow : IDisposable
+    class DrawWindow :DataBase,IDisposable
     {
 
         private readonly GraphicsWindow _window;
@@ -19,27 +18,19 @@ namespace WPFCheatUITemplate.Core.Draw
         public readonly Dictionary<string, SolidBrush> _brushes;
         public readonly Dictionary<string, Font> _fonts;
        
-        public  WindowData _WindowData;
-       
+        private CheatTools.WindowData _WindowData;
+
+        public bool ShowFPS;
+
         public Action<Graphics> DrawCallBack;
         public Action<Graphics> SetBrushes;
         public Action<Graphics> SetFonts;
 
-        public Memory memory;
-
-        public DrawWindow(int pid):this(pid,300)
+        public DrawWindow(int maxfps=60)
         {
+            SetGameWindowForegroundWindow();
 
-        }
-
-        public DrawWindow(int pid, int maxfps)
-        {
-            memory = new Memory();
-
-            memory.Initialize(pid);
-            memory.SetForegroundWindow();
-
-            _WindowData = memory.GetGameWindowData();
+            _WindowData = GetGameWindowData();
 
 
             _brushes = new Dictionary<string, SolidBrush>();
@@ -66,45 +57,7 @@ namespace WPFCheatUITemplate.Core.Draw
             _window.DestroyGraphics += _window_DestroyGraphics;
         }
 
-        public DrawWindow(string WinDowName):this(WinDowName,300)
-        {
-           
-        }
-
-        public DrawWindow(string WinDowName,int maxfps)
-        {
-            memory = new Memory();
-
-            memory.Initialize(WinDowName);
-            memory.SetForegroundWindow();
-
-            _WindowData = memory.GetGameWindowData();
-
-
-            _brushes = new Dictionary<string, SolidBrush>();
-            _fonts = new Dictionary<string, Font>();
-
-
-            var gfx = new Graphics()
-            {
-                VSync = false,
-                MeasureFPS = true,
-                PerPrimitiveAntiAliasing = true,
-                TextAntiAliasing = true
-            };
-
-            _window = new GraphicsWindow(_WindowData.Left, _WindowData.Top, _WindowData.Width, _WindowData.Height, gfx)
-            {
-                FPS = maxfps,
-                IsTopmost = true,
-                IsVisible = true
-            };
-
-            _window.SetupGraphics += _window_SetupGraphics;
-            _window.DrawGraphics += _window_DrawGraphics;
-            _window.DestroyGraphics += _window_DestroyGraphics;
-        }
-
+       
         private void _window_SetupGraphics(object sender, SetupGraphicsEventArgs e)
         {
             var gfx = e.Graphics;
@@ -144,8 +97,9 @@ namespace WPFCheatUITemplate.Core.Draw
             var gfx = e.Graphics;
             gfx.ClearScene(_brushes["transparency"]);
             ResizeWindow(gfx);
-
-            gfx.DrawText(_fonts["Microsoft YaHei"], 12, _brushes["deepPink"], 10, 20,
+            
+            if (ShowFPS)
+                gfx.DrawText(_fonts["Microsoft YaHei"], 12, _brushes["deepPink"], 10, 20,
                $"FPS：{gfx.FPS}\n"/*FrameTime：{e.FrameTime}\nFrameCount：{e.FrameCount}\nDeltaTime：{e.DeltaTime}*/);
 
             DrawCallBack?.Invoke(gfx);
@@ -162,7 +116,7 @@ namespace WPFCheatUITemplate.Core.Draw
         private void ResizeWindow(Graphics gfx)
         {
             // 窗口移动跟随
-            _WindowData = memory.GetGameWindowData();
+            _WindowData = GetGameWindowData();
             _window.X = _WindowData.Left;
             _window.Y = _WindowData.Top;
             _window.Width = _WindowData.Width;
