@@ -136,6 +136,9 @@ namespace WPFCheatUITemplate
             WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
         }
 
+
+
+
         #endregion
 
         #region 指针泛型读写
@@ -253,7 +256,7 @@ namespace WPFCheatUITemplate
 
         #region 字符串读写
 
-        public static string ReadStringASCII(IntPtr m_pProcessHandle, IntPtr address, int size)
+        public static string ReadStringToASCII(IntPtr m_pProcessHandle, IntPtr address, int size)
         {
             byte[] buffer = new byte[size];
             ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);
@@ -271,7 +274,7 @@ namespace WPFCheatUITemplate
             return Encoding.ASCII.GetString(buffer);
         }
 
-        public static string ReadStringUnicode(IntPtr m_pProcessHandle, IntPtr address, int size)
+        public static string ReadStringToUnicode(IntPtr m_pProcessHandle, IntPtr address, int size)
         {
             byte[] buffer = new byte[size];
             ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);
@@ -287,6 +290,24 @@ namespace WPFCheatUITemplate
             }
 
             return Encoding.Unicode.GetString(buffer);
+        }
+
+        public static string ReadStringToUTF8(IntPtr m_pProcessHandle, IntPtr address, int size)
+        {
+            byte[] buffer = new byte[size];
+            ReadProcessMemory(m_pProcessHandle, address, buffer, size, out _);
+
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                if (buffer[i] == 0)
+                {
+                    byte[] _buffer = new byte[i];
+                    Buffer.BlockCopy(buffer, 0, _buffer, 0, i);
+                    return Encoding.UTF8.GetString(_buffer);
+                }
+            }
+
+            return Encoding.UTF8.GetString(buffer);
         }
 
         #endregion
