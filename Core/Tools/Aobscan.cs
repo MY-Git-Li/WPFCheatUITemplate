@@ -62,18 +62,22 @@ namespace WPFCheatUITemplate.Core.Tools
         //https://msdn.microsoft.com/zh-cn/library/windows/desktop/aa366786(v=vs.85).aspx
         private const UInt32 PAGE_EXECUTE_READ = 0x20;
         private const UInt32 PAGE_EXECUTE_READWRITE = 0x40;
-        private const UInt32 PAGE_READWRITE = 0x04; 
+        private const UInt32 PAGE_READWRITE = 0x04;
+        private const UInt32 PAGE_EXECUTE_WRITECOPY = 0x80;
         // https://msdn.microsoft.com/en-us/library/windows/desktop/aa366775(v=vs.85).aspx
         private const UInt32 MEM_COMMIT = 0x1000;
 
         public static long FindPattern(IntPtr handle, IntPtr beginAddr, IntPtr endAddr, string pattern)
         {
+
+            bool FuzzySearch = false;
             List<byte> tempArray = new List<byte>();
             foreach (var each in pattern.Split(' '))
             {
                 if (each == "??")
                 {
                     tempArray.Add(Convert.ToByte("0", 16));
+                    FuzzySearch = true;
                 }
                 else
                 {
@@ -97,11 +101,11 @@ namespace WPFCheatUITemplate.Core.Tools
                 }
                 //判断页面信息，如果State不是MEM_COMMIT，或Protect属性不是PAGE_EXECUTE_READ，则忽略
                 //需要注意的是，这里我只比较了PAGE_EXECUTE_READ，实际上，如果写成通用的类，应该判断是否存在PAGE_GUARD位，这样才适用多种情况，具体见MSDN。
-                if ((memInfo.State & MEM_COMMIT) != 0 && memInfo.Protect == PAGE_EXECUTE_READ)
+                if ((memInfo.State & MEM_COMMIT) != 0 && (memInfo.Protect == PAGE_EXECUTE_READ || memInfo.Protect == PAGE_READWRITE || memInfo.Protect == PAGE_EXECUTE_READWRITE || memInfo.Protect == PAGE_EXECUTE_WRITECOPY))
                 {
                     //读取整个内存页
                     var buffer = CheatTools.ReadMemory(handle, (IntPtr)memInfo.BaseAddress, (int)memInfo.RegionSize);
-                    var index = QSIndexOf(buffer, data); //查找，
+                    var index = QSIndexOf(buffer, data, FuzzySearch); //查找，
                     if (index != -1)
                     {
                         ////找到则修改Protect属性。这里只修改2字节即可。
@@ -126,11 +130,11 @@ namespace WPFCheatUITemplate.Core.Tools
                 }
                 //判断页面信息，如果State不是MEM_COMMIT，或Protect属性不是PAGE_EXECUTE_READ，则忽略
                 //需要注意的是，这里我只比较了PAGE_EXECUTE_READ，实际上，如果写成通用的类，应该判断是否存在PAGE_GUARD位，这样才适用多种情况，具体见MSDN。
-                if ((memInfo.State & MEM_COMMIT) != 0 && memInfo.Protect == PAGE_EXECUTE_READ)
+                if ((memInfo.State & MEM_COMMIT) != 0 && (memInfo.Protect == PAGE_EXECUTE_READ || memInfo.Protect == PAGE_READWRITE || memInfo.Protect == PAGE_EXECUTE_READWRITE || memInfo.Protect == PAGE_EXECUTE_WRITECOPY))
                 {
                     //读取整个内存页
                     var buffer = CheatTools.ReadMemory(handle, (IntPtr)memInfo.BaseAddress, (int)memInfo.RegionSize);
-                    var index = QSIndexOf(buffer, data); //查找，
+                    var index = QSIndexOf(buffer, data, FuzzySearch); //查找，
                     if (index != -1)
                     {
                         ////找到则修改Protect属性。这里只修改2字节即可。
@@ -149,55 +153,73 @@ namespace WPFCheatUITemplate.Core.Tools
         }
 
 
-#region Sunday Quick-Search算法的C#实现
-        private static Int32[] FlagBuffer = new Int32[256];
+        #region Sunday Quick-Search算法的C#实现
 
-        private static Int32 QSIndexOf(Byte[] source, Byte[] pattern)
+        private static Int32 QSIndexOf(Byte[] T, Byte[] P, bool FuzzySearch)
         {
 
-            if (source.Length < pattern.Length)
+            int n = T.Length;
+            int m = P.Length;
+            int[] shift = new int[256];
+
+            int min = 2147483647;
+
+            // 默认值，移动m+1位
+            for (int i = 0; i < 256; i++)
             {
-                return -1;
+                shift[i] = m + 1;
             }
 
-            var sLength = source.Length;
-            var pLength = pattern.Length;
-            var pMaxIndex = pLength - 1;
-            var startIndex = 0;
-            var endPos = sLength - pLength;
-            var badMov = pLength + 1;
-
-            for (Int32 i = 0; i < 256; i++)
+            // 模式串P中每个字母出现的最后的下标
+            // 所对应的主串参与匹配的最末位字符的下一位字符移动到该位，所需要的移动位数
+            for (int i = 0; i < m; i++)
             {
-                FlagBuffer[i] = badMov;
+                shift[P[i]] = m - i;
 
-            }
-            for (int i = 0; i <= pMaxIndex; i++)
-            {
-                FlagBuffer[pattern[i]] = pLength - i;
-            }
-
-            Int32 pIndex, step, result = -1;
-
-            while (startIndex <= endPos)
-            {
-                for (pIndex = 0; pIndex <= pMaxIndex && source[startIndex + pIndex] == pattern[pIndex]; pIndex++)
+                if (m - i < min)
                 {
-                    if (pIndex == pMaxIndex)
+                    min = m - i;
+                }
+            }
+
+            // 模式串开始位置在主串的哪里
+            int s = 0;
+            // 模式串已经匹配到的位置
+            int j;
+            while (s <= n - m)
+            {
+                j = 0;
+                while (T[s + j] == P[j] || P[j] == 0x00)
+                {
+                    j++;
+                    // 匹配成功
+                    if (j >= m)
                     {
-                        result = startIndex;
+                        return s;
                     }
                 }
-                if (result > -1) break;
-                step = startIndex + pLength;
-                if (step >= sLength) break;
-                startIndex += FlagBuffer[source[step]];
+                // 找到主串中当前跟模式串匹配的最末字符的下一个字符
+                // 在模式串中出现最后的位置
+                // 所需要从(模式串末尾+1)移动到该位置的步数
+                //存在模糊配合，则每次移动步数为最小匹配值
+                if (FuzzySearch)
+                {
+                    s += min;
+
+                }
+                else
+                {
+                    s += shift[T[s + m]];
+                }
+
+
             }
-            return result;
+            return -1;
         }
 
-#endregion
 
+
+        #endregion
 
     }
 
