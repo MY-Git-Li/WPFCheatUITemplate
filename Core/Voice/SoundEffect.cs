@@ -13,6 +13,7 @@ namespace WPFCheatUITemplate.Core.Voice
         public SoundEffect()
         {
             player = new SoundPlayer();
+            isOpen = true;
         }
 
 
