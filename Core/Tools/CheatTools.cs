@@ -519,6 +519,11 @@ namespace WPFCheatUITemplate
 
             Process processes = Process.GetProcessById((int)pid);
 
+            if (moduleName == "" || moduleName == null)
+            {
+                return (uint)processes.MainModule.ModuleMemorySize;
+            }
+
             foreach (ProcessModule item in processes.Modules)
             {
                 if (item.ModuleName == moduleName)
@@ -537,6 +542,11 @@ namespace WPFCheatUITemplate
             }
 
             Process processes = Process.GetProcessById((int)pid);
+
+            if (moduleName == "" || moduleName == null)
+            {
+                return processes.MainModule.BaseAddress;
+            }
 
             foreach (ProcessModule item in processes.Modules)
             {
