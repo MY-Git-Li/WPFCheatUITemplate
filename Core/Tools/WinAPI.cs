@@ -125,6 +125,24 @@ namespace WPFCheatUITemplate.Core.Tools
         [DllImport("User32.dll", EntryPoint = "UpdateWindow")]
         public static extern bool UpdateWindow(IntPtr hWnd);
 
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [DllImport("user32.dll")]
+        public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
+
+        [DllImport("user32.dll")]
+        public static extern int SetForegroundWindow(IntPtr hwnd);
+
         #endregion
 
         #region 按键相关

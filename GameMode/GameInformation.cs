@@ -12,6 +12,8 @@ namespace WPFCheatUITemplate.GameMode
 
         static int pid;
 
+        static IntPtr windowHandle;
+
         static string processName = Configuration.Configure.processName;
 
         static string windowsName = Configuration.Configure.windowsName;
@@ -19,6 +21,8 @@ namespace WPFCheatUITemplate.GameMode
         static string classWindowsName = Configuration.Configure.classWindowsName;
 
         static bool isByWindowsNamePrecedence = Configuration.Configure.isByWindowsNamePrecedence;
+
+        #region 字段
 
         public static IntPtr Handle
         {
@@ -61,5 +65,9 @@ namespace WPFCheatUITemplate.GameMode
         public static GameVersion.Version CurentVersion { get => GameVersion.GetCurrentVersion(Handle);}
             
         public static bool IsByWindowsNamePrecedence { get => isByWindowsNamePrecedence;}
+
+        public static IntPtr WindowHandle { get => windowHandle; set => windowHandle = value; }
+
+        #endregion
     }
 }

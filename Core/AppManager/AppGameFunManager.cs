@@ -319,10 +319,12 @@ namespace WPFCheatUITemplate
             if (pid != 0)
             {
                 GameInformation.Handle = CheatTools.GetProcessHandle(pid);
+                GameInformation.WindowHandle = System.Diagnostics.Process.GetProcessById(pid).MainWindowHandle;
             }
             else
             {
                 GameInformation.Handle = IntPtr.Zero;
+                GameInformation.WindowHandle = IntPtr.Zero;
             }
         }
 
@@ -333,7 +335,12 @@ namespace WPFCheatUITemplate
         private void ClearRes()
         {
             if (GameInformation.Pid != 0)
+            {
                 RunAllGameFunEnding();
+                WinAPI.CloseHandle(GameInformation.Handle);
+            }
+                
+
         }
 
         #region 扩展方法相关
