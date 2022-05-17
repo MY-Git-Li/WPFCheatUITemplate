@@ -153,14 +153,14 @@
     <Compile Include="GameMode\GameModeManger.cs" />
     <Compile Include="GameMode\Entity\Zombie.cs" />
     <Compile Include="GameMode\GameVersion.cs" />
-    <Compile Include="Core\DataBase.cs" />
+    <Compile Include="Core\Base\DataBase.cs" />
     <Compile Include="Core\Draw\DrawManager.cs" />
     <Compile Include="Core\Draw\DrawWindow.cs" />
     <Compile Include="Core\Events\Events.cs" />
     <Compile Include="Core\Exceptions\ZeroAddressException.cs" />
     <Compile Include="Core\Extends\AddressDatas.cs" />
     <Compile Include="Core\Extends\Extends.cs" />
-    <Compile Include="Core\GameFunBase.cs" />
+    <Compile Include="Core\Base\GameFunBase.cs" />
     <Compile Include="Core\Interface\IAddressDatas.cs" />
     <Compile Include="Core\GameFuns\AddressDataManager.cs" />
     <Compile Include="Core\GameFuns\FastGameFun.cs" />
@@ -168,7 +168,7 @@
     <Compile Include="Core\Tools\Aobscan.cs" />
     <Compile Include="Core\Tools\BaseInjector.cs" />
     <Compile Include="Core\Tools\ProcessMgr.cs" />
-    <Compile Include="Core\ViewMenu.cs" />
+    <Compile Include="Core\Base\ViewMenu.cs" />
     <Compile Include="Core\Tools\EcanConvertToCh.cs" />
     <Compile Include="Core\Tools\KeybdAndMouser\Keybd.cs" />
     <Compile Include="Core\Tools\KeybdAndMouser\mouse.cs" />
