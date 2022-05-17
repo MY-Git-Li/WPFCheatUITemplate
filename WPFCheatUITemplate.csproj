@@ -134,8 +134,8 @@
     <Compile Include="DataSet\DataVSteam.cs" />
     <Compile Include="GameMode\Entity\Plant.cs" />
     <Compile Include="GameMode\Entity\Projectile.cs" />
-    <Compile Include="GameMode\Other\GameModeData.cs" />
-    <Compile Include="GameMode\Other\GameModeManagerBase.cs" />
+    <Compile Include="GameMode\Core\GameModeData.cs" />
+    <Compile Include="GameMode\Core\GameModeManagerBase.cs" />
     <Compile Include="DataSet\DataV1_1_0_1056.cs" />
     <Compile Include="GameFuns\AdventureLevel.cs" />
     <Compile Include="GameFuns\AllowBackground.cs" />
