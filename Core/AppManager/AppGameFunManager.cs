@@ -569,6 +569,18 @@ namespace WPFCheatUITemplate
 
         private void InitUi()
         {
+            var Count = GetGameFunCount();
+            string Count_Str = Count.ToString().NumberToChinese();
+            Configure.WindowTitle += $" {Count_Str}项修改器";
+            Configure.Subtitle_SC += $" {Count_Str}项修改器";
+            
+            if (Configure.Subtitle_TC!="")
+            {
+                Configure.Subtitle_TC += $" {Count_Str}项修改器";
+            }
+
+            Configure.Subtitle_EN += $" {Count} Trainer";
+
             mainWindow.Title = Configure.WindowTitle;
             mainWindow.Height = Configure.WindowHeight;
             mainWindow.Width = Configure.WindowWidth;

@@ -10,7 +10,7 @@ namespace WPFCheatUITemplate.Configuration
     {
         #region 程序配置
 
-        public static string WindowTitle = $"《植物大战僵尸》 Early Access {AppGameFunManager.Instance.GetGameFunCount().ToString().NumberToChinese()}项修改器";
+        public static string WindowTitle = $"《植物大战僵尸》 Early Access";
         public static double WindowHeight = 800;
         public static double WindowWidth = 880;
 
@@ -20,9 +20,9 @@ namespace WPFCheatUITemplate.Configuration
 
         #region 基本不用动
 
-        public static string Subtitle_SC = $"Early Access {AppGameFunManager.Instance.GetGameFunCount().ToString().NumberToChinese()}项修改器";
-        public static string Subtitle_TC = $"Early Access {AppGameFunManager.Instance.GetGameFunCount().ToString().NumberToChinese()}項修改器";
-        public static string Subtitle_EN = $"Early Access Plus {AppGameFunManager.Instance.GetGameFunCount()} Trainer";
+        public static string Subtitle_SC = $"Early Access";
+        public static string Subtitle_TC = $"Early Access";
+        public static string Subtitle_EN = $"Early Access Plus";
 
         public static string KeyDes_SC = "快捷键";
         public static string KeyDes_TC = "快捷鍵";
