@@ -5,23 +5,26 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using WPFCheatUITemplate.Core;
 using WPFCheatUITemplate.Core.Extends;
 using WPFCheatUITemplate.Core.GameFuns;
 using WPFCheatUITemplate.Core.Interface;
 
 namespace WPFCheatUITemplate.GameMode
 {
-    abstract class GameModeData
+    abstract class GameModeData:DataBase
     {
         GameVersion.Version version = GameInformation.CurentVersion;
 
         Dictionary<GameVersion.Version, Dictionary<string, int>> data_Offset = new Dictionary<GameVersion.Version, Dictionary<string, int>>();
         
-        IntPtr BaseAddress;
+        IntPtr baseAddress;
+
+        public IntPtr BaseAddress { get => baseAddress;}
 
         public GameModeData(IntPtr BaseAddress)
         {
-            this.BaseAddress = BaseAddress;
+            this.baseAddress = BaseAddress;
 
             InitData();
 
@@ -32,11 +35,11 @@ namespace WPFCheatUITemplate.GameMode
 
         virtual public T GetValue<T>(string name) where T : struct
         {
-           return CheatTools.ReadMemory<T>(GameInformation.Handle, (IntPtr)(BaseAddress + GetOffSet(name)));
+           return CheatTools.ReadMemory<T>(GameInformation.Handle, (IntPtr)(baseAddress + GetOffSet(name)));
         }
         virtual public U SetValue<U>(string name, U Value) where U : struct
         {
-            CheatTools.WriteMemory<U>(GameInformation.Handle, (IntPtr)(BaseAddress + GetOffSet(name)), Value);
+            CheatTools.WriteMemory<U>(GameInformation.Handle, (IntPtr)(baseAddress + GetOffSet(name)), Value);
             return GetValue<U>(name);
         }
 
