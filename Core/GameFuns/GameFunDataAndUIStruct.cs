@@ -78,7 +78,7 @@ namespace WPFCheatUITemplate.Core.GameFuns
     public class GameData
     {
         /// <summary>
-        /// 模块名字-----必填
+        /// 模块名字
         /// </summary>
         public string ModuleName { get; set; }
 
@@ -126,9 +126,11 @@ namespace WPFCheatUITemplate.Core.GameFuns
         {
 
             IntPtr handle = GameMode.GameInformation.Handle;
-            ModuleAddress = CheatTools.GetProcessModuleHandle((uint)GameMode.GameInformation.Pid, ModuleName);
-            uint mouduleSize = CheatTools.GetProcessModuleSize((uint)GameMode.GameInformation.Pid, ModuleName);
-
+            if (ModuleAddress == IntPtr.Zero)
+            {
+                ModuleAddress = CheatTools.GetProcessModuleHandle((uint)GameMode.GameInformation.Pid, ModuleName);
+            }
+            
             if (!IsSignatureCode)
             {
                 if (IsIntPtr)
@@ -145,6 +147,7 @@ namespace WPFCheatUITemplate.Core.GameFuns
             }
             else
             {
+                uint mouduleSize = CheatTools.GetProcessModuleSize((uint)GameMode.GameInformation.Pid, ModuleName);
 
                 var offset = CheatTools.FindPattern(handle, ModuleAddress, (IntPtr)(ModuleAddress.ToInt64() + mouduleSize), SignatureCode);
 

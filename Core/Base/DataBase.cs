@@ -263,6 +263,51 @@ namespace WPFCheatUITemplate.Core
         {
             CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, Value);
         }
+
+        /// <summary>
+        /// 读指针偏移
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="address"></param>
+        /// <param name="offsets"></param>
+        /// <returns></returns>
+        public static T ReadMemory<T>(IntPtr address, int[] offsets) where T : struct
+        {
+            return CheatTools.ReadMemory<T>(GameMode.GameInformation.Handle, address, offsets);
+        }
+        /// <summary>
+        /// 写指针偏移
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="address"></param>
+        /// <param name="offsets"></param>
+        public static void WriteMemory<T>(IntPtr address, int[] offsets, T value) where T : struct
+        {
+            CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, offsets, value);
+        }
+
+        /// <summary>
+        /// 通过id写指针偏移内存
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <param name="offsets"></param>
+        static public void WriteMemoryByID<T>(string id, int[] offsets, T value) where T : struct
+        {
+            WriteMemory<T>(GetAddress(id), offsets, value);
+        }
+        /// <summary>
+        /// 通过id读指针偏移内存
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <param name="offsets"></param>
+        static public void ReadMemoryByID<T>(string id, int[] offsets) where T : struct
+        {
+            ReadMemory<T>(GetAddress(id), offsets);
+        }
+
+
         /// <summary>
         /// 读矩阵
         /// </summary>

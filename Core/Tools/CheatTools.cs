@@ -138,7 +138,36 @@ namespace WPFCheatUITemplate
             WriteProcessMemory(m_pProcessHandle, address, Value, Value.Length, out _);
         }
 
+        public static T ReadMemory<T>(IntPtr _processHandle, IntPtr address, int[] offsets) where T : struct
+        {
+            byte[] buffer = new byte[Marshal.SizeOf(typeof(T))];
+            ReadProcessMemory(_processHandle, GetPtrAddress(_processHandle, address, offsets), buffer, buffer.Length, out _);
+            return ByteArrayToStructure<T>(buffer);
+        }
+        public static void WriteMemory<T>(IntPtr _processHandle, IntPtr address, int[] offsets, T value) where T : struct
+        {
+            byte[] buffer = StructureToByteArray(value);
+            WriteProcessMemory(_processHandle, GetPtrAddress(_processHandle, address, offsets), buffer, buffer.Length, out _);
+        }
 
+        private static IntPtr GetPtrAddress(IntPtr processHandle, IntPtr pointer, int[] offset)
+        {
+            if (offset != null)
+            {
+                byte[] buffer = new byte[8];
+                ReadProcessMemory(processHandle, pointer, buffer, buffer.Length, out _);
+
+                for (int i = 0; i < (offset.Length - 1); i++)
+                {
+                    pointer = (IntPtr)BitConverter.ToInt64(buffer, 0) + offset[i];
+                    ReadProcessMemory(processHandle, pointer, buffer, buffer.Length, out _);
+                }
+
+                pointer = (IntPtr)BitConverter.ToInt64(buffer, 0) + offset[offset.Length - 1];
+            }
+
+            return pointer;
+        }
 
 
         #endregion
