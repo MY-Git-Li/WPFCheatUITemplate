@@ -302,9 +302,9 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <param name="offsets"></param>
-        static public void ReadMemoryByID<T>(string id, int[] offsets) where T : struct
+        static public T ReadMemoryByID<T>(string id, int[] offsets) where T : struct
         {
-            ReadMemory<T>(GetAddress(id), offsets);
+           return ReadMemory<T>(GetAddress(id), offsets);
         }
 
 
