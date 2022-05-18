@@ -58,7 +58,7 @@ namespace WPFCheatUITemplate.GameMode
             }
         }
 
-        int GetOffSet(string id)
+        new int GetOffSet(string id)
         {
             version = GameInformation.CurentVersion;
 
