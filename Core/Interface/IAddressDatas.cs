@@ -8,6 +8,9 @@ namespace WPFCheatUITemplate.Core.Interface
 {
     public interface IAddressDatas
     {
+        /// <summary>
+        /// 地址初始化--用于添加地址数据
+        /// </summary>
         void Init();
     }
 }
