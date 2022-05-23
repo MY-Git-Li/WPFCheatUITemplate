@@ -162,7 +162,7 @@ namespace WPFCheatUITemplate.Core.Tools
             int m = P.Length;
             int[] shift = new int[256];
 
-            int min = 2147483647;
+            int min = 1;
 
             // 默认值，移动m+1位
             for (int i = 0; i < 256; i++)
@@ -175,11 +175,6 @@ namespace WPFCheatUITemplate.Core.Tools
             for (int i = 0; i < m; i++)
             {
                 shift[P[i]] = m - i;
-
-                if (m - i < min)
-                {
-                    min = m - i;
-                }
             }
 
             // 模式串开始位置在主串的哪里
