@@ -743,7 +743,7 @@ namespace WPFCheatUITemplate
 
         }
 
-        public void RegisterAllHotKey()
+        private void RegisterAllHotKey()
         {
             #region//快捷键禁用/启用
             {
