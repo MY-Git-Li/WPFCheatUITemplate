@@ -43,7 +43,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="address">地址</param>
         /// <param name="value">锁定的值</param>
         /// <exception cref="Exception">重复地址</exception>
-        static public void AddLockData<T>(IntPtr address, object value) where T : struct
+        static protected void AddLockData<T>(IntPtr address, object value) where T : struct
         {
             byte[] buffer = StructureToByteArray(value);
 
@@ -66,7 +66,7 @@ namespace WPFCheatUITemplate.Core
         /// 解除锁定的地址
         /// </summary>
         /// <param name="address">地址</param>
-        static public void DecLockData(IntPtr address)
+        static protected void DecLockData(IntPtr address)
         {
             foreach (var item in lockDatas)
             {
@@ -83,7 +83,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T">值类型</typeparam>
         /// <param name="id">唯一标识id</param>
         /// <param name="value">值</param>
-        static public void AddLockDataById<T>(string id, object value) where T : struct
+        static protected void AddLockDataById<T>(string id, object value) where T : struct
         {
             AddLockData<T>(GetAddress(id), value);
         }
@@ -91,7 +91,7 @@ namespace WPFCheatUITemplate.Core
         /// 通过ID来解除锁定
         /// </summary>
         /// <param name="id">唯一标识id</param>
-        static public void DecLockDataById(string id)
+        static protected void DecLockDataById(string id)
         {
             DecLockData(GetAddress(id));
         }
@@ -100,7 +100,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <typeparam name="T">字节型</typeparam>
         /// <param name="id">唯一标识id</param>
-        static public void AddLockDataById<T>(string id) where T : struct
+        static protected void AddLockDataById<T>(string id) where T : struct
         {
             AddLockData<T>(GetAddress(id), GetModifyData(id));
         }
@@ -111,7 +111,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="id">唯一标识id</param>
         /// <param name="v">版本</param>
         /// <param name="offset">偏移</param>
-        static public void AddOffsetData(string id, GameVersion.Version v, int offset)
+        static protected void AddOffsetData(string id, GameVersion.Version v, int offset)
         {
             AppGameFunManager.Instance.AddressDataMg.AddOffsetData(id, v, offset);
         }
@@ -123,7 +123,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="gameData">游戏数据</param>
         /// <param name="modifyData">要修改的数据</param>
         /// <param name="orcData">原始的数据</param>
-        static public void AddData(string id, GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
+        static protected void AddData(string id, GameVersion.Version v, GameData gameData, byte[] modifyData, byte[] orcData)
         {
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData, modifyData, orcData);
         }
@@ -132,7 +132,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="id">唯一标识id</param>
         /// <param name="address">地址</param>
-        static public void AddData(string id,IntPtr address)
+        static protected void AddData(string id,IntPtr address)
         {
             AppGameFunManager.Instance.AddressDataMg.AddData(id, address);
         }
@@ -142,7 +142,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="id">唯一标识id</param>
         /// <param name="v">版本</param>
         /// <param name="gameData">游戏数据</param>
-        static public void AddData(string id, GameVersion.Version v, GameData gameData)
+        static protected void AddData(string id, GameVersion.Version v, GameData gameData)
         {
             AppGameFunManager.Instance.AddressDataMg.AddData(id, v, gameData);
         }
@@ -151,7 +151,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="id">唯一标识id</param>
         /// <returns></returns>
-        static public byte[] GetModifyData(string id)
+        static protected byte[] GetModifyData(string id)
         {
             return AppGameFunManager.Instance.AddressDataMg.GetModifyData(id);
         }
@@ -160,7 +160,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="id">唯一标识id</param>
         /// <returns></returns>
-        static public int GetOffSet(string id)
+        static protected int GetOffSet(string id)
         {
             return AppGameFunManager.Instance.AddressDataMg.GetOffSet(id);
         }
@@ -169,7 +169,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="id">唯一标识id</param>
         /// <returns></returns>
-        static public byte[] GetOrcData(string id)
+        static protected byte[] GetOrcData(string id)
         {
             return AppGameFunManager.Instance.AddressDataMg.GetOrcData(id);
         }
@@ -178,7 +178,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="id">唯一标识id</param>
         /// <returns></returns>
-        static public IntPtr GetAddress(string id)
+        static protected IntPtr GetAddress(string id)
         {
             return AppGameFunManager.Instance.AddressDataMg.GetAddress(id);
         }
@@ -189,7 +189,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T">值类型</typeparam>
         /// <param name="id">唯一标识id</param>
         /// <param name="value">值</param>
-        static public void WriteMemoryByID<T>(string id, object value) where T : struct
+        static protected void WriteMemoryByID<T>(string id, object value) where T : struct
         {
             WriteMemory<T>(GetAddress(id), value);
         }
@@ -199,7 +199,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T">字节型</typeparam>
         /// <param name="id">唯一标识id</param>
         /// <param name="value"></param>
-        static public void WriteMemoryByID<T>(string id, byte[] value) where T : struct
+        static protected void WriteMemoryByID<T>(string id, byte[] value) where T : struct
         {
             WriteMemory<T>(GetAddress(id), value);
         }
@@ -208,7 +208,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="id">唯一标识id</param>
         /// <param name="isOrc">是否写原数据</param>
-        static public void WriteMemoryByID(string id, bool isOrc = false)
+        static protected void WriteMemoryByID(string id, bool isOrc = false)
         {
             if (isOrc)
             {
@@ -227,7 +227,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T">读的类型</typeparam>
         /// <param name="address">地址</param>
         /// <returns></returns>
-        static public T ReadMemory<T>(IntPtr address) where T : struct
+        static protected T ReadMemory<T>(IntPtr address) where T : struct
         {
             return CheatTools.ReadMemory<T>(GameMode.GameInformation.Handle, address);
         }
@@ -237,7 +237,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T">读的类型</typeparam>
         /// <param name="id">唯一标识id</param>
         /// <returns></returns>
-        static public T ReadMemoryByID<T>(string id) where T : struct
+        static protected T ReadMemoryByID<T>(string id) where T : struct
         {
             return ReadMemory<T>(AppGameFunManager.Instance.AddressDataMg.GetAddress(id));
         }
@@ -247,7 +247,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T">值类型</typeparam>
         /// <param name="address">地址</param>
         /// <param name="Value">值</param>
-        static public void WriteMemory<T>(IntPtr address, object Value) where T : struct
+        static protected void WriteMemory<T>(IntPtr address, object Value) where T : struct
         {
             byte[] buffer = StructureToByteArray(Value);
             CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, buffer);
@@ -259,7 +259,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T">字节类型</typeparam>
         /// <param name="address">地址</param>
         /// <param name="Value">值</param>
-        static public void WriteMemory<T>(IntPtr address, byte[] Value) where T : struct
+        static protected void WriteMemory<T>(IntPtr address, byte[] Value) where T : struct
         {
             CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, Value);
         }
@@ -271,7 +271,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="address"></param>
         /// <param name="offsets"></param>
         /// <returns></returns>
-        public static T ReadMemory<T>(IntPtr address, int[] offsets) where T : struct
+        protected static T ReadMemory<T>(IntPtr address, int[] offsets) where T : struct
         {
             return CheatTools.ReadMemory<T>(GameMode.GameInformation.Handle, address, offsets);
         }
@@ -281,7 +281,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="address"></param>
         /// <param name="offsets"></param>
-        public static void WriteMemory<T>(IntPtr address, int[] offsets, T value) where T : struct
+        protected static void WriteMemory<T>(IntPtr address, int[] offsets, T value) where T : struct
         {
             CheatTools.WriteMemory<T>(GameMode.GameInformation.Handle, address, offsets, value);
         }
@@ -292,7 +292,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <param name="offsets"></param>
-        static public void WriteMemoryByID<T>(string id, int[] offsets, T value) where T : struct
+        static protected void WriteMemoryByID<T>(string id, int[] offsets, T value) where T : struct
         {
             WriteMemory<T>(GetAddress(id), offsets, value);
         }
@@ -302,7 +302,7 @@ namespace WPFCheatUITemplate.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <param name="offsets"></param>
-        static public T ReadMemoryByID<T>(string id, int[] offsets) where T : struct
+        static protected T ReadMemoryByID<T>(string id, int[] offsets) where T : struct
         {
            return ReadMemory<T>(GetAddress(id), offsets);
         }
@@ -314,7 +314,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="address">矩阵地址</param>
         /// <param name="size">矩阵大小</param>
         /// <returns></returns>
-        static public float[] ReadMatrix(IntPtr address,int size)
+        static protected float[] ReadMatrix(IntPtr address,int size)
         {
            return CheatTools.ReadMatrix<float>(GameMode.GameInformation.Handle, address, size);
         }
@@ -324,7 +324,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="address">字符串地址</param>
         /// <param name="size">大小</param>
         /// <returns></returns>
-        static public string ReadStringToASCII(IntPtr address, int size)
+        static protected string ReadStringToASCII(IntPtr address, int size)
         {
             return CheatTools.ReadStringToASCII(GameMode.GameInformation.Handle, address, size);
         }
@@ -334,7 +334,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="address">字符串地址</param>
         /// <param name="size">大小</param>
         /// <returns></returns>
-        static public string ReadStringToUnicode(IntPtr address, int size)
+        static protected string ReadStringToUnicode(IntPtr address, int size)
         {
             return CheatTools.ReadStringToUnicode(GameMode.GameInformation.Handle, address, size);
         }
@@ -344,7 +344,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="address">字符串地址</param>
         /// <param name="size">大小</param>
         /// <returns></returns>
-        static public string ReadStringToUTF8(IntPtr address, int size)
+        static protected string ReadStringToUTF8(IntPtr address, int size)
         {
             return CheatTools.ReadStringToUTF8(GameMode.GameInformation.Handle, address, size);
         }
@@ -352,7 +352,7 @@ namespace WPFCheatUITemplate.Core
         /// 得到窗口大小
         /// </summary>
         /// <returns></returns>
-        static public CheatTools.WindowData GetGameWindowData()
+        static protected CheatTools.WindowData GetGameWindowData()
         {
             return CheatTools.GetGameWindowData(GameMode.GameInformation.WindowHandle);
         }
@@ -360,7 +360,7 @@ namespace WPFCheatUITemplate.Core
         /// 将游戏窗口至前
         /// </summary>
         /// <returns></returns>
-        static public int SetGameWindowForegroundWindow()
+        static protected int SetGameWindowForegroundWindow()
         {
             return CheatTools.SetForegroundWindow(GameMode.GameInformation.WindowHandle);
         }

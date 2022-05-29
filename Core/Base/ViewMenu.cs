@@ -15,7 +15,7 @@ namespace WPFCheatUITemplate.Core
         /// 设置下一个的快捷键
         /// </summary>
         /// <param name="keyModifiers"></param>
-        public static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers)
+        protected static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers)
         {
             UIManager.SetCurentKeyModifiers(keyModifiers);
         }
@@ -23,7 +23,7 @@ namespace WPFCheatUITemplate.Core
         /// 设置下一个的快捷键
         /// </summary>
         /// <param name="keys"></param>
-        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys)
+        protected static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys)
         {
             UIManager.SetCurentKeyModifiers(keys);
         }
@@ -32,7 +32,7 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="keys"></param>
         /// <param name="keyModifiers"></param>
-        public static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys, HotKey.KeyModifiers keyModifiers)
+        protected static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys, HotKey.KeyModifiers keyModifiers)
         {
             UIManager.SetCurentKeyModifiers(keys, keyModifiers);
         }
@@ -41,14 +41,14 @@ namespace WPFCheatUITemplate.Core
         /// </summary>
         /// <param name="keyModifiers"></param>
         /// <param name="keys"></param>
-        public static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers, System.Windows.Forms.Keys keys)
+        protected static void SetCurentKeyModifiers(HotKey.KeyModifiers keyModifiers, System.Windows.Forms.Keys keys)
         {
             UIManager.SetCurentKeyModifiers(keyModifiers, keys);
         }
         /// <summary>
         /// 恢复到上一次快捷键
         /// </summary>
-        public static void SetCurentKeyModifiersByReverseFormer()
+        protected static void SetCurentKeyModifiersByReverseFormer()
         {
             UIManager.SetCurentKeyModifiersByReverseFormer();
         }
@@ -56,7 +56,7 @@ namespace WPFCheatUITemplate.Core
         /// 创建空白隔间
         /// </summary>
         /// <param name="offset"></param>
-        public static void CreatSeparate(int offset = 15)
+        protected static void CreatSeparate(int offset = 15)
         {
             UIManager.CreatSeparate(offset);
         }
@@ -67,7 +67,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="Description_TC">隔间中文繁体</param>
         /// <param name="Description_EN">隔间英文</param>
         /// <param name="offset"></param>
-        public static void CreatSeparateEx(string Description_SC, string Description_TC = "", string Description_EN = "", int offset = 30)
+        protected static void CreatSeparateEx(string Description_SC, string Description_TC = "", string Description_EN = "", int offset = 30)
         {
             UIManager.CreatSeparateEx(Description_SC, Description_TC, Description_EN, offset);
         }
@@ -77,7 +77,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="Description_SC">隔间中文简体</param>
         /// <param name="Description_EN">隔间英文</param>
         /// <param name="offset"></param>
-        public static void CreatSeparate(string Description_SC, string Description_EN = "", int offset = 30)
+        protected static void CreatSeparate(string Description_SC, string Description_EN = "", int offset = 30)
         {
             UIManager.CreatSeparate(Description_SC, Description_EN, offset);
         }
@@ -85,7 +85,7 @@ namespace WPFCheatUITemplate.Core
         /// 创建下一个页面
         /// </summary>
         /// <param name="offset"></param>
-        public static void NextPage(int offset = 0)
+        protected static void NextPage(int offset = 0)
         {
             UIManager.NextPage(offset);
         }
@@ -100,7 +100,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="SliderShowNum">显示滑动块值</param>
         /// <param name="IsHide">是否隐藏</param>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
+        protected static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
           string FunDescribe_EN,double SliderMinNum, double SliderMaxNum, double SliderShowNum = 1, bool IsHide = false)
         {
             return GetButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, true, SliderMinNum, SliderMaxNum, SliderShowNum, IsHide);
@@ -115,7 +115,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="SliderShowNum">显示滑动块值</param>
         /// <param name="IsHide">是否隐藏</param>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
+        protected static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
           string FunDescribe_EN, int SliderMinNum, int SliderMaxNum, double SliderShowNum = 1, bool IsHide = false)
         {
             return GetButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, false, SliderMinNum, SliderMaxNum, SliderShowNum, IsHide);
@@ -130,7 +130,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="SliderShowNum">显示滑动块值</param>
         /// <param name="IsHide">是否隐藏</param>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
+        protected static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
           string FunDescribe_EN, double SliderMinNum, double SliderMaxNum, double SliderShowNum = 1, bool IsHide = false)
         {
             return GetCheckButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, true, SliderMinNum, SliderMaxNum, SliderShowNum ,IsHide);
@@ -145,7 +145,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="SliderShowNum">显示滑动块值</param>
         /// <param name="IsHide">是否隐藏</param>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
+        protected static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
          string FunDescribe_EN, int SliderMinNum, int SliderMaxNum, double SliderShowNum = 1, bool IsHide = false)
         {
             return GetCheckButtonDateStruct(FunDescribe_SC, FunDescribe_EN, true, false, SliderMinNum, SliderMaxNum, SliderShowNum, IsHide);
@@ -154,7 +154,7 @@ namespace WPFCheatUITemplate.Core
         /// 隐藏的选择框形式
         /// </summary>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetCheckButtonDateStructWithHide()
+        protected static GameFunDataAndUIStruct GetCheckButtonDateStructWithHide()
         {
             return GetCheckButtonDateStruct("","",false,false,1 ,1,1 ,true);
         }
@@ -162,7 +162,7 @@ namespace WPFCheatUITemplate.Core
         /// 隐藏的按钮形式
         /// </summary>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetButtonDateStructWithHide()
+        protected static GameFunDataAndUIStruct GetButtonDateStructWithHide()
         {
             return GetButtonDateStruct("", "", false,false, 1, 1,1 ,true);
         }
@@ -179,7 +179,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="SliderShowNum">显示的滑动块值</param>
         /// <param name="IsHide">是否隐藏</param>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
+        protected static GameFunDataAndUIStruct GetButtonDateStruct(string FunDescribe_SC,
           string FunDescribe_EN, bool IsAcceptValue = false, bool IsShowDecimal  = false, double SliderMinNum = 1, double SliderMaxNum = 9999, double SliderShowNum = 1, bool IsHide = false)
         {
             return UIManager.GetButtonDateStruct(FunDescribe_SC, FunDescribe_EN, IsAcceptValue, IsShowDecimal, SliderMinNum, SliderMaxNum, SliderShowNum, IsHide);
@@ -196,7 +196,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="SliderShowNum">滑动块</param>
         /// <param name="IsHide">是否隐藏</param>
         /// <returns></returns>
-        public static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
+        protected static GameFunDataAndUIStruct GetCheckButtonDateStruct(string FunDescribe_SC,
            string FunDescribe_EN, bool IsAcceptValue = false, bool IsShowDecimal = false, double SliderMinNum = 1, double SliderMaxNum = 9999, double SliderShowNum = 1, bool IsHide = false)
         {
             return UIManager.GetCheckButtonDateStruct(FunDescribe_SC,FunDescribe_EN, IsAcceptValue, IsShowDecimal, SliderMinNum, SliderMaxNum, SliderShowNum, IsHide);
@@ -204,14 +204,14 @@ namespace WPFCheatUITemplate.Core
         /// <summary>
         /// 开启声音提示
         /// </summary>
-        public static void SoundEffectOpen()
+        protected static void SoundEffectOpen()
         {
             AppGameFunManager.Instance.SoundEffectOpen();
         }
         /// <summary>
         /// 关闭声音提示
         /// </summary>
-        public static void SoundEffectClose()
+        protected static void SoundEffectClose()
         {
             AppGameFunManager.Instance.SoundEffectClose();
         }
@@ -222,7 +222,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="Description_SC">简体</param>
         /// <param name="Description_TC">繁体</param>
         /// <param name="Description_EN">英文</param>
-        public static void AddString(string id, string Description_SC, string Description_TC, string Description_EN)
+        protected static void AddString(string id, string Description_SC, string Description_TC, string Description_EN)
         {
             AppGameFunManager.Instance.UILangerManger.AddString(id, Description_SC, Description_TC, Description_EN);
         }
@@ -232,7 +232,7 @@ namespace WPFCheatUITemplate.Core
         /// <param name="id">字符串唯一标识id</param>
         /// <param name="Description_SC">简体</param>
         /// <param name="Description_EN">英文</param>
-        public static void AddString(string id, string Description_SC, string Description_EN)
+        protected static void AddString(string id, string Description_SC, string Description_EN)
         {
             AppGameFunManager.Instance.UILangerManger.AddString(id, Description_SC, Description_EN);
         }
