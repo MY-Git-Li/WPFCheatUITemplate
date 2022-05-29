@@ -215,5 +215,26 @@ namespace WPFCheatUITemplate.Core
         {
             AppGameFunManager.Instance.SoundEffectClose();
         }
+        /// <summary>
+        /// 添加多国语言字符串
+        /// </summary>
+        /// <param name="id">字符串唯一标识id</param>
+        /// <param name="Description_SC">简体</param>
+        /// <param name="Description_TC">繁体</param>
+        /// <param name="Description_EN">英文</param>
+        public static void AddString(string id, string Description_SC, string Description_TC, string Description_EN)
+        {
+            AppGameFunManager.Instance.UILangerManger.AddString(id, Description_SC, Description_TC, Description_EN);
+        }
+        /// <summary>
+        /// 添加多国语言字符串
+        /// </summary>
+        /// <param name="id">字符串唯一标识id</param>
+        /// <param name="Description_SC">简体</param>
+        /// <param name="Description_EN">英文</param>
+        public static void AddString(string id, string Description_SC, string Description_EN)
+        {
+            AppGameFunManager.Instance.UILangerManger.AddString(id, Description_SC, Description_EN);
+        }
     }
 }
