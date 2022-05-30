@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WPFCheatUITemplate.Core.GameFuns;
 using WPFCheatUITemplate.Core.Tools;
 using WPFCheatUITemplate.Core.UI;
-
+using WPFCheatUITemplate.Core.Tools.Extensions;
 namespace WPFCheatUITemplate.Core
 {
     abstract class ViewMenu : DataBase
@@ -216,7 +216,7 @@ namespace WPFCheatUITemplate.Core
             AppGameFunManager.Instance.SoundEffectClose();
         }
         /// <summary>
-        /// 添加多国语言字符串
+        /// 添加多地区语言字符串
         /// </summary>
         /// <param name="id">字符串唯一标识id</param>
         /// <param name="Description_SC">简体</param>
@@ -227,7 +227,7 @@ namespace WPFCheatUITemplate.Core
             AppGameFunManager.Instance.UILangerManger.AddString(id, Description_SC, Description_TC, Description_EN);
         }
         /// <summary>
-        /// 添加多国语言字符串
+        /// 添加多地区语言字符串
         /// </summary>
         /// <param name="id">字符串唯一标识id</param>
         /// <param name="Description_SC">简体</param>
@@ -244,6 +244,25 @@ namespace WPFCheatUITemplate.Core
         protected static string GetString(string id)
         {
             return AppGameFunManager.Instance.UILangerManger.GetString(id);
+        }
+        /// <summary>
+        /// 设置鼠标悬浮提示
+        /// </summary>
+        /// <param name="Description_SC">悬浮提示中文</param>
+        /// <param name="Description_TC">悬浮提示繁体</param>
+        /// <param name="Description_EN">悬浮提示英文</param>
+        protected static void SetToolTip(string Description_SC, string Description_TC, string Description_EN)
+        {
+            ToolTipUI.SetToolTip(Description_SC,Description_TC,Description_EN);
+        }
+        /// <summary>
+        /// 设置鼠标悬浮提示
+        /// </summary>
+        /// <param name="Description_SC">悬浮提示中文</param>
+        /// <param name="Description_EN">悬浮提示英文</param>
+        protected static void SetToolTip(string Description_SC, string Description_EN)
+        {
+            ToolTipUI.SetToolTip(Description_SC, Description_SC.ToTraditional(), Description_EN);
         }
     }
 }

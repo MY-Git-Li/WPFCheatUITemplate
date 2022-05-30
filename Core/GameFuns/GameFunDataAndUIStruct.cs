@@ -236,6 +236,15 @@ namespace WPFCheatUITemplate.Core.GameFuns
         /// 是否界面显示小数
         /// </summary>
         public bool IsShowDecimal { get; set; }
+
+        public bool IsHaveToolTip { get; set; }
+
+        public string ToolTipDescription_SC { get; set; }
+
+        public string ToolTipDescription_TC { get; set; }
+
+        public string ToolTipDescription_EN { get; set; }
+
     }
     /// <summary>
     /// 快捷键设置类

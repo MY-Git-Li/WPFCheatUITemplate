@@ -47,12 +47,12 @@ namespace WPFCheatUITemplate
             new DrawWindow();
 
             CreatSeparate("基本属性", "Basic properties");
-            SetCurentKeyModifiers(HotKey.KeyModifiers.Shift, Keys.W);
+            SetCurentKeyModifiers(HotKey.KeyModifiers.Shift, Keys.W); 
             new AutoGet();
 
             SetCurentKeyModifiers(HotKey.KeyModifiers.Ctrl, Keys.NumPad1);
-            new ArbitrarilyPlant();
-            new AllowBackground();
+            new ArbitrarilyPlant();SetToolTip("这个功能允许你可以随意的在草坪上种植，包括已经种上植物的土地", "This function allows you to plant on the lawn at will, including the land that has been planted with plants");
+            new AllowBackground(); 
 
             SetCurentKeyModifiers(HotKey.KeyModifiers.Alt, Keys.NumPad1);
             new FastGameFun(GetCheckButtonDateStruct("超级攻速", "Super attack speed"), "supershoot", "supershoot2");

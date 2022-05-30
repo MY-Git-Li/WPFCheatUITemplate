@@ -14,6 +14,14 @@ namespace WPFCheatUITemplate.Core.GameFuns
         static System.Windows.Forms.Keys formerKey = curentKey;
         static HotKey.KeyModifiers formerKeyModifiers = curentKeyModifiers;
 
+        static UIData lastUIData = null;
+
+
+        public static UIData GetLastUIData()
+        {
+            return lastUIData;
+        }
+
         static void SetCurentKeyModifiers(System.Windows.Forms.Keys keys,bool iskeys, HotKey.KeyModifiers keyModifiers, bool iskeyModifiers)
         {
             SaveCurentKey();
@@ -99,6 +107,7 @@ namespace WPFCheatUITemplate.Core.GameFuns
                 FsModifiers = curentKeyModifiers,
             };
 
+            lastUIData = gameFunDateStruct.uIData;
 
             Update();
             return gameFunDateStruct;

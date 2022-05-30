@@ -24,6 +24,17 @@ namespace WPFCheatUITemplate.Core.UI
             row = 0;
         }
 
+        public ToolTip CreatToolTip(TextBlock textBlock)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.Content = "dwadwad";
+            ToolTipService.SetBetweenShowDelay(textBlock, 10);
+            ToolTipService.SetInitialShowDelay(textBlock, 1000);
+
+            return toolTip;
+        }
+
+
         public Description CreatShowDescription(GameFun gameFun)
         {
             Description sc = new Description();

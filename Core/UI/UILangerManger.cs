@@ -87,6 +87,8 @@ namespace WPFCheatUITemplate.Core.UI
                 }
                
             }
+
+            ToolTipUI.SetSimplifiedChinese();
         }
 
         public void SetEnglish()
@@ -99,6 +101,7 @@ namespace WPFCheatUITemplate.Core.UI
                     item.textBlock.Text = item.Description_EN;
                 }
             }
+            ToolTipUI.SetEnglish();
         }
         public void SetTraditionalChinese()
         {
@@ -110,6 +113,7 @@ namespace WPFCheatUITemplate.Core.UI
                     item.textBlock.Text = item.Description_TC;
                 }
             }
+            ToolTipUI.SetTraditionalChinese();
         }
     }
 }

@@ -683,10 +683,9 @@ namespace WPFCheatUITemplate
                             Description_TC = item.gameFun.gameFunDataAndUIStruct.uIData.KeyDescription_TC
                         };
 
-
                         UILangerManger.RegisterLanguageUI(funlanguageUI);
                         UILangerManger.RegisterLanguageUI(keylanguageUI);
-
+                        
                         createLayout.AddRowDefin();
 
                         item.showDescription = createLayout.CreatShowDescription(item.gameFun);
@@ -694,6 +693,21 @@ namespace WPFCheatUITemplate
                         funlanguageUI.textBlock = item.showDescription.funDescription;
                         keylanguageUI.textBlock = item.showDescription.keyDescription;
 
+                        if (item.gameFun.gameFunDataAndUIStruct.uIData.IsHaveToolTip)
+                        {
+                            LanguageUI toolTiplanguageUI = new LanguageUI()
+                            {
+                                Description_EN = item.gameFun.gameFunDataAndUIStruct.uIData.ToolTipDescription_EN,
+                                Description_SC = item.gameFun.gameFunDataAndUIStruct.uIData.ToolTipDescription_SC,
+                                Description_TC = item.gameFun.gameFunDataAndUIStruct.uIData.ToolTipDescription_TC
+                            };
+
+                            ToolTipUI.RegisterToolTipLanguageUI(toolTiplanguageUI);
+
+                            toolTiplanguageUI.textBlock = funlanguageUI.textBlock;
+                            funlanguageUI.textBlock.ToolTip = createLayout.CreatToolTip(funlanguageUI.textBlock);
+                        }
+                            
                         item.myStackPanel = createLayout.CreatMyStackPanel(item.gameFun, item);
 
                         createLayout.UpDateRow();

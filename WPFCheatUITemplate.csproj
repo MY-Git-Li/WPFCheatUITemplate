@@ -130,6 +130,7 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Core\Algorithm\Algorithm.cs" />
+    <Compile Include="Core\UI\ToolTipUI.cs" />
     <Compile Include="DataSet\DataVDefault.cs" />
     <Compile Include="DataSet\DataV1_0_0_1051.cs" />
     <Compile Include="DataSet\DataVSteam.cs" />
