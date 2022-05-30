@@ -264,5 +264,13 @@ namespace WPFCheatUITemplate.Core
         {
             ToolTipUI.SetToolTip(Description_SC, Description_SC.ToTraditional(), Description_EN);
         }
+        /// <summary>
+        /// 设置鼠标悬浮提示
+        /// </summary>
+        /// <param name="id">悬浮提示中文</param>
+        protected static void SetToolTipByID(string id)
+        {
+            ToolTipUI.SetToolTipByID(id);
+        }
     }
 }

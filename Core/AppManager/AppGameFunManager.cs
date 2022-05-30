@@ -702,7 +702,7 @@ namespace WPFCheatUITemplate
                                 Description_TC = item.gameFun.gameFunDataAndUIStruct.uIData.ToolTipDescription_TC
                             };
 
-                            ToolTipUI.RegisterToolTipLanguageUI(toolTiplanguageUI);
+                            ToolTipUI.RegisterToolTipLanguageUI(toolTiplanguageUI, item.gameFun.gameFunDataAndUIStruct.uIData.ToolTipStringID);
 
                             toolTiplanguageUI.textBlock = funlanguageUI.textBlock;
                             createLayout.CreatToolTip(funlanguageUI.textBlock);

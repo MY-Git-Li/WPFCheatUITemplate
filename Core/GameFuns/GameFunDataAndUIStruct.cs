@@ -241,6 +241,10 @@ namespace WPFCheatUITemplate.Core.GameFuns
         /// </summary>
         public bool IsHaveToolTip { get; set; }
         /// <summary>
+        /// ToolTip提示--字符串ID方式
+        /// </summary>
+        public string ToolTipStringID { get; set; }
+        /// <summary>
         /// ToolTip提示 简体
         /// </summary>
         public string ToolTipDescription_SC { get; set; }
