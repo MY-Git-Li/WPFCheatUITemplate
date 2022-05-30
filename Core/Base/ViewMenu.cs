@@ -236,5 +236,14 @@ namespace WPFCheatUITemplate.Core
         {
             AppGameFunManager.Instance.UILangerManger.AddString(id, Description_SC, Description_EN);
         }
+        /// <summary>
+        /// 通过ID得到字符串
+        /// </summary>
+        /// <param name="id">字符串唯一标识id</param>
+        /// <returns></returns>
+        protected static string GetString(string id)
+        {
+            return AppGameFunManager.Instance.UILangerManger.GetString(id);
+        }
     }
 }
