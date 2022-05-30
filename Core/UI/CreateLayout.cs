@@ -24,16 +24,6 @@ namespace WPFCheatUITemplate.Core.UI
             row = 0;
         }
 
-        public ToolTip CreatToolTip(TextBlock textBlock)
-        {
-            ToolTip toolTip = new ToolTip();
-            toolTip.Content = "dwadwad";
-            ToolTipService.SetBetweenShowDelay(textBlock, 10);
-            ToolTipService.SetInitialShowDelay(textBlock, 1000);
-
-            return toolTip;
-        }
-
 
         public Description CreatShowDescription(GameFun gameFun)
         {
@@ -296,6 +286,15 @@ namespace WPFCheatUITemplate.Core.UI
             return textBox;
         }
 
+        public void CreatToolTip(TextBlock textBlock)
+        {
+            ToolTip toolTip = new ToolTip();
+            textBlock.ToolTip = toolTip;
+            ToolTipService.SetBetweenShowDelay(textBlock, 10);
+            ToolTipService.SetInitialShowDelay(textBlock, 1000);
+            ToolTipService.SetShowDuration(textBlock, 10000);
+
+        }
     }
 
 }

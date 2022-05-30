@@ -705,7 +705,7 @@ namespace WPFCheatUITemplate
                             ToolTipUI.RegisterToolTipLanguageUI(toolTiplanguageUI);
 
                             toolTiplanguageUI.textBlock = funlanguageUI.textBlock;
-                            funlanguageUI.textBlock.ToolTip = createLayout.CreatToolTip(funlanguageUI.textBlock);
+                            createLayout.CreatToolTip(funlanguageUI.textBlock);
                         }
                             
                         item.myStackPanel = createLayout.CreatMyStackPanel(item.gameFun, item);

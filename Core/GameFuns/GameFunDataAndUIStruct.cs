@@ -236,13 +236,21 @@ namespace WPFCheatUITemplate.Core.GameFuns
         /// 是否界面显示小数
         /// </summary>
         public bool IsShowDecimal { get; set; }
-
+        /// <summary>
+        /// 是否拥有ToolTip提示
+        /// </summary>
         public bool IsHaveToolTip { get; set; }
-
+        /// <summary>
+        /// ToolTip提示 简体
+        /// </summary>
         public string ToolTipDescription_SC { get; set; }
-
+        /// <summary>
+        /// ToolTip提示 繁体
+        /// </summary>
         public string ToolTipDescription_TC { get; set; }
-
+        /// <summary>
+        /// ToolTip提示 英语
+        /// </summary>
         public string ToolTipDescription_EN { get; set; }
 
     }
