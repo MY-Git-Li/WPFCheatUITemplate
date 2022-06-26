@@ -19,12 +19,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
         public static extern int CloseHandle(int hObject);
 
         [DllImport("kernel32.dll")]
-        public static extern bool ReadProcessMemory(
-            int hProcess,
-            int lpBaseAddress,
-            byte[] lpBuffer,
-            int nsize,
-            int lpNumberOfBytesRead);
+        public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out IntPtr lpNumberOfBytesRead);
 
 
         [DllImport("kernel32.dll")]
@@ -45,9 +40,9 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
         public static extern Int32 WriteProcessMemory(
 
-            int hProcess,
+            IntPtr hProcess,
 
-            int lpBaseAddress,
+            IntPtr lpBaseAddress,
 
             byte[] buffer,
 
@@ -65,7 +60,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
             int dwStackSize,
 
-            int lpStartAddress,
+            Int64 lpStartAddress,
 
             int lpParameter,
 
@@ -93,7 +88,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
         [DllImport("Kernel32.dll")]
 
-        public static extern System.Int32 VirtualAllocEx(
+        public static extern Int64 VirtualAllocEx(
 
             int hProcess,
 
@@ -113,7 +108,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
             int hProcess,
 
-            int lpAddress,
+            Int64 lpAddress,
 
             int dwSize,
 
@@ -151,7 +146,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
         #endregion
 
-        public static void Run(this Assembler asm, int pid)
+        public static void RunAsm(this Assembler asm, int pid)
         {
             var stream = new MemoryStream();
 
@@ -165,7 +160,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
                var addre = VirtualAllocEx(hwnd, 0, code.Length, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 
-                WriteProcessMemory(hwnd, addre, code, code.Length, 0);
+                WriteProcessMemory((IntPtr)hwnd, (IntPtr)addre, code, code.Length, 0);
 
                 var  threadhwnd = CreateRemoteThread(hwnd, 0, 0, addre, 0, 0, ref pid);
 
@@ -177,5 +172,70 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
             }
         }
+
+        public static void JmpHook(this Assembler asm, int pid,Int64 address)
+        {
+            var codeBytes = new byte[32];
+
+            var hwnd = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_CREATE_THREAD | PROCESS_VM_WRITE, 0, pid);
+            if (hwnd != 0)
+            {
+                ReadProcessMemory((IntPtr)hwnd, (IntPtr)address, codeBytes, codeBytes.Length, out var readBytes);
+
+            }
+
+            int exampleCodeBitness = asm.Bitness;
+            ulong exampleCodeRIP = (ulong)address;
+
+            var codeReader = new ByteArrayCodeReader(codeBytes);
+            var decoder = Iced.Intel.Decoder.Create(exampleCodeBitness, codeReader);
+            decoder.IP = exampleCodeRIP;
+            ulong endRip = decoder.IP + (uint)codeBytes.Length;
+
+            var instructions = new List<Instruction>();
+            while (decoder.IP < endRip)
+                instructions.Add(decoder.Decode());
+
+            int index  = 0;
+            int codeSum = 0;
+            int MaxJmpLeng = asm.Bitness == 32 ? 5 : 14;
+            foreach (var item in instructions)
+            {
+                codeSum += item.Length;
+                index++;
+                if (codeSum >= MaxJmpLeng)
+                {
+                    break;
+                }
+               
+            }
+
+            var addre = VirtualAllocEx(hwnd, 0, 1024, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
+
+            //写入原始数据
+            WriteProcessMemory((IntPtr)hwnd, (IntPtr)addre, codeBytes, codeSum, 0);
+
+            //ret
+            asm.jmp(instructions[index].IP);
+            var stream = new MemoryStream();
+            asm.Assemble(new StreamCodeWriter(stream), (ulong)(addre+ codeSum));
+            var code = stream.ToArray();
+            WriteProcessMemory((IntPtr)hwnd, (IntPtr)addre + codeSum, code, code.Length, 0);
+
+            //jmp
+            Assembler jmpAsm = new Assembler(asm.Bitness);
+            jmpAsm.jmp((ulong)addre);
+            for (int i = 0; i < codeSum - MaxJmpLeng; i++)
+            {
+                jmpAsm.nop();
+            }          
+            var streamjmp = new MemoryStream();
+            jmpAsm.Assemble(new StreamCodeWriter(streamjmp), (ulong)(address));
+            var jmpcode = streamjmp.ToArray();
+            WriteProcessMemory((IntPtr)hwnd, (IntPtr)address, jmpcode, jmpcode.Length, 0);
+
+            CloseHandle(hwnd);
+        }
+
     }
 }

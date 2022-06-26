@@ -1,6 +1,6 @@
 ﻿using WPFCheatUITemplate.Core.Tools.Extensions;
 using WPFCheatUITemplate.Core.GameFuns;
-using WPFCheatUITemplate.Core.Tools;
+using WPFCheatUITemplate.Core.Tools.ASM;
 using WPFCheatUITemplate.Core.Extends;
 
 namespace WPFCheatUITemplate.GameFuns
