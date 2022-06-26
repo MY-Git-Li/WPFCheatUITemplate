@@ -3,6 +3,8 @@ using WPFCheatUITemplate.GameFuns;
 using WPFCheatUITemplate.Core;
 using WPFCheatUITemplate.Core.GameFuns;
 using WPFCheatUITemplate.Core.Tools;
+using WPFCheatUITemplate.Core.Tools.ASM;
+
 namespace WPFCheatUITemplate
 {
     class Start : ViewMenu
