@@ -96,6 +96,9 @@
     <Reference Include="GameOverlay, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\GameOverlay.Net.4.3.1\lib\net47\GameOverlay.dll</HintPath>
     </Reference>
+    <Reference Include="Iced, Version=1.17.0.0, Culture=neutral, PublicKeyToken=5baba79f4264913b, processorArchitecture=MSIL">
+      <HintPath>packages\Iced.1.17.0\lib\net45\Iced.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
     </Reference>
@@ -130,6 +133,7 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Core\Algorithm\Algorithm.cs" />
+    <Compile Include="Core\Tools\ASM\AssembleHelper.cs" />
     <Compile Include="Core\UI\ToolTipUI.cs" />
     <Compile Include="DataSet\DataVDefault.cs" />
     <Compile Include="DataSet\DataV1_0_0_1051.cs" />
@@ -175,7 +179,7 @@
     <Compile Include="Core\Tools\KeybdAndMouser\mouse.cs" />
     <Compile Include="Core\UI\UIManager.cs" />
     <Compile Include="Core\Interface\IExtend.cs" />
-    <Compile Include="Core\Tools\ASM.cs" />
+    <Compile Include="Core\Tools\ASM\ASM.cs" />
     <Compile Include="Core\Tools\Extensions\IStringExtensions.cs" />
     <Compile Include="Core\UI\CreateUIGrid.cs" />
     <Compile Include="Core\UI\LanguageUI.cs" />

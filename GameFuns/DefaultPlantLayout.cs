@@ -1,6 +1,8 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
 using WPFCheatUITemplate.Core.GameFuns;
+using WPFCheatUITemplate.Core.Tools.ASM;
+
 namespace WPFCheatUITemplate.GameFuns
 {
     class DefaultPlantLayout:GameFun

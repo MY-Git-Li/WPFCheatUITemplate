@@ -5,8 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPFCheatUITemplate
+namespace WPFCheatUITemplate.Core.Tools.ASM
 {
+    [Obsolete("这个类仅仅适合x32位，推荐使用最新的Assemble类适合16、32、64位处理器")]
     class ASM
     {
         #region API相关
