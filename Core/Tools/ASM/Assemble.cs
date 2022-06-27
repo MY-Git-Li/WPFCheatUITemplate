@@ -51,8 +51,6 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
                 WinAPI.CloseHandle((IntPtr)threadhwnd);
 
-                WinAPI.CloseHandle(hwnd);
-
             }
         }
 
