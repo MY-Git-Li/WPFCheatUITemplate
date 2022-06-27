@@ -16,7 +16,6 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
         HookTtpe hookTtpe;
         struct HookTtpe
         {
-            public IntPtr hwnd;
             public Int64 O_address;
             public byte[] codeBytes;
             public int codeSum;
@@ -32,12 +31,12 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
         {
             int pid = GameMode.GameInformation.Pid;
 
+            IntPtr hwnd = GameMode.GameInformation.Handle;
+
             var stream = new MemoryStream();
 
             this.Assemble(new StreamCodeWriter(stream), 0);
             var code = stream.ToArray();
-
-            var hwnd = WinAPI.OpenProcess(WinAPI.PROCESS_ALL_ACCESS | WinAPI.PROCESS_CREATE_THREAD | WinAPI.PROCESS_VM_WRITE, false, pid);
 
             if (!hwnd.Equals(IntPtr.Zero))
             {
@@ -61,10 +60,10 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
         {
             int pid = GameMode.GameInformation.Pid;
 
-          
+            IntPtr hwnd = GameMode.GameInformation.Handle;
+
             var codeBytes = new byte[32];
 
-            var hwnd = WinAPI.OpenProcess(WinAPI.PROCESS_ALL_ACCESS | WinAPI.PROCESS_CREATE_THREAD | WinAPI.PROCESS_VM_WRITE, false, pid);
             if (!hwnd.Equals(IntPtr.Zero))
             {
                 CheatTools.ReadProcessMemory(hwnd, (IntPtr)address, codeBytes, codeBytes.Length, out var readBytes);
@@ -103,7 +102,6 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
             hookTtpe.codeSum = codeSum;
 
             hookTtpe.O_address = address;
-            hookTtpe.hwnd = hwnd;
           
             //写入原始数据
             CheatTools.WriteProcessMemory(hwnd, (IntPtr)addre, codeBytes, codeSum, out var writeBytes);
@@ -135,15 +133,23 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
         public void CloseHook()
         {
+            if (hookTtpe.O_address == 0)
+            {
+                return;
+            }
             //写入原始数据
-            CheatTools.WriteProcessMemory(hookTtpe.hwnd, (IntPtr)hookTtpe.O_address, hookTtpe.codeBytes, hookTtpe.codeSum, out var writeBytes);
+            CheatTools.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.codeBytes, hookTtpe.codeSum, out var writeBytes);
 
         }
 
 
         public void RestartHook()
         {
-            CheatTools.WriteProcessMemory(hookTtpe.hwnd, (IntPtr)hookTtpe.O_address, hookTtpe.jmpBytes, hookTtpe.jmpBytes.Length,out var writeBytes);
+            if (hookTtpe.O_address == 0)
+            {
+                return;
+            }
+            CheatTools.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.jmpBytes, hookTtpe.jmpBytes.Length,out var writeBytes);
         }
     }
 }

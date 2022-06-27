@@ -289,6 +289,13 @@ namespace WPFCheatUITemplate.Core.GameFuns
 
             IntPtr ret = IntPtr.Zero;
 
+            if (generalAddress.ContainsKey(id))
+            {
+                ret = generalAddress[id];
+
+                return ret;
+            }
+
             if (data_Dic.ContainsKey(version))
             {
                 Dictionary<string, GameData> dic = data_Dic[version];
@@ -313,11 +320,7 @@ namespace WPFCheatUITemplate.Core.GameFuns
                 ret = HandleGetAddress(GameVersion.Version.Default, dic, id);
 
             }
-            else if(generalAddress.ContainsKey(id))
-            {
-                ret = generalAddress[id];
-            }
-
+           
             return ret;
         }
 

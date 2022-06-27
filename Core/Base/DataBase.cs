@@ -184,6 +184,36 @@ namespace WPFCheatUITemplate.Core
         }
 
         /// <summary>
+        /// 注册符号变量--在游戏内存中
+        /// </summary>
+        /// <param name="id">符号变量唯一id</param>
+        /// <param name="size">所占地址大小</param>
+        static protected void RegisterSymbol(string id, int size)
+        {
+            Tools.Extensions.ASMExtend.RegisterSymbol(id, size);
+        }
+
+        /// <summary>
+        /// 得到符号变量地址
+        /// </summary>
+        /// <param name="id">符号变量唯一id</param>
+        /// <returns></returns>
+        static protected IntPtr GetSymbolAddress(string id)
+        {
+            return Tools.Extensions.ASMExtend.GetSymbolAddress(id);
+        }
+        /// <summary>
+        /// 设置符号变量地址
+        /// </summary>
+        /// <typeparam name="T">所占地址大小</typeparam>
+        /// <param name="id">符号变量唯一id</param>
+        /// <param name="data">数据</param>
+        static protected void SetSymbolData<T>(string id, T data) where T : struct
+        {
+            Tools.Extensions.ASMExtend.SetSymbolData(id, data);
+        }
+
+        /// <summary>
         /// 通过id写内存
         /// </summary>
         /// <typeparam name="T">值类型</typeparam>
