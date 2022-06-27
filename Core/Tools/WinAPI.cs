@@ -42,6 +42,56 @@ namespace WPFCheatUITemplate.Core.Tools
             ref IntPtr lpflOldProtect
         );
 
+        [DllImport("kernel32", EntryPoint = "CreateRemoteThread")]
+
+        public static extern int CreateRemoteThread(
+
+           int hProcess,
+
+           int lpThreadAttributes,
+
+           int dwStackSize,
+
+           Int64 lpStartAddress,
+
+           int lpParameter,
+
+           int dwCreationFlags,
+
+           ref int lpThreadId
+
+           );
+
+        [DllImport("Kernel32.dll")]
+
+        public static extern Int64 VirtualAllocEx(
+
+            IntPtr hProcess,
+
+            int lpAddress,
+
+            int dwSize,
+
+            int flAllocationType,
+
+            int flProtect
+
+            );
+
+        [DllImport("Kernel32.dll")]
+
+        public static extern System.Int32 VirtualFreeEx(
+
+            IntPtr hProcess,
+
+            Int64 lpAddress,
+
+            int dwSize,
+
+            int flAllocationType
+
+            );
+
         #endregion
 
         #region ProcessAPI
@@ -88,6 +138,22 @@ namespace WPFCheatUITemplate.Core.Tools
         public const int GWL_EXSTYLE = (-20);
         public const int LWA_COLORKEY = 1;
         public const int LWA_ALPHA = 2;
+
+        public const int PAGE_EXECUTE_READWRITE = 0x4;
+
+        public const int MEM_COMMIT = 4096;
+
+        public const int MEM_RELEASE = 0x8000;
+
+        public const int MEM_DECOMMIT = 0x4000;
+
+        public const int PROCESS_ALL_ACCESS = 0x1F0FFF;
+
+        public const int PROCESS_CREATE_THREAD = 0x2;
+
+        public const int PROCESS_VM_OPERATION = 0x8;
+
+        public const int PROCESS_VM_WRITE = 0x20;
 
         #endregion
 

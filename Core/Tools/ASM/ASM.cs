@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WPFCheatUITemplate.Core.Tools.ASM
 {
-    [Obsolete("这个类仅仅适合x32位，推荐使用最新的Iced.Intel.Assemble类适合32、64位处理器")]
+    [Obsolete("这个类仅仅适合x32位，推荐使用最新的Assemble类适合32、64位处理器")]
     class ASM
     {
         #region API相关

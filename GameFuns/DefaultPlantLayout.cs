@@ -2,13 +2,12 @@
 using System.Windows.Forms;
 using WPFCheatUITemplate.Core.GameFuns;
 using WPFCheatUITemplate.Core.Tools.ASM;
-
+using static Iced.Intel.AssemblerRegisters;
 namespace WPFCheatUITemplate.GameFuns
 {
     class DefaultPlantLayout:GameFun
     {
-        
-        int pid;
+ 
         public DefaultPlantLayout()
         {
             gameFunDataAndUIStruct = GetButtonDateStruct("默认植物种植", "Default planting", false);
@@ -16,25 +15,36 @@ namespace WPFCheatUITemplate.GameFuns
 
         public void Plant(int x, int y, int id)
         {
-            ASM asm = new ASM();
-            asm.Pushad();
-            asm.Push68(-1);
-            asm.Push68(id);
-            asm.Mov_EAX(x);
-            asm.Push68(y);
-            var offset = ReadMemory<int>(GetAddress("Secondary_Offset"));
-            asm.Push68(offset);
-            asm.Mov_EBX(GetAddress("Plant_Call").ToInt32());
-            asm.Call_EBX();
-            asm.Popad();
-            asm.Ret(); 
-            asm.RunAsm(pid);
+            //ASM asm = new ASM();
+            //asm.Pushad();
+            //asm.Push68(-1);
+            //asm.Push68(id);
+            //asm.Mov_EAX(x);
+            //asm.Push68(y);
+            //var offset = ReadMemory<int>(GetAddress("Secondary_Offset"));
+            //asm.Push68(offset);
+            //asm.Mov_EBX(GetAddress("Plant_Call").ToInt32());
+            //asm.Call_EBX();
+            //asm.Popad();
+            //asm.Ret(); 
+            //asm.RunAsm(pid);
+
+            Assemble asm = new Assemble(32);
+            asm.pushad();
+            asm.push(-1);
+            asm.push(id);
+            asm.mov(eax, x);
+            asm.push(y);
+            asm.push(ReadMemory<int>(GetAddress("Secondary_Offset")));
+            asm.mov(ebx, GetAddress("Plant_Call").ToInt32());
+            asm.call(ebx);
+            asm.popad();
+            asm.ret();
+            asm.RunAsm();
         }
 
         public override void DoFirstTime(double value)
         {
-            pid = GameMode.GameInformation.Pid;
-
             for (int i = 0; i < 5; i++)
             {
                 Plant(i, 0, 40);

@@ -4,7 +4,7 @@ using WPFCheatUITemplate.Core;
 using WPFCheatUITemplate.Core.GameFuns;
 using WPFCheatUITemplate.Core.Tools;
 using WPFCheatUITemplate.Core.Tools.ASM;
-
+using static Iced.Intel.AssemblerRegisters;
 namespace WPFCheatUITemplate
 {
     class Start : ViewMenu
@@ -32,14 +32,13 @@ namespace WPFCheatUITemplate
             {
                 doFirstTime = (v) =>
                 {
-                    var ecx = ReadMemoryByID<int>("Secondary_Offset");
-                    ASM asm = new ASM();
-                    asm.Mov_EAX(ecx);
-                    asm.Mov_ECX_EAX();
-                    asm.Mov_EAX(GetAddress("Win_Call").ToInt32());
-                    asm.Call_EAX();
-                    asm.Ret();
-                    asm.RunAsm(GameMode.GameInformation.Pid);
+                    Assemble asm = new Assemble(32);
+                    asm.mov(eax, ReadMemoryByID<int>("Secondary_Offset"));
+                    asm.mov(ecx, eax);
+                    asm.mov(eax, GetAddress("Win_Call").ToInt32());
+                    asm.call(eax);
+                    asm.ret();
+                    asm.RunAsm();
 
                 },
 
