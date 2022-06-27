@@ -80,9 +80,19 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
             while (decoder.IP < endRip)
                 instructions.Add(decoder.Decode());
 
+
+            var addre = WinAPI.VirtualAllocEx(hwnd, 0, HOOKALLOCSIZE, WinAPI.MEM_COMMIT, WinAPI.PAGE_EXECUTE_READWRITE);
+
             int index = 0;
             int codeSum = 0;
-            int MaxJmpLeng = this.Bitness == 32 ? 5 : 14;
+
+            Assembler TextjmpAsmCode = new Assembler(this.Bitness);
+            TextjmpAsmCode.jmp((ulong)addre);
+            var Textstreamjmp = new MemoryStream();
+            TextjmpAsmCode.Assemble(new StreamCodeWriter(Textstreamjmp), (ulong)(address));
+            var Textjmpcode = Textstreamjmp.ToArray();
+
+            int MaxJmpLeng = Textjmpcode.Length;
             foreach (var item in instructions)
             {
                 codeSum += item.Length;
@@ -93,8 +103,6 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
                 }
 
             }
-
-            var addre = WinAPI.VirtualAllocEx(hwnd, 0, HOOKALLOCSIZE, WinAPI.MEM_COMMIT, WinAPI.PAGE_EXECUTE_READWRITE);
 
             hookTtpe.codeBytes = codeBytes;
             hookTtpe.codeSum = codeSum;
