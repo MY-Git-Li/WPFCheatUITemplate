@@ -257,6 +257,12 @@ namespace WPFCheatUITemplate.Core.GameFuns
         /// </summary>
         public string ToolTipDescription_EN { get; set; }
 
+
+        public UIData()
+        {
+            UIManager.SetLastUIData(this);
+        }
+
     }
     /// <summary>
     /// 快捷键设置类

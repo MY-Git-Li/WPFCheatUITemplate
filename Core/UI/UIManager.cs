@@ -17,6 +17,11 @@ namespace WPFCheatUITemplate.Core.GameFuns
         static UIData lastUIData = null;
 
 
+        public static void SetLastUIData(UIData uIData)
+        {
+            lastUIData = uIData;
+        }
+
         public static UIData GetLastUIData()
         {
             return lastUIData;
@@ -107,7 +112,6 @@ namespace WPFCheatUITemplate.Core.GameFuns
                 FsModifiers = curentKeyModifiers,
             };
 
-            lastUIData = gameFunDateStruct.uIData;
 
             Update();
             return gameFunDateStruct;
