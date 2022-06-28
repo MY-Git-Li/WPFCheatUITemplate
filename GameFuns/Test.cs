@@ -7,10 +7,10 @@ namespace WPFCheatUITemplate.GameFuns
 {
     class Test : Extends
     {
-        ASM asm;
+        //ASM asm;
         public Test()
         {
-            asm = new ASM();
+            //asm = new ASM();
         }
         public override void StartAsync()
         {
