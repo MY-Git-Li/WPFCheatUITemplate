@@ -36,7 +36,7 @@ namespace WPFCheatUITemplate.Core.GameFuns
 
         public FastGameFun(GameFunDataAndUIStruct gameFunDataAndUIStruct, params string[] Id):this(gameFunDataAndUIStruct)
         {
-            doFirstTime = (v) => 
+            doFirstTime += (v) => 
             {
                 for (int j = 0; j < Id.Length; j++)
                 {
@@ -45,7 +45,7 @@ namespace WPFCheatUITemplate.Core.GameFuns
 
             };
 
-            doRunAgain = (v) =>
+            doRunAgain += (v) =>
             {
                 for (int j = 0; j < Id.Length; j++)
                 {
