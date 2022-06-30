@@ -18,6 +18,8 @@ namespace WPFCheatUITemplate.Configuration
         public static string MainTitle_TC = "《植物大戰僵屍》";
         public static string MainTitle_EN = "Plants vs Zombies";
 
+        public static string PictureImagePath = "../Picture/2.png";
+
         #region 基本不用动
 
         public static string Subtitle_SC = $"Early Access";

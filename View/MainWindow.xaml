@@ -64,7 +64,7 @@
 
                 <StackPanel Grid.Column="0" Margin="3 0 0 0">
                     <StackPanel>
-                        <Image Height="300" Stretch="Fill" Source="../Picture/2.png"  VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <Image x:Name="picture_image" Height="300" Stretch="Fill" Source="../Picture/2.png" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <TextBlock Name="process" Margin="0 10 0 0" Text="游戏进程名：" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
                         <TextBlock  x:FieldModifier="public"  x:Name="lbl_gemeProcess" Text="jiwudazhanjiangshi.exe" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
 
@@ -72,6 +72,12 @@
                         <TextBlock   x:FieldModifier="public" x:Name="lbl_processID"  Text="86564" Style="{StaticResource OtherText}"/>
 
                         <TextBlock Name="author" Margin="0 10 0 0" Text="作者：Mr.Li" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
+
+                        <TextBlock x:Name="version" Margin="0 20 0 0" Text="修改器版本：Build.2021.05.03" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
+
+                        <TextBlock  Margin="0 0 0 0" TextDecorations="Underline" MouseLeftButtonDown="updata_MouseLeftButtonDown" Text="检查修改器版本更新(√)" HorizontalAlignment="Left" Style="{StaticResource OtherText_updata}"/>
+
+
 
                     </StackPanel>
                 </StackPanel>

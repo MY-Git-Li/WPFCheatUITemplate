@@ -87,5 +87,11 @@ namespace WPFCheatUITemplate
             myStoryboard = new Storyboard();
             myStoryboard.Children.Add(flashAnimation);
         }
+
+        private void updata_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //TODO:联网更新
+            MessageBox.Show("更新代码正在构建中");
+        }
     }
 }

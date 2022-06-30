@@ -509,6 +509,9 @@ namespace WPFCheatUITemplate
             mainWindow.Loaded += mainWindows_Loaded;
             mainWindow.Closing += mainWindows_Closing;
 
+            var path = Configure.PictureImagePath;
+            mainWindow.picture_image.Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(path,UriKind.Relative));
+
             RegisterManger(new CreateLayout(System.Windows.Application.Current.Resources), grid);
 
             GetAllExtend();
@@ -657,6 +660,17 @@ namespace WPFCheatUITemplate
                 Description_SC = Configure.OtherDes_SC,
                 Description_TC = Configure.OtherDes_TC.Equals("") ? Configure.OtherDes_SC.ToTraditional() : Configure.OtherDes_TC,
                 Description_EN = Configure.OtherDes_EN
+
+            });
+            string TimeStr = string.Format("{0:yyyy.MM.dd}", System.IO.File.GetLastWriteTime(this.GetType().Assembly.Location));
+            string version_SC = "修改器版本：Build." + TimeStr;
+            string version_EN = "Trainer Version: "+ TimeStr;
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.version,
+                Description_SC = version_SC,
+                Description_TC = version_SC.ToTraditional(),
+                Description_EN = version_EN
 
             });
         }
