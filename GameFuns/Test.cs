@@ -14,7 +14,7 @@ namespace WPFCheatUITemplate.GameFuns
         {
             //asm = new ASM();
         }
-        public override void Start()
+        public override void StartAsync()
         {
             //#region KeybdTest
 
@@ -65,13 +65,13 @@ namespace WPFCheatUITemplate.GameFuns
             //    Console.WriteLine("下载进度：" + downloader.TotalProgress + "%");
             //    Console.WriteLine("下载速度：" + downloader.TotalSpeedInBytes / 1024 / 1024 + "MBps");
             //};
-           
+
             //mtd.FileMergedComplete += (sender, e) =>
             //{
             //    Console.WriteLine("文件合并完成");
             //};
             //mtd.Start();//开始下载
-           
+
         }
        
     }
