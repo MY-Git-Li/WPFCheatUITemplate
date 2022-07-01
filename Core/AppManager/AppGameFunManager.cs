@@ -673,6 +673,17 @@ namespace WPFCheatUITemplate
                 Description_EN = version_EN
 
             });
+
+            string CheckVersion_SC = "检查修改器版本更新";
+            string CheckVersion_EN = "Check for trainer update";
+            uILangerManger.RegisterLanguageUI(new LanguageUI()
+            {
+                textBlock = mainWindow.CheckVersion,
+                Description_SC = CheckVersion_SC,
+                Description_TC = CheckVersion_SC.ToTraditional(),
+                Description_EN = CheckVersion_EN
+
+            });
         }
 
         private void DrawUI()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPFCheatUITemplate.Core.Tools.Extensions;
 namespace WPFCheatUITemplate.Configuration
 {
@@ -18,6 +19,9 @@ namespace WPFCheatUITemplate.Configuration
         public static string MainTitle_TC = "《植物大戰僵屍》";
         public static string MainTitle_EN = "Plants vs Zombies";
 
+        /// <summary>
+        /// 界面的图片地址
+        /// </summary>
         public static string PictureImagePath = "../Picture/2.png";
 
         #region 基本不用动
@@ -64,6 +68,22 @@ namespace WPFCheatUITemplate.Configuration
 
         public static bool isByWindowsNamePrecedence = true;
 
+
+        #endregion
+
+        #region 更新配置
+        /// <summary>
+        /// 检查更新URL地址
+        /// </summary>
+        public static string ConfigAddress = "";
+        /// <summary>
+        /// 要更新程序的URL地址
+        /// </summary>
+        public static string UpdateAddress = "";
+        /// <summary>
+        /// 当前版本
+        /// </summary>
+        public static Version version = Application.ResourceAssembly.GetName().Version;
 
         #endregion
 

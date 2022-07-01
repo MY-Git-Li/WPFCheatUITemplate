@@ -137,6 +137,7 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Core\Algorithm\Algorithm.cs" />
+    <Compile Include="Core\AppManager\AppUpdateManager.cs" />
     <Compile Include="Core\Net\DownFile\MultiThreadDownloader.cs" />
     <Compile Include="Core\Net\DownFile\PartialDownloader.cs" />
     <Compile Include="Core\Net\HttpHelper.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Core\UI\CreateUIGrid.cs" />
     <Compile Include="Core\UI\LanguageUI.cs" />
     <Compile Include="Core\Voice\SoundEffect.cs" />
+    <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="GameFuns\Sun.cs" />
     <Compile Include="Core\UI\UILangerManger.cs" />

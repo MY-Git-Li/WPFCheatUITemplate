@@ -74,8 +74,11 @@
                         <TextBlock Name="author" Margin="0 10 0 0" Text="作者：Mr.Li" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
 
                         <TextBlock x:Name="version" Margin="0 20 0 0" Text="修改器版本：Build.2021.05.03" HorizontalAlignment="Left" Style="{StaticResource OtherText}"/>
-
-                        <TextBlock  Margin="0 0 0 0" TextDecorations="Underline" MouseLeftButtonDown="updata_MouseLeftButtonDown" Text="检查修改器版本更新(√)" HorizontalAlignment="Left" Style="{StaticResource OtherText_updata}"/>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="CheckVersion"  Margin="0 0 0 0" TextDecorations="Underline" MouseLeftButtonDown="updata_MouseLeftButtonDown" Text="检查修改器版本更新" HorizontalAlignment="Left" Style="{StaticResource OtherText_updata}"/>
+                            <TextBlock Visibility="{Binding CheckVersionedvisibility}" Margin="0 0 0 0" TextDecorations="Underline"  Text="(√)" HorizontalAlignment="Left" Style="{StaticResource OtherText_updata}"/>
+                        </StackPanel>
 
 
 

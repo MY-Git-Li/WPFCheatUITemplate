@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFCheatUITemplate.MVVM;
 
 namespace WPFCheatUITemplate
 {
-    class MainWindowsViewModel
+    public class MainWindowsViewModel: ViewModelBase
     {
+
+        Visibility checkVersionedvisibility = Visibility.Hidden;
+        public Visibility CheckVersionedvisibility { get => checkVersionedvisibility; set { checkVersionedvisibility = value;RaisePropertyChanged("CheckVersionedvisibility"); } }
+
         public CommandBase CloseWindowsCommand { get; set; }
 
         public CommandBase MinimumButtonCommand { get; set; }
@@ -18,6 +24,7 @@ namespace WPFCheatUITemplate
         public CommandBase TraditionalChineseLanguage { get; set; }
 
         public CommandBase EnglishDescriptionLanguage { get; set; }
+       
 
         public MainWindowsViewModel()
         {

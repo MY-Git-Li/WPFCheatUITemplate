@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media.Animation;
+using WPFCheatUITemplate.Core.AppManager;
 using WPFCheatUITemplate.Core.UI;
 
 namespace WPFCheatUITemplate
@@ -90,8 +91,7 @@ namespace WPFCheatUITemplate
 
         private void updata_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //TODO:联网更新
-            MessageBox.Show("更新代码正在构建中");
+            AppUpdateManager.Update((DataContext as MainWindowsViewModel)); 
         }
     }
 }
