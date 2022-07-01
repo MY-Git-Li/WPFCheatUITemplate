@@ -9,6 +9,10 @@ namespace WPFCheatUITemplate.Core.Voice
     {
         SoundPlayer player;
 
+        System.IO.Stream afpiz_if2hn = Properties.Resources.afpiz_if2hn;
+
+        System.IO.Stream ext09_vnxd7 = Properties.Resources.ext09_vnxd7;
+
         bool isOpen;
         public SoundEffect()
         {
@@ -33,7 +37,7 @@ namespace WPFCheatUITemplate.Core.Voice
                 return;
             }
 
-            player.Stream = Properties.Resources.afpiz_if2hn;
+            player.Stream = afpiz_if2hn;
             player.Play();
         }
         public void PlayTurnOffEffect()
@@ -43,7 +47,7 @@ namespace WPFCheatUITemplate.Core.Voice
                 return;
             }
 
-            player.Stream = Properties.Resources.ext09_vnxd7;
+            player.Stream = ext09_vnxd7;
             player.Play();
         }
     }

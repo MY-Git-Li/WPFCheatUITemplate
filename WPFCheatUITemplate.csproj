@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{90F6F846-ED50-4EC4-9C34-8DF18A7ACA9A}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>WPFCheatUITemplate</RootNamespace>
     <AssemblyName>WPFCheatUITemplate</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -92,6 +92,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GameOverlay, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\GameOverlay.Net.4.3.1\lib\net47\GameOverlay.dll</HintPath>
@@ -112,6 +115,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -133,6 +137,10 @@
     </ApplicationDefinition>
     <Compile Include="Configuration\Configure.cs" />
     <Compile Include="Core\Algorithm\Algorithm.cs" />
+    <Compile Include="Core\Net\DownFile\MultiThreadDownloader.cs" />
+    <Compile Include="Core\Net\DownFile\PartialDownloader.cs" />
+    <Compile Include="Core\Net\HttpHelper.cs" />
+    <Compile Include="Core\Net\Json\JsonHelper.cs" />
     <Compile Include="Core\Tools\ASM\Assemble.cs" />
     <Compile Include="Core\Tools\Extensions\ASMExtend.cs" />
     <Compile Include="Core\UI\ToolTipUI.cs" />
