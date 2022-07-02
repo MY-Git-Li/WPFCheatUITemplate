@@ -1125,6 +1125,11 @@ namespace WPFCheatUITemplate
 
             }
         }
+
+        public void CheakVersion()
+        {
+            mainWindow.CheakVersion();
+        }
     }
 
 }

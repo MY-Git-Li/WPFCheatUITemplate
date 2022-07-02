@@ -62,10 +62,10 @@ namespace WPFCheatUITemplate
 
         #region 32-64位通用泛型读写
 
-        [DllImport("kernel32.dll")]
-        public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out IntPtr lpNumberOfBytesRead);
-        [DllImport("kernel32.dll")]
-        public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out int lpNumberOfBytesWritten);
+        //[DllImport("kernel32.dll")]
+        //public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out IntPtr lpNumberOfBytesRead);
+        //[DllImport("kernel32.dll")]
+        //public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out int lpNumberOfBytesWritten);
 
         public static T ReadMemory<T>(IntPtr _processHandle, IntPtr address) where T : struct
         {
@@ -343,121 +343,10 @@ namespace WPFCheatUITemplate
 
         #endregion
 
-        #region 指定读写--不建议使用，推荐使用上面的泛型
-        //读内存模块  
-        public static IntPtr ReadModule(string ModuleName)
-        {
-            return WinAPI.GetModuleHandle(ModuleName);
-        }
-
-        //读取内存中的值
-        public static int ReadMemoryValue(int baseAddress, IntPtr hProcess)
-        {
-            try
-            {
-                byte[] buffer = new byte[4];
-                //获取缓冲区地址
-                IntPtr byteAddress = Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
-                //将制定内存中的值读入缓冲区
-                WinAPI.ReadProcessMemory(hProcess, (IntPtr)baseAddress, byteAddress, 4, IntPtr.Zero);
-                ////关闭操作
-                //WinAPI.CloseHandle(hProcess);
-                //从非托管内存中读取一个 32 位带符号整数。
-                return Marshal.ReadInt32(byteAddress);
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-
-        //读浮点数
-        public static float ReadMemoryFloat(int baseAddress, IntPtr hProcess)
-        {
-            try
-            {
-                byte[] buffer = new byte[4];
-                //获取缓冲区地址
-                IntPtr byteAddress = Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
-                //将制定内存中的值读入缓冲区
-                WinAPI.ReadProcessMemory(hProcess, (IntPtr)baseAddress, byteAddress, 4, IntPtr.Zero);
-                ////关闭操作
-                //WinAPI.CloseHandle(hProcess);
-
-                byte[] res = new byte[4];
-                for (int i = 0; i < 4; i++)
-                {
-                    res[i] = Marshal.ReadByte(byteAddress + i);
-                }
-
-                return ByteToFloat(res);
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-
-        //读长整数型
-        public static long ReadMemoryValue(long baseAddress, IntPtr hProcess)
-        {
-            try
-            {
-                string temp = ((IntPtr)baseAddress).ToString("x");
-                byte[] buffer = new byte[4];
-                IntPtr byteAddress = Marshal.UnsafeAddrOfPinnedArrayElement(buffer, 0);
-                WinAPI.ReadProcessMemory(hProcess, (IntPtr)baseAddress, byteAddress, 4, IntPtr.Zero);
-                //WinAPI.CloseHandle(hProcess);
-                string ss = ((IntPtr)baseAddress).ToString("x");
-                return Marshal.ReadInt32(byteAddress);
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-
-        //写内存整数型
-        public static void WriteMemoryInt(long baseAddress, IntPtr hProcess, int value)
-        {
-            bool flag;
-            int[] Data = new int[] { value };
-            flag = WinAPI.WriteProcessMemory(hProcess, (IntPtr)baseAddress, Data, 4, IntPtr.Zero);
-            //WinAPI.CloseHandle(hProcess);
-        }
-        //写内存整数型
-        public static void WriteMemoryInt(int baseAddress, IntPtr hProcess, int value)
-        {
-            bool flag;
-            int[] Data = new int[] { value };
-            flag = WinAPI.WriteProcessMemory(hProcess, (IntPtr)baseAddress, Data, 4, IntPtr.Zero);
-            //WinAPI.CloseHandle(hProcess);
-        }
-
-        //写内存字节型  
-        public static void WriteMemoryByte(int baseAddress, IntPtr hProcess, byte[] value)
-        {
-            bool flag;
-            flag = WinAPI.WriteProcessMemory(hProcess, (IntPtr)baseAddress, value, value.Length, IntPtr.Zero);
-            //WinAPI.CloseHandle(hProcess);
-        }
-
-        //写内存浮点型 
-        public static void WriteMemoryFloat(int baseAddress, IntPtr hProcess, float value_f)
-        {
-            byte[] value = FloatToByte(value_f);
-            bool flag;
-            flag = WinAPI.WriteProcessMemory(hProcess, (IntPtr)baseAddress, value, value.Length, IntPtr.Zero);
-            //WinAPI.CloseHandle(hProcess);
-        }
-        //关闭句柄
-        public static void CloseHandle(IntPtr hProcess)
-        {
-            WinAPI.CloseHandle(hProcess);
-        }
-        #endregion
 
         #region 特征码相关
+
+       
         //寻找地址
         public static List<IntPtr> FindData(IntPtr hProcess, IntPtr beginAddr, IntPtr endAddr, string data)
         {

@@ -9,11 +9,12 @@ namespace WPFCheatUITemplate.Core.AppManager
 {
     public class AppUpdateManager
     {
-        public static void Update(MainWindowsViewModel mainWindowsViewModel)
+        public static bool Update()
         {
+            bool islatest = false;
             //TODO:联网更新
-            MessageBox.Show("更新代码正在构建中");
-            mainWindowsViewModel.CheckVersionedvisibility = Visibility.Visible;
+
+            return islatest;
         }
 
     }

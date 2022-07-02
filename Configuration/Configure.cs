@@ -75,7 +75,7 @@ namespace WPFCheatUITemplate.Configuration
         /// <summary>
         /// 检查更新URL地址
         /// </summary>
-        public static string ConfigAddress = "";
+        public static string ConfigAddress = "https://my-git-li.github.io/ProgramConfiguration/Config.json";
         /// <summary>
         /// 要更新程序的URL地址
         /// </summary>

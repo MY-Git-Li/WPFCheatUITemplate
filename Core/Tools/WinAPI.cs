@@ -5,27 +5,16 @@ namespace WPFCheatUITemplate.Core.Tools
     class WinAPI
     {
         #region MemoryAPI
-        //从指定内存中读取字节集数据
-        [DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory")]
-        public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr lpBuffer, int nSize, IntPtr lpNumberOfBytesRead);
 
-        [DllImport("kernel32.dll", EntryPoint = "ReadProcessMemory")]
+        [DllImport("kernel32.dll")]
+        public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out IntPtr lpNumberOfBytesRead);
+        [DllImport("kernel32.dll")]
+        public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] buffer, int size, out int lpNumberOfBytesWritten);
+
+        [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, IntPtr lpBuffer, uint nSize, IntPtr lpNumberOfBytesRead);
 
-        //从指定内存中写入字节集数据
-        [DllImport("kernel32.dll", EntryPoint = "WriteProcessMemory")]
-        public static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, int[] lpBuffer, int nSize, IntPtr lpNumberOfBytesWritten);
 
-        //写内存  
-        [DllImport("kernel32.dll", EntryPoint = "WriteProcessMemory")]
-        public static extern bool WriteProcessMemory
-        (
-            IntPtr lpProcess,
-            IntPtr lpBaseAddress,
-            byte[] lpBuffer,
-            int nSize,
-            IntPtr BytesWrite
-        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool VirtualProtectEx

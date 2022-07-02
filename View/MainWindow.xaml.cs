@@ -89,9 +89,22 @@ namespace WPFCheatUITemplate
             myStoryboard.Children.Add(flashAnimation);
         }
 
+
+        public void CheakVersion()
+        {
+            if (AppUpdateManager.Update())
+            {
+                (DataContext as MainWindowsViewModel).CheckVersionedvisibility = Visibility.Visible;
+            }
+            else
+            {
+                (DataContext as MainWindowsViewModel).CheckVersionedvisibility = Visibility.Hidden;
+            }
+        }
+
         private void updata_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            AppUpdateManager.Update((DataContext as MainWindowsViewModel)); 
+            CheakVersion();
         }
     }
 }
