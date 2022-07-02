@@ -14,7 +14,7 @@ namespace WPFCheatUITemplate.Core.AppManager
             bool islatest = false;
             //TODO:联网更新
 
-            return islatest;
+            return !islatest;
         }
 
     }

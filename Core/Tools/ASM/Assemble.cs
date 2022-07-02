@@ -43,7 +43,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
                 var addre = WinAPI.VirtualAllocEx(hwnd, 0, code.Length, WinAPI.MEM_COMMIT, WinAPI.PAGE_EXECUTE_READWRITE);
 
-                CheatTools.WriteProcessMemory(hwnd, (IntPtr)addre, code, code.Length,out var writeBytes);
+                WinAPI.WriteProcessMemory(hwnd, (IntPtr)addre, code, code.Length,out var writeBytes);
 
                 var threadhwnd = WinAPI.CreateRemoteThread(hwnd.ToInt32(), 0, 0, addre, 0, 0, ref pid);
 
@@ -64,7 +64,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
             if (!hwnd.Equals(IntPtr.Zero))
             {
-                CheatTools.ReadProcessMemory(hwnd, (IntPtr)address, codeBytes, codeBytes.Length, out var readBytes);
+                WinAPI.ReadProcessMemory(hwnd, (IntPtr)address, codeBytes, codeBytes.Length, out var readBytes);
 
             }
 
@@ -108,16 +108,16 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
             hookTtpe.codeSum = codeSum;
 
             hookTtpe.O_address = address;
-          
+
             //写入原始数据
-            CheatTools.WriteProcessMemory(hwnd, (IntPtr)addre, codeBytes, codeSum, out var writeBytes);
+            WinAPI.WriteProcessMemory(hwnd, (IntPtr)addre, codeBytes, codeSum, out var writeBytes);
 
             //ret
             this.jmp(instructions[index].IP);
             var stream = new MemoryStream();
             this.Assemble(new StreamCodeWriter(stream), (ulong)(addre + codeSum));
             var code = stream.ToArray();
-            CheatTools.WriteProcessMemory(hwnd, (IntPtr)addre + codeSum, code, code.Length, out writeBytes);
+            WinAPI.WriteProcessMemory(hwnd, (IntPtr)addre + codeSum, code, code.Length, out writeBytes);
 
             
            
@@ -131,7 +131,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
             var streamjmp = new MemoryStream();
             jmpAsm.Assemble(new StreamCodeWriter(streamjmp), (ulong)(address));
             var jmpcode = streamjmp.ToArray();
-            CheatTools.WriteProcessMemory(hwnd, (IntPtr)address, jmpcode, jmpcode.Length, out writeBytes);
+            WinAPI.WriteProcessMemory(hwnd, (IntPtr)address, jmpcode, jmpcode.Length, out writeBytes);
 
             hookTtpe.jmpBytes = jmpcode;
         }
@@ -144,7 +144,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
                 return;
             }
             //写入原始数据
-            CheatTools.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.codeBytes, hookTtpe.codeSum, out var writeBytes);
+            WinAPI.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.codeBytes, hookTtpe.codeSum, out var writeBytes);
 
         }
 
@@ -155,7 +155,7 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
             {
                 return;
             }
-            CheatTools.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.jmpBytes, hookTtpe.jmpBytes.Length,out var writeBytes);
+            WinAPI.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.jmpBytes, hookTtpe.jmpBytes.Length,out var writeBytes);
         }
     }
 }
