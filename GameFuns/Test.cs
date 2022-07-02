@@ -73,7 +73,7 @@ namespace WPFCheatUITemplate.GameFuns
             //mtd.Start();//开始下载
 
 
-            AppGameFunManager.Instance.CheakVersion();
+            //AppGameFunManager.Instance.CheakVersion();
         }
        
     }

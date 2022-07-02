@@ -12,6 +12,8 @@ namespace WPFCheatUITemplate.Core.UI
 
         Dictionary<string, LanguageUI> languageUIsDictionary = new Dictionary<string, LanguageUI>();
 
+        public event Action<UILangerManger> OnLanguageChange;
+
         public void RegisterLanguageUI(LanguageUI languageUI)
         {
             if (languageUI.ShowText == "")
@@ -63,6 +65,16 @@ namespace WPFCheatUITemplate.Core.UI
             AddString(id, Description_SC, Description_SC.ToTraditional(), Description_EN);
         }
 
+        public void DecString(string id)
+        {
+           languageUIsDictionary.Remove(id);
+        }
+
+        public void UnRegisterLanguageUI(LanguageUI languageUI)
+        {
+            languageUIs.Remove(languageUI);
+        }
+
 
         public string GetString(string id)
         {
@@ -73,6 +85,11 @@ namespace WPFCheatUITemplate.Core.UI
             {
                 return "";
             }
+        }
+
+        private void DoOnLanguageChange()
+        {
+            OnLanguageChange?.Invoke(this);
         }
 
 
@@ -89,6 +106,7 @@ namespace WPFCheatUITemplate.Core.UI
             }
 
             ToolTipUI.SetSimplifiedChinese();
+            DoOnLanguageChange();
         }
 
         public void SetEnglish()
@@ -102,6 +120,7 @@ namespace WPFCheatUITemplate.Core.UI
                 }
             }
             ToolTipUI.SetEnglish();
+            DoOnLanguageChange();
         }
         public void SetTraditionalChinese()
         {
@@ -114,6 +133,7 @@ namespace WPFCheatUITemplate.Core.UI
                 }
             }
             ToolTipUI.SetTraditionalChinese();
+            DoOnLanguageChange();
         }
     }
 }

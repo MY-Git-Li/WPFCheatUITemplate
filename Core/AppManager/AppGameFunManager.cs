@@ -131,10 +131,8 @@ namespace WPFCheatUITemplate
         #region 语言设置
 
 
-        void SetDefaultLanguage()
+        public void SetDefaultLanguage()
         {
-            InitErrorMessageString();
-
             string mode = Properties.Settings.Default.langer;
             if (mode == "SC")
             {
@@ -537,9 +535,13 @@ namespace WPFCheatUITemplate
             DisableControl();
             investigateGame.FindingGame();
 
+            InitErrorMessageString();
+
             SetDefaultLanguage();
 
             StartFlashAnimation();
+
+            CheakVersion();
         }
 
         #endregion
@@ -1126,7 +1128,10 @@ namespace WPFCheatUITemplate
             }
         }
 
-        public void CheakVersion()
+        /// <summary>
+        /// 此方法只能在主线程中使用
+        /// </summary>
+        private void CheakVersion()
         {
             mainWindow.CheakVersion();
         }

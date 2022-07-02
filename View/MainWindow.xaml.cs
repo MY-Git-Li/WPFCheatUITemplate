@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -6,6 +7,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Animation;
 using WPFCheatUITemplate.Core.AppManager;
 using WPFCheatUITemplate.Core.UI;
+using WPFCheatUITemplate.View;
 
 namespace WPFCheatUITemplate
 {
@@ -16,13 +18,18 @@ namespace WPFCheatUITemplate
     {
       
         Storyboard myStoryboard;
-       
+
+        BackgroundWorker startCheakVersion;
 
         public MainWindow()
         {
             InitializeComponent();
 
             this.DataContext = new MainWindowsViewModel();
+
+            startCheakVersion = new BackgroundWorker();
+            startCheakVersion.DoWork += new DoWorkEventHandler(GetVersion);
+            startCheakVersion.RunWorkerCompleted += new RunWorkerCompletedEventHandler(GetVersioned);
 
             AppGameFunManager.Instance.RegisterWindow(this, keyAndDescribelayouts);
 
@@ -89,17 +96,36 @@ namespace WPFCheatUITemplate
             myStoryboard.Children.Add(flashAnimation);
         }
 
-
-        public void CheakVersion()
+        private void GetVersion(object sender, DoWorkEventArgs e)
         {
-            if (AppUpdateManager.Update())
+            var islatest = AppUpdateManager.Update();
+            e.Result = islatest;
+        }
+
+        private void GetVersioned(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            if ((bool)e.Result)
             {
                 (DataContext as MainWindowsViewModel).CheckVersionedvisibility = Visibility.Visible;
             }
             else
             {
                 (DataContext as MainWindowsViewModel).CheckVersionedvisibility = Visibility.Hidden;
+                //TODO 让用户选择是否弹出更新窗口
+                var updateWindow = new UpdateWindow();
+                updateWindow.Show();
             }
+        }
+
+
+        public void CheakVersion()
+        {
+            if (!startCheakVersion.IsBusy)
+            {
+                startCheakVersion.RunWorkerAsync();
+            }
+            
         }
 
         private void updata_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
