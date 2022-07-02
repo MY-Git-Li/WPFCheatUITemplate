@@ -19,20 +19,7 @@ namespace WPFCheatUITemplate.Core.AppManager
 
         public static bool Update()
         {
-            bool islatest = false;
-
-            var serverVersion = GetServerVersion();
-
-            if (serverVersion == Configure.version)
-            {
-                islatest = true;
-            }
-            else
-            {
-                islatest = false;
-            }
-           
-            return islatest;
+            return GetServerVersion() == Configure.version;
         }
 
 

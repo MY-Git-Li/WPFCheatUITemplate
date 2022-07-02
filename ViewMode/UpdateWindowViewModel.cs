@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace WPFCheatUITemplate.ViewMode
 {
-    public class UpdateWindowViewModel:MainWindowsViewModel
+    public class UpdateWindowViewModel:MainWindowsViewModel, IDisposable
     {
         string mainTitle;
         string subtitle;
@@ -34,10 +34,13 @@ namespace WPFCheatUITemplate.ViewMode
             Subtitle = obj.GetString("updata_subtitle");
         }
 
-        ~UpdateWindowViewModel()
+        public void Dispose()
         {
             var uILangerManger = AppGameFunManager.Instance.UILangerManger;
             uILangerManger.OnLanguageChange -= UILangerManger_OnLanguageChange;
+
+            uILangerManger.DecString("updata_mainTitle");
+            uILangerManger.DecString("updata_subtitle");
         }
 
         public string MainTitle { get => mainTitle; set { mainTitle = value; RaisePropertyChanged("MainTitle"); } }

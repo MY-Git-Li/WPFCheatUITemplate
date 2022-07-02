@@ -18,7 +18,13 @@ namespace WPFCheatUITemplate.View
             this.DataContext = new UpdateWindowViewModel();
 
             this.Loaded += UpdateWindow_Loaded;
+            this.Closed += UpdateWindow_Closed;
 
+        }
+
+        private void UpdateWindow_Closed(object sender, System.EventArgs e)
+        {
+            (DataContext as UpdateWindowViewModel).Dispose();
         }
 
         private void UpdateWindow_Loaded(object sender, RoutedEventArgs e)
