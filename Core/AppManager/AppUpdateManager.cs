@@ -19,13 +19,17 @@ namespace WPFCheatUITemplate.Core.AppManager
 
         public static bool Update()
         {
-            return GetServerVersion() == Configure.version;
+            return GetServerVersion().Equals(Configure.ClientVersion);
         }
 
 
 
         private static Version GetServerVersion()
         {
+            if (!Configure.ServerVersion.Equals(Version.Parse("0.0.0.0")))
+            {
+                return Configure.ServerVersion;
+            }
             HttpHelper http = new HttpHelper();
             HttpItem item = new HttpItem()
             {
@@ -43,7 +47,8 @@ namespace WPFCheatUITemplate.Core.AppManager
             var ret = http.GetHtml(item);
             string html = ret.Html;
             var json = JsonHelper.JsonDes<UpdateConfigAddress>(html);
-            var  serverVersion = new Version((json as UpdateConfigAddress).version);
+            Configure.ServerVersion = new Version((json as UpdateConfigAddress).version);
+            var  serverVersion = Configure.ServerVersion;
             return serverVersion;
 
         }

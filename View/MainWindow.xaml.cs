@@ -96,41 +96,70 @@ namespace WPFCheatUITemplate
             myStoryboard.Children.Add(flashAnimation);
         }
 
+        struct DoWorkResult
+        {
+            public bool Islatest { get; set; }
+            public UpdateWindow Client { get; set; }
+        }
+
         private void GetVersion(object sender, DoWorkEventArgs e)
         {
             var islatest = AppUpdateManager.Update();
-            e.Result = islatest;
+
+            DoWorkResult doWorkResult = new DoWorkResult();
+            doWorkResult.Client = e.Argument as UpdateWindow;
+            doWorkResult.Islatest = islatest;
+
+            e.Result = doWorkResult;
         }
 
         private void GetVersioned(object sender, RunWorkerCompletedEventArgs e)
         {
-
-            if ((bool)e.Result)
+            var doWorkResult = (DoWorkResult)e.Result;
+            if (doWorkResult.Islatest)
             {
                 (DataContext as MainWindowsViewModel).CheckVersionedvisibility = Visibility.Visible;
             }
             else
             {
                 (DataContext as MainWindowsViewModel).CheckVersionedvisibility = Visibility.Hidden;
-                //TODO 让用户选择是否弹出更新窗口
-                var updateWindow = new UpdateWindow();
-                updateWindow.Show();
+
+                if (doWorkResult.Client == null)
+                {
+                    var ret =  MessageBox.Show("检查到新版本，是否前往更新界面？", "更新提示", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if(ret == MessageBoxResult.Yes)
+                    {
+                        var updateWindow = new UpdateWindow(null);
+                        updateWindow.Owner = this;
+                        updateWindow.Show();
+                    }
+                        
+                }
+                else
+                {
+                    doWorkResult.Client.Show();
+                }
+               
+
+
             }
         }
 
 
-        public void CheakVersion()
+        public void CheakVersion(UpdateWindow ClientObj = null)
         {
             if (!startCheakVersion.IsBusy)
             {
-                startCheakVersion.RunWorkerAsync();
+                startCheakVersion.RunWorkerAsync(ClientObj);
             }
             
         }
 
         private void updata_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            CheakVersion();
+            var updateWindow = new UpdateWindow(CheakVersion);
+            updateWindow.Owner = this;
+            updateWindow.CheakVersion();
         }
     }
 }

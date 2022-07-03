@@ -83,8 +83,11 @@ namespace WPFCheatUITemplate.Configuration
         /// <summary>
         /// 当前版本
         /// </summary>
-        public static Version version = Application.ResourceAssembly.GetName().Version;
-
+        public static Version ClientVersion = Application.ResourceAssembly.GetName().Version;
+        /// <summary>
+        /// 服务器版本
+        /// </summary>
+        public static Version ServerVersion = Version.Parse("0.0.0.0");
         #endregion
 
     }

@@ -12,7 +12,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="{x:Null}"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         
         >
     <Border Margin="2" Background="#1E2021" CornerRadius="8" MouseLeftButtonDown="Border_MouseLeftButtonDown">

@@ -3,6 +3,8 @@ using System.Windows.Input;
 using WPFCheatUITemplate.Core.UI;
 using WPFCheatUITemplate.ViewMode;
 using WPFCheatUITemplate.Core.Tools.Extensions;
+using System;
+
 namespace WPFCheatUITemplate.View
 {
     /// <summary>
@@ -10,8 +12,9 @@ namespace WPFCheatUITemplate.View
     /// </summary>
     public partial class UpdateWindow : Window
     {
+        private Action<UpdateWindow> ActCheakVersion;
 
-        public UpdateWindow()
+        public UpdateWindow(Action<UpdateWindow> action)
         {
             InitializeComponent();
 
@@ -20,6 +23,13 @@ namespace WPFCheatUITemplate.View
             this.Loaded += UpdateWindow_Loaded;
             this.Closed += UpdateWindow_Closed;
 
+            ActCheakVersion = action;
+
+        }
+
+        public void CheakVersion()
+        {
+            ActCheakVersion?.Invoke(this);
         }
 
         private void UpdateWindow_Closed(object sender, System.EventArgs e)

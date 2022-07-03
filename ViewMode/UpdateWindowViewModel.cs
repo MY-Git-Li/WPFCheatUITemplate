@@ -12,11 +12,20 @@ namespace WPFCheatUITemplate.ViewMode
         string mainTitle;
         string subtitle;
 
+        public CommandBase HideWindowsCommand { get; set; }
 
         public UpdateWindowViewModel()
         {
             mainTitle = "mainTitle";
             subtitle = "Early Access 更新程序";
+
+            HideWindowsCommand = new CommandBase();
+            HideWindowsCommand.DoExecute = new Action<object>((o) =>
+            {
+                (o as Window).Hide();
+            });
+            HideWindowsCommand.DoCanExecute = new Func<object, bool>((o) => { return true; });
+
 
             var uILangerManger = AppGameFunManager.Instance.UILangerManger;
 
