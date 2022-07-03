@@ -151,7 +151,7 @@ namespace WPFCheatUITemplate
 
         void InitErrorMessageString()
         {
-            UILangerManger.AddString("Details", "详细信息：", "Details");
+            UILangerManger.AddString("Details", "详细信息：", "Details:");
             UILangerManger.AddString("Exception", "意外的错误", "Exception");
             UILangerManger.AddString("messbox", 
                 "未检测到游戏进程，" +
@@ -1010,7 +1010,7 @@ namespace WPFCheatUITemplate
 
             #region 详细错误信息
 
-            string mode = Properties.Settings.Default.langer;
+            //string mode = Properties.Settings.Default.langer;
             string Details = UILangerManger.GetString("Details");
             string Modulename = UILangerManger.GetString("Modulename");
             string mouduleOffset = UILangerManger.GetString("mouduleOffset");
@@ -1074,11 +1074,11 @@ namespace WPFCheatUITemplate
 
             #endregion
 
-            System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);//重启软件
+            //System.Diagnostics.Process.Start(System.Windows.Application.ResourceAssembly.Location);//重启软件
 
-            Environment.Exit(0);//关闭程序
-
-
+            //Environment.Exit(0);//关闭程序
+            var App = System.Windows.Application.Current as App;
+            App.RestartApp();
         }
 
         public void WndProcWPF(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
