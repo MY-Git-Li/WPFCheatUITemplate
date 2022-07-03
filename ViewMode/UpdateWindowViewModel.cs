@@ -52,7 +52,7 @@ namespace WPFCheatUITemplate.ViewMode
             uILangerManger.DecString("updata_subtitle");
         }
 
-        public string MainTitle { get => mainTitle; set { mainTitle = value; RaisePropertyChanged("MainTitle"); } }
-        public string Subtitle { get => subtitle; set {  subtitle = value; RaisePropertyChanged("Subtitle"); } }
+        public string MainTitle { get => mainTitle; set { mainTitle = value; RaisePropertyChanged(); } }
+        public string Subtitle { get => subtitle; set {  subtitle = value; RaisePropertyChanged(); } }
     }
 }

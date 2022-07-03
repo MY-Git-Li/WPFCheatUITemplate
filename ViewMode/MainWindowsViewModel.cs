@@ -13,7 +13,7 @@ namespace WPFCheatUITemplate
     {
 
         Visibility checkVersionedvisibility = Visibility.Hidden;
-        public Visibility CheckVersionedvisibility { get => checkVersionedvisibility; set { checkVersionedvisibility = value;RaisePropertyChanged("CheckVersionedvisibility"); } }
+        public Visibility CheckVersionedvisibility { get => checkVersionedvisibility; set { checkVersionedvisibility = value;RaisePropertyChanged(); } }
 
         public CommandBase CloseWindowsCommand { get; set; }
 
