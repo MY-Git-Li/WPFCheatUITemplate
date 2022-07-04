@@ -68,6 +68,7 @@ namespace WPFCheatUITemplate
 
         public event Events.OnZeroAddressExceptionHandler OnZeroAddressExceptionEvent;
 
+        public event Events.OnClearResHandler OnClearResEvent;
 
         async void DoOnGameRunEventAsync()
         {
@@ -337,8 +338,8 @@ namespace WPFCheatUITemplate
                 RunAllGameFunEnding();
                 WinAPI.CloseHandle(GameInformation.Handle);
             }
-                
 
+            OnClearResEvent?.Invoke();
         }
 
         #region 扩展方法相关

@@ -17,5 +17,7 @@ namespace WPFCheatUITemplate.Core.Events
 
         public delegate void OnZeroAddressExceptionHandler(GameData gameData);
 
+        public delegate void OnClearResHandler();
+
     }
 }

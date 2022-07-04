@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WPFCheatUITemplate.Core.Tools.ASM
 {
@@ -14,6 +11,9 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
         const int HOOKALLOCSIZE = 1024;
 
         HookTtpe hookTtpe;
+
+        bool isStartHook;
+
         struct HookTtpe
         {
             public Int64 O_address;
@@ -22,9 +22,25 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
             public byte[] jmpBytes;
         }
 
-
         public Assemble(int bitness) : base(bitness)
         {
+            AppGameFunManager.Instance.OnClearResEvent += Instance_OnClearResEvent;
+        }
+
+        private void Instance_OnClearResEvent()
+        {
+            Clear();
+        }
+        private void Clear()
+        {
+            //清理Hook地址
+            if (isStartHook)
+            {
+                CloseHook();
+
+                IntPtr hwnd = GameMode.GameInformation.Handle;
+                WinAPI.VirtualFreeEx(hwnd, hookTtpe.O_address, HOOKALLOCSIZE, WinAPI.MEM_RELEASE);
+            }
         }
 
         public void RunAsm()
@@ -56,6 +72,8 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
         public void Hook(Int64 address)
         {
+            isStartHook = true;
+
             int pid = GameMode.GameInformation.Pid;
 
             IntPtr hwnd = GameMode.GameInformation.Handle;
@@ -139,23 +157,29 @@ namespace WPFCheatUITemplate.Core.Tools.ASM
 
         public void CloseHook()
         {
-            if (hookTtpe.O_address == 0)
+            if (!isStartHook)
             {
                 return;
             }
-            //写入原始数据
-            WinAPI.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.codeBytes, hookTtpe.codeSum, out var writeBytes);
+            //必须这样写原因未知
+            int pid = GameMode.GameInformation.Pid;
+            var hande = CheatTools.GetProcessHandle(pid);
 
+            WinAPI.WriteProcessMemory(hande, (IntPtr)hookTtpe.O_address, hookTtpe.codeBytes, hookTtpe.codeSum, out var writeBytes);
         }
 
 
         public void RestartHook()
         {
-            if (hookTtpe.O_address == 0)
+            if (!isStartHook)
             {
                 return;
             }
-            WinAPI.WriteProcessMemory(GameMode.GameInformation.Handle, (IntPtr)hookTtpe.O_address, hookTtpe.jmpBytes, hookTtpe.jmpBytes.Length,out var writeBytes);
+            //必须这样写原因未知
+            int pid = GameMode.GameInformation.Pid;
+            var hande = CheatTools.GetProcessHandle(pid);
+
+            WinAPI.WriteProcessMemory(hande, (IntPtr)hookTtpe.O_address, hookTtpe.jmpBytes, hookTtpe.jmpBytes.Length,out var writeBytes);
         }
     }
 }
